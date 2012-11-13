@@ -27,6 +27,7 @@ load 'rails/tasks/engine.rake'
 
 Bundler::GemHelper.install_tasks
 
+<<<<<<< HEAD
 require 'rake/testtask'
 
 Rake::TestTask.new(:test) do |t|
@@ -38,3 +39,5 @@ end
 
 
 task :default => :test
+=======
+>>>>>>> 2fc3cba23c47f84af39a27757a627bd71100da18
