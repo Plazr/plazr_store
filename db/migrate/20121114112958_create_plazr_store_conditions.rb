@@ -1,7 +1,7 @@
 class CreatePlazrStoreConditions < ActiveRecord::Migration
   def change
     create_table :plazr_store_conditions do |t|
-      t.string :condition
+      t.string :condition, :null => false
       t.references :category_condition
 
       t.timestamps
