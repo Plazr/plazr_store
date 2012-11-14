@@ -7,5 +7,6 @@ class CreatePlazrStorePages < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :plazr_store_pages, :slug
   end
 end

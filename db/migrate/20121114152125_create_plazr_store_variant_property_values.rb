@@ -1,9 +1,13 @@
 class CreatePlazrStoreVariantPropertyValues < ActiveRecord::Migration
   def change
     create_table :plazr_store_variant_property_values do |t|
-      t.string :value
+      t.string :value, :null => false
+      t.references :variant
+      t.references :variant_property
 
       t.timestamps
     end
+    add_index :plazr_store_variant_property_values, :variant_id
+    add_index :plazr_store_variant_property_values, :variant_property_id
   end
 end
