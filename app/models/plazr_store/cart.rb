@@ -3,6 +3,8 @@ module PlazrStore
     ## Relations ##
     # belongs_to :user TODO metodo que chama api
 
+    has_one :order
+
     has_many :cart_variants
     has_many :variants, :through => :cart_variants
 

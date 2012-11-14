@@ -5,8 +5,6 @@ module PlazrStore
     belongs_to :product
     
     ## Attributes ##
-    belongs_to :user
-    belongs_to :product
     attr_accessible :comment, :rating
   end
 end
