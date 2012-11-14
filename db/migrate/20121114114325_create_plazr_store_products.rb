@@ -10,8 +10,15 @@ class CreatePlazrStoreProducts < ActiveRecord::Migration
       t.boolean :active, :null => false, :default => true
       t.datetime :available_at
       t.datetime :deleted_at
+      t.references :brand
+      t.references :prototype
 
       t.timestamps
     end
+    add_index :plazr_store_products, :brand_id
+    add_index :plazr_store_products, :prototype_id
+    add_index :plazr_store_products, :available_at
+    add_index :plazr_store_products, :permalink
+    add_index :plazr_store_products, :name
   end
 end
