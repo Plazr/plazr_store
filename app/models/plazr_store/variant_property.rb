@@ -4,6 +4,9 @@ module PlazrStore
     has_and_belongs_to_many :products
     has_and_belongs_to_many :prototypes
 
+    has_many :variant_property_values
+    has_many :variant, :through => :variant_property_values
+
     ## Attributes ##
     attr_accessible :name_display, :name_id
   end
