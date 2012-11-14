@@ -13,7 +13,7 @@ class CreatePlazrStoreOrders < ActiveRecord::Migration
       t.references :promotional_code
       t.references :coupon
       t.references :payment_data
-      t.refererences :user
+      t.references :user
       t.integer :bill_address_id
       t.integer :ship_address_id
 
@@ -23,6 +23,7 @@ class CreatePlazrStoreOrders < ActiveRecord::Migration
     add_index :plazr_store_orders, :promotional_code_id
     add_index :plazr_store_orders, :coupon_id
     add_index :plazr_store_orders, :payment_data_id
+    add_index :plazr_store_orders, :user_id
     add_index :plazr_store_orders, :bill_address_id
     add_index :plazr_store_orders, :ship_address_id
   end

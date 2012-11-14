@@ -7,7 +7,7 @@ class CreatePlazrStoreProductProperties < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :plazr_store_store_properties, :product_id
-    add_index :plazr_store_store_properties, :property_id
+    add_index :plazr_store_product_properties, :product_id
+    add_index :plazr_store_product_properties, :property_id
   end
 end
