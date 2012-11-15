@@ -3,7 +3,7 @@ class CreatePlazrStorePaymentData < ActiveRecord::Migration
     create_table :plazr_store_payment_data do |t|
       t.decimal :total
       t.text :payment_data
-      t.string :state
+      t.string :state, :null => false
       t.references :user
       t.references :payment_method
       t.integer :bill_address_id

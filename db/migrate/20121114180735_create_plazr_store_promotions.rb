@@ -1,10 +1,10 @@
 class CreatePlazrStorePromotions < ActiveRecord::Migration
   def change
     create_table :plazr_store_promotions do |t|
-      t.string :name
+      t.string :name, :null => false
       t.text :description
-      t.string :value
-      t.datetime :starts_at
+      t.string :value, :null => false
+      t.datetime :starts_at, :null => false
       t.datetime :expires_at
       t.references :discount_type
 

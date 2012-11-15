@@ -2,7 +2,7 @@ class CreatePlazrStoreFeedbackProducts < ActiveRecord::Migration
   def change
     create_table :plazr_store_feedback_products do |t|
       t.text :comment
-      t.decimal :rating
+      t.integer :rating, :null => false
       t.references :user
       t.references :product
 
