@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  code: MyString
+  description: MyText
+  value: MyString
+  minimum_cart: 1
+  starts_at: 2012-11-14 18:24:31
+  expires_at: 2012-11-14 18:24:31
+  uses_allowed: 1
+  discount_type: 
+  user: 
+
+two:
+  code: MyString
+  description: MyText
+  value: MyString
+  minimum_cart: 1
+  starts_at: 2012-11-14 18:24:31
+  expires_at: 2012-11-14 18:24:31
+  uses_allowed: 1
+  discount_type: 
+  user: 
