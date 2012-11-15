@@ -4,10 +4,10 @@ class CreatePlazrStorePaymentData < ActiveRecord::Migration
       t.decimal :total
       t.text :payment_data
       t.string :state, :null => false
-      t.references :user
-      t.references :payment_method
-      t.integer :bill_address_id
-      t.integer :ship_address_id
+      t.references :user, :null => false
+      t.references :payment_method, :null => false
+      t.integer :bill_address_id, :null => false
+      t.integer :ship_address_id, :null => false
 
       t.timestamps
     end

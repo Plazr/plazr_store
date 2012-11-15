@@ -3,7 +3,7 @@ class CreatePlazrStoreFeedbackStores < ActiveRecord::Migration
     create_table :plazr_store_feedback_stores do |t|
       t.text :comment
       t.integer :rating, :null => false
-      t.references :user
+      t.references :user, :null => false
 
       t.timestamps
     end

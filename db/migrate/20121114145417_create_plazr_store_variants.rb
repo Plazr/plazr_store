@@ -9,9 +9,11 @@ class CreatePlazrStoreVariants < ActiveRecord::Migration
       t.integer :amount_available, :null => false, :default => 0
       t.boolean :is_master, :null => false, :default => false
       t.datetime :deleted_at
+      t.references :product, :null => false
 
       t.timestamps
     end
+    add_index :plazr_store_variants, :product_id
     add_index :plazr_store_variants, :sku
   end
 end
