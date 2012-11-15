@@ -8,6 +8,6 @@ class CreatePlazrStoreWishlists < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :plazr_store_whishlists, :user_id
+    add_index :plazr_store_wishlists, :user_id
   end
 end
