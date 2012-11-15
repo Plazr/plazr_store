@@ -1,7 +1,7 @@
 class CreatePlazrStoreCartVariants < ActiveRecord::Migration
   def change
     create_table :plazr_store_cart_variants do |t|
-      t.integer :amount
+      t.integer :amount, :null => false, :default => 1
       t.integer :cart_id
       t.integer :variant_id
 
