@@ -1,0 +1,14 @@
+Feature: Central Page
+  In order to group all stores and show all highlighted products of Plazr
+  As an user (registered or not registered)
+  I want to see on Central Page of Plazr
+  
+  Stakeholder: User
+  Priority: Essential 
+
+  Scenario: See Central Page
+    Given I am user registered
+    And there are other users registered
+	  And I am on the Central Page
+    Then I should see all stores grouped together
+    And all featured products
