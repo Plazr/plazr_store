@@ -4,14 +4,14 @@ Feature: Payments
   I want to provide different types of payment
 
   Stakeholder: Owner of an online store
-  Priority: Essential    
+  Priority: Essential
 
   Background: I should be registered and authenticated
-  	Given I am the registered user
+  	Given I am registered
     And there are other users
     And I am in a store
     And I select products to shopping cart
-	And I want buy this products
+	  And I want buy this products
 
   Scenario: Payment by Paypal
     When I press payment by paypal button
