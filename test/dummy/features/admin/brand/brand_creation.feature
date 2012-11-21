@@ -1,21 +1,22 @@
 @brand @creation @admin
 Feature: Brand creation
 
-  In order to have access to the brand types that will be in contest
-  As a Web Manager, Administrator or Root user
-  I want to be able to create a brand type
+  In order to have access to the brands
+  As an Admin and Root
+  I want to be able to create a brand
 
   Background:         
-    Given I am authenticated
+    # Given I am authenticated
     #And My user role is 
-    #       | Administrator |
+    #       | Admin |
+    #       | Root |
     Given I am at the brand creation page
 
   Scenario: Create a brand successfully
 
     I should be able to create a new brand
 
-    When I fill in all fields for a brand
+    When I fill in all fields for brand
     And I submit that data
     Then I should see a success message
     And The new brand should be stored in the database
