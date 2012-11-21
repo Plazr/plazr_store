@@ -38,6 +38,6 @@ RSpec.configure do |config|
   #     --seed 1234
   #config.order = "random"
   config.before(:each) do
-    @routes = PlazrStore::Engine.routes
+    @routes = PZS::Engine.routes
   end
 end
