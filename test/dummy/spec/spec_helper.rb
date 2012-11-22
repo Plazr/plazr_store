@@ -1,7 +1,5 @@
 require 'rubygems'
 require 'spork'
-require 'capybara/rspec'
-require 'factory_girl_rails'
 
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
@@ -12,6 +10,9 @@ Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
+  require 'capybara/rspec'
+  require 'factory_girl_rails'
+  require 'shoulda/matchers'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
@@ -25,9 +26,6 @@ Spork.prefork do
     config.use_transactional_fixtures = true
     config.infer_base_class_for_anonymous_controllers = false
     config.order = "random"
-    config.before(:each) do
-      @routes = PlazrStore::Engine.routes
-    end
   end
 
 end
