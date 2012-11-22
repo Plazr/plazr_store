@@ -26,8 +26,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "guard-spork"
-  s.add_development_dependency "mocha"
+  # s.add_development_dependency "mocha"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "shoulda-matchers"
   s.add_development_dependency "awesome_print"
+  s.add_development_dependency "rb-inotify"
+  s.add_development_dependency "rb-fsevent"
 end

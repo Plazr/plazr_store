@@ -1,7 +1,7 @@
 module PlazrStore
   class Brand < ActiveRecord::Base
     ## Relations ##
-    has_many :product
+    has_many :products
 
     ## Attributes ##
     attr_accessible :name
