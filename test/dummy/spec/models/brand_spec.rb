@@ -1,13 +1,9 @@
 require 'spec_helper'
 
 describe PZS::Brand do
-  before {
-    @brand = FactoryGirl.build :brand
-  }
+  before { @brand = FactoryGirl.build :brand }
 
-  subject {
-    @brand
-  }
+  subject { @brand }
 
   it "should create a new instance given a valid attribute" do
     should be_valid
