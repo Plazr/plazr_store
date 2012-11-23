@@ -12,4 +12,5 @@ Feature: Receive newsletter
     When I select receive newsletter
     And I select the type of newsletters
     And I press submit button 
-    Then I should receiving on my email the newsletters selected
+    Then I should see success message
+    And I should receiving on my email the newsletters selected
