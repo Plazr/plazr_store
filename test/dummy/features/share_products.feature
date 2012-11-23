@@ -8,7 +8,6 @@ Feature: Sharing in a social networks
 
   Background: I should be registered and authenticated
     Given I am registered user
-    And there are other users registered
     And I am on product page
 
   Scenario: Share products
