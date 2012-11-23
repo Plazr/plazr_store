@@ -13,7 +13,7 @@ Feature: Checkout
 	And I click on checkout button
 	Then I should see a success message
 
-  Scenario: Checkout impossible
+  Scenario: Impossible	Checkout
     Given I am on checkout page
 	And I have not products in my shopping cart 
 	And I should not see checkout button
