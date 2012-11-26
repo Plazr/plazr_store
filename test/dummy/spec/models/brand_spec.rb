@@ -1,15 +1,16 @@
 require 'spec_helper'
 
 describe PZS::Brand do
-  before { @brand = FactoryGirl.build :brand }
+  # before { @brand = FactoryGirl.build :brand }
+  # subject(:brand) { @brand }
 
-  subject { @brand }
+  subject(:brand) { FactoryGirl.build :brand }
 
   it "should create a new instance given a valid attribute" do
     should be_valid
   end
 
-  describe "#Relations" do
+  context "#Relations" do
     it { should have_many :products }
   end
 
