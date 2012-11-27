@@ -4,6 +4,9 @@ Feature: Inventory Management
   As owner
   I want to manage the inventory
 
+  Stakeholder: User
+  Priority: Medium
+
   Scenario: Increase stock
   	Given I am on backoffice
   	And one product is unavailable
