@@ -10,6 +10,6 @@ Feature: Establish logins for staff
   Scenario: Create accounts for staff
     Given I am on back office page
     When I select add new staff member button
-    And I fill de form which name and mail
+    And I fill de form with name and mail
     And I press submition button
     Then I should see success message
