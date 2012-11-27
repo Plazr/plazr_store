@@ -1,0 +1,14 @@
+= form_for [:admin, @discount_type] do |f|
+  - if @discount_type.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@discount_type.errors.count, "error")} prohibited this discount type from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @discount_type.errors.full_messages.each do |msg|
+            %li= msg
+
+  = f.label :name
+  = f.text_field :name
+
+  = f.submit "Submit"
+  = link_to 'Cancel', admin_discount_types_path
