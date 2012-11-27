@@ -17,7 +17,7 @@ describe PZS::Admin::BrandsController, :type => :controller do
   end
 
   describe "GET #show" do
-    it_behaves_like 'assign and render', :show
+    it_behaves_like 'assign and render', :show, :brand
   end
 
   describe "GET #new" do
@@ -32,7 +32,7 @@ describe PZS::Admin::BrandsController, :type => :controller do
   end
 
   describe "GET #edit" do
-    it_behaves_like 'assign and render', :edit
+    it_behaves_like 'assign and render',  :edit,:brand
   end
 
   describe "POST #create" do

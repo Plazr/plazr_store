@@ -8,10 +8,14 @@ describe PZS::Brand, type: :model do
   end
 
   describe "#Relations" do
-    it { should have_many :products }
+    it "has many products" do 
+      should have_many :products
+    end
   end
 
   describe "#Validations" do
-    it { should validate_presence_of :name }
+    it "requires name to be set" do
+      should validate_presence_of :name
+    end
   end
 end

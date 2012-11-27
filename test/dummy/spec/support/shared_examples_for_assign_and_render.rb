@@ -1,12 +1,12 @@
-shared_examples_for 'assign and render' do |method|
-  it "assigns the requested brand to @brand" do
-    brand = FactoryGirl.create :brand
-    get method, id: brand
-    assigns(:brand).should eq(brand)
+shared_examples_for 'assign and render' do |method, model|
+  it "assigns the requested #{model} to @#{model}" do
+    m = FactoryGirl.create model
+    get method, id: m
+    assigns(model).should eq(m)
   end
 
   it "renders the :#{method} template" do
-    get method, id: FactoryGirl.create(:brand)
+    get method, id: FactoryGirl.create(model)
     response.should render_template method
   end
 end
