@@ -1,6 +1,6 @@
-Feature: Video support in front page
+Feature: Video support in the front page
 
-	I should be able to manage my advertising videos
+	As a Client, I should be able to manage my advertising videos
 
 	Stakeholder: Client
 	Priority: Medium
