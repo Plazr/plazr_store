@@ -20,23 +20,22 @@ Feature: Video support in front page
 		Given I am authenticated
 		And I have a store
 		And I am in the back office
-		And I uploaded videos
+		And I have videos
 		When go to the video index page
-		Then I should see the latest added videos
+		Then I should see the latest videos
 
 	Scenario: Successful removal
 		Given I am authenticated
 		And I have a store
 		And I am in the back office
-		And I uploaded videos
+		And I have videos
 		When I select a video
-		And I choose to delete it
+		And I click to delete it
 		Then I should see a video success message
-		And I should be at the video list page
+		And I should be at the video index page
 		And I should not see the video
 
 	Scenario: Video is visible
-		Given a video has been uploaded
-		And it is set to visible
-		When I access the front page
+		Given there is a video
+		When I go to the front page
 		Then I should see the video player
