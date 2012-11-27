@@ -110,6 +110,13 @@ describe PZS::Admin::BrandsController, :type => :controller do
       }.to change(PZS::Brand,:count).by(-1)
     end
 
+    xit "marks it as deleted" do
+      existing_brand.reload
+      expect{
+        delete :destroy, id: existing_brand
+      }.to change(PZS::Brand.with_deleted.count).by(0)
+    end
+
     it "redirects to brands#index" do
       delete :destroy, id: existing_brand
       response.should redirect_to admin_brands_path

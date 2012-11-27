@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114224643) do
+ActiveRecord::Schema.define(:version => 20121127155946) do
 
   create_table "plazr_store_addresses", :force => true do |t|
     t.string   "first_name",        :null => false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.string   "company"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_addresses", ["first_name"], :name => "index_plazr_store_addresses_on_first_name"
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "plazr_store_cart_variants", :force => true do |t|
@@ -42,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "variant_id",                :null => false
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_cart_variants", ["cart_id", "variant_id"], :name => "index_plazr_store_cart_variants_on_cart_id_and_variant_id", :unique => true
@@ -52,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "user_id",                                                  :null => false
     t.datetime "created_at",                                               :null => false
     t.datetime "updated_at",                                               :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_carts", ["user_id"], :name => "index_plazr_store_carts_on_user_id"
@@ -60,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.text     "description", :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "plazr_store_conditions", :force => true do |t|
@@ -67,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "category_condition_id", :null => false
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_conditions", ["category_condition_id"], :name => "index_plazr_store_conditions_on_category_condition_id"
@@ -84,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "user_id",                         :null => false
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_coupons", ["code"], :name => "index_plazr_store_coupons_on_code"
@@ -95,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "plazr_store_feedback_products", :force => true do |t|
@@ -104,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "product_id", :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_feedback_products", ["product_id"], :name => "index_plazr_store_feedback_products_on_product_id"
@@ -115,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "user_id",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_feedback_stores", ["user_id"], :name => "index_plazr_store_feedback_stores_on_user_id"
@@ -127,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.datetime "updated_at",  :null => false
     t.integer  "page_id"
     t.integer  "variant_id"
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_multimedia", ["page_id"], :name => "index_plazr_store_multimedia_on_page_id"
@@ -150,6 +161,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "ship_address_id"
     t.datetime "created_at",                                                         :null => false
     t.datetime "updated_at",                                                         :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_orders", ["bill_address_id"], :name => "index_plazr_store_orders_on_bill_address_id"
@@ -166,6 +178,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_pages", ["slug"], :name => "index_plazr_store_pages_on_slug"
@@ -180,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "ship_address_id",   :null => false
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_payment_data", ["bill_address_id"], :name => "index_plazr_store_payment_data_on_bill_address_id"
@@ -193,6 +207,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "property_id", :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_product_properties", ["product_id", "property_id"], :name => "index_product_property", :unique => true
@@ -210,6 +225,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.datetime "available_at"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_products", ["available_at"], :name => "index_plazr_store_products_on_available_at"
@@ -229,6 +245,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "times_used",   :default => 0
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_promotional_codes", ["code"], :name => "index_plazr_store_promotional_codes_on_code"
@@ -242,6 +259,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "discount_type_id", :null => false
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_promotions", ["discount_type_id"], :name => "index_plazr_store_promotions_on_discount_type_id"
@@ -251,12 +269,14 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.string   "display_name", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "plazr_store_prototypes", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "plazr_store_shipment_conditions", :force => true do |t|
@@ -264,6 +284,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.decimal  "value",           :precision => 8, :scale => 2
     t.datetime "created_at",                                    :null => false
     t.datetime "updated_at",                                    :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "plazr_store_store_categories", :force => true do |t|
@@ -271,6 +292,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "plazr_store_user_groups", :force => true do |t|
@@ -278,6 +300,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "plazr_store_variant_categories", :force => true do |t|
@@ -285,6 +308,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "plazr_store_variant_properties", :force => true do |t|
@@ -292,6 +316,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.string   "display_name", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "plazr_store_variant_property_values", :force => true do |t|
@@ -300,6 +325,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "variant_property_id", :null => false
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_variant_property_values", ["variant_id", "variant_property_id"], :name => "index_variant_property_value", :unique => true
@@ -315,6 +341,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "product_id",                                                        :null => false
     t.datetime "created_at",                                                        :null => false
     t.datetime "updated_at",                                                        :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_variants", ["product_id"], :name => "index_plazr_store_variants_on_product_id"
@@ -326,6 +353,7 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.integer  "user_id",                      :null => false
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "plazr_store_wishlists", ["user_id"], :name => "index_plazr_store_wishlists_on_user_id"

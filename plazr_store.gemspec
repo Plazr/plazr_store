@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2.9"
   s.add_dependency "rb-readline"
+  s.add_dependency "paranoia"
+  s.add_dependency "haml"
   # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"
