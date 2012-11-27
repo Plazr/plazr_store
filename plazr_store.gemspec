@@ -26,8 +26,21 @@ Gem::Specification.new do |s|
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "guard-spork"
-  s.add_development_dependency "mocha"
+  # s.add_development_dependency "mocha"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "shoulda-matchers"
   s.add_development_dependency "awesome_print"
+  s.add_development_dependency "fuubar"
+
+  # Mac specific gems
+  if RUBY_PLATFORM =~ /darwin/i
+    s.add_development_dependency "rb-fsevent"
+    s.add_development_dependency "growl"
+  end
+
+  # Linux specific gems
+  if RUBY_PLATFORM =~ /linux/i
+    s.add_development_dependency "rb-inotify"
+    s.add_development_dependency "libnotify"
+  end
 end

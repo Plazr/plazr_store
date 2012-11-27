@@ -8,8 +8,8 @@ class CreatePlazrStoreVariants < ActiveRecord::Migration
       t.boolean :available, :null => false, :default => true
       t.integer :amount_available, :null => false, :default => 0
       t.boolean :is_master, :null => false, :default => false
-      t.datetime :deleted_at
       t.references :product, :null => false
+      # t.datetime :deleted_at
 
       t.timestamps
     end

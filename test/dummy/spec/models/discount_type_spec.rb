@@ -8,7 +8,7 @@ describe PZS::DiscountType, :type => :model do
 
   describe "#Relations" do
     it "has many coupons" do
-      FactoryGirl.create(:discount_type).shoud have_many :coupons 
+      FactoryGirl.create(:discount_type).should have_many :coupons 
     end
 
     it "has many promotions" do
@@ -17,6 +17,12 @@ describe PZS::DiscountType, :type => :model do
   end
   
   describe "#Validations" do
-    it {should validate_presence_of :name}
+    it "requires the presence of a name" do
+      FactoryGirl.create(:discount_type).should validate_presence_of :name
+    end
+
+    it "should have a unique name" do
+      FactoryGirl.create(:black_friday_discount).should validate_uniqueness_of :name
+    end
   end
 end
