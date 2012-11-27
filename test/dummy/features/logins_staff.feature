@@ -1,4 +1,4 @@
-Feature: Organization of the stores by categories
+Feature: Establish logins for staff
 
   In order to organize the stores
   As a owner of the store
@@ -23,9 +23,10 @@ Feature: Organization of the stores by categories
     Then I should see success message
     And the store is associated with these new categories
 
-  Scenario: See stores by categories
-  	Given I am user
-  	And I am on central page of Plazr
-  	When I select stores by categories
-  	And select one category
-  	Then I should see all the stores that are associated with this category
+
+
+Requisito # 25. - Estabelecer logins para staff 
+Descrição: Deve ser possível a criação de contas dedicadas ao staff da loja online. Estas contas terão acesso à área de administração da loja onde poderão gerir inventário, processar encomendas, etc., de acordo com as permissões que estiverem associadas à conta.
+Stakeholder: Proprietário de loja online 
+Prioridade: Alta 
+Critérios de Ajuste: O staff das lojas terá a sua conta própria e assim os respetivos privilégios para fazerem a administração da sua página.
