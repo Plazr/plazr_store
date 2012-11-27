@@ -6,5 +6,7 @@ module PlazrStore
 
     ## Attributes ##
     attr_accessible :description, :name
+
+    validates :name, :presence => true
   end
 end
