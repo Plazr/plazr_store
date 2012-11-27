@@ -19,24 +19,24 @@ Feature: Video support in front page
 	Scenario: Listing
 		Given I am authenticated
 		And I have a store
-		And I am in my store's back-office
+		And I am in the back office
 		And I uploaded videos
 		When go to the video index page
-		Then I want to see all the videos
+		Then I should see the latest added videos
 
 	Scenario: Successful removal
 		Given I am authenticated
 		And I have a store
-		And I am in my store's back-office
+		And I am in the back office
 		And I uploaded videos
 		When I select a video
 		And I choose to delete it
-		Then I want to see "Deleted"
-		And I want to see the video list page
-		And I do not want to see the video title
+		Then I should see a video success message
+		And I should be at the video list page
+		And I should not see the video
 
 	Scenario: Video is visible
-		Given "video.avi" has been uploaded
-		And it has been set to be visible
+		Given a video has been uploaded
+		And it is set to visible
 		When I access the front page
-		Then I want to see the video playing
+		Then I should see the video player
