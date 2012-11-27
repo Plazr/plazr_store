@@ -4,7 +4,7 @@ Feature: Purchase history
   I want to see history of all my purchases order by date
 
   Stakeholder: User
-  Priority: Essential 
+  Priority: Essential
 
   Scenario: See purchase history
     Given I am registered
