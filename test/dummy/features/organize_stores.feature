@@ -7,7 +7,7 @@ Feature: Organization of the stores by categories
   Stakeholder: Owner
   Priority: High
 
-  Scenario: Create a new store
+  Scenario: Assign a category to a store
     Given I am on create store page
     And I am setting the type of store
     When I select the categories
