@@ -1,7 +1,6 @@
-Feature: Video support in store front pages
-	In order to advertise an event
-	As a client
-	I want to be able to add, remove and change videos to, from and in my store's front page.
+Feature: Video support in front page
+
+	I should be able to manage my advertising videos
 
 	Stakeholder: Client
 	Priority: Medium
@@ -10,20 +9,20 @@ Feature: Video support in store front pages
 	Scenario: Sucessful upload
 		Given I am authenticated
 		And I have a store
-		And I am in my store's back-office
-		When I select "video.avi"
-		And submit
-		Then I want to see "Uploaded"
-		And I want to see the video list page
-		And I want to see the video title
+		And I am in the back office
+		When I select a video file to upload
+		And I click submit
+		Then I should see a video success message
+		And I should be at video list page
+		And I should to see the video
 
 	Scenario: Listing
 		Given I am authenticated
 		And I have a store
 		And I am in my store's back-office
 		And I uploaded videos
-		When I access the video list page
-		Then I want to see all the titles
+		When go to the video index page
+		Then I want to see all the videos
 
 	Scenario: Successful removal
 		Given I am authenticated
