@@ -1,27 +1,19 @@
 Feature: Establish logins for staff
 
-  In order to organize the stores
+  In order to help the owner manage your store
   As a owner of the store
-  I want to be able to define my store by categories 	
+  I want to be able to create accounts dedicated to staff
   
   Stakeholder: Owner
   Priority: High
 
-  Scenario: Assign a category to a store
-    Given I am on create store page
-    And I am setting the type of store
-    When I select the categories
-    And I press submition button 
+  Scenario: Create accounts for staff
+    Given I am on back office page
+    When I select add new staff member button
+    And I fill de form which name and mail
+    And I press submition button
     Then I should see success message
     And the store is associated with these categories
-
-  Scenario: Edit store
-    Given I am on edit store page
-    And I am editing the type of store
-    When I select the new categories
-    And I press submition button 
-    Then I should see success message
-    And the store is associated with these new categories
 
 
 
