@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
 require 'factory_girl_rails'
+require 'shoulda-matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -38,6 +39,6 @@ RSpec.configure do |config|
   #     --seed 1234
   #config.order = "random"
   config.before(:each) do
-    @routes = PlazrStore::Engine.routes
+    @routes = PZS::Engine.routes
   end
 end
