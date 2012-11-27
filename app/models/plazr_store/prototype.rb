@@ -6,6 +6,6 @@ module PlazrStore
     has_and_belongs_to_many :variant_properties
 
     ## Attributes ##
-    attr_accessible :active, :name
+    attr_accessible :name
   end
 end

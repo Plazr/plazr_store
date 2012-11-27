@@ -14,6 +14,6 @@ module PlazrStore
     has_many :variant_properties, :through => :variant_property_values
 
     ## Attributes ##
-    attr_accessible :amount_available, :available, :cost_price, :deleted_at, :description, :is_master, :price, :sku
+    attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku
   end
 end

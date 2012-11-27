@@ -7,6 +7,6 @@ module PlazrStore
     has_many :products, :through => :product_properties
 
     ## Attributes ##
-    attr_accessible :name_display, :name_id
+    attr_accessible :display_name, :id_name
   end
 end

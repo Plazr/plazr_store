@@ -8,10 +8,10 @@ class CreatePlazrStoreProducts < ActiveRecord::Migration
       t.decimal :price_min
       t.decimal :rating
       t.boolean :active, :null => false, :default => true
-      t.datetime :available_at
-      t.datetime :deleted_at
       t.references :brand
       t.references :prototype
+      t.datetime :available_at
+      # t.datetime :deleted_at
 
       t.timestamps
     end

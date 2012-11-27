@@ -12,6 +12,6 @@ module PlazrStore
     has_many :properties, :through => :product_properties
 
     ## Attributes ##
-    attr_accessible :active, :available_at, :deleted_at, :details, :name, :permalink, :price_max, :price_min, :rating
+    attr_accessible :available_at, :details, :name, :permalink, :price_max, :price_min, :rating
   end
 end

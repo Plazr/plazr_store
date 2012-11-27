@@ -8,6 +8,6 @@ module PlazrStore
     has_many :variants, :through => :variant_property_values
 
     ## Attributes ##
-    attr_accessible :name_display, :name_id
+    attr_accessible :display_name, :id_name
   end
 end

@@ -3,7 +3,7 @@ class CreatePlazrStoreShipmentConditions < ActiveRecord::Migration
     create_table :plazr_store_shipment_conditions do |t|
       t.string :shipment_method, :null => false
       t.decimal :value, :precision => 8, :scale => 2
-      t.boolean :active, :null => false, :default => true
+      # t.datetime :deleted_at
 
       t.timestamps
     end

@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(:version => 20121114224643) do
 
   create_table "plazr_store_addresses", :force => true do |t|
-    t.string   "first_name",                          :null => false
-    t.string   "last_name",                           :null => false
+    t.string   "first_name",        :null => false
+    t.string   "last_name",         :null => false
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
@@ -23,9 +23,8 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.string   "phone"
     t.string   "alternative_phone"
     t.string   "company"
-    t.boolean  "active",            :default => true, :null => false
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   add_index "plazr_store_addresses", ["first_name"], :name => "index_plazr_store_addresses_on_first_name"
@@ -206,10 +205,9 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.decimal  "price_min"
     t.decimal  "rating"
     t.boolean  "active",       :default => true, :null => false
-    t.datetime "available_at"
-    t.datetime "deleted_at"
     t.integer  "brand_id"
     t.integer  "prototype_id"
+    t.datetime "available_at"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end
@@ -249,25 +247,23 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
   add_index "plazr_store_promotions", ["discount_type_id"], :name => "index_plazr_store_promotions_on_discount_type_id"
 
   create_table "plazr_store_properties", :force => true do |t|
-    t.string   "name_id"
-    t.string   "name_display", :null => false
+    t.string   "id_name"
+    t.string   "display_name", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
   create_table "plazr_store_prototypes", :force => true do |t|
-    t.string   "name",                         :null => false
-    t.boolean  "active",     :default => true, :null => false
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "plazr_store_shipment_conditions", :force => true do |t|
-    t.string   "shipment_method",                                                 :null => false
+    t.string   "shipment_method",                               :null => false
     t.decimal  "value",           :precision => 8, :scale => 2
-    t.boolean  "active",                                        :default => true, :null => false
-    t.datetime "created_at",                                                      :null => false
-    t.datetime "updated_at",                                                      :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
   end
 
   create_table "plazr_store_store_categories", :force => true do |t|
@@ -292,8 +288,8 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
   end
 
   create_table "plazr_store_variant_properties", :force => true do |t|
-    t.string   "name_id"
-    t.string   "name_display", :null => false
+    t.string   "id_name"
+    t.string   "display_name", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -316,7 +312,6 @@ ActiveRecord::Schema.define(:version => 20121114224643) do
     t.boolean  "available",                                      :default => true,  :null => false
     t.integer  "amount_available",                               :default => 0,     :null => false
     t.boolean  "is_master",                                      :default => false, :null => false
-    t.datetime "deleted_at"
     t.integer  "product_id",                                                        :null => false
     t.datetime "created_at",                                                        :null => false
     t.datetime "updated_at",                                                        :null => false
