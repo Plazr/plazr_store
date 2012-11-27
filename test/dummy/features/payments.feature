@@ -1,14 +1,13 @@
 Feature: Payments
-  In order to sell products
-  As a registered owner of a store
+  In order to buy products
+  As a registered client of a store
   I want to provide different types of payment
 
-  Stakeholder: Owner of an online store
+  Stakeholder: Client of an online store
   Priority: Essential
 
   Background: I should be registered and authenticated
   	Given I am registered
-    And there are other users
     And I am in a store
     And I select products to shopping cart
 	  And I want buy this products
