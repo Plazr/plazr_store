@@ -1,7 +1,9 @@
 PlazrStore::Engine.routes.draw do
 
 	namespace :mockup do
-		get 'pages/index' => 'pages#index'
+		get 'index' => 'pages#index'
+		get 'single' => 'pages#single'
+		get 'about' => 'pages#about'
 		root to: 'pages#index'
 	end
 

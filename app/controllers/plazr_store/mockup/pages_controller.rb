@@ -3,5 +3,11 @@ module PlazrStore
 		def index
 
 		end
+		def about
+
+		end
+		def single
+
+		end
 	end
 end
