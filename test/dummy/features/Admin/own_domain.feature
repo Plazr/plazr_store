@@ -7,12 +7,16 @@ Feature: Own domain
   Priority: Essential    
 
   Scenario: Use own domain
-    Given I am the registered owner of a store
-    And there are other owners of stores
-    And I am create a new store
-    And I want to use my own domain 
-	  And I select use my own domain
-	  And I write de domain 
-    When I press submission button
-    And write my own domain in browser
-    Then I should redirect to my store in Plazr
+    Given I am create a new store
+	  When I select use my own domain
+	  And I write the domain 
+    And I press submission button
+    Then I should see success message
+    And is downloaded the page to import of my domain
+
+  Scenario: See my store
+    Given I am on browser
+    And I am created a Plazr store
+    And I configured my own domain
+    When I write the my domain on browser
+    Then I should be redirect to my Plazr store

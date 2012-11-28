@@ -1,5 +1,6 @@
 Feature: Search Products
-  In order to search according to some parameters
+  In order to search products according to some parameters
+  As user
   I want to see all the products that sastify there parameters
   
   Stakeholder: User
