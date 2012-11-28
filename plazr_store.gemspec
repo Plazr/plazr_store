@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "shoulda-matchers"
   s.add_development_dependency "awesome_print"
   s.add_development_dependency "fuubar"
+  s.add_development_dependency 'simplecov'
 
   # Mac specific gems
   if RUBY_PLATFORM =~ /darwin/i
