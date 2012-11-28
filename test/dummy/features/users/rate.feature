@@ -2,7 +2,7 @@ Feature: Rate
 	In order to rate a product
 	I want to rate a product
 
-	Stakeholder: client of an online store
+	Stakeholder: User
 	Priority: Medium
 
 	Scenario: Classificate a product

@@ -4,7 +4,7 @@ Feature: Manage Products
   As a registered owner of a store
   I want to manage my products
 
-  Stakeholder: Store owner
+  Stakeholder: Owner
   Priority: Essential
 
   Background:

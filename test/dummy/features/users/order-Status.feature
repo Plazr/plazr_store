@@ -2,7 +2,7 @@ Feature: Order-Status
 	In order to see a product status
 	I want to follow my product
 
-	Stakeholder: client of an online store
+	Stakeholder: User
 	Priority: Medium
 
 	Scenario: See order-status

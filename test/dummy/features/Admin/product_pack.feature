@@ -2,7 +2,7 @@ Feature: Create Pack
 	In order to create a product pack
 	I want create a product pack
 
-	Stakeholder: owner of an online store
+	Stakeholder: Owner
 	Priority: very low
 
 	Scenario: Create a group of products

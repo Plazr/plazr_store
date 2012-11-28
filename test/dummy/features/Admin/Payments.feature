@@ -2,9 +2,8 @@ Feature: Payments
 	In order to manage the payments methods
 	I want to select the payment methods available
 
-	Stakeholder: Owner of an online store
+	Stakeholder: Owner
 	Priority: High
-
 
 	Scenario: Modify the payment method
 		Given I should be owner of the store and authenticated

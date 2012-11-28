@@ -3,7 +3,7 @@ Feature: Own domain
   As a registered owner of a store
   I want to access my own store through my domain
 
-  Stakeholder: Owner of an online store
+  Stakeholder: Owner
   Priority: Essential    
 
   Scenario: Use own domain

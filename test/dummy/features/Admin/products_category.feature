@@ -2,7 +2,7 @@ Feature: Organize products
 
   As a store owner I should be able to organize products in categories.
 
-  Stakeholder: Store owner
+  Stakeholder: Owner
   Priority: Essential
 
   Background:

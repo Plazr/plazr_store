@@ -4,6 +4,9 @@ Feature: Response to User support
   As user
   I want to send a notification to the owner
 
+  Stakeholder: User
+  Priority: 
+
   Scenario: Send notification
     Given I am on home page
     When I press help button

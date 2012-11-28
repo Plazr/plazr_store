@@ -3,7 +3,7 @@ Feature: Organize products
   As a registered owner of a store
   I want to associate multiple tags to the products
 
-  Stakeholder: Owner of an online store
+  Stakeholder: Owner
   Priority: Essential 
 
   Background: I should be registered and authenticated

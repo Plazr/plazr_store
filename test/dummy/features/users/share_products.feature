@@ -1,7 +1,7 @@
 Feature: Share products
 	I want share products with friends
 
-	Stakeholder: Client of an online store
+	Stakeholder: User
 	Priority: Medium
 
 	Scenario: Shared products with friends

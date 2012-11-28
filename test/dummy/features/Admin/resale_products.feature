@@ -3,7 +3,7 @@ Feature: Resale products
   As a registered owner of a store
   I want to resale products in my store
 
-  Stakeholder: Owner of an online store
+  Stakeholder: Owner
   Priority: Essential 
 
   Background: I should be registered and authenticated

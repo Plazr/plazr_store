@@ -4,6 +4,9 @@ Feature: Reports
   As owner
   I want to be able to see reports and graphics
 
+  Stakeholder: Owner
+  Priority: Essential
+
   Scenario: See reports succeffully
   	Given I am on backoffice
   	And I have sell products

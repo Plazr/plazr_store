@@ -4,6 +4,9 @@ Feature: Response to user support
   As owner
   I want to respond to a notification
 
+  Stakeholder: Owner
+  Priority: 
+
   Scenario: Response to a notification
     Given I am on my home page
     And one user send notification

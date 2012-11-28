@@ -2,9 +2,8 @@ Feature: Video support in the front page
 
 	As a Client, I should be able to manage my advertising videos
 
-	Stakeholder: Client
+	Stakeholder: User
 	Priority: Medium
-	By: Henrique Martins
 
 	Scenario: Sucessful upload
 		Given I am authenticated
