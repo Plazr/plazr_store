@@ -3,11 +3,11 @@ FactoryGirl.define do
     sequence(:name) { |n| "Name #{n}" }
 
     factory :adidas_brand do
-       name "Adidas" 
+      name "Adidas" 
     end
 
     factory :invalid_brand do
-       name nil 
+      name nil 
     end
   end
 
@@ -28,11 +28,16 @@ FactoryGirl.define do
     sequence(:name) { |n| "Name #{n}" }
 
     factory :clothes_prototype do
-       name "Clothes" 
+      name "Clothes" 
     end
 
     factory :invalid_prototype do
-       name nil 
+      name nil 
     end
+  end
+
+  factory :property, :class => PZS::Property do
+    sequence(:id_name) { |n| "Id Name #{n}" }
+    sequence(:display_name) { |n| "Name #{n}" }
   end
 end
