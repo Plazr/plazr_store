@@ -10,6 +10,10 @@ gem "jquery-rails"
 gem "haml"
 gem "paranoia"
 
+# gem PlayAuth
+gem 'plazr_auth', :git => 'git@github.com:naps62/plazr_auth.git'
+gem 'thin'
+
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
@@ -17,3 +21,4 @@ gem "paranoia"
 
 # To use debugger
 # gem 'debugger'
+

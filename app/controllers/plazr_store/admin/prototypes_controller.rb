@@ -1,0 +1,52 @@
+module PlazrStore
+  class Admin::PrototypesController < ApplicationController
+    before_filter :instance_variable_loading, :only => [:new, :create, :edit, :update]
+
+    def show
+      @prototype = Prototype.find(params[:id])
+    end
+
+    def index
+      @prototypes = Prototype.all
+    end
+
+    def create
+      @prototype = Prototype.new(params[:prototype])
+
+      if @prototype.save
+        redirect_to admin_prototype_path(@prototype), :notice => 'Prototype was successfully created.'
+      else
+        render :new
+      end
+    end
+
+    def new
+      @prototype = Prototype.new
+    end
+
+    def edit
+      @prototype = Prototype.find params[:id]
+    end
+
+    def update
+      @prototype = Prototype.find(params[:id])
+
+      if @prototype.update_attributes(params[:prototype])
+        redirect_to admin_prototype_path(@prototype), :notice => 'Prototype was successfully updated.'
+      else
+        render :edit 
+      end
+    end
+
+    def destroy
+      @prototype = Prototype.find(params[:id])
+      @prototype.destroy
+      redirect_to admin_prototypes_path
+    end
+
+    protected
+      def instance_variable_loading
+        # @properties = Properties.all
+      end
+  end
+end
