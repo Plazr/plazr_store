@@ -1,0 +1,14 @@
+= form_for [:admin, @prototype] do |f|
+  - if @prototype.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@prototype.errors.count, "error")} prohibited this prototype from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @prototype.errors.full_messages.each do |msg|
+            %li= msg
+
+  = f.label :name
+  = f.text_field :name
+
+  = f.submit "Submit"
+  = link_to 'Cancel', admin_prototypes_path
