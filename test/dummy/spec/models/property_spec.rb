@@ -7,15 +7,19 @@ describe PZS::Property, :type => :model do
   end
 
   describe "#Relations" do
-    it "has and belongs to many prototypes" do
-      FactoryGirl.create(:property).should have_and_belong_to_many(:prototypes)
+    it "has many property_prototypes" do
+      FactoryGirl.create(:property).should have_many :property_prototypes
+    end
+
+    it "has many prototypes through property_prototypes" do
+      FactoryGirl.create(:property).should have_many(:prototypes).through(:property_prototypes)
     end
 
     it "has many product_properties" do
       FactoryGirl.create(:property).should have_many :product_properties
     end
 
-    it "has many products throught product_properties" do
+    it "has many products through product_properties" do
       FactoryGirl.create(:property).should have_many(:products).through(:product_properties)
     end
   end

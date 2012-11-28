@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127155946) do
+ActiveRecord::Schema.define(:version => 20121128122914) do
 
   create_table "plazr_store_addresses", :force => true do |t|
     t.string   "first_name",        :null => false
@@ -212,6 +212,15 @@ ActiveRecord::Schema.define(:version => 20121127155946) do
 
   add_index "plazr_store_product_properties", ["product_id", "property_id"], :name => "index_product_property", :unique => true
 
+  create_table "plazr_store_product_variant_properties", :force => true do |t|
+    t.integer  "product_id",          :null => false
+    t.integer  "variant_property_id", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "plazr_store_product_variant_properties", ["product_id", "variant_property_id"], :name => "index_product_variant_property", :unique => true
+
   create_table "plazr_store_products", :force => true do |t|
     t.string   "name",                           :null => false
     t.text     "details"
@@ -233,6 +242,15 @@ ActiveRecord::Schema.define(:version => 20121127155946) do
   add_index "plazr_store_products", ["name"], :name => "index_plazr_store_products_on_name"
   add_index "plazr_store_products", ["permalink"], :name => "index_plazr_store_products_on_permalink"
   add_index "plazr_store_products", ["prototype_id"], :name => "index_plazr_store_products_on_prototype_id"
+
+  create_table "plazr_store_promotion_variants", :force => true do |t|
+    t.integer  "promotion_id", :null => false
+    t.integer  "variant_id",   :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "plazr_store_promotion_variants", ["promotion_id", "variant_id"], :name => "index_promotion_variant", :unique => true
 
   create_table "plazr_store_promotional_codes", :force => true do |t|
     t.string   "code",                        :null => false
@@ -272,12 +290,39 @@ ActiveRecord::Schema.define(:version => 20121127155946) do
     t.datetime "deleted_at"
   end
 
+  create_table "plazr_store_property_prototypes", :force => true do |t|
+    t.integer  "property_id",  :null => false
+    t.integer  "prototype_id", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "plazr_store_property_prototypes", ["property_id", "prototype_id"], :name => "index_property_prototype", :unique => true
+
+  create_table "plazr_store_prototype_variant_properties", :force => true do |t|
+    t.integer  "prototype_id",        :null => false
+    t.integer  "variant_property_id", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "plazr_store_prototype_variant_properties", ["prototype_id", "variant_property_id"], :name => "index_prototype_variant_property", :unique => true
+
   create_table "plazr_store_prototypes", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.datetime "deleted_at"
   end
+
+  create_table "plazr_store_shipment_condition_variants", :force => true do |t|
+    t.integer  "shipment_condition_id", :null => false
+    t.integer  "variant_id",            :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "plazr_store_shipment_condition_variants", ["shipment_condition_id", "variant_id"], :name => "index_shipment_condition_variant", :unique => true
 
   create_table "plazr_store_shipment_conditions", :force => true do |t|
     t.string   "shipment_method",                               :null => false
@@ -329,6 +374,24 @@ ActiveRecord::Schema.define(:version => 20121127155946) do
   end
 
   add_index "plazr_store_variant_property_values", ["variant_id", "variant_property_id"], :name => "index_variant_property_value", :unique => true
+
+  create_table "plazr_store_variant_variant_categories", :force => true do |t|
+    t.integer  "variant_id",          :null => false
+    t.integer  "variant_category_id", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "plazr_store_variant_variant_categories", ["variant_id", "variant_category_id"], :name => "index_variant_variant_category", :unique => true
+
+  create_table "plazr_store_variant_wishlists", :force => true do |t|
+    t.integer  "variant_id",  :null => false
+    t.integer  "wishlist_id", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "plazr_store_variant_wishlists", ["variant_id", "wishlist_id"], :name => "index_variant_wishlist", :unique => true
 
   create_table "plazr_store_variants", :force => true do |t|
     t.string   "sku",                                                               :null => false
