@@ -7,7 +7,7 @@ require "plazr_store/version"
 Gem::Specification.new do |s|
   s.name        = "plazr_store"
   s.version     = PlazrStore::VERSION
-  s.authors     = ["TODO: Your name"]
+  s.authors     = ["Bruno Azevedo", "Miguel Palhas"]
   s.email       = ["TODO: Your email"]
   s.homepage    = "TODO"
   s.summary     = "TODO: Summary of PlazrStore."
@@ -20,8 +20,8 @@ Gem::Specification.new do |s|
   s.add_dependency "rb-readline"
   s.add_dependency "paranoia"
   s.add_dependency "haml"
-  # s.add_dependency "jquery-rails"
 
+  s.add_development_dependency 'debugger'
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "cucumber-rails"
   s.add_development_dependency "rspec-rails"
@@ -33,6 +33,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "shoulda-matchers"
   s.add_development_dependency "awesome_print"
   s.add_development_dependency "fuubar"
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'thin'
 
   # Mac specific gems
   if RUBY_PLATFORM =~ /darwin/i

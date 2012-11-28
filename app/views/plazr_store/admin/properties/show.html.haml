@@ -1,0 +1,17 @@
+%h1 Show Brand
+%p#notice
+  = notice
+%table
+  %tr
+    %td
+      %b Id Name
+    %td
+      %b Display Name
+    %td
+      = @property.id_name
+    %td
+      = @property.display_name
+
+= link_to 'Edit', edit_admin_property_path(@property)
+|
+= link_to 'Back', admin_properties_path

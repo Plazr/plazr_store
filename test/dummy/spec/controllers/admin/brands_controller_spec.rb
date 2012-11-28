@@ -62,22 +62,23 @@ describe PZS::Admin::BrandsController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    let(:existing_brand) {FactoryGirl.create(:adidas_brand)}
+    let(:existing_brand) {FactoryGirl.create(:brand)}
 
     context "valid attributes" do
+      let(:new_brand) { FactoryGirl.attributes_for(:adidas_brand)}
       it "locates the requested brand" do
-        put :update, id: existing_brand, brand: FactoryGirl.attributes_for(:brand, name: "Nike")
+        put :update, id: existing_brand, brand: new_brand
         assigns(:brand).should eq(existing_brand)      
       end
 
       it "changes brand's attributes" do
-        put :update, id: existing_brand, brand: FactoryGirl.attributes_for(:brand, name: "Nike")
+        put :update, id: existing_brand, brand: new_brand
         existing_brand.reload # to check that our updates are actually persisted
-        existing_brand.name.should eq("Nike")
+        existing_brand.name.should eq(new_brand[:name])
       end
 
       it "redirects to the updated brand" do
-        put :update, id: existing_brand, brand: FactoryGirl.attributes_for(:adidas_brand)
+        put :update, id: existing_brand, brand: FactoryGirl.attributes_for(:brand)
         response.should redirect_to admin_brand_url(existing_brand)
       end
     end

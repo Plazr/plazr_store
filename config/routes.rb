@@ -3,6 +3,7 @@ PlazrStore::Engine.routes.draw do
     resources :brands
     resources :discount_types
     resources :prototypes
+    resources :properties
   end
 
   mount PlazrAuth::Engine => '/'

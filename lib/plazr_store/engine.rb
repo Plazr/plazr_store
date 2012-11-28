@@ -1,3 +1,6 @@
+require 'haml'
+require 'paranoia'
+
 module PlazrStore
   class Engine < ::Rails::Engine
     isolate_namespace PlazrStore
