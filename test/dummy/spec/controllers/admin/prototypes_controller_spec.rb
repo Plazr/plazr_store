@@ -32,6 +32,14 @@ describe PZS::Admin::PrototypesController, :type => :controller do
   end
 
   describe "GET #edit" do
+    describe "is filtered by #instance_variable_loading" do
+      it "assigns all properties to @properties" do
+        prototype= FactoryGirl.create :prototype
+        property = FactoryGirl.create :property
+        get :edit, id: prototype
+        assigns(:properties).should eq([property])
+      end
+    end
     it_behaves_like 'assign and render', :edit, :prototype
   end
 

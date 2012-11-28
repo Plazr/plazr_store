@@ -46,7 +46,7 @@ module PlazrStore
 
     protected
       def instance_variable_loading
-        # @properties = Properties.all
+        @properties = Property.all
       end
   end
 end

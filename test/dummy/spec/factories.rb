@@ -41,8 +41,8 @@ FactoryGirl.define do
     sequence(:display_name) { |n| "Name #{n}" }
 
     factory :silk_property do
-      id_name "Silk"
-      display_name "Silk"
+      id_name "Material"
+      display_name "Material"
     end
 
     factory :invalid_property do

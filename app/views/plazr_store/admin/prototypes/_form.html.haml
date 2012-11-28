@@ -9,13 +9,12 @@
 
   = f.label :name
   = f.text_field :name
-
-  -# - @properties.find_each |prop|
-  -#   = check_box_tag 'prototype[property_ids][]', prop.id, @prototype.properties.include?(prop)
-  -#   = prop.display_name
-
-  -# = hidden_field_tag 'prototype[property_ids][]', ''
-
+  %br
+  - @properties.each do |prop| 
+    = check_box_tag 'prototype[property_ids][]', prop.id, @prototype.properties.include?(prop)
+    = prop.display_name
+  = hidden_field_tag 'prototype[property_ids][]', ''
+  %br
 
   = f.submit "Submit"
   = link_to 'Cancel', admin_prototypes_path
