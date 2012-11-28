@@ -62,22 +62,23 @@ describe PZS::Admin::DiscountTypesController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    let(:existing_discount_type) {FactoryGirl.create(:black_friday_discount)}
+    let(:existing_discount_type) {FactoryGirl.create(:discount_type)}
 
     context "valid attributes" do
+      let(:new_discount_type) { FactoryGirl.attributes_for(:black_friday_discount) }
       it "locates the requested discount type" do
-        put :update, id: existing_discount_type, discount_type: FactoryGirl.attributes_for(:discount_type, :name => "Saldos")
+        put :update, id: existing_discount_type, discount_type: new_discount_type
         assigns(:discount_type).should eq(existing_discount_type)      
       end
 
       it "changes discount type's attributes" do
-        put :update, id: existing_discount_type, discount_type: FactoryGirl.attributes_for(:discount_type, :name => "Saldos")
+        put :update, id: existing_discount_type, discount_type: new_discount_type
         existing_discount_type.reload # to check that our updates are actually persisted
-        existing_discount_type.name.should eq("Saldos")
+        existing_discount_type.name.should eq(new_discount_type[:name])
       end
 
       it "redirects to the updated discount type" do
-        put :update, id: existing_discount_type, discount_type: FactoryGirl.attributes_for(:black_friday_discount)
+        put :update, id: existing_discount_type, discount_type: FactoryGirl.attributes_for(:discount_type)
         response.should redirect_to admin_discount_type_url(existing_discount_type)
       end
     end

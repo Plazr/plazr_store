@@ -1,0 +1,20 @@
+%h1 Listing Properties
+%table
+  %thead
+    %tr
+      %th Id Name
+      %th Display Name
+  %tbody
+    - @properties.each do |property|
+      %tr
+        %td
+          = property.id_name
+        %td
+          = property.display_name
+        %td
+          = link_to 'Show', admin_property_path(property)
+        %td
+          = link_to 'Edit', edit_admin_property_path(property)
+        %td
+          = link_to 'Destroy', admin_property_path(property), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New Brand', new_admin_property_path

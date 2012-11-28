@@ -28,5 +28,14 @@ FactoryGirl.define do
   factory :property, :class => PZS::Property do
     sequence(:id_name) { |n| "Id Name #{n}" }
     sequence(:display_name) { |n| "Name #{n}" }
+
+    factory :silk_property do
+      id_name "Silk"
+      display_name "Silk"
+    end
+
+    factory :invalid_property do
+      display_name nil
+    end
   end
 end
