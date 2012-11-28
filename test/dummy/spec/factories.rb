@@ -13,7 +13,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :brand, :class => PlazrStore::Brand do
+  factory :brand, :class => PZS::Brand do
     sequence(:name) { |n| "Name #{n}" }
 
     factory :adidas_brand do
