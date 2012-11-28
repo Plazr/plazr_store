@@ -110,6 +110,13 @@ describe PZS::Admin::DiscountTypesController, :type => :controller do
       }.to change(PZS::DiscountType,:count).by(-1)
     end
 
+    it "marks it as deleted" do
+      existing_discount_type.reload
+      expect{
+        delete :destroy, id: existing_discount_type
+      }.to change(PZS::DiscountType.with_deleted,:count).by(0)
+    end
+
     it "redirects to discount_type#index" do
       delete :destroy, id: existing_discount_type
       response.should redirect_to admin_discount_types_path
