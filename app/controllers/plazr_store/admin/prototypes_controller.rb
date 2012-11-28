@@ -1,5 +1,7 @@
 module PlazrStore
   class Admin::PrototypesController < ApplicationController
+    before_filter :instance_variable_loading, :only => [:new, :create, :edit, :update]
+
     def show
       @prototype = Prototype.find(params[:id])
     end
@@ -41,5 +43,10 @@ module PlazrStore
       @prototype.destroy
       redirect_to admin_prototypes_path
     end
+
+    protected
+      def instance_variable_loading
+        # @properties = Properties.all
+      end
   end
 end
