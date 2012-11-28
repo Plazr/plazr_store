@@ -22,6 +22,8 @@ Gem::Specification.new do |s|
   s.add_dependency "haml"
   # s.add_dependency "jquery-rails"
 
+  s.add_development_dependency 'debugger'
+  s.add_development_dependency 'pry-rails'
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "cucumber-rails"
   s.add_development_dependency "rspec-rails"
@@ -34,6 +36,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "awesome_print"
   s.add_development_dependency "fuubar"
   s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'thin'
 
   # Mac specific gems
   if RUBY_PLATFORM =~ /darwin/i
