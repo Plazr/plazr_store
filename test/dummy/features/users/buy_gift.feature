@@ -10,7 +10,7 @@ Feature: Buy gift to offer
   Scenario: Buy gift
     Given I am on product page
     When I press buy product button
-    And I press send gift button
+    And I press send gift
     And I fill form with description and destination address
     And I press submition button
     Then I should see success message

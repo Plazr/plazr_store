@@ -12,4 +12,4 @@ Feature: Establish logins for staff
     When I select add new staff member button
     And I fill de form with name and mail
     And I press submition button
-    Then I should see success message
+    Then I should see a success message

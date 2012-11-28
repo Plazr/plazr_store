@@ -20,8 +20,9 @@ Feature: Wishlist
   	And I press whishlist button
   	Then I should see success message
 
-  Scenario: Want public wishlist
-    Given I have on whishlist page
+  Scenario: See public wishlist
+    Given I have on public whishlists page
     When I select one whishlist
-    And I press want whislist button
+    And I press want whishlist button
     Then I should see success message
+    And the whishlist is associated with my account

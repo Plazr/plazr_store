@@ -4,7 +4,7 @@ Feature: Inventory Management
   As owner
   I want to manage the inventory
 
-  Stakeholder: User
+  Stakeholder: Owner
   Priority: Medium
 
   Scenario: Increase stock

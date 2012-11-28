@@ -11,8 +11,8 @@ Feature: Owners must be able to create pages
     Given I am on backoffice page
     When I select new page button
     And I fill the form with name and description
-    And I press submission button
-    Then I should see success message 
+    And I press submit
+    Then I should see a success message 
     And I should be redirect to page created 
     And I should see in my store link to the new page created
 
@@ -22,6 +22,6 @@ Feature: Owners must be able to create pages
   	When I select one page
   	And I press edit button
   	And I change the form
-  	And I press submission button
+  	And I press submit
   	Then I should see sucess message
-  	And I should be redirect to page edited 
+  	And I should be redirect to page edited

@@ -1,28 +1,23 @@
 Feature: Notification of replacement stock
 
-  In order to buy a product that is exhausted
-  As a user of the store
-  I want to be able to request the stock replacement
+  In order to sell more
+  As a owner
+  I want to be able to receive request the stock replacement
   
   Stakeholder: Owner
   Priority: High
 
-  Scenario: Request notification
-    Given I am on product page
-    And I am registered user
-    And the product is exhausted
-    When I press replacment stock button
-    Then I should see success message
-
-   Scenario: Receive notification of stock replacement
-    Given I am owner
-    And the product is exhausted
-    And the user request notification
-    Then I should see message of request
-
-   Scenario: Replacement stock
+  Background:
     Given I am owner
     And the product is exhausted
     And the user request notification 
-    And I increase the stock of the product
+
+  Scenario: Receive notification of stock replacement
+    Given I am on my home page
+    Then I should see message of request
+
+  Scenario: Replacement stock
+    Given I am on product page
+    And the product is exhausted  
+    And I increase the stock
     Then should be sent a message to user

@@ -16,4 +16,4 @@ Feature: Checkout
   Scenario: Impossible	Checkout
     Given I am on checkout page
   	And I have not products in my shopping cart 
-  	And I should not see checkout button
+  	Then I should not see checkout button
