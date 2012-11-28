@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127155946) do
+ActiveRecord::Schema.define(:version => 20121128151245) do
 
   create_table "plazr_store_addresses", :force => true do |t|
     t.string   "first_name",        :null => false
