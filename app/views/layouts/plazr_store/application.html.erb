@@ -3,29 +3,19 @@
   <head>
     <title>PlazrStore</title>
     <%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
+    <%= javascript_include_tag "plazr_store/application" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
 
-    <!-- Navigation bar -->
-    <div class="navbar navbar-fixed-top navbar-inverse">
-      <div class="navbar-inner">
-        <!-- <div class="container"> -->
-          <a class="brand" href="#">Plazr.net</a>
-          <form class="navbar-search pull-right">
-            <input type="text" class="search-query" placeholder="Search products">
-          </form>
-          <ul class="nav pull-right">
-            <li class="active"><a href="#">Option</a></li>
-          </ul>
-        <!-- </div> -->
-      </div>
-    </div>
+    <navigation>
+      <ul>
+        <li>Home</li>
+        <li>About Us</li>
+      </ul>
+    </naviation>
 
-    <div class="container">
-      <%= yield %>
-    </div>
+    <%= yield %>
 
-    <%= javascript_include_tag "plazr_store/application" %>
-</body>
+  </body>
 </html>
