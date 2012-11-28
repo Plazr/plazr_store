@@ -7,8 +7,13 @@ gemspec
 
 # jquery-rails is used by the dummy application
 gem "jquery-rails"
-gem "haml"
-gem "paranoia"
+
+# This has to be here, since it doesn't work properly when added only to the dev group
+# But we also can't add it as a global dependency, as it would become a dependency for apps using this engine
+gem 'pry-rails'
+
+# This one actually is actually better here. Otherwise any app using this engine would be forced to use pry
+gem 'plazr_auth', :git => 'git@github.com:naps62/plazr_auth.git'
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
@@ -16,4 +21,4 @@ gem "paranoia"
 # your gem to rubygems.org.
 
 # To use debugger
-# gem 'debugger'
+
