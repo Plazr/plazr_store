@@ -20,9 +20,5 @@ describe PZS::DiscountType, :type => :model do
     it "requires the presence of a name" do
       FactoryGirl.create(:discount_type).should validate_presence_of :name
     end
-
-    it "should have a unique name" do
-      FactoryGirl.create(:black_friday_discount).should validate_uniqueness_of :name
-    end
   end
 end
