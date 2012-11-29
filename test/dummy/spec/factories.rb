@@ -38,4 +38,19 @@ FactoryGirl.define do
       display_name nil
     end
   end
+
+  factory :variant_property, :class => PZS::VariantProperty do
+    sequence(:id_name) { |n| "Id Name #{n}" }
+    sequence(:display_name) { |n| "Name #{n}" }
+
+    factory :size_variant_property do
+      id_name "Size"
+      display_name "Size"
+    end
+
+    factory :invalid_variant_property do
+      display_name nil
+    end
+
+  end
 end

@@ -6,5 +6,6 @@ PlazrStore::Engine.routes.draw do
     resources :brands
     resources :discount_types
     resources :properties
+    resources :variant_properties
   end
 end
