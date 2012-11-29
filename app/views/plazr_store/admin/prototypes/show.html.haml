@@ -1,0 +1,13 @@
+%h1 Show Prototype
+%p#notice
+  = notice
+%table
+  %tr
+    %td
+      %b Name
+    %td
+      = @prototype.name
+
+= link_to 'Edit', edit_admin_prototype_path(@prototype)
+|
+= link_to 'Back', admin_prototypes_path
