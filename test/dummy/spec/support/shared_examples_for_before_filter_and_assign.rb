@@ -1,10 +1,16 @@
-shared_examples_for 'before filter and assign' do |method, model, variables|
-  # variables.each do |var|
-    # it "assigns all properties to @properties" do
-    #   prototype= FactoryGirl.create :prototype
-    #   property = FactoryGirl.create :property
-    #   get :edit, id: prototype
-    #   assigns(:properties).should eq([property])
-    # end
-  # end
+require 'active_support/inflector'
+
+shared_examples_for 'before filter and assign' do |method, model, variables_to_assign|
+  variables_to_assign.each do |var|
+    it "assigns all #{var.to_s.pluralize} to @#{var.to_s.pluralize}" do
+      m = FactoryGirl.create model
+      v = FactoryGirl.create var
+      if method == :edit
+        get :edit, id: m
+      elsif method == :new
+        get :new
+      end
+      assigns(var.to_s.pluralize.to_sym).should eq([v])
+    end
+  end
 end
