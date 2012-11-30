@@ -25,10 +25,12 @@ describe PZS::Admin::PrototypesController, :type => :controller do
       it_behaves_like 'before filter and assign', :new, :prototype, [:property]
     end
     it "assigns a new prototype to @prototype" do
+      controller.stub(:instance_variable_loading)
       get :new
       assigns(:prototype).should be_an_instance_of PZS::Prototype 
     end
     it "renders the :new template" do
+      controller.stub(:instance_variable_loading)
       get :new
       response.should render_template :new
     end
@@ -38,7 +40,17 @@ describe PZS::Admin::PrototypesController, :type => :controller do
     describe "is filtered by #instance_variable_loading" do
       it_behaves_like 'before filter and assign', :edit, :prototype, [:property]
     end
-    it_behaves_like 'assign and render', :edit, :prototype
+    it "assigns the requested prototype to @prototype" do
+      controller.stub(:instance_variable_loading)
+      p = FactoryGirl.create :prototype
+      get :edit, id: p
+      assigns(:prototype).should eq(p)
+    end
+    it "renders the :edit template" do
+      controller.stub(:instance_variable_loading)
+      get :edit, id: FactoryGirl.create(:prototype)
+      response.should render_template :edit
+    end
   end
 
   describe "POST #create" do
