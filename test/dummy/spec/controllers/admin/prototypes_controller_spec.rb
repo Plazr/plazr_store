@@ -21,6 +21,9 @@ describe PZS::Admin::PrototypesController, :type => :controller do
   end
 
   describe "GET #new" do
+    describe "is filtered by #instance_variable_loading" do
+      it_behaves_like 'before filter and assign', :new, :prototype, [:property]
+    end
     it "assigns a new prototype to @prototype" do
       get :new
       assigns(:prototype).should be_an_instance_of PZS::Prototype 
@@ -33,12 +36,7 @@ describe PZS::Admin::PrototypesController, :type => :controller do
 
   describe "GET #edit" do
     describe "is filtered by #instance_variable_loading" do
-      it "assigns all properties to @properties" do
-        prototype= FactoryGirl.create :prototype
-        property = FactoryGirl.create :property
-        get :edit, id: prototype
-        assigns(:properties).should eq([property])
-      end
+      it_behaves_like 'before filter and assign', :edit, :prototype, [:property]
     end
     it_behaves_like 'assign and render', :edit, :prototype
   end

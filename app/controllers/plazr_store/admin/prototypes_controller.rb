@@ -1,6 +1,6 @@
 module PlazrStore
   class Admin::PrototypesController < ApplicationController
-    before_filter :instance_variable_loading, :only => [:new, :create, :edit, :update]
+    before_filter :instance_variable_loading, :only => [:new, :edit]
 
     def show
       @prototype = Prototype.find(params[:id])
