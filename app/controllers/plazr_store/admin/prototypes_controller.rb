@@ -47,6 +47,7 @@ module PlazrStore
     protected
       def instance_variable_loading
         @properties = Property.all
+        @variant_properties = VariantProperty.all
       end
   end
 end

@@ -13,7 +13,7 @@ module PlazrStore
     has_many :variant_properties, :through => :prototype_variant_properties
 
     ## Attributes ##
-    attr_accessible :name, :property_ids
+    attr_accessible :name, :property_ids, :variant_property_ids
 
     # Validations
     validates :name, presence: true

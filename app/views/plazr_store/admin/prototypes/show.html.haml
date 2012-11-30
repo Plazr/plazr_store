@@ -7,6 +7,22 @@
       %b Name
     %td
       = @prototype.name
+%table
+  %thead
+    %tr
+      %th Properties
+    %tbody
+      - @prototype.properties.each do |p|
+        %tr
+          %td= p.display_name
+%table
+  %thead
+    %tr
+      %th Variant Properties
+    %tbody
+      - @prototype.variant_properties.each do |p|
+        %tr
+          %td= p.display_name
 
 = link_to 'Edit', edit_admin_prototype_path(@prototype)
 |
