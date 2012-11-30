@@ -24,18 +24,6 @@ FactoryGirl.define do
     end
   end
 
-  factory :prototype, :class => PZS::Prototype do
-    sequence(:name) { |n| "Name #{n}" }
-
-    factory :clothes_prototype do
-      name "Clothes" 
-    end
-
-    factory :invalid_prototype do
-      name nil 
-    end
-  end
-
   factory :property, :class => PZS::Property do
     sequence(:id_name) { |n| "Id Name #{n}" }
     sequence(:display_name) { |n| "Name #{n}" }
@@ -47,6 +35,18 @@ FactoryGirl.define do
 
     factory :invalid_property do
       display_name nil
+    end
+  end
+
+  factory :prototype, :class => PZS::Prototype do
+    sequence(:name) { |n| "Name #{n}" }
+
+    factory :clothes_prototype do
+      name "Clothes" 
+    end
+
+    factory :invalid_prototype do
+      name nil 
     end
   end
 
