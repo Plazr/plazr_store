@@ -24,6 +24,20 @@ FactoryGirl.define do
     end
   end
 
+  factory :property, :class => PZS::Property do
+    sequence(:id_name) { |n| "Property #{n}" }
+    sequence(:display_name) { |n| "Property #{n}" }
+
+    factory :silk_property do
+      id_name "Material"
+      display_name "Material"
+    end
+
+    factory :invalid_property do
+      display_name nil
+    end
+  end
+
   factory :prototype, :class => PZS::Prototype do
     sequence(:name) { |n| "Prototype #{n}" }
 
@@ -40,20 +54,6 @@ FactoryGirl.define do
     after(:create) do |prot| 
       prot.properties << FactoryGirl.create(:property)
       prot.variant_properties << FactoryGirl.create(:variant_property)
-    end
-  end
-
-  factory :property, :class => PZS::Property do
-    sequence(:id_name) { |n| "Property #{n}" }
-    sequence(:display_name) { |n| "Property #{n}" }
-
-    factory :silk_property do
-      id_name "Material"
-      display_name "Material"
-    end
-
-    factory :invalid_property do
-      display_name nil
     end
   end
 
