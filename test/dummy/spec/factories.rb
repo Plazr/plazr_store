@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :brand, :class => PZS::Brand do
-    sequence(:name) { |n| "Name #{n}" }
+    sequence(:name) { |n| "Brand #{n}" }
 
     factory :adidas_brand do
       name "Adidas" 
@@ -13,7 +13,7 @@ FactoryGirl.define do
 
   factory :discount_type, :class => PZS::DiscountType do 
     sequence(:name) { |n| "Discount #{n}" }
-    description "Description"
+    description "Discount Description"
 
     factory :black_friday_discount do
       name "Black Friday"
@@ -25,7 +25,7 @@ FactoryGirl.define do
   end
 
   factory :prototype, :class => PZS::Prototype do
-    sequence(:name) { |n| "Name #{n}" }
+    sequence(:name) { |n| "Prototype #{n}" }
 
     factory :clothes_prototype do
       name "Clothes" 
@@ -36,9 +36,16 @@ FactoryGirl.define do
     end
   end
 
+  factory :prototype_with_properties_and_variant_properties, parent: :prototype do
+    after(:create) do |prot| 
+      prot.properties << FactoryGirl.create(:property)
+      prot.variant_properties << FactoryGirl.create(:variant_property)
+    end
+  end
+
   factory :property, :class => PZS::Property do
-    sequence(:id_name) { |n| "Id Name #{n}" }
-    sequence(:display_name) { |n| "Name #{n}" }
+    sequence(:id_name) { |n| "Property #{n}" }
+    sequence(:display_name) { |n| "Property #{n}" }
 
     factory :silk_property do
       id_name "Material"
@@ -51,8 +58,8 @@ FactoryGirl.define do
   end
 
   factory :variant_property, :class => PZS::VariantProperty do
-    sequence(:id_name) { |n| "Id Name #{n}" }
-    sequence(:display_name) { |n| "Name #{n}" }
+    sequence(:id_name) { |n| "Variant Property #{n}" }
+    sequence(:display_name) { |n| "Variant Property #{n}" }
 
     factory :size_variant_property do
       id_name "Size"
@@ -62,6 +69,6 @@ FactoryGirl.define do
     factory :invalid_variant_property do
       display_name nil
     end
-
   end
+
 end

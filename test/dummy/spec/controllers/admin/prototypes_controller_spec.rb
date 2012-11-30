@@ -22,7 +22,7 @@ describe PZS::Admin::PrototypesController, :type => :controller do
 
   describe "GET #new" do
     describe "is filtered by #instance_variable_loading" do
-      it_behaves_like 'before filter and assign', :new, :prototype, [:property]
+      it_behaves_like 'before filter and assign', :new, :prototype, [:property, :variant_property]
     end
     it "assigns a new prototype to @prototype" do
       controller.stub(:instance_variable_loading)
@@ -38,7 +38,7 @@ describe PZS::Admin::PrototypesController, :type => :controller do
 
   describe "GET #edit" do
     describe "is filtered by #instance_variable_loading" do
-      it_behaves_like 'before filter and assign', :edit, :prototype, [:property]
+      it_behaves_like 'before filter and assign', :edit, :prototype, [:property, :variant_property]
     end
     it "assigns the requested prototype to @prototype" do
       controller.stub(:instance_variable_loading)
