@@ -48,12 +48,12 @@ FactoryGirl.define do
     factory :invalid_prototype do
       name nil 
     end
-  end
 
-  factory :prototype_with_properties_and_variant_properties, parent: :prototype do
-    after(:create) do |prot| 
-      prot.properties << FactoryGirl.create(:property)
-      prot.variant_properties << FactoryGirl.create(:variant_property)
+    factory :prototype_with_properties_and_variant_properties do
+      after(:create) do |prot| 
+        prot.properties << FactoryGirl.create(:property)
+        prot.variant_properties << FactoryGirl.create(:variant_property)
+      end
     end
   end
 
