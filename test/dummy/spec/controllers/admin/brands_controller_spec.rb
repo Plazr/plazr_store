@@ -4,61 +4,23 @@ describe PZS::Admin::BrandsController, :type => :controller do
   # render_views
 
   describe "GET #index" do
-    it "assigns brands" do
-      brand = FactoryGirl.create :brand
-      get :index
-      assigns(:brands).should eq([brand])
-    end
-
-    it "renders the :index template" do
-      get :index
-      response.should render_template :index
-    end
+    it_behaves_like 'assign and render for index', :brand
   end
 
   describe "GET #show" do
-    it_behaves_like 'assign and render', :show, :brand
+    it_behaves_like 'assign and render for show and edit', :show, :brand
   end
 
   describe "GET #new" do
-    it "assigns a new brand to @brand" do
-      get :new
-      assigns(:brand).should be_an_instance_of PZS::Brand 
-    end
-    it "renders the :new template" do
-      get :new
-      response.should render_template :new
-    end
+    it_behaves_like 'assign and render for new', :brand, PZS::Brand
   end
 
   describe "GET #edit" do
-    it_behaves_like 'assign and render',  :edit,:brand
+    it_behaves_like 'assign and render for show and edit', :edit, :brand
   end
 
   describe "POST #create" do
-    context "with valid attributes" do
-      it "saves the new brand in the database" do
-        expect{
-          post :create, brand: FactoryGirl.attributes_for(:brand)
-        }.to change(PZS::Brand,:count).by(1)
-      end
-      it "redirects to the :show template" do
-        post :create, brand: FactoryGirl.attributes_for(:brand)
-        response.should redirect_to admin_brand_url(PZS::Brand.last)
-      end
-    end
-
-    context "with invalid attributes" do
-      it "does not save the new brand in the database" do
-        expect{
-          post :create, brand: FactoryGirl.attributes_for(:invalid_brand)
-        }.to_not change(PZS::Brand,:count)
-      end
-      it "re-renders the :new template" do
-        post :create, brand: FactoryGirl.attributes_for(:invalid_brand)
-        response.should render_template :new
-      end
-    end
+    it_behaves_like 'admin create', :brand, PZS::Brand
   end
 
   describe 'PUT #update' do
@@ -103,24 +65,6 @@ describe PZS::Admin::BrandsController, :type => :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:existing_brand) {FactoryGirl.create(:brand)}
-
-    it "deletes the brand" do
-      expect{
-        delete :destroy, id: existing_brand
-      }.to change(PZS::Brand,:count).by(-1)
-    end
-
-    it "marks it as deleted" do
-      existing_brand.reload
-      expect{
-        delete :destroy, id: existing_brand
-      }.to change(PZS::Brand.with_deleted, :count).by(0)
-    end
-
-    it "redirects to brands#index" do
-      delete :destroy, id: existing_brand
-      response.should redirect_to admin_brands_path
-    end
+    it_behaves_like 'admin destroy', :brand, PZS::Brand
   end
 end

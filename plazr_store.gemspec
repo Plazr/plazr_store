@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.9"
   s.add_dependency "rb-readline"
   s.add_dependency "paranoia"
+  s.add_dependency "paranoia_uniqueness_validator"
   s.add_dependency "haml"
 
   s.add_development_dependency 'debugger'

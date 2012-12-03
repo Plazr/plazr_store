@@ -24,6 +24,29 @@ FactoryGirl.define do
     end
   end
 
+  factory :product, :class => PZS::Product do
+    sequence(:name) { |n| "Product #{n}" }
+    details "Details"
+    sequence(:slug) { |n| "product-#{n}" }
+
+    factory :pes_2012_product do
+      name "Pro Evolution Soccer 2012" 
+      details "A video game which is the eleventh edition in the Pro Evolution Soccer series developed and published by Konami with production assistance from the Blue Sky Team"
+      slug "pes-2012"
+    end
+
+    factory :invalid_product do
+      name nil 
+    end
+
+    # factory :product_with_properties_and_variant_properties do
+    #   after(:create) do |prot| 
+    #     prot.properties << FactoryGirl.create(:property)
+    #     prot.variant_properties << FactoryGirl.create(:variant_property)
+    #   end
+    # end
+  end
+
   factory :property, :class => PZS::Property do
     sequence(:id_name) { |n| "Property #{n}" }
     sequence(:display_name) { |n| "Property #{n}" }
