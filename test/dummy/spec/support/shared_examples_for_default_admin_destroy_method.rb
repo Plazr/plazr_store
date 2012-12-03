@@ -1,6 +1,6 @@
 require 'active_support/inflector'
 
-shared_examples_for 'admin destroy' do |model, model_signature|
+shared_examples_for 'default admin destroy method' do |model, model_signature|
   let!(:existing_instance) {FactoryGirl.create(model)}
 
   it "deletes the #{model}" do

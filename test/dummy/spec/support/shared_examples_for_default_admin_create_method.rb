@@ -1,4 +1,4 @@
-shared_examples_for 'admin create' do |model, model_signature|
+shared_examples_for 'default admin create method' do |model, model_signature|
   context "with valid attributes" do
     it "saves the new #{model} in the database" do
       expect{

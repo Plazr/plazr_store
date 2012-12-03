@@ -4,11 +4,11 @@ describe PZS::Admin::PrototypesController, :type => :controller do
   # render_views
 
   describe "GET #index" do
-    it_behaves_like 'assign and render for index', :prototype
+    it_behaves_like 'default admin index method', :prototype
   end
 
   describe "GET #show" do
-    it_behaves_like 'assign and render for show and edit', :show, :prototype
+    it_behaves_like 'default admin show and edit methods', :show, :prototype
   end
 
   describe "GET #new" do
@@ -45,50 +45,14 @@ describe PZS::Admin::PrototypesController, :type => :controller do
   end
 
   describe "POST #create" do
-    it_behaves_like 'admin create', :prototype, PZS::Prototype
+    it_behaves_like 'default admin create method', :prototype, PZS::Prototype
   end
 
   describe 'PUT #update' do
-    let(:existing_prototype) {FactoryGirl.create(:clothes_prototype)}
-
-    context "valid attributes" do
-      it "locates the requested prototype" do
-        put :update, id: existing_prototype, prototype: FactoryGirl.attributes_for(:prototype, name: "Jeans")
-        assigns(:prototype).should eq(existing_prototype)      
-      end
-
-      it "changes prototype's attributes" do
-        put :update, id: existing_prototype, prototype: FactoryGirl.attributes_for(:prototype, name: "Jeans")
-        existing_prototype.reload # to check that our updates are actually persisted
-        existing_prototype.name.should eq("Jeans")
-      end
-
-      it "redirects to the updated prototype" do
-        put :update, id: existing_prototype, prototype: FactoryGirl.attributes_for(:clothes_prototype)
-        response.should redirect_to admin_prototype_url(existing_prototype)
-      end
-    end
-
-    context "invalid attributes" do
-      it "locates the requested prototype" do
-        put :update, id: existing_prototype, prototype: FactoryGirl.attributes_for(:invalid_prototype)
-        assigns(:prototype).should eq(existing_prototype)      
-      end
-
-      it "does not change prototype's attributes" do
-        put :update, id: existing_prototype, prototype: FactoryGirl.attributes_for(:invalid_prototype)
-        existing_prototype.reload # to check that our updates are actually persisted
-        existing_prototype.name.should_not be_nil
-      end
-
-      it "re-renders the edit method" do
-        put :update, id: existing_prototype, prototype: FactoryGirl.attributes_for(:invalid_prototype)
-        response.should render_template :edit
-      end
-    end
+    it_behaves_like 'default admin update method', :prototype, :name
   end
 
   describe 'DELETE #destroy' do
-    it_behaves_like 'admin destroy', :prototype, PZS::Prototype
+    it_behaves_like 'default admin destroy method', :prototype, PZS::Prototype
   end
 end

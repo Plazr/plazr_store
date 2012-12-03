@@ -1,4 +1,4 @@
-shared_examples_for 'assign and render for new' do |model, model_signature|
+shared_examples_for 'default admin new method' do |model, model_signature|
   it "assigns a new #{model} to @#{model}" do
     get :new
     assigns(model).should be_an_instance_of model_signature

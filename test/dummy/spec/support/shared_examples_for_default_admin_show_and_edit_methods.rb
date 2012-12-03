@@ -1,4 +1,4 @@
-shared_examples_for 'assign and render for show and edit' do |method, model|
+shared_examples_for 'default admin show and edit methods' do |method, model|
   it "assigns the requested #{model} to @#{model}" do
     m = FactoryGirl.create model
     get method, id: m

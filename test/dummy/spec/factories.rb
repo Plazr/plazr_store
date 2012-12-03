@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :brand, :class => PZS::Brand do
     sequence(:name) { |n| "Brand #{n}" }
 
-    factory :adidas_brand do
+    factory :brand_v2 do
       name "Adidas" 
     end
 
@@ -15,7 +15,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Discount #{n}" }
     description "Discount Description"
 
-    factory :black_friday_discount do
+    factory :discount_type_v2 do
       name "Black Friday"
     end
 
@@ -29,7 +29,7 @@ FactoryGirl.define do
     details "Details"
     sequence(:slug) { |n| "product-#{n}" }
 
-    factory :pes_2012_product do
+    factory :product_v2 do
       name "Pro Evolution Soccer 2012" 
       details "A video game which is the eleventh edition in the Pro Evolution Soccer series developed and published by Konami with production assistance from the Blue Sky Team"
       slug "pes-2012"
@@ -51,7 +51,7 @@ FactoryGirl.define do
     sequence(:id_name) { |n| "Property #{n}" }
     sequence(:display_name) { |n| "Property #{n}" }
 
-    factory :silk_property do
+    factory :property_v2 do
       id_name "Material"
       display_name "Material"
     end
@@ -64,7 +64,7 @@ FactoryGirl.define do
   factory :prototype, :class => PZS::Prototype do
     sequence(:name) { |n| "Prototype #{n}" }
 
-    factory :clothes_prototype do
+    factory :prototype_v2 do
       name "Clothes" 
     end
 
@@ -84,7 +84,7 @@ FactoryGirl.define do
     sequence(:id_name) { |n| "Variant Property #{n}" }
     sequence(:display_name) { |n| "Variant Property #{n}" }
 
-    factory :size_variant_property do
+    factory :variant_property_v2 do
       id_name "Size"
       display_name "Size"
     end

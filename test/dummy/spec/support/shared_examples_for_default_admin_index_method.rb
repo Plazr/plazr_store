@@ -1,6 +1,6 @@
 require 'active_support/inflector'
 
-shared_examples_for 'assign and render for index' do |model|
+shared_examples_for 'default admin index method' do |model|
   it "assigns #{model.to_s.pluralize}" do
     m = FactoryGirl.create model
     get :index
