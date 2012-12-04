@@ -1,6 +1,6 @@
 module PlazrStore
   class Admin::ProductsController < ApplicationController
-    # before_filter :instance_variable_loading, :only => [:new, :edit]
+    before_filter :instance_variable_loading, :only => [:new, :edit]
 
     def show
       @product = Product.find(params[:id])
@@ -22,6 +22,7 @@ module PlazrStore
 
     def new
       @product = Product.new
+      # @master_variant = Variant.new
     end
 
     def edit
@@ -44,10 +45,10 @@ module PlazrStore
       redirect_to admin_products_path
     end
 
-    # protected
-    #   def instance_variable_loading
-    #     @properties = Property.all
-    #     @variant_properties = VariantProperty.all
-    #   end
+    protected
+      def instance_variable_loading
+        @properties = Property.all
+        @variant_properties = VariantProperty.all
+      end
   end
 end
