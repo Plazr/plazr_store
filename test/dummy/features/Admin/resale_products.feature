@@ -13,14 +13,8 @@ Feature: Resale products
     And there are other store owners with products
     And I am in other store
 
-  Scenario: Resale products successfully
-    When I click
-    And I press resale button
-    Then I should see that product in my store
-
-  Scenario: Resale products unsuccessfully
-    When I select the product of other store
-    And that product is not available for resale
-    And I press resale button
-    Then show the error message
-    And I should not see that product in my store
+  Scenario: Successfully resale product
+    When I click on a product
+    And I click the resale button
+    Then I should see a success message
+    And I should have the product

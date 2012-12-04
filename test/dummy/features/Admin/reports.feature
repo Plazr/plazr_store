@@ -1,20 +1,18 @@
 Feature: Reports
 
-  In order to control the activity of store
-  As owner
+  In order to manage my store
+  As a store owner
   I want to be able to see reports and graphics
 
   Stakeholder: Owner
   Priority: Essential
 
-  Scenario: See reports succeffully
-  	Given I am on backoffice
-  	And I have sell products
-  	When I press reports buton
-  	Then I should see the reports and graphics from my store
+  Scenario: Products have been sold
+  	Given I have sold products
+  	When I go to my stores statistics page
+  	Then I should see reports and graphics
 
-  Scenario: See reports succeffully
-    Given I am on backoffice
-  	And I have not still sell products
-  	When I press reports buton
-  	Then I should see unsuccess message
+  Scenario: No product has been sold
+  	Given I have not sold products
+    When I go to my stores statistics page
+  	Then I should see no sale message
