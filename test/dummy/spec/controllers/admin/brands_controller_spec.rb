@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PZS::Admin::BrandsController, :type => :controller do
+describe PZS::Admin::BrandsController, :type => :controller, :skip => true do
   # render_views
 
   describe "GET #index" do
