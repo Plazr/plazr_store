@@ -1,5 +1,8 @@
 module PlazrStore
   class Variant < ActiveRecord::Base
+    # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
+    include PZS::ParanoiaInterface
+    
     ## Relations ##
     belongs_to :product
 
@@ -25,6 +28,9 @@ module PlazrStore
     has_many :wishlists, :through => :variant_wishlists
 
     ## Attributes ##
-    attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku
+    attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku, :product_id
+
+    ## Validations ##
+    validates_presence_of :name, :sku, :price, :available, :amount_available, :is_master, :product_id 
   end
 end
