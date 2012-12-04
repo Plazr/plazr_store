@@ -1,6 +1,6 @@
 require 'active_support/inflector'
 
-shared_examples_for 'admin update' do |model, attribute|
+shared_examples_for 'default admin update method' do |model, attribute|
     let(:existing_instance) {FactoryGirl.create(model)}
 
     context "valid attributes" do

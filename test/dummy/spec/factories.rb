@@ -80,6 +80,21 @@ FactoryGirl.define do
     end
   end
 
+  factory :variant_category, :class => PZS::VariantCategory do
+    sequence(:name) { |n| "Name #{n}" }
+    description "Description"
+    is_leaf false
+    parent_variant_category_id ""
+
+    factory :variant_category_v2 do
+      name "Sapatilhas"
+    end
+
+    factory :invalid_variant_category do
+      name nil
+    end
+  end
+
   factory :variant_property, :class => PZS::VariantProperty do
     sequence(:id_name) { |n| "Variant Property #{n}" }
     sequence(:display_name) { |n| "Variant Property #{n}" }
