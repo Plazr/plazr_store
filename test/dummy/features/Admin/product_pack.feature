@@ -4,8 +4,9 @@ Feature: Create Pack
 	As a store owner
 	I should be able to select multiple products
 
-	Stakeholder: Owner
-	Priority: very low
+
+  	Stakeholder: Owner
+  	Priority: Very low
 
 	Scenario: Create a group of products
     	Given I am registered

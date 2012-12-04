@@ -16,3 +16,4 @@ Feature: Reports
   	Given I have not sold products
     When I go to my stores statistics page
   	Then I should see no sale message
+

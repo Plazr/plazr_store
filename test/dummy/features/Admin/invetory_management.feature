@@ -18,7 +18,7 @@ Feature: Inventory Management
     Given I am on backoffice
   	And one product is available with 5 items
   	When I increase stock button 5 times
-  	Then I should see success message
+  	Then I should see a success message
   	And I should see this product unvailable
 
   Scenario: Available to order

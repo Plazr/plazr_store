@@ -1,6 +1,5 @@
 Feature: Discounts
 
-  In order to ...
   As a user
   I want to be able to use discounts 
   
@@ -15,10 +14,10 @@ Feature: Discounts
   Scenario: Use discounts successfully
     And I fill form with code receibed from this store
     And I press submition button
-    Then I should see success message
+    Then I should see a success message
     And should be subtracted from total the correct value discounted
 
   Scenario: Use discounts unsuccessfully
-    And I fill form with code receibed from other store
+    And I fill form with wrong code
     And I press submition button
-    Then I should see unsuccess message
+    Then I should see a unsuccess message

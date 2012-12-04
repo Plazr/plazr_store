@@ -13,5 +13,5 @@ Feature: Feedback on Store
     When I press classify button
     And I fill form with rating
     And I fill form with comment
-    Then I should see success message
+    Then I should see success a message
     And I should see this message on home page

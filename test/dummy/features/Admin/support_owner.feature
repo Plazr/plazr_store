@@ -14,4 +14,5 @@ Feature: Response to user support
     And I should see notification
     And I fill in form with help description 
     And I select the response status
+    And I press submit
     Then I should see success message

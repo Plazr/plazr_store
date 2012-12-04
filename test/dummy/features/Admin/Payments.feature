@@ -1,11 +1,14 @@
 Feature: Payments
 
+
 	In order to manage the payment methods
 	As a store owner
 	I want to select from payment methods available
 
-	Stakeholder: Owner
-	Priority: High
+
+  	Stakeholder: Owner
+  	Priority: High
+
 
 	Scenario: Modify the payment method
     	Given I am registered

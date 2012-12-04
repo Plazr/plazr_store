@@ -27,3 +27,4 @@ Feature: Owners must be able to create pages
     And I click submit
     Then I should see success message
     And I should be in my new page
+
