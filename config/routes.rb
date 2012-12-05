@@ -5,6 +5,7 @@ PlazrStore::Engine.routes.draw do
     resources :products
     resources :properties
     resources :prototypes
+    resources :variant_categories
     resources :variant_properties
     resources :pages
   end
