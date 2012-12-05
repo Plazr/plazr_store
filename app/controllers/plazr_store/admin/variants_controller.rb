@@ -1,54 +1,53 @@
 module PlazrStore
-  class Admin::ProductsController < ApplicationController
-    before_filter :instance_variable_loading, :only => [:new, :edit]
+  class Admin::VariantsController < ApplicationController
+    # before_filter :instance_variable_loading, :only => [:new, :edit]
 
     def show
-      @product = Product.find(params[:id])
+      @variant = Variant.find(params[:id])
     end
 
     def index
-      @products = Product.all
+      @variants = Variant.all
     end
 
     def create
-      @product = Product.new(params[:product])
+      @variant = Variant.new(params[:variant])
 
-      if @product.save
-        redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
+      if @variant.save
+        redirect_to admin_variant_path(@variant), :notice => 'Variant was successfully created.'
       else
         render :new
       end
     end
 
     def new
-      @product = Product.new
-      # @master_variant = Variant.new
+      @variant = Variant.new
     end
 
     def edit
-      @product = Product.find params[:id]
+      @variant = Variant.find params[:id]
     end
 
     def update
-      @product = Product.find(params[:id])
+      @variant = Variant.find(params[:id])
 
-      if @product.update_attributes(params[:product])
-        redirect_to admin_product_path(@product), :notice => 'Product was successfully updated.'
+      if @variant.update_attributes(params[:variant])
+        redirect_to admin_variant_path(@variant), :notice => 'Variant was successfully updated.'
       else
         render :edit 
       end
     end
 
     def destroy
-      @product = Product.find(params[:id])
-      @product.destroy
-      redirect_to admin_products_path
+      @variant = Variant.find(params[:id])
+      @variant.destroy
+      redirect_to admin_variants_path
     end
 
-    protected
-      def instance_variable_loading
-        @properties = Property.all
-        @variant_properties = VariantProperty.all
-      end
+    # protected
+    #   def instance_variable_loading
+    #     @properties = Property.all
+    #     @variant_properties = VariantProperty.all
+    #   end
   end
 end

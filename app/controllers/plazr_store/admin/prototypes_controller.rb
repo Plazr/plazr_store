@@ -16,6 +16,7 @@ module PlazrStore
       if @prototype.save
         redirect_to admin_prototype_path(@prototype), :notice => 'Prototype was successfully created.'
       else
+        instance_variable_loading 
         render :new
       end
     end
@@ -34,6 +35,7 @@ module PlazrStore
       if @prototype.update_attributes(params[:prototype])
         redirect_to admin_prototype_path(@prototype), :notice => 'Prototype was successfully updated.'
       else
+        instance_variable_loading
         render :edit 
       end
     end

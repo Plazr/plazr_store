@@ -6,7 +6,7 @@ module PlazrStore
     ## Relations ##
     belongs_to :product
 
-    has_many :multimedia
+    has_many :multimedia, :class_name => "Multimedia"
 
     has_many :promotion_variants
     has_many :promotions, :through => :promotion_variants
@@ -24,10 +24,24 @@ module PlazrStore
     has_many :wishlists, :through => :variant_wishlists
 
     ## Attributes ##
-    attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku, :product_id
+    attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku, :product_id, :product
 
     ## Validations ##
-    validates_presence_of :name, :sku, :price, :available, :amount_available, :is_master, :product_id 
+    validates_presence_of :sku, :price, :available, :amount_available, :is_master, :product_id 
     validates :sku, :uniqueness_without_deleted => true
+
+    ## Callbacks ##
+    before_validation :set_is_master, :on => :create
+
+    protected
+      # if this variant is being created after the creation of a product is_master is set to true
+      # if it is a new variant belonging to a product (we can assume a master variant exists) then is_master is set to false
+      def set_is_master
+        if self.product.has_master?
+          self.is_master = false
+        else
+          self.is_master = true
+        end
+      end
   end
 end

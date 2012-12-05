@@ -1,29 +1,34 @@
-%h1 Show Product
+%h1 Show Variant
 %p#notice
   = notice
 %table
   %tr
     %td
-      %b Name
+      %b SKU
     %td
-      = @product.name
-%table
-  %thead
-    %tr
-      %th Properties
-    %tbody
-      - @product.properties.each do |p|
-        %tr
-          %td= p.display_name
-%table
-  %thead
-    %tr
-      %th Variant Properties
-    %tbody
-      - @product.variant_properties.each do |p|
-        %tr
-          %td= p.display_name
+      = @variant.sku
+  %tr
+    %td
+      %b Description
+    %td
+      = @variant.description
+-# %table
+-#   %thead
+-#     %tr
+-#       %th Properties
+-#     %tbody
+-#       - @variant.properties.each do |p|
+-#         %tr
+-#           %td= p.display_name
+-# %table
+-#   %thead
+-#     %tr
+-#       %th Variant Properties
+-#     %tbody
+-#       - @variant.variant_properties.each do |p|
+-#         %tr
+-#           %td= p.display_name
 
-= link_to 'Edit', edit_admin_product_path(@product)
+= link_to 'Edit', edit_admin_variant_path(@variant)
 |
-= link_to 'Back', admin_products_path
+= link_to 'Back', admin_variants_path

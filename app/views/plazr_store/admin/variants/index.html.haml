@@ -1,17 +1,17 @@
-%h1 Listing Products
+%h1 Listing Variants
 %table
   %thead
     %tr
-      %th Name
+      %th SKU
   %tbody
-    - @products.each do |product|
+    - @variants.each do |variant|
       %tr
         %td
-          = product.name
+          = variant.sku
         %td
-          = link_to 'Show', admin_product_path(product)
+          = link_to 'Show', admin_variant_path(variant)
         %td
-          = link_to 'Edit', edit_admin_product_path(product)
+          = link_to 'Edit', edit_admin_variant_path(variant)
         %td
-          = link_to 'Destroy', admin_product_path(product), :method => :delete, :data => { :confirm => 'Are you sure?' }
-= link_to 'New Product', new_admin_product_path
+          = link_to 'Destroy', admin_variant_path(variant), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New Variant', new_admin_variant_path

@@ -16,6 +16,7 @@ module PlazrStore
       if @product.save
         redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
       else
+        instance_variable_loading
         render :new
       end
     end
@@ -35,6 +36,7 @@ module PlazrStore
       if @product.update_attributes(params[:product])
         redirect_to admin_product_path(@product), :notice => 'Product was successfully updated.'
       else
+        instance_variable_loading
         render :edit 
       end
     end
