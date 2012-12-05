@@ -1,0 +1,20 @@
+= form_for [:admin, @page] do |f|
+  - if @page.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @page.errors.full_messages.each do |msg|
+            %li= msg
+
+  = f.label :title
+  = f.text_field :title
+
+  = f.label :slug
+  = f.text_field :slug
+
+  = f.label :content
+  = f.text_area :content
+
+  = f.submit "Submit"
+  = link_to 'Cancel', admin_pages_path

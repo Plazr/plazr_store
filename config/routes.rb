@@ -6,6 +6,7 @@ PlazrStore::Engine.routes.draw do
     resources :properties
     resources :prototypes
     resources :variant_properties
+    resources :pages
   end
 
   mount PlazrAuth::Engine => '/'
