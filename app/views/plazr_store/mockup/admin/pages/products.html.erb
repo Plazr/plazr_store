@@ -1,0 +1,40 @@
+<section>
+	<h3>Products</h3>
+	<button>All</button>
+	<button>None</button>
+	<% 10.times do %>
+		<%= render 'product' %>
+	<% end %>
+</section>
+
+<section>
+	<h3>Product Packs</h3>
+	<div>
+		Selected:
+		<button>All</button>
+		<button>None</button>
+		Search:
+		<input type="text" />
+	</div>
+	<% 5.times do %>
+		<%= render 'product' %>
+	<% end %>
+</section>
+
+<aside>
+	<section>
+		<h3>Products</h3>
+		<ul>
+			<li><%= link_to 'Delete', '#' %></li>
+			<li><%= link_to 'Add to selected packs', '#' %></li>
+		</ul>
+	</section>
+
+	<section>
+		<h3>Product Packs</h3>
+		<ul>
+			<li><%= link_to 'Delete', '#' %></li>
+			<li><%= link_to 'Add selected products', '#' %></li>
+		</ul>
+	</section>
+</aside>
