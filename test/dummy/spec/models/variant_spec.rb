@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'spec_support'
 
 describe PZS::Variant, type: :model do
   it "creates a new instance given a valid attribute" do
@@ -105,19 +106,5 @@ describe PZS::Variant, type: :model do
         variant.cost_price.should be_nil_or_greater_than_or_equal_to 0
       end
     end
-  end
-end
-
-RSpec::Matchers.define :be_nil_or_greater_than_or_equal_to do |minimum|
-  match do |actual|
-    result = actual == nil || minimum<actual || actual == minimum
-    result
-  end
-end
-
-RSpec::Matchers.define :be_greater_than_or_equal_to do |minimum|
-  match do |actual|
-    result = minimum<actual || actual == minimum
-    result
   end
 end
