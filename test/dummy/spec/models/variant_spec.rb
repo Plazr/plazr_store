@@ -65,11 +65,21 @@ describe PZS::Variant, type: :model do
     it "requires available to be set" do
       FactoryGirl.create(:variant).should validate_presence_of :available
     end
-    it "requires is_master to be set" do
-      FactoryGirl.create(:variant).should validate_presence_of :is_master
-    end
     it "requires product_id to be set" do
       FactoryGirl.create(:variant).should validate_presence_of :product
+    end
+    
+    describe "is_master field" do
+      let(:variant) {FactoryGirl.create(:variant)}
+      it "can take the value 'true'" do
+        variant.should allow_value("true").for(:is_master)
+      end
+      it "can take the value 'false" do
+        variant.should allow_value("false").for(:is_master)
+      end
+      it "cannot take any other value" do
+        variant.should_not allow_value(nil).for(:is_master)
+      end
     end
 
     it "does not allow duplicate sku" do

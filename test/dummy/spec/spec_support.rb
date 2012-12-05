@@ -11,3 +11,9 @@ RSpec::Matchers.define :be_greater_than_or_equal_to do |minimum|
     result
   end
 end
+
+  def build_attributes(*args)
+    FactoryGirl.build(*args).attributes.delete_if do |k, v| 
+      ["id", "created_at", "updated_at"].member?(k)
+    end
+  end

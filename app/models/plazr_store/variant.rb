@@ -30,7 +30,8 @@ module PlazrStore
     attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku, :product_id
 
     ## Validations ##
-    validates_presence_of :sku, :available, :is_master, :product 
+    validates_presence_of :sku, :available, :product
+    validates :is_master, :inclusion => {:in => [true, false]}
     validates :sku, :uniqueness_without_deleted => true
     validates :price, presence: true, numericality: {:greater_than_or_equal_to => 0}
     validates :amount_available, numericality: {:only_integer => true}, :allow_nil => true
@@ -42,11 +43,9 @@ module PlazrStore
 
     protected
       # if this variant is being created after the creation of a product is_master is set to true
-      # if it is a new variant belonging to a product (we can assume a master variant exists) then is_master is set to false
+      # if not, by default it will be false
       def set_is_master
-        if self.product.has_master?
-          self.is_master = false
-        else
+        if !self.product.has_master?
           self.is_master = true
         end
       end

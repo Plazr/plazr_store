@@ -23,7 +23,6 @@ describe PZS::Admin::ProductsController, :type => :controller do
       assigns(:product).should be_an_instance_of PZS::Product 
     end
     it "renders the :new template" do
-      # controller.stub(:instance_variable_loading)
       get :new
       response.should render_template :new
     end
@@ -34,13 +33,11 @@ describe PZS::Admin::ProductsController, :type => :controller do
       it_behaves_like 'before filter and assign', :edit, :product, [:property, :variant_property]
     end
     it "assigns the requested product to @product" do
-      # controller.stub(:instance_variable_loading)
       p = FactoryGirl.create :product
       get :edit, id: p
       assigns(:product).should eq(p)
     end
     it "renders the :edit template" do
-      # controller.stub(:instance_variable_loading)
       get :edit, id: FactoryGirl.create(:product)
       response.should render_template :edit
     end
