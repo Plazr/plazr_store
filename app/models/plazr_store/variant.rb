@@ -6,6 +6,9 @@ module PlazrStore
     ## Relations ##
     belongs_to :product
 
+    has_many :cart_variants
+    has_many :carts, :through => :cart_variants
+
     has_many :multimedia, :class_name => "Multimedia"
 
     has_many :promotion_variants
@@ -24,11 +27,15 @@ module PlazrStore
     has_many :wishlists, :through => :variant_wishlists
 
     ## Attributes ##
-    attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku, :product_id, :product
+    attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku, :product_id
 
     ## Validations ##
-    validates_presence_of :sku, :price, :available, :amount_available, :is_master, :product_id 
+    validates_presence_of :sku, :available, :is_master, :product 
     validates :sku, :uniqueness_without_deleted => true
+    validates :price, presence: true, numericality: {:greater_than_or_equal_to => 0}
+    validates :amount_available, numericality: {:only_integer => true}, :allow_nil => true
+    validates :cost_price, numericality: {:greater_than_or_equal_to => 0}, :allow_nil => true
+
 
     ## Callbacks ##
     before_validation :set_is_master, :on => :create

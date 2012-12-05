@@ -113,21 +113,23 @@ FactoryGirl.define do
   factory :variant, :class => PZS::Variant do
     sequence(:sku) {|n| "SKU#{n}"}
     description "Description"
-    price 10
+    price {rand(50.0)}
     available true
-    amount_available 10
+    amount_available {rand(20)-10}
     is_master true
     association :product
-    # after(:build) do |v| 
-    #   v.product = FactoryGirl.create(:product)
-    # end
 
     factory :variant_v2 do
       sequence(:sku) {|n| "SKU_v2"}
+      amount_available nil
     end
 
     factory :invalid_variant do
       sku nil 
+      price nil
+      available nil
+      is_master nil
+      association nil
     end
   end
 

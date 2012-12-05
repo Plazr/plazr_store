@@ -20,7 +20,7 @@ module PlazrStore
     attr_accessible :available_at, :details, :name, :slug, :price_max, :price_min, :rating
 
     ## Validations ##
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness_without_deleted: true
     validates :slug, :uniqueness_without_deleted => true
 
     ## Methods ##

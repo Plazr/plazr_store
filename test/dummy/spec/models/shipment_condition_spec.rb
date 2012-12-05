@@ -17,7 +17,7 @@ describe PZS::ShipmentCondition, :type => :model do
   end
   
   describe "#Validations" do
-    let!(:shipment_condition) {FactoryGirl.create(:shipment_condition)}
+    let(:shipment_condition) {FactoryGirl.create(:shipment_condition)}
 
     it "requires the presence of the shipment_method" do
       shipment_condition.should validate_presence_of :shipment_method
