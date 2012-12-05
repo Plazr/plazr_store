@@ -124,4 +124,22 @@ FactoryGirl.define do
     end
   end
 
+  #Page factory
+  factory :page, :class => PZS::Page do
+    sequence(:title) { |n| "Page #{n}" }
+    sequence(:slug) { |n| "Page #{n}" }
+    sequence(:content) { |n| "Page #{n}" }
+
+    factory :page_v2 do
+      title "title_1"
+      slug "slug_1"
+      content "content_1"
+    end
+
+    factory :invalid_page do
+      title nil
+    end
+  end
+
+
 end
