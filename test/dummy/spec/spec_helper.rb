@@ -41,5 +41,10 @@ Spork.prefork do
 end
 
 Spork.each_run do
+  # if ENV['DRB']
+  #   require 'simplecov'
+  #   puts 'Starting simplecov on ' + SimpleCov.root(File.expand_path '../../../..', __FILE__)
+  #   SimpleCov.start 'rails'
+  # end
   # This code will be run each time you run your specs.
 end

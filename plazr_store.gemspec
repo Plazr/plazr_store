@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.9"
   s.add_dependency "rb-readline"
   s.add_dependency "paranoia"
+  s.add_dependency "paranoia_uniqueness_validator"
   s.add_dependency "haml"
 
   s.add_development_dependency 'debugger'
@@ -31,10 +32,10 @@ Gem::Specification.new do |s|
   # s.add_development_dependency "mocha"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "shoulda-matchers"
-  s.add_development_dependency "awesome_print"
   s.add_development_dependency "fuubar"
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'thin'
+  s.add_development_dependency 'faker'
 
   # Mac specific gems
   if RUBY_PLATFORM =~ /darwin/i

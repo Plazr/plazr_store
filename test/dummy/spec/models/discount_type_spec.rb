@@ -1,6 +1,6 @@
 require 'spec_helper.rb'
 
-describe PZS::DiscountType, :type => :model do
+describe PZS::DiscountType, :type => :model, :skip => true do
 
   it "should create a new valid instance" do
     FactoryGirl.create(:discount_type).should be_valid
