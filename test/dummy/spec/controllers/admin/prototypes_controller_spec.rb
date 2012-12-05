@@ -45,7 +45,7 @@ describe PZS::Admin::PrototypesController, :type => :controller, :skip => true d
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :prototype, :name
+    it_behaves_like 'default admin update method', :prototype, [:name], :name
   end
 
   describe 'DELETE #destroy' do

@@ -11,7 +11,7 @@ module PlazrStore
     attr_accessible :shipment_method, :value
 
     ## Validations ##
-    validates :shipment_method, presence: true
+    validates :shipment_method, presence: true, uniqueness_without_deleted: true
     validates :value, presence: true, numericality: {:greater_than_or_equal_to => 0}
   end
 end

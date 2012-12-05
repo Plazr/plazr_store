@@ -7,10 +7,11 @@
       %b Shipment Method
     %td
       = @shipment_condition.shipment_method
+  %tr
     %td
       %b Value
     %td
-      #{@variant_category.value} €
+      #{@shipment_condition.value} €
 
 = link_to 'Edit', edit_admin_shipment_condition_path(@shipment_condition)
 |
