@@ -1,16 +1,13 @@
 Feature: Buy gift to offer
 
-  In order to give a present
+  In order to buy products as a gift
   As a user
-  I want to be able buy a product and sends it to a destination
-  
+  I should be able to see the gift option
+
   Stakeholder: User
   Priority: High
 
-  Scenario: Buy gift
-    Given I am on product page
-    When I press buy product button
-    And I press send gift
-    And I fill form with description and destination address
-    And I press submition button
-    Then I should see success message
+  Scenario: Buy as a gift
+    Given I am on a product page
+    When I click to buy
+    Then I should see a send as a gift option

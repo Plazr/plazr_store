@@ -1,13 +1,15 @@
 Feature: Compare products
-  In order to compare diferent products
+
+  In order decide between two products
   As a user
-  I want comparate products for that caracteristics
+  I should be able to comparate products in the same page
 
   Stakeholder: User
   Priority: Low
-  
+
   Scenario: Comparate products
-	Given I am in a products page
-	When I select two or more products
-	And I press a compare button
-	Then I sould see the products side by side
+	Given I am on a store
+	When I select two products
+	And I click to compare
+	Then I should be in a comparation page
+  And I should see both products

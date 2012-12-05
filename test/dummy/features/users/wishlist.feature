@@ -1,28 +1,21 @@
 Feature: Wishlist
 
-  In order to save the products I want to buy
+  In order to save the products I want to buy later
   As user
   I want to create whishlists
 
   Stakeholder: User
-  Priority: Low
+  Priority: Normal
 
-  Scenario: Create whishlist private
-  	Given I am on cart page
-  	And I have products to buy
-  	When I press whishlist button
+  Scenario: Create a whishlist
+    Given I am registered
+  	And I am on a product page
+  	When I click to add to the whishlist
   	Then I should see success message
+    And the product should be in my whishlist
 
-  Scenario: Create whishlist public
-  	Given I am on cart page
-  	And I have products to buy
-  	When I select public whishlist 
-  	And I press whishlist button
-  	Then I should see success message
-
-  Scenario: See public wishlist
-    Given I have on public whishlists page
-    When I select one whishlist
-    And I press want whishlist button
-    Then I should see success message
-    And the whishlist is associated with my account
+  Scenario: View my wishlist
+    Given I am registered
+    And I have products in my whishlist
+    When I go to my whishlist page
+    Then I should see the products
