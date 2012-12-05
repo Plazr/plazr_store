@@ -14,11 +14,3 @@ gem 'pry-rails'
 
 # This one actually is actually better here. Otherwise any app using this engine would be forced to use pry
 gem 'plazr_auth', :git => 'git@github.com:naps62/plazr_auth.git'
-
-# Declare any dependencies that are still in development here instead of in
-# your gemspec. These might include edge Rails or gems from your path or
-# Git. Remember to move these dependencies to your gemspec before releasing
-# your gem to rubygems.org.
-
-# To use debugger
-
