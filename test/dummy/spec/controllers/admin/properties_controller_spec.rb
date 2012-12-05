@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PZS::Admin::PropertiesController, :type => :controller do 
-  #render_views
+  render_views
 
   describe "GET #index" do
     it_behaves_like 'default admin index method', :property
