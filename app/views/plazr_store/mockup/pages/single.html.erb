@@ -1,1 +1,94 @@
-<h2>Single Product Page</h2>
+<article>
+
+	<header>
+		<h1 id="product_name">T-SHIRT</h1>
+		<p>classificação</p>
+	</header>
+
+	<section id="product_info">
+
+		<img id="principal_image" src="/assets/plazr_store/1.png"></img>
+		
+		<div id="secundary_image">
+			<button class="nav_button"><</button>
+			<%= render "sec_images" %>
+			<button class="nav_button">></button>
+		</div>
+		
+		<div id="description">
+			<h3 id="title">Descrição</h3>
+			<div id="text">
+				<p>Referência<p>
+				<p>04379733</p>
+				<p>Utilização</p>
+				<p>FUTEBOL</p>
+				<p id="price">4,99€</p>
+			</div>
+		</div>
+
+		<div id="op_shopping">
+			<p>Tamanho:</p>
+			<select id="sizes">
+			  <option value="M">M</option>
+			  <option value="L">L</option>
+			  <option value="XL">XL</option>
+			</select>
+			<p>Quantidade:</p>
+			<input type="number" value="Quantity" />
+		</div>
+
+		<input type="submit" value="Adicionar ao cesto" />
+		<input type="submit" value="Adicionar à wishlist" />
+		<input type="submit" value="Partilhar" />
+
+	<section>
+
+	<section>
+
+		<header>
+			<h3 id="package_group">Pacote de produtos</h3>
+		</header>
+
+		
+			<div id="package_group_images">
+				<table>
+					<tr>
+					<td><button class="nav_button"><</button></td>
+					<%= render 'package_group' %>
+					<td><button class="nav_button">></button></td>
+					</tr>
+				</table>
+			</div>
+
+	</section>
+
+	<section>
+
+		<header>
+			<h3 id="related_products">Produtos relacionados</h3>
+		</header>
+
+		
+			<div id="related_prd_images">
+				<table>
+					<tr>
+					<td><button class="nav_button"><</button></td>
+					<%= render 'related_products_im' %>
+					<td><button class="nav_button">></button></td>
+					</tr>
+				</table>
+			</div>
+
+	</section>
+
+	<section id="comments">
+
+		<header>
+			<h3 id="comment">Comentários</h3>
+		</header>
+
+		<%= render 'comment' %>
+
+	</section>
+
+</article>
