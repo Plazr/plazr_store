@@ -12,10 +12,12 @@ describe PZS::Admin::ProductsController, :type => :controller do
   end
 
   describe "GET #new" do
-    # describe "is filtered by #instance_variable_loading" do
-    #   it_behaves_like 'before filter and assign', :new, :product, [:property, :variant_property]
-    # end
+    describe "is filtered by #instance_variable_loading" do
+      it_behaves_like 'before filter and assign', :new, :product, [:property, :variant_property]
+    end
     it "assigns a new product to @product" do
+      # PZS::Property.stub( :all ).and_return( FactoryGirl.create :property )
+      # PZS::VariantProperty.stub( :all ).and_return( FactoryGirl.create :variant_property )
       # controller.stub(:instance_variable_loading)
       get :new
       assigns(:product).should be_an_instance_of PZS::Product 
@@ -28,9 +30,9 @@ describe PZS::Admin::ProductsController, :type => :controller do
   end
 
   describe "GET #edit" do
-    # describe "is filtered by #instance_variable_loading" do
-    #   it_behaves_like 'before filter and assign', :edit, :product, [:property, :variant_property]
-    # end
+    describe "is filtered by #instance_variable_loading" do
+      it_behaves_like 'before filter and assign', :edit, :product, [:property, :variant_property]
+    end
     it "assigns the requested product to @product" do
       # controller.stub(:instance_variable_loading)
       p = FactoryGirl.create :product

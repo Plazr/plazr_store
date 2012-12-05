@@ -1,30 +1,47 @@
 module PlazrStore
   class Variant < ActiveRecord::Base
+    # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
+    include PZS::ParanoiaInterface
+    
     ## Relations ##
     belongs_to :product
 
-    has_many :multimedia
+    has_many :multimedia, :class_name => "Multimedia"
 
-    #has_and_belongs_to_many :promotions
     has_many :promotion_variants
     has_many :promotions, :through => :promotion_variants
 
-    #has_and_belongs_to_many :shipment_conditions
     has_many :shipment_condition_variants
     has_many :shipment_conditions, :through => :shipment_condition_variants
 
     has_many :variant_property_values
     has_many :variant_properties, :through => :variant_property_values
 
-    #has_and_belongs_to_many :variant_categories
     has_many :variant_variant_categories
     has_many :variant_categories, :through => :variant_variant_categories
 
-    #has_and_belongs_to_many :wishlists
     has_many :variant_wishlists
     has_many :wishlists, :through => :variant_wishlists
 
     ## Attributes ##
-    attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku
+    attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku, :product_id, :product
+
+    ## Validations ##
+    validates_presence_of :sku, :price, :available, :amount_available, :is_master, :product_id 
+    validates :sku, :uniqueness_without_deleted => true
+
+    ## Callbacks ##
+    before_validation :set_is_master, :on => :create
+
+    protected
+      # if this variant is being created after the creation of a product is_master is set to true
+      # if it is a new variant belonging to a product (we can assume a master variant exists) then is_master is set to false
+      def set_is_master
+        if self.product.has_master?
+          self.is_master = false
+        else
+          self.is_master = true
+        end
+      end
   end
 end
