@@ -1,0 +1,17 @@
+= form_for [:admin, @shipment_condition] do |f|
+  - if @shipment_condition.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@shipment_condition.errors.count, "error")} prohibited this shipment_condition from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @shipment_condition.errors.full_messages.each do |msg|
+            %li= msg
+
+  = f.label :shipment_method
+  = f.text_field :shipment_method
+
+  = f.label :value
+  = f.number_field :value
+
+  = f.submit "Submit"
+  = link_to 'Cancel', admin_shipment_conditions_path

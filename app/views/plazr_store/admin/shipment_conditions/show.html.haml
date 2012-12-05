@@ -1,0 +1,17 @@
+%h1 Show ShipmentCondition
+%p#notice
+  = notice
+%table
+  %tr
+    %td
+      %b Shipment Method
+    %td
+      = @shipment_condition.shipment_method
+    %td
+      %b Value
+    %td
+      #{@variant_category.value} €
+
+= link_to 'Edit', edit_admin_shipment_condition_path(@shipment_condition)
+|
+= link_to 'Back', admin_shipment_conditions_path
