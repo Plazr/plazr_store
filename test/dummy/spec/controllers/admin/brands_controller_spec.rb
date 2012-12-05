@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PZS::Admin::BrandsController, :type => :controller, :skip => true do
-  # render_views
+  render_views
 
   describe "GET #index" do
     it_behaves_like 'default admin index method', :brand
@@ -24,7 +24,7 @@ describe PZS::Admin::BrandsController, :type => :controller, :skip => true do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :brand, :name
+    it_behaves_like 'default admin update method', :brand, [:name], :name
   end
 
   describe 'DELETE #destroy' do

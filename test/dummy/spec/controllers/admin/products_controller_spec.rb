@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PZS::Admin::ProductsController, :type => :controller do
-  # render_views
+  render_views
 
   describe "GET #index" do
     it_behaves_like 'default admin index method', :product
@@ -49,7 +49,7 @@ describe PZS::Admin::ProductsController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :product, :name
+    it_behaves_like 'default admin update method', :product, [:name], :name
   end
 
   describe 'DELETE #destroy' do

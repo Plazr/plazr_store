@@ -80,6 +80,21 @@ FactoryGirl.define do
     end
   end
 
+  factory :shipment_condition, :class => PZS::ShipmentCondition do
+    sequence(:shipment_method) { |n| "Shipment Method #{n}"}
+    value {rand(1000.0)}
+
+    factory :shipment_condition_v2 do
+      shipment_method "UPS"
+      value {63.63}
+    end
+
+    factory :invalid_shipment_condition do
+      shipment_method nil
+      value -1
+    end
+  end
+
   factory :variant_category, :class => PZS::VariantCategory do
     sequence(:name) { |n| "Name #{n}" }
     description "Description"
