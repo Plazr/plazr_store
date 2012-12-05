@@ -1,0 +1,17 @@
+= form_for [:admin, @property] do |f|
+  - if @property.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@property.errors.count, "error")} prohibited this property from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @property.errors.full_messages.each do |msg|
+            %li= msg
+
+  = f.label :id_name
+  = f.text_field :id_name
+
+  = f.label :display_name
+  = f.text_field :display_name
+
+  = f.submit "Submit"
+  = link_to 'Cancel', admin_properties_path

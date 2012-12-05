@@ -1,0 +1,17 @@
+%h1 Listing Variants
+%table
+  %thead
+    %tr
+      %th SKU
+  %tbody
+    - @variants.each do |variant|
+      %tr
+        %td
+          = variant.sku
+        %td
+          = link_to 'Show', admin_variant_path(variant)
+        %td
+          = link_to 'Edit', edit_admin_variant_path(variant)
+        %td
+          = link_to 'Destroy', admin_variant_path(variant), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New Variant', new_admin_variant_path

@@ -7,7 +7,7 @@ require "plazr_store/version"
 Gem::Specification.new do |s|
   s.name        = "plazr_store"
   s.version     = PlazrStore::VERSION
-  s.authors     = ["TODO: Your name"]
+  s.authors     = ["Bruno Azevedo", "Miguel Palhas"]
   s.email       = ["TODO: Your email"]
   s.homepage    = "TODO"
   s.summary     = "TODO: Summary of PlazrStore."
@@ -17,7 +17,35 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.9"
-  # s.add_dependency "jquery-rails"
+  s.add_dependency "rb-readline"
+  s.add_dependency "paranoia"
+  s.add_dependency "paranoia_uniqueness_validator"
+  s.add_dependency "haml"
 
+  s.add_development_dependency 'debugger'
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "cucumber-rails"
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "database_cleaner"
+  s.add_development_dependency "guard-rspec"
+  s.add_development_dependency "guard-spork"
+  # s.add_development_dependency "mocha"
+  s.add_development_dependency "factory_girl_rails"
+  s.add_development_dependency "shoulda-matchers"
+  s.add_development_dependency "fuubar"
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'thin'
+  s.add_development_dependency 'faker'
+
+  # Mac specific gems
+  if RUBY_PLATFORM =~ /darwin/i
+    s.add_development_dependency "rb-fsevent"
+    s.add_development_dependency "growl"
+  end
+
+  # Linux specific gems
+  if RUBY_PLATFORM =~ /linux/i
+    s.add_development_dependency "rb-inotify"
+    s.add_development_dependency "libnotify"
+  end
 end

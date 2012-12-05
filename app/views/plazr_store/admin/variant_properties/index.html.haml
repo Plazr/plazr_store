@@ -1,0 +1,20 @@
+%h1 Listing VariantProperties
+%table
+  %thead
+    %tr
+      %th Id Name
+      %th Display Name
+  %tbody
+    - @variant_properties.each do |variant_property|
+      %tr
+        %td
+          = variant_property.id_name
+        %td
+          = variant_property.display_name
+        %td
+          = link_to 'Show', admin_variant_property_path(variant_property)
+        %td
+          = link_to 'Edit', edit_admin_variant_property_path(variant_property)
+        %td
+          = link_to 'Destroy', admin_variant_property_path(variant_property), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New VariantProperty', new_admin_variant_property_path
