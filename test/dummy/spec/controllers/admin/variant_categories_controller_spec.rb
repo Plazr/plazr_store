@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PZS::Admin::VariantCategoriesController, :type => :controller do 
-  #render_views
+  render_views
 
   describe "GET #index" do
     it_behaves_like 'default admin index method', :variant_category
@@ -32,7 +32,6 @@ describe PZS::Admin::VariantCategoriesController, :type => :controller do
       m = FactoryGirl.create_list(:variant_category, 5)
       n = FactoryGirl.create :variant_category
       get :edit, id: n
-      PZS::VariantCategory.stub(:where).and_return(m)
       assigns(:variant_categories).should eq(m)
     end
     it "assigns the requested variant_category to @variant_category" do
@@ -70,7 +69,6 @@ describe PZS::Admin::VariantCategoriesController, :type => :controller do
         m = FactoryGirl.create_list(:variant_category, 5)
         n = FactoryGirl.create :variant_category
         get :edit, id: n
-        PZS::VariantCategory.stub(:where).and_return(m)
         assigns(:variant_categories).should eq(m)
       end
 
