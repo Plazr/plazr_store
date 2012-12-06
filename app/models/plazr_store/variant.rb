@@ -34,7 +34,8 @@ module PlazrStore
     validates :is_master, :inclusion => {:in => [true, false]}
     validates :sku, :uniqueness_without_deleted => true
     validates :price, presence: true, numericality: {:greater_than_or_equal_to => 0}
-    validates :amount_available, numericality: {:only_integer => true}, :allow_nil => true
+    #remove allow_nil from this validation and change migration so that variant cannot take nil values
+    validates :amount_available, numericality: {:only_integer => true}
     validates :cost_price, numericality: {:greater_than_or_equal_to => 0}, :allow_nil => true
 
 
