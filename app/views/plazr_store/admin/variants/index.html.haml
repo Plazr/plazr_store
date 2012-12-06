@@ -3,11 +3,29 @@
   %thead
     %tr
       %th SKU
+      %th Description
+      %th Price
+      %th Cost Price
+      %th Amount Available
+      %th Availability
+      %th Product
   %tbody
     - @variants.each do |variant|
       %tr
         %td
           = variant.sku
+        %td
+          = variant.description
+        %td
+          #{variant.price} €
+        %td
+          #{variant.cost_price} €
+        %td
+          = variant.amount_available
+        %td
+          = variant.available
+        %td
+          = variant.product.name
         %td
           = link_to 'Show', admin_variant_path(variant)
         %td

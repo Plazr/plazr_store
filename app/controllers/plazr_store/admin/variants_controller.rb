@@ -1,6 +1,6 @@
 module PlazrStore
   class Admin::VariantsController < ApplicationController
-    # before_filter :instance_variable_loading, :only => [:new, :edit]
+    before_filter :instance_variable_loading, :only => [:new, :edit]
 
     def show
       @variant = Variant.find(params[:id])
@@ -16,6 +16,7 @@ module PlazrStore
       if @variant.save
         redirect_to admin_variant_path(@variant), :notice => 'Variant was successfully created.'
       else
+        instance_variable_loading
         render :new
       end
     end
@@ -34,6 +35,7 @@ module PlazrStore
       if @variant.update_attributes(params[:variant])
         redirect_to admin_variant_path(@variant), :notice => 'Variant was successfully updated.'
       else
+        instance_variable_loading
         render :edit 
       end
     end
@@ -44,10 +46,9 @@ module PlazrStore
       redirect_to admin_variants_path
     end
 
-    # protected
-    #   def instance_variable_loading
-    #     @properties = Property.all
-    #     @variant_properties = VariantProperty.all
-    #   end
+    protected
+      def instance_variable_loading
+        @products = Product.all
+      end
   end
 end

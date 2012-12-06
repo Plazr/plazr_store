@@ -109,6 +109,30 @@ FactoryGirl.define do
       name nil
     end
   end
+  
+  factory :variant, :class => PZS::Variant do
+    sequence(:sku) {|n| "SKU#{n}"}
+    description "Description"
+    price {rand(50.0)}
+    available true
+    amount_available {rand(20)-10}
+    is_master true
+    association :product
+
+    factory :variant_v2 do
+      sequence(:sku) {|n| "SKU_v2"}
+      amount_available nil
+      association :product
+    end
+
+    factory :invalid_variant do
+      sku nil 
+      price nil
+      available nil
+      is_master nil
+      product nil
+    end
+  end
 
   factory :variant_property, :class => PZS::VariantProperty do
     sequence(:id_name) { |n| "Variant Property #{n}" }
@@ -140,6 +164,4 @@ FactoryGirl.define do
       title nil
     end
   end
-
-
 end

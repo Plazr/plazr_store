@@ -10,18 +10,27 @@
   = f.label :name
   = f.text_field :name
   %br
-  -# %h4= "Properties"
-  -# - @properties.each do |prop| 
-  -#   = check_box_tag 'product[property_ids][]', prop.id, @product.properties.include?(prop)
-  -#   = prop.display_name
-  -# = hidden_field_tag 'product[property_ids][]', ''
+  = f.label :details
+  = f.text_area :details
+  %br
+  = f.label :price_max
+  = f.text_field :price_max
+  %br
+  = f.label :price_min
+  = f.text_field :price_min
+  %br
+  %h4= "Properties"
+  - @properties.each do |prop| 
+    = check_box_tag 'product[property_ids][]', prop.id, @product.properties.include?(prop)
+    = prop.display_name
+  = hidden_field_tag 'product[property_ids][]', ''
 
-  -# %h4= "Variant Properties"
-  -# - @variant_properties.each do |prop| 
-  -#   = check_box_tag 'product[variant_property_ids][]', prop.id, @product.variant_properties.include?(prop)
-  -#   = prop.display_name
-  -# = hidden_field_tag 'product[variant_property_ids][]', ''
-  -# %br
+  %h4= "Variant Properties"
+  - @variant_properties.each do |prop| 
+    = check_box_tag 'product[variant_property_ids][]', prop.id, @product.variant_properties.include?(prop)
+    = prop.display_name
+  = hidden_field_tag 'product[variant_property_ids][]', ''
+  %br
 
   = f.submit "Submit"
   = link_to 'Cancel', admin_products_path

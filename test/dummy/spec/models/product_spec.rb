@@ -31,15 +31,23 @@ describe PZS::Product, type: :model do
     it "has many variant_properties through product_variant_properties" do
       FactoryGirl.create(:product).should have_many(:variant_properties).through(:product_variant_properties)
     end
+
+    it "has many variants" do 
+      FactoryGirl.create(:product).should have_many :variants
+    end
   end
 
   describe "#Validations" do
     it "requires name to be set" do
       FactoryGirl.create(:product).should validate_presence_of :name
     end
-    it "does not allow duplicate slug " do
-      FactoryGirl.create(:product, slug: "prodcut-x")
-      FactoryGirl.build(:product, slug: "prodcut-x").should_not be_valid
+    it "does not allow duplicate name" do
+      FactoryGirl.create(:product_v2)
+      FactoryGirl.build(:product_v2).should_not be_valid
+    end
+    it "does not allow duplicate slug" do
+      FactoryGirl.create(:product_v2)
+      FactoryGirl.build(:product_v2).should_not be_valid
     end
   end
 end
