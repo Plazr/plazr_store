@@ -30,8 +30,9 @@ describe PZS::Admin::VariantsController, :type => :controller do
   describe "GET #edit" do
     it "assigns all products to @products" do
       m = FactoryGirl.create_list(:product, 5)
-      get :new
-      assigns(:products).should eq(m)
+      v = FactoryGirl.create :variant
+      get :edit, id: v
+      assigns(:products).should eq(m << v.product)
     end
     it "assigns the requested variant to @variant" do
       p = FactoryGirl.create :variant
@@ -49,7 +50,7 @@ describe PZS::Admin::VariantsController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :variant, [:sku, :price, :available, :is_master, :product], :sku
+    it_behaves_like 'default admin update method', :variant, [:sku, :price, :available, :is_master, :product_id], :sku
   end
 
   describe 'DELETE #destroy' do

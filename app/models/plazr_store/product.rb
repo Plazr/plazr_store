@@ -17,7 +17,7 @@ module PlazrStore
     has_many :variant_properties, :through => :product_variant_properties
 
     ## Attributes ##
-    attr_accessible :available_at, :details, :name, :slug, :price_max, :price_min, :rating
+    attr_accessible :available_at, :details, :name, :slug, :price_max, :price_min, :rating, :brand_id, :prototype_id
 
     ## Validations ##
     validates :name, presence: true, uniqueness_without_deleted: true

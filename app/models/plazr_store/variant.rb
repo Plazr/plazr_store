@@ -39,7 +39,8 @@ module PlazrStore
 
 
     ## Callbacks ##
-    before_validation :set_is_master, :on => :create
+    #it is only activated if this variant has a product_id
+    before_validation :set_is_master, :on => :create, :if => "!product_id.nil?"
 
     protected
       # if this variant is being created after the creation of a product is_master is set to true

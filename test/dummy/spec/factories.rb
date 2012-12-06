@@ -129,7 +129,7 @@ FactoryGirl.define do
       sku nil 
       price nil
       available nil
-      #is_master nil
+      is_master nil
       product nil
     end
   end
