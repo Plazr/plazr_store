@@ -27,5 +27,9 @@ module PlazrStore
     def has_master?
       self.variants.count >= 1
     end
+
+    def master_variant
+      self.variants.master_variant
+    end
   end
 end

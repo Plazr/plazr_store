@@ -50,4 +50,22 @@ describe PZS::Product, type: :model do
       FactoryGirl.build(:product_v2).should_not be_valid
     end
   end
+
+  describe "#Public Methods" do
+    describe "#has_master?" do
+      context "has variants" do
+        it "returns true" do
+          p = FactoryGirl.create(:product_with_master_variant)
+          p.has_master?.should be_true
+        end
+        it "returns false" do
+          p = FactoryGirl.create(:product)
+          p.has_master?.should be_false
+        end
+      end
+    end
+    describe "#master_variant" do
+      pending "@wip"
+    end
+  end
 end

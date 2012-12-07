@@ -35,13 +35,15 @@ shared_examples_for 'default admin update method' do |model, att_valid, att_inva
       assigns(model).should eq(existing_instance)      
     end
 
-    it "does not change #{model}'s #{att_invalid}" do
-      old_var = existing_instance.send(att_invalid)
-      put :update, id: existing_instance, model => FactoryGirl.attributes_for("invalid_#{model}".to_sym)
-      existing_instance.reload # to check that our updates are actually persisted
-      existing_instance.send(att_invalid).should eq(old_var)
+    att_valid.each do |var|
+      it "does not change #{model}'s #{var}" do
+        old_var = existing_instance.send(var)
+        put :update, id: existing_instance, model => FactoryGirl.attributes_for("invalid_#{model}".to_sym)
+        existing_instance.reload # to check that our updates are actually persisted
+        existing_instance.send(var).should eq(old_var)
+      end
     end
-    
+
     it "re-renders the edit method" do
       put :update, id: existing_instance, model => FactoryGirl.attributes_for("invalid_#{model}".to_sym)
       response.should render_template :edit

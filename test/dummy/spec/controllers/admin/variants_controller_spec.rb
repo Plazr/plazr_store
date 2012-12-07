@@ -13,36 +13,20 @@ describe PZS::Admin::VariantsController, :type => :controller do
 
   describe "GET #new" do
     it "assigns all products to @products" do
-      m = FactoryGirl.create_list(:product, 5)
+      p = FactoryGirl.create(:product_with_master_variant)
       get :new
-      assigns(:products).should eq(m)
+      assigns(:products).should eq([p])
     end
-    it "assigns a new variant to @variant" do
-      get :new
-      assigns(:variant).should be_an_instance_of PZS::Variant 
-    end
-    it "renders the :new template" do
-      get :new
-      response.should render_template :new
-    end
+    it_behaves_like 'default admin new method', :variant, PZS::Variant
   end
 
   describe "GET #edit" do
     it "assigns all products to @products" do
-      m = FactoryGirl.create_list(:product, 5)
-      v = FactoryGirl.create :variant
-      get :edit, id: v
-      assigns(:products).should eq(m << v.product)
+      p = FactoryGirl.create(:product_with_master_variant)
+      get :edit, id: p.master_variant.first # master_variant returns an ActiveRecord::Relation object
+      assigns(:products).should eq([p])
     end
-    it "assigns the requested variant to @variant" do
-      p = FactoryGirl.create :variant
-      get :edit, id: p
-      assigns(:variant).should eq(p)
-    end
-    it "renders the :edit template" do
-      get :edit, id: FactoryGirl.create(:variant)
-      response.should render_template :edit
-    end
+    it_behaves_like 'default admin show and edit methods', :edit, :variant
   end
 
   describe "POST #create" do
