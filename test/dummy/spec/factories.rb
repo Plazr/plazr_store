@@ -121,7 +121,6 @@ FactoryGirl.define do
 
     factory :variant_v2 do
       sequence(:sku) {|n| "SKU_v2"}
-      amount_available nil
       association :product
     end
 
@@ -129,6 +128,7 @@ FactoryGirl.define do
       sku nil 
       price nil
       available nil
+      amount_available nil
       is_master nil
       product nil
     end
