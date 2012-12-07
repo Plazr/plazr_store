@@ -47,6 +47,17 @@ describe PZS::Admin::VariantCategoriesController, :type => :controller do
 
   describe "POST #create" do
     context "with valid attributes" do
+      context "checking the is_leaf attribute" do
+        it "should be false" do
+          post :create, :variant_category => FactoryGirl.attributes_for(:variant_category)
+          assigns(:variant_category).is_leaf.should be_false
+        end
+        it "should be true" do
+          parent = FactoryGirl.create(:variant_category)
+          post :create, :variant_category => FactoryGirl.attributes_for(:variant_category_v2, :parent_variant_category_id => parent.id)
+          assigns(:variant_category).is_leaf.should be_true
+        end
+      end
       it "saves the new variant_category in the database" do
         expect{
           post :create, :variant_category => FactoryGirl.attributes_for(:variant_category)
@@ -90,12 +101,29 @@ describe PZS::Admin::VariantCategoriesController, :type => :controller do
         assigns(:variant_category).should eq(existing_instance)      
       end
 
+      it "checks the parent_variant_category_id" do
+        post :create, :variant_category => FactoryGirl.attributes_for(:variant_category)
+        assigns(:is_leaf).should be_false
+      end
+
       it "changes variant_category's attributes" do
         put :update, id: existing_instance, :variant_category => new_instance
         existing_instance.reload # to check that our updates are actually persisted
         existing_instance.send(:name).should eq(new_instance[:name])
       end
 
+      context "checking the is_leaf attribute" do
+        it "should be false" do
+          put :update, id: existing_instance, :variant_category => new_instance
+          assigns(:variant_category).is_leaf.should be_false
+        end
+        it "should be true" do
+          parent = FactoryGirl.create(:variant_category)
+          put :update, id: existing_instance, :variant_category => FactoryGirl.attributes_for(:variant_category_v2, :parent_variant_category_id => parent.id)
+          assigns(:variant_category).is_leaf.should be_true
+        end
+      end
+      
       it "redirects to the updated variant_category" do
         put :update, id: existing_instance, :variant_category => new_instance
         response.should redirect_to send("admin_variant_category_url".to_sym, existing_instance)
