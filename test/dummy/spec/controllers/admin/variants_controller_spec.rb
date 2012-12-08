@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PZS::Admin::VariantsController, :type => :controller do
+describe PZS::Admin::VariantsController, :type => :controller, focus: true do
   render_views
 
   describe "GET #index" do
@@ -31,6 +31,29 @@ describe PZS::Admin::VariantsController, :type => :controller do
 
   describe "POST #create" do
     it_behaves_like 'default admin create method', :variant, PZS::Variant
+    # context "with valid attributes" do
+    #   it "saves the new variant in the database" do
+    #     expect{
+    #       post :create, :variant => build_attributes(:variant)
+    #     }.to change(PZS::Variant, :count).by(1)
+    #   end
+    #   it "redirects to the :show template" do
+    #     post :create, :variant => build_attributes(:variant)
+    #     response.should redirect_to admin_product_variant_url(PZS::Variant.last)
+    #   end
+    # end
+
+    # context "with invalid attributes" do
+    #   it "does not save the new variant in the database" do
+    #     expect{
+    #       post :create, :variant => build_attributes(:invalid_variant)
+    #     }.to_not change(PZS::Variant, :count)
+    #   end
+    #   it "re-renders the :new template" do
+    #     post :create, :variant => build_attributes(:invalid_variant)
+    #     response.should render_template :new
+    #   end
+    # end
   end
 
   describe 'PUT #update' do
