@@ -48,7 +48,7 @@ describe PZS::Admin::ProductsController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :product, [:name], :name
+    it_behaves_like 'default admin update method', :product, [:name]
   end
 
   describe 'DELETE #destroy' do

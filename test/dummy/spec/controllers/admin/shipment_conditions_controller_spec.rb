@@ -24,7 +24,7 @@ describe PZS::Admin::ShipmentConditionsController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :shipment_condition, [:shipment_method, :value], :value
+    it_behaves_like 'default admin update method', :shipment_condition, [:shipment_method, :value]
   end
 
   describe 'DELETE #destroy' do

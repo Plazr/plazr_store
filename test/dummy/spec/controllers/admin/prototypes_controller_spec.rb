@@ -15,29 +15,14 @@ describe PZS::Admin::PrototypesController, :type => :controller, skip: true do
     describe "is filtered by #instance_variable_loading" do
       it_behaves_like 'before filter and assign', :new, :prototype, [:property, :variant_property]
     end
-    it "assigns a new prototype to @prototype" do
-      get :new
-      assigns(:prototype).should be_an_instance_of PZS::Prototype 
-    end
-    it "renders the :new template" do
-      get :new
-      response.should render_template :new
-    end
+    it_behaves_like 'default admin new method', :prototype, PZS::Prototype
   end
 
   describe "GET #edit" do
     describe "is filtered by #instance_variable_loading" do
       it_behaves_like 'before filter and assign', :edit, :prototype, [:property, :variant_property]
     end
-    it "assigns the requested prototype to @prototype" do
-      p = FactoryGirl.create :prototype
-      get :edit, id: p
-      assigns(:prototype).should eq(p)
-    end
-    it "renders the :edit template" do
-      get :edit, id: FactoryGirl.create(:prototype)
-      response.should render_template :edit
-    end
+    it_behaves_like 'default admin show and edit methods', :edit, :prototype
   end
 
   describe "POST #create" do
@@ -45,7 +30,7 @@ describe PZS::Admin::PrototypesController, :type => :controller, skip: true do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :prototype, [:name], :name
+    it_behaves_like 'default admin update method', :prototype, [:name]
   end
 
   describe 'DELETE #destroy' do

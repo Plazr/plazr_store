@@ -34,7 +34,7 @@ describe PZS::Admin::VariantsController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :variant, [:sku, :price, :available, :is_master, :product_id], :sku
+    it_behaves_like 'default admin update method', :variant, [:sku, :price, :available, :is_master, :product_id]
   end
 
   describe 'DELETE #destroy' do

@@ -107,6 +107,9 @@ FactoryGirl.define do
     is_leaf false
     parent_variant_category_id ""
 
+    factory :variant_category_not_leaf do
+    end
+
     factory :variant_category_v2 do
       name "Sapatilhas"
     end

@@ -24,7 +24,7 @@ describe PZS::Admin::BrandsController, :type => :controller, :skip => true do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :brand, [:name], :name
+    it_behaves_like 'default admin update method', :brand, [:name]
   end
 
   describe 'DELETE #destroy' do

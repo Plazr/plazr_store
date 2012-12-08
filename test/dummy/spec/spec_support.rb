@@ -15,7 +15,7 @@ RSpec::Matchers.define :be_greater_than_or_equal_to do |minimum|
 end
 
 def build_attributes(factory_name)
-  #this get all the attributes of a given factory and strips the fields 'id', 'created_at', 'updated_at' and 'deleted_at'
+  #this gets all the attributes of a given factory including associations and strips the fields 'id', 'created_at', 'updated_at' and 'deleted_at'
   #because they cant be mass-assigned and returns an array
   att = FactoryGirl.build(factory_name).attributes.delete_if do |k, v| 
     ["id", "created_at", "updated_at", "deleted_at"].member?(k)
