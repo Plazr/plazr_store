@@ -1,5 +1,5 @@
 <header>
-  <h1>The awesome store</h1>
+	<h1>The awesome store</h1>
 </header>
 
 <!-- Advertisement -->
@@ -8,38 +8,45 @@ Video, or slideshow
 </section>
 
 <section>
-  <header>
-    <h2>Featured</h2>
-  </header>
-  <section>
-    <% 5.times do %>
-      <%= render 'featured' %>
-    <% end %>
-  </section>
+	<header>
+		<h2>Featured</h2>
+	</header>
+	<section>
+		
+		<% 5.times do %>
+			<%= render 'product' %>
+		<% end %>
+	</section>
 </section>
 
 <section>
-  <header>
-    <h2>Recommended</h2>
-  </header>
-  <section>
-    <% 5.times do %>
-      <%= render 'recommended' %>
-    <% end %>
-  </section>
+<header>
+<h2>Recommended</h2>
+</header>
+<section>
+<% 5.times do %>
+<%= render 'product' %>
+<% end %>
+</section>
 </section>
 
 <section>
-  <header>
-    <h2>Products</h2>
-  </header>
-  <section>
-    <% 10.times do %>
-      <%= render 'product' %>
-    <% end %>
-  </section>
+	<header>
+		<h2>Products</h2>
+	</header>
+	<section>
+		<div>
+			Sort by:
+			<select>
+				<option>Date added</option>
+				<option>Popularity</option>
+				<option>Rating</option>
+				<option>Price (ascending)</option>
+				<option>Price (descending)</option>
+			</select>
+		</div>
+		<% 10.times do %>
+			<%= render 'product' %>
+		<% end %>
+	</section>
 </section>
-
-<footer role="contentinfo">
-  Copyright &copy; meself
-</footer>

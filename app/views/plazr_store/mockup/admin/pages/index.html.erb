@@ -1,0 +1,36 @@
+<header>
+	<h1>Admin Page</h1>
+</header>
+
+<section id="products">
+	<% 10.times do %>
+		<%= render 'product' %>
+	<% end %>
+</section>
+
+<section id="store">
+</section>
+
+<section id="videos">
+</section>
+
+<aside>
+	<h2>Toolbox</h2>
+	<section>
+		<h3>Products</h3>
+		<button>Delete selected</button>
+	</section>
+	<section>
+		<h3>Product Packs</h3>
+		<button>Create New</button>
+		<table>
+			<tr><td>Pack1</td><td><a href="#">Show</a><td><a href="#">Delete</a></td><td><a href="#">Add selected</a></td></tr>
+			<tr><td>Pack2</td><td><a href="#">Show</a><td><a href="#">Delete</a></td><td><a href="#">Add selected</a></td></tr>
+			<tr><td>Pack3</td><td><a href="#">Show</a><td><a href="#">Delete</a></td><td><a href="#">Add selected</a></td></tr>
+		</table>
+	</section>
+</aside>
+
+<footer>
+	<p>&copy; Byte me</p>
+</footer>
