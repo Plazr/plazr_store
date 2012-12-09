@@ -1,6 +1,53 @@
 <article>
 
+	<header>
+		<h1 class="product_type_title">Futebol</h1>
+	</header>
 
+	<section id="principal_filter">
+
+		<%= render "filter_opt" %>
+
+	</section>
+
+	<button type="submit" class="compare_button">Comparar</button>
+
+	<section id="secundary_filter">
+
+		<div id="price_filter">
+			<span>Filtrar por preço: </span>
+			<input type="text" class="txt" man="min_price">
+			<span> € a </span>
+			<input type="text" class="txt" man="max_price">
+			<span> €</span>
+			<button type="submit" class="search_button">ok</button>
+		</div>
+
+		<div id="mark_filter">
+			<span>Filtrar por marca: </span>
+			<select id="marks">
+				<option>Adidas</option>
+				<option>Nike</option>
+			</select>
+		</div>
+
+		<div id="show_filter">
+			<span>Filtrar por preço: </span>
+			<select id="prices">
+				<option>Ascendente</option>
+				<option>Descendente</option>
+			</select>
+		</div>
+
+	</section>
+
+	<section>
+
+		<div id="products_list">
+			<%= render "products_search" %>
+		</div>
+
+	</section>
 
 
 </article>
