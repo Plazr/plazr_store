@@ -1,7 +1,6 @@
 require 'active_support/inflector'
 
-#3 args: model is the model to be tested, att_valid is an array of the attributes to be validated
-#and the att_invalid is just one attribute to test the invalid context
+#2 args: model is the model to be tested, att_valid is an array of the attributes to be validated
 shared_examples_for 'default admin update method' do |model, att_valid|
   let(:existing_instance) {FactoryGirl.create(model)}
 

@@ -3,17 +3,14 @@ module PlazrStore
     before_filter :get_product
 
     def show
-      # @product = Product.find(params[:product_id])
       @variant = Variant.find(params[:id])
     end
 
     def index
-      # @product = Product.find(params[:product_id])
       @variants = @product.variants
     end
 
     def create
-      # @product = Product.find(params[:product_id])
       @variant = @product.variants.build params[:variant]
 
       if @variant.save
@@ -24,17 +21,14 @@ module PlazrStore
     end
 
     def new
-      # @product = Product.find(params[:product_id])
       @variant = Variant.new(available: true)
     end
 
     def edit
-      # @product = Product.find(params[:product_id])
       @variant = Variant.find params[:id]
     end
 
     def update
-      # @product = Product.find(params[:product_id])
       @variant = Variant.find(params[:id])
 
       if @variant.update_attributes(params[:variant])
@@ -45,7 +39,6 @@ module PlazrStore
     end
 
     def destroy
-      # @product = Product.find(params[:product_id])
       @variant = Variant.find(params[:id])
       @variant.destroy
       redirect_to admin_product_variants_path

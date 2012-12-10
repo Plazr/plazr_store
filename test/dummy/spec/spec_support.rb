@@ -23,3 +23,13 @@ def build_attributes(factory_name)
   #here we take the array and symbolize the keys
   Hash[att.map{|(k,v)| [k.to_sym,v]}]
 end
+
+# strips certain key-value pairs from hash 'original'
+def trim_hash_attributes(original)
+  # remove certain key-value pairs
+  att = original.delete_if do |k, v| 
+    ["id", "created_at", "updated_at", "deleted_at"].member?(k)
+  end
+  #here we take the array and symbolize the keys
+  Hash[att.map{|(k,v)| [k.to_sym,v]}]
+end

@@ -11,7 +11,7 @@
   = f.text_field :shipment_method
 
   = f.label :value
-  = f.text_field :value, :class => 'shipment_condition', :value => (number_with_precision(f.object.value, :precision => 2) || 0)
+  = f.text_field :value, :class => 'shipment_condition'
   
   = f.submit "Submit"
   = link_to 'Cancel', admin_shipment_conditions_path

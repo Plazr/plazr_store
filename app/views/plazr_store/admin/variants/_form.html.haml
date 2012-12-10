@@ -14,10 +14,10 @@
   = f.text_area :description
   %br
   = f.label :price
-  = f.text_field :price, :class => 'variant', :value => (number_with_precision(f.object.price, :precision => 2) || 0)
+  = f.text_field :price, :class => 'variant'
   %br
   = f.label :cost_price
-  = f.text_field :cost_price, :class => 'variant', :value => (number_with_precision(f.object.cost_price, :precision => 2) || 0)
+  = f.text_field :cost_price, :class => 'variant'
   %br
   = f.label :amount_available
   = f.number_field :amount_available
