@@ -27,9 +27,9 @@
         %td
           = variant.product.name
         %td
-          = link_to 'Show', admin_product_variant_path(@product, variant)
+          = link_to 'Show', admin_variant_path(variant)
         %td
-          = link_to 'Edit', edit_admin_product_variant_path(@product, variant)
+          = link_to 'Edit', edit_admin_variant_path(variant)
         %td
-          = link_to 'Destroy', admin_product_variant_path(@product, variant), :method => :delete, :data => { :confirm => 'Are you sure?' }
-= link_to 'New Variant', new_admin_product_variant_path
+          = link_to 'Destroy', admin_variant_path(variant), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New Variant', new_admin_variant_path

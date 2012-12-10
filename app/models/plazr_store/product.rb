@@ -8,7 +8,7 @@ module PlazrStore
     belongs_to :prototype
 
     has_many :feedback_products
-    has_many :variants
+    has_many :variants, :dependent => :destroy
 
     has_many :product_properties
     has_many :properties, :through => :product_properties
@@ -18,6 +18,7 @@ module PlazrStore
 
     ## Attributes ##
     attr_accessible :available_at, :details, :name, :slug, :price_max, :price_min, :rating, :brand_id, :prototype_id, :property_ids, :variant_property_ids
+    accepts_nested_attributes_for :variants
 
     ## Validations ##
     validates :name, presence: true, uniqueness_without_deleted: true
