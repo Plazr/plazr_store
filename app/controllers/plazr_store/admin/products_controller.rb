@@ -11,7 +11,9 @@ module PlazrStore
     end
 
     def create
+      # raise
       @product = Product.new(params[:product])
+      # @master_variant = @product.variants.build(params[:variant], available: true)
 
       if @product.save
         redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
@@ -23,7 +25,7 @@ module PlazrStore
 
     def new
       @product = Product.new
-      # @master_variant = Variant.new
+      # @master_variant = @product.variants.build(:available => true)
     end
 
     def edit

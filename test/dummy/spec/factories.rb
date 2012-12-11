@@ -139,7 +139,7 @@ FactoryGirl.define do
       available nil
       amount_available nil
       is_master nil
-      product nil
+      # product nil
     end
   end
 

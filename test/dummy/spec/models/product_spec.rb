@@ -58,6 +58,8 @@ describe PZS::Product, type: :model do
           p = FactoryGirl.create(:product_with_master_variant)
           p.has_master?.should be_true
         end
+      end
+      context "doesn't have variants" do
         it "returns false" do
           p = FactoryGirl.create(:product)
           p.has_master?.should be_false
