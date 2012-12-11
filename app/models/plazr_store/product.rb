@@ -8,7 +8,8 @@ module PlazrStore
     belongs_to :prototype
 
     has_many :feedback_products
-    has_many :variants, :dependent => :destroy
+    # Specifying the :inverse_of option on associations lets you tell Active Record about inverse relationships and it will optimise object loading
+    has_many :variants, :dependent => :destroy, :inverse_of => :product
 
     has_many :product_properties
     has_many :properties, :through => :product_properties
@@ -18,7 +19,7 @@ module PlazrStore
 
     ## Attributes ##
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id, :prototype_id, :property_ids, :variant_property_ids
-    accepts_nested_attributes_for :variants
+    accepts_nested_attributes_for :variants, :allow_destroy => true
 
     ## Validations ##
     validates :name, presence: true, uniqueness_without_deleted: true

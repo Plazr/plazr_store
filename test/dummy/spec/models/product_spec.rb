@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PZS::Product, type: :model do
+describe PZS::Product, type: :model, focus: true do
   it "creates a new instance given a valid attribute" do
     FactoryGirl.create(:product).should be_valid
   end
@@ -32,8 +32,9 @@ describe PZS::Product, type: :model do
       FactoryGirl.create(:product).should have_many(:variant_properties).through(:product_variant_properties)
     end
 
-    it "has many variants" do 
-      FactoryGirl.create(:product).should have_many :variants
+    it "has many variants, :dependent => :destroy" do 
+      FactoryGirl.create(:product).should have_many(:variants).dependent(:destroy)
+      # TODO falta testar o :inverse_of => :product
     end
   end
 

@@ -38,12 +38,12 @@
     = prop.display_name
   = hidden_field_tag 'product[variant_property_ids][]', ''
   %br
-  -# = fields_for @master_variant do |mv|
-  -#   = mv.label :sku
-  -#   = mv.text_field :sku
-  -#   %br
-  -#   = mv.label :price
-  -#   = mv.text_field :price
+  = fields_for :variants do |mv|
+    = mv.label :sku
+    = mv.text_field :sku
+    %br
+    = mv.label :price
+    = mv.text_field :price
 
 
   = f.submit "Submit"
