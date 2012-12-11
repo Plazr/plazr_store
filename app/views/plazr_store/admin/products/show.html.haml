@@ -7,22 +7,22 @@
       %b Name
     %td
       = @product.name
--# %table
--#   %thead
--#     %tr
--#       %th Properties
--#     %tbody
--#       - @product.properties.each do |p|
--#         %tr
--#           %td= p.display_name
--# %table
--#   %thead
--#     %tr
--#       %th Variant Properties
--#     %tbody
--#       - @product.variant_properties.each do |p|
--#         %tr
--#           %td= p.display_name
+%table
+  %thead
+    %tr
+      %th Properties
+    %tbody
+      - @product.properties.each do |p|
+        %tr
+          %td= p.display_name
+%table
+  %thead
+    %tr
+      %th Variant Properties
+    %tbody
+      - @product.variant_properties.each do |p|
+        %tr
+          %td= p.display_name
 
 = link_to 'Edit', edit_admin_product_path(@product)
 |

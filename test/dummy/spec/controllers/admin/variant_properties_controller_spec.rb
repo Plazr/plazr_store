@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PZS::Admin::VariantPropertiesController, :type => :controller do 
-  #render_views
+  render_views
 
   describe "GET #index" do
     it_behaves_like 'default admin index method', :variant_property
@@ -24,7 +24,7 @@ describe PZS::Admin::VariantPropertiesController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :variant_property, :display_name
+    it_behaves_like 'default admin update method', :variant_property, [:display_name]
   end
 
   describe 'DELETE #destroy' do

@@ -8,6 +8,7 @@ module PlazrStore
     belongs_to :prototype
 
     has_many :feedback_products
+    has_many :variants
 
     has_many :product_properties
     has_many :properties, :through => :product_properties
@@ -16,10 +17,19 @@ module PlazrStore
     has_many :variant_properties, :through => :product_variant_properties
 
     ## Attributes ##
-    attr_accessible :available_at, :details, :name, :slug, :price_max, :price_min, :rating
+    attr_accessible :available_at, :details, :name, :slug, :price_max, :price_min, :rating, :brand_id, :prototype_id
 
     ## Validations ##
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness_without_deleted: true
     validates :slug, :uniqueness_without_deleted => true
+
+    ## Methods ##
+    def has_master?
+      self.variants.count >= 1
+    end
+
+    def master_variant
+      self.variants.master_variant
+    end
   end
 end

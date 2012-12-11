@@ -1,0 +1,45 @@
+= form_for [:admin, @variant] do |f|
+  - if @variant.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@variant.errors.count, "error")} prohibited this variant from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @variant.errors.full_messages.each do |msg|
+            %li= msg
+
+  = f.label :sku
+  = f.text_field :sku
+  %br
+  = f.label :description
+  = f.text_area :description
+  %br
+  = f.label :price
+  = f.text_field :price, :class => 'variant', :value => (number_with_precision(f.object.price, :precision => 2) || 0)
+  %br
+  = f.label :cost_price
+  = f.text_field :cost_price, :class => 'variant', :value => (number_with_precision(f.object.cost_price, :precision => 2) || 0)
+  %br
+  = f.label :available
+  = f.check_box :available
+  %br
+  = f.label :amount_available
+  = f.number_field :amount_available
+  %br
+  = f.label :product
+  = f.collection_select :product_id, @products, :id, :name
+  -# %br
+  -# %h4= "Properties"
+  -# - @properties.each do |prop| 
+  -#   = check_box_tag 'variant[property_ids][]', prop.id, @variant.properties.include?(prop)
+  -#   = prop.display_name
+  -# = hidden_field_tag 'variant[property_ids][]', ''
+
+  -# %h4= "Variant Properties"
+  -# - @variant_properties.each do |prop| 
+  -#   = check_box_tag 'variant[variant_property_ids][]', prop.id, @variant.variant_properties.include?(prop)
+  -#   = prop.display_name
+  -# = hidden_field_tag 'variant[variant_property_ids][]', ''
+  -# %br
+  %br
+  = f.submit "Submit"
+  = link_to 'Cancel', admin_variants_path

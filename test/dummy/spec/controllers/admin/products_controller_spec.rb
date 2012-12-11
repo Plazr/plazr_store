@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PZS::Admin::ProductsController, :type => :controller do
-  # render_views
+  render_views
 
   describe "GET #index" do
     it_behaves_like 'default admin index method', :product
@@ -12,33 +12,32 @@ describe PZS::Admin::ProductsController, :type => :controller do
   end
 
   describe "GET #new" do
-    # describe "is filtered by #instance_variable_loading" do
-    #   it_behaves_like 'before filter and assign', :new, :product, [:property, :variant_property]
-    # end
+    describe "is filtered by #instance_variable_loading" do
+      it_behaves_like 'before filter and assign', :new, :product, [:property, :variant_property]
+    end
     it "assigns a new product to @product" do
+      # PZS::Property.stub( :all ).and_return( FactoryGirl.create :property )
+      # PZS::VariantProperty.stub( :all ).and_return( FactoryGirl.create :variant_property )
       # controller.stub(:instance_variable_loading)
       get :new
       assigns(:product).should be_an_instance_of PZS::Product 
     end
     it "renders the :new template" do
-      # controller.stub(:instance_variable_loading)
       get :new
       response.should render_template :new
     end
   end
 
   describe "GET #edit" do
-    # describe "is filtered by #instance_variable_loading" do
-    #   it_behaves_like 'before filter and assign', :edit, :product, [:property, :variant_property]
-    # end
+    describe "is filtered by #instance_variable_loading" do
+      it_behaves_like 'before filter and assign', :edit, :product, [:property, :variant_property]
+    end
     it "assigns the requested product to @product" do
-      # controller.stub(:instance_variable_loading)
       p = FactoryGirl.create :product
       get :edit, id: p
       assigns(:product).should eq(p)
     end
     it "renders the :edit template" do
-      # controller.stub(:instance_variable_loading)
       get :edit, id: FactoryGirl.create(:product)
       response.should render_template :edit
     end
@@ -49,7 +48,7 @@ describe PZS::Admin::ProductsController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :product, :name
+    it_behaves_like 'default admin update method', :product, [:name]
   end
 
   describe 'DELETE #destroy' do

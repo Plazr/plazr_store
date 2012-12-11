@@ -1,0 +1,20 @@
+%h1 Listing ShipmentConditions
+%table
+  %thead
+    %tr
+      %th Shipment Method
+      %th Value
+  %tbody
+    - @shipment_conditions.each do |shipment_condition|
+      %tr
+        %td
+          = shipment_condition.shipment_method
+        %td
+          #{shipment_condition.value} €
+        %td
+          = link_to 'Show', admin_shipment_condition_path(shipment_condition)
+        %td
+          = link_to 'Edit', edit_admin_shipment_condition_path(shipment_condition)
+        %td
+          = link_to 'Destroy', admin_shipment_condition_path(shipment_condition), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New shipmentCondition', new_admin_shipment_condition_path

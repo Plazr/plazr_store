@@ -24,7 +24,7 @@ describe PZS::Admin::PagesController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :page, :title
+    it_behaves_like 'default admin update method', :page, [:title]
   end
 
   describe 'DELETE #destroy' do
