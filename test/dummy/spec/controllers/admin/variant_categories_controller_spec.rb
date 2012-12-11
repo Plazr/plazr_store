@@ -12,41 +12,37 @@ describe PZS::Admin::VariantCategoriesController, :type => :controller do
   end
 
   describe "GET #new" do
-    it "assigns all variant_categories to @variant_categories" do
-      m = FactoryGirl.create_list(:variant_category, 5)
+    it "assigns all variant_categories that aren't leaf to @variant_categories" do
+      m = FactoryGirl.create_list(:variant_category_not_leaf, 5)
       get :new
       assigns(:variant_categories).should eq(m)
     end
-    it "assigns a new variant_category to @variant_category" do
-      get :new
-      assigns(:variant_category).should be_an_instance_of PZS::VariantCategory 
-    end
-    it "renders the :new template" do
-      get :new
-      response.should render_template :new
-    end
+    it_behaves_like 'default admin new method', :variant_category, PZS::VariantCategory
   end
 
   describe "GET #edit" do
     it "assigns all variant_categories except the one to be edited to @variant_categories" do
-      m = FactoryGirl.create_list(:variant_category, 5)
+      m = FactoryGirl.create_list(:variant_category_not_leaf, 5)
       n = FactoryGirl.create :variant_category
       get :edit, id: n
       assigns(:variant_categories).should eq(m)
     end
-    it "assigns the requested variant_category to @variant_category" do
-      p = FactoryGirl.create :variant_category
-      get :edit, id: p
-      assigns(:variant_category).should eq(p)
-    end
-    it "renders the :edit template" do
-      get :edit, id: FactoryGirl.create(:variant_category)
-      response.should render_template :edit
-    end
+    it_behaves_like 'default admin show and edit methods', :edit, :variant_category
   end
 
   describe "POST #create" do
     context "with valid attributes" do
+      describe "assigns is_leaf attribute" do
+        it "false if parent category is empty" do
+          post :create, :variant_category => FactoryGirl.attributes_for(:variant_category)
+          assigns(:variant_category).is_leaf.should be_false
+        end
+        it "true if parent category is not empty" do
+          parent = FactoryGirl.create(:variant_category)
+          post :create, :variant_category => FactoryGirl.attributes_for(:variant_category_v2, :parent_variant_category_id => parent.id)
+          assigns(:variant_category).is_leaf.should be_true
+        end
+      end
       it "saves the new variant_category in the database" do
         expect{
           post :create, :variant_category => FactoryGirl.attributes_for(:variant_category)
@@ -90,12 +86,29 @@ describe PZS::Admin::VariantCategoriesController, :type => :controller do
         assigns(:variant_category).should eq(existing_instance)      
       end
 
+      it "checks the parent_variant_category_id" do
+        post :create, :variant_category => FactoryGirl.attributes_for(:variant_category)
+        assigns(:is_leaf).should be_false
+      end
+
       it "changes variant_category's attributes" do
         put :update, id: existing_instance, :variant_category => new_instance
         existing_instance.reload # to check that our updates are actually persisted
         existing_instance.send(:name).should eq(new_instance[:name])
       end
 
+      context "checking the is_leaf attribute" do
+        it "should be false" do
+          put :update, id: existing_instance, :variant_category => new_instance
+          assigns(:variant_category).is_leaf.should be_false
+        end
+        it "should be true" do
+          parent = FactoryGirl.create(:variant_category)
+          put :update, id: existing_instance, :variant_category => FactoryGirl.attributes_for(:variant_category_v2, :parent_variant_category_id => parent.id)
+          assigns(:variant_category).is_leaf.should be_true
+        end
+      end
+      
       it "redirects to the updated variant_category" do
         put :update, id: existing_instance, :variant_category => new_instance
         response.should redirect_to send("admin_variant_category_url".to_sym, existing_instance)

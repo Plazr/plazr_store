@@ -1,4 +1,5 @@
-require 'spec_helper.rb'
+require 'spec_helper'
+require 'spec_support'
 
 describe PZS::ShipmentCondition, :type => :model do
 
@@ -17,7 +18,7 @@ describe PZS::ShipmentCondition, :type => :model do
   end
   
   describe "#Validations" do
-    let!(:shipment_condition) {FactoryGirl.create(:shipment_condition)}
+    let(:shipment_condition) {FactoryGirl.create(:shipment_condition)}
 
     it "requires the presence of the shipment_method" do
       shipment_condition.should validate_presence_of :shipment_method
@@ -39,12 +40,5 @@ describe PZS::ShipmentCondition, :type => :model do
         shipment_condition.value.should be_greater_than_or_equal_to 0
       end
     end
-  end
-end
-
-RSpec::Matchers.define :be_greater_than_or_equal_to do |minimum|
-  match do |actual|
-    result = minimum<actual || actual == minimum
-    result
   end
 end

@@ -6,22 +6,45 @@
         %ul
           - @product.errors.full_messages.each do |msg|
             %li= msg
+  -# - if @master_variant.errors.any?
+  -#   #error_explanation
+  -#     %h2= "#{pluralize(@master_variant.errors.count, "error")} prohibited this product from being saved:"
+  -#     %div{:class=>["alert","alert-error"]}
+  -#       %ul
+  -#         - @master_variant.errors.full_messages.each do |msg|
+  -#           %li= msg
 
   = f.label :name
   = f.text_field :name
   %br
-  -# %h4= "Properties"
-  -# - @properties.each do |prop| 
-  -#   = check_box_tag 'product[property_ids][]', prop.id, @product.properties.include?(prop)
-  -#   = prop.display_name
-  -# = hidden_field_tag 'product[property_ids][]', ''
+  = f.label :details
+  = f.text_area :details
+  %br
+  = f.label :slug
+  = f.text_field :slug
+  %br
+  = f.label :available_at
+  = f.text_field :available_at
+  %br
+  %h4= "Properties"
+  - @properties.each do |prop| 
+    = check_box_tag 'product[property_ids][]', prop.id, @product.properties.include?(prop)
+    = prop.display_name
+  = hidden_field_tag 'product[property_ids][]', ''
 
-  -# %h4= "Variant Properties"
-  -# - @variant_properties.each do |prop| 
-  -#   = check_box_tag 'product[variant_property_ids][]', prop.id, @product.variant_properties.include?(prop)
-  -#   = prop.display_name
-  -# = hidden_field_tag 'product[variant_property_ids][]', ''
-  -# %br
+  %h4= "Variant Properties"
+  - @variant_properties.each do |prop| 
+    = check_box_tag 'product[variant_property_ids][]', prop.id, @product.variant_properties.include?(prop)
+    = prop.display_name
+  = hidden_field_tag 'product[variant_property_ids][]', ''
+  %br
+  -# = fields_for @master_variant do |mv|
+  -#   = mv.label :sku
+  -#   = mv.text_field :sku
+  -#   %br
+  -#   = mv.label :price
+  -#   = mv.text_field :price
+
 
   = f.submit "Submit"
   = link_to 'Cancel', admin_products_path

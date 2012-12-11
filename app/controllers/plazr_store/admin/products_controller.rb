@@ -1,9 +1,14 @@
 module PlazrStore
   class Admin::ProductsController < ApplicationController
-    # before_filter :instance_variable_loading, :only => [:new, :edit]
+    before_filter :instance_variable_loading, :only => [:new, :edit]
 
     def show
       @product = Product.find(params[:id])
+      if @product.has_variants?
+        @variants = @product.variants_without_master
+      else
+        @variants = @product.master_variant
+      end
     end
 
     def index
@@ -11,17 +16,21 @@ module PlazrStore
     end
 
     def create
+      # raise
       @product = Product.new(params[:product])
+      # @master_variant = @product.variants.build(params[:variant], available: true)
 
       if @product.save
         redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
       else
+        instance_variable_loading
         render :new
       end
     end
 
     def new
       @product = Product.new
+      # @master_variant = @product.variants.build(:available => true)
     end
 
     def edit
@@ -34,6 +43,7 @@ module PlazrStore
       if @product.update_attributes(params[:product])
         redirect_to admin_product_path(@product), :notice => 'Product was successfully updated.'
       else
+        instance_variable_loading
         render :edit 
       end
     end
@@ -44,10 +54,10 @@ module PlazrStore
       redirect_to admin_products_path
     end
 
-    # protected
-    #   def instance_variable_loading
-    #     @properties = Property.all
-    #     @variant_properties = VariantProperty.all
-    #   end
+    protected
+      def instance_variable_loading
+        @properties = Property.all
+        @variant_properties = VariantProperty.all
+      end
   end
 end

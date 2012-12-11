@@ -1,4 +1,4 @@
-= form_for [:admin, @product, @variant] do |f|
+= form_for [:admin, @variant] do |f|
   - if @variant.errors.any?
     #error_explanation
       %h2= "#{pluralize(@variant.errors.count, "error")} prohibited this variant from being saved:"
@@ -14,16 +14,19 @@
   = f.text_area :description
   %br
   = f.label :price
-  = f.text_field :price, :class => 'variant'
+  = f.text_field :price, :class => 'variant', :value => (number_with_precision(f.object.price, :precision => 2) || 0)
   %br
   = f.label :cost_price
-  = f.text_field :cost_price, :class => 'variant'
+  = f.text_field :cost_price, :class => 'variant', :value => (number_with_precision(f.object.cost_price, :precision => 2) || 0)
+  %br
+  = f.label :available
+  = f.check_box :available
   %br
   = f.label :amount_available
   = f.number_field :amount_available
   %br
-  = f.label :restock_date
-  = f.date_select :restock_date
+  = f.label :product
+  = f.collection_select :product_id, @products, :id, :name
   -# %br
   -# %h4= "Properties"
   -# - @properties.each do |prop| 
@@ -39,4 +42,4 @@
   -# %br
   %br
   = f.submit "Submit"
-  = link_to 'Cancel', admin_product_variants_path
+  = link_to 'Cancel', admin_variants_path

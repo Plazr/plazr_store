@@ -2,7 +2,10 @@ PlazrStore::Engine.routes.draw do
   namespace :admin do
     resources :brands
     resources :discount_types
-    resources :products
+    resources :products do
+       resources :variants
+    end
+    resources :variants
     resources :properties
     resources :prototypes
     resources :shipment_conditions

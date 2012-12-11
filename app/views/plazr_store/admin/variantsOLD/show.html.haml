@@ -29,14 +29,9 @@
       = @variant.amount_available
   %tr
     %td
-      %b Visible
+      %b Availability
     %td
-      = @variant.visible
-  %tr
-    %td
-      %b Restock Date
-    %td
-      = @variant.restock_date
+      = @variant.available
   %tr
     %td
       %b Product
@@ -64,6 +59,6 @@
 -#         %tr
 -#           %td= p.display_name
 
-= link_to 'Edit', edit_admin_product_variant_path(@product, @variant)
+= link_to 'Edit', edit_admin_variant_path(@variant)
 |
-= link_to 'Back', admin_product_variants_path
+= link_to 'Back', admin_variants_path

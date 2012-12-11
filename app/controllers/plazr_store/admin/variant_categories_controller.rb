@@ -10,12 +10,12 @@ module PlazrStore
     end
 
     def new
-      @variant_categories = VariantCategory.where(is_leaf: false)
+      @variant_categories = VariantCategory.parent_categories
       @variant_category = VariantCategory.new
     end
 
     def edit
-      @variant_categories = VariantCategory.where("is_leaf = ? AND id != ?", false, params[:id])
+      @variant_categories = VariantCategory.parent_categories_without_self(params[:id])
       @variant_category = VariantCategory.find(params[:id])
     end
 
@@ -35,14 +35,14 @@ module PlazrStore
 
     def update
       @variant_category = VariantCategory.find(params[:id])
-      if(!params[:variant_category][:parent_variant_category_id].empty?)
-        @variant_category.is_leaf = true
-      end
 
       if @variant_category.update_attributes(params[:variant_category])
+        if(!params[:variant_category][:parent_variant_category_id].empty?)
+          @variant_category.is_leaf = true
+        end
         redirect_to admin_variant_category_path(@variant_category), :notice => 'VariantCategory was created sucessfully'
       else
-        @variant_categories = VariantCategory.where("is_leaf = ? AND id != ?", false, params[:id])
+        @variant_categories = VariantCategory.parent_categories_without_self(params[:id])
         render :edit
       end
     end

@@ -24,7 +24,7 @@ describe PZS::Admin::VariantPropertiesController, :type => :controller do
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :variant_property, [:display_name], :display_name
+    it_behaves_like 'default admin update method', :variant_property, [:display_name]
   end
 
   describe 'DELETE #destroy' do

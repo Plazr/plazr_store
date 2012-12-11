@@ -1,27 +1,28 @@
 module PlazrStore
   class Admin::VariantsController < ApplicationController
-    before_filter :get_product
+    before_filter :instance_variable_loading, :only => [:new, :edit]
 
     def show
       @variant = Variant.find(params[:id])
     end
 
     def index
-      @variants = @product.variants
+      @variants = Variant.all
     end
 
     def create
-      @variant = @product.variants.build params[:variant]
+      @variant = Variant.new(params[:variant])
 
       if @variant.save
-        redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully created.'
+        redirect_to admin_variant_path(@variant), :notice => 'Variant was successfully created.'
       else
+        instance_variable_loading
         render :new
       end
     end
 
     def new
-      @variant = Variant.new(visible: true)
+      @variant = Variant.new
     end
 
     def edit
@@ -32,8 +33,9 @@ module PlazrStore
       @variant = Variant.find(params[:id])
 
       if @variant.update_attributes(params[:variant])
-        redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully updated.'
+        redirect_to admin_variant_path(@variant), :notice => 'Variant was successfully updated.'
       else
+        instance_variable_loading
         render :edit 
       end
     end
@@ -41,12 +43,12 @@ module PlazrStore
     def destroy
       @variant = Variant.find(params[:id])
       @variant.destroy
-      redirect_to admin_product_variants_path
+      redirect_to admin_variants_path
     end
 
     protected
-      def get_product
-        @product = Product.find(params[:product_id])
+      def instance_variable_loading
+        @products = Product.all
       end
   end
 end

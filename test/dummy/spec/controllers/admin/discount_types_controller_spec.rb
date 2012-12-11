@@ -24,7 +24,7 @@ describe PZS::Admin::DiscountTypesController, :type => :controller, :skip => tru
   end
 
   describe 'PUT #update' do
-    it_behaves_like 'default admin update method', :discount_type, [:name], :name
+    it_behaves_like 'default admin update method', :discount_type, [:name]
   end
 
   describe 'DELETE #destroy' do

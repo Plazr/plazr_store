@@ -25,7 +25,7 @@ FactoryGirl.define do
   end
 
   factory :product, :class => PZS::Product do
-    sequence(:name) { |n| "Product #{n}" }
+    sequence(:name) { |n| "Product#{n}" }
     details "Details"
     sequence(:slug) { |n| "product-#{n}" }
 
@@ -33,6 +33,12 @@ FactoryGirl.define do
       name "Pro Evolution Soccer 2012" 
       details "A video game which is the eleventh edition in the Pro Evolution Soccer series developed and published by Konami with production assistance from the Blue Sky Team"
       slug "pes-2012"
+    end
+
+    factory :product_with_master_variant do
+      after(:build) do |p| 
+        p.variants << FactoryGirl.create(:variant, product: p)
+      end
     end
 
     factory :invalid_product do
@@ -101,12 +107,39 @@ FactoryGirl.define do
     is_leaf false
     parent_variant_category_id ""
 
+    factory :variant_category_not_leaf do
+    end
+
     factory :variant_category_v2 do
       name "Sapatilhas"
     end
 
     factory :invalid_variant_category do
       name nil
+    end
+  end
+  
+  factory :variant, :class => PZS::Variant do
+    sequence(:sku) {|n| "SKU#{n}"}
+    description "Description"
+    price {rand(50.0)}
+    visible true
+    amount_available {rand(20)}
+    is_master true
+    association :product
+
+    factory :variant_v2 do
+      sequence(:sku) {|n| "SKU_v2"}
+      association :product
+    end
+
+    factory :invalid_variant do
+      sku nil 
+      price nil
+      visible nil
+      amount_available nil
+      is_master nil
+      # product nil
     end
   end
 
@@ -124,7 +157,6 @@ FactoryGirl.define do
     end
   end
 
-  #Page factory
   factory :page, :class => PZS::Page do
     sequence(:title) { |n| "Page #{n}" }
     sequence(:slug) { |n| "Page #{n}" }
@@ -140,6 +172,4 @@ FactoryGirl.define do
       title nil
     end
   end
-
-
 end

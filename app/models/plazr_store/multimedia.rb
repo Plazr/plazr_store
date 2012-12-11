@@ -3,8 +3,9 @@ module PlazrStore
     ## Relations ##
     belongs_to :variant
     belongs_to :page
+    belongs_to :multimedia_type
 
     ## Attributes ##
-    attr_accessible :description, :link, :size
+    attr_accessible :caption, :link, :size
   end
 end
