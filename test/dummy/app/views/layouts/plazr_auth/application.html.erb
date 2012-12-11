@@ -10,9 +10,18 @@
 
 <h1>Plazr Store (Dummy App)</h1>
 
-<h2>Current User: <%= current_user.to_s %>
+<h2>Current User: <%= current_user.to_s %></h2>
 
-<%= yield %>
+<table>
+  <tr>
+    <td class="nav">
+      <%= render 'plazr_auth/shared/nav' %>
+      <%= render 'plazr_store/shared/nav' %>
+    </td>
+    
+    <td class="content"><%= yield %></td>
+  </tr>
+</table>
 
 </body>
 </html>
