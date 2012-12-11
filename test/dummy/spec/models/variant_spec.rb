@@ -62,8 +62,8 @@ describe PZS::Variant, type: :model do
     it "requires sku to be set" do
       FactoryGirl.create(:variant).should validate_presence_of :sku
     end
-    it "requires available to be set" do
-      FactoryGirl.create(:variant).should validate_presence_of :available
+    it "requires visible to be set" do
+      FactoryGirl.create(:variant).should validate_presence_of :visible
     end
     it "requires product_id to be set" do
       FactoryGirl.create(:variant).should validate_presence_of :product
@@ -104,6 +104,9 @@ describe PZS::Variant, type: :model do
       let(:variant) {FactoryGirl.create(:variant)}
       it "is numerical and has only integer values" do
         variant.should validate_numericality_of(:amount_available).only_integer
+      end
+      it "is equal or greater than 0" do
+        variant.amount_available.should be_greater_than_or_equal_to 0
       end
     end
 

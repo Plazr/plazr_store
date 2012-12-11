@@ -17,7 +17,7 @@ module PlazrStore
     has_many :variant_properties, :through => :product_variant_properties
 
     ## Attributes ##
-    attr_accessible :available_at, :details, :name, :slug, :price_max, :price_min, :rating, :brand_id, :prototype_id, :property_ids, :variant_property_ids
+    attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id, :prototype_id, :property_ids, :variant_property_ids
     accepts_nested_attributes_for :variants
 
     ## Validations ##
@@ -31,6 +31,14 @@ module PlazrStore
 
     def master_variant
       self.variants.master_variant
+    end
+
+    def variants_without_master
+      self.variants.without_master
+    end
+
+    def has_variants?
+      self.variants_without_master.count >= 1
     end
   end
 end

@@ -27,18 +27,19 @@ module PlazrStore
     has_many :wishlists, :through => :variant_wishlists
 
     ## Attributes ##
-    attr_accessible :amount_available, :available, :cost_price, :description, :is_master, :price, :sku, :product_id
+    attr_accessible :amount_available, :visible, :cost_price, :description, :is_master, :price, :restock_date, :sku, :product_id
 
     ## Validations ##
-    validates_presence_of :sku, :available, :product
+    validates_presence_of :sku, :visible, :product
     validates :is_master, :inclusion => {:in => [true, false]}
     validates :sku, :uniqueness_without_deleted => true
     validates :price, presence: true, numericality: {:greater_than_or_equal_to => 0}
-    validates :amount_available, numericality: {:only_integer => true}
+    validates :amount_available, numericality: {:only_integer => true, :greater_than_or_equal_to => 0}
     validates :cost_price, numericality: {:greater_than_or_equal_to => 0}, :allow_nil => true
 
     ## Scopes ##
     scope :master_variant, where(:is_master => true)
+    scope :without_master, where(:is_master => false)
 
     ## Callbacks ##
     #it is only activated if this variant has a product_id

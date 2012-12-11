@@ -16,5 +16,12 @@ module PlazrStore
 
     ## Validations ##
     validates :name, presence: true
+
+    ## Scopes ##
+    scope :parent_categories, where(:is_leaf => false)
+  
+    def self.parent_categories_without_self(id)
+      where("is_leaf = ? AND id != ?", false, id)
+    end
   end
 end

@@ -4,8 +4,6 @@ class CreatePlazrStoreProducts < ActiveRecord::Migration
       t.string :name, :null => false
       t.text :details
       t.string :slug
-      t.decimal :price_max
-      t.decimal :price_min
       t.decimal :rating
       t.references :brand
       t.references :prototype
