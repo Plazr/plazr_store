@@ -1,7 +1,7 @@
 class CreatePlazrStoreMultimedia < ActiveRecord::Migration
   def change
     create_table :plazr_store_multimedia do |t|
-      t.text :description
+      t.text :caption
       t.integer :size
       t.text :link
 
