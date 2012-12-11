@@ -20,4 +20,8 @@ Gem::Specification.new do |s|
   # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "cucumber-rails"
+  s.add_development_dependency "database_cleaner"
+  s.add_development_dependency "guard-cucumber"
+  s.add_development_dependency "rb-fsevent"
 end
