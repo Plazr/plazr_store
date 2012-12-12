@@ -50,7 +50,7 @@ module PlazrStore
 
     ## Callbacks ##
     #it is only activated if this variant has a product_id
-    before_validation :set_is_master, :on => :create, :if => "!product_id.nil?"
+    before_validation :set_is_master, :on => :create#, :if => "!product_id.nil?"
     before_save :mark_variant_properties_for_removal
 
     def get_unselected_variant_categories_and_order_by_name
@@ -74,7 +74,6 @@ module PlazrStore
       # if this variant is being created after the creation of a product then is_master is set to true
       # if not (meaning a master variant already exists), is_master is set to false
       def set_is_master
-        # self.is_master = !self.product.has_master?
         if self.product.has_master?
           self.is_master = false
         else

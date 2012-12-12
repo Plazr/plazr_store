@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.name        = "plazr_store"
   s.version     = PlazrStore::VERSION
   s.authors     = ["Bruno Azevedo", "Miguel Palhas"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of PlazrStore."
-  s.description = "TODO: Description of PlazrStore."
+  s.email       = ["azevedo.252@gmail.com"]
+  s.homepage    = "http://www.plazr.net"
+  s.summary     = "Summary of PlazrStore."
+  s.description = "Description of PlazrStore."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]

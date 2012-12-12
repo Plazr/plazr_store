@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe PZS::Admin::PropertiesController, :type => :controller do 
+  include Devise::TestHelpers
+
   render_views
 
   describe "GET #index" do
