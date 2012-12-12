@@ -1,7 +1,5 @@
 module PlazrStore
   class Admin::ProductsController < ApplicationController
-    before_filter :instance_variable_loading, :only => [:new, :edit]
-
     def show
       @product = Product.find(params[:id])
       if @product.has_variants?
@@ -16,25 +14,29 @@ module PlazrStore
     end
 
     def create
-      # raise
       @product = Product.new(params[:product])
-      # @master_variant = @product.variants.build(params[:variant], available: true)
 
       if @product.save
         redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
       else
-        instance_variable_loading
+        build_relations_for_fields_for
         render :new
       end
     end
 
     def new
       @product = Product.new
-      # @master_variant = @product.variants.build(:available => true)
+      
+      # builds a variant so that fields_for can render it, otherwise the relation :variants would be empty and fields_for wouldn't render anything
+      @product.variants.build(:visible => true)
+
+      build_relations_for_fields_for
     end
 
     def edit
       @product = Product.find params[:id]
+
+      build_relations_for_fields_for
     end
 
     def update
@@ -43,7 +45,7 @@ module PlazrStore
       if @product.update_attributes(params[:product])
         redirect_to admin_product_path(@product), :notice => 'Product was successfully updated.'
       else
-        instance_variable_loading
+        build_relations_for_fields_for
         render :edit 
       end
     end
@@ -55,9 +57,12 @@ module PlazrStore
     end
 
     protected
-      def instance_variable_loading
-        @properties = Property.all
-        @variant_properties = VariantProperty.all
-      end
+    # builds certain product relations so that fields_for can render properly
+    def build_relations_for_fields_for
+      # builds variant_properties that are not persisted so that fields_for can render them
+      @product.get_unselected_variant_properties_and_order_by_name
+      # builds properties that are not persisted so that fields_for can render them
+      @product.get_unselected_properties_and_order_by_name
+    end
   end
 end

@@ -7,11 +7,14 @@
           - @shipment_condition.errors.full_messages.each do |msg|
             %li= msg
 
-  = f.label :shipment_method
-  = f.text_field :shipment_method
+  = f.label :service_name
+  = f.text_field :service_name
 
-  = f.label :value
-  = f.text_field :value, :class => 'shipment_condition'
+  = f.label :price
+  = f.text_field :price, :class => 'shipment_condition'
   
+  = f.label :service_details
+  = f.text_area :service_details
+
   = f.submit "Submit"
   = link_to 'Cancel', admin_shipment_conditions_path

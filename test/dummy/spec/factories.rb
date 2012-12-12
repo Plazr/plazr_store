@@ -45,12 +45,18 @@ FactoryGirl.define do
       name nil 
     end
 
-    # factory :product_with_properties_and_variant_properties do
-    #   after(:create) do |prot| 
-    #     prot.properties << FactoryGirl.create(:property)
-    #     prot.variant_properties << FactoryGirl.create(:variant_property)
-    #   end
-    # end
+    factory :product_with_properties_and_variant_properties do
+      after(:create) do |p| 
+        p.product_properties << FactoryGirl.create(:product_property, :product_id => p.id)
+        p.variant_properties << FactoryGirl.create(:variant_property)
+      end
+    end
+  end
+
+  factory :product_property, :class => PZS::ProductProperty do
+    association :product
+    association :property
+    value "prop_value"
   end
 
   factory :property, :class => PZS::Property do
@@ -87,17 +93,20 @@ FactoryGirl.define do
   end
 
   factory :shipment_condition, :class => PZS::ShipmentCondition do
-    sequence(:shipment_method) { |n| "Shipment Method #{n}"}
-    value {rand(1000.0)}
+    sequence(:service_name) { |n| "Shipment Service Name #{n}"}
+    price {rand(20.0)}
+    sequence(:service_details) {|n| "Shipment Service Details #{n}"}
 
     factory :shipment_condition_v2 do
-      shipment_method "UPS"
-      value {63.63}
+      service_name "UPS"
+      price {63.63}
+      service_details "Delivery Time : 20 days"
     end
 
     factory :invalid_shipment_condition do
-      shipment_method nil
-      value -1
+      service_name nil
+      price -1
+      service_details nil
     end
   end
 
@@ -118,7 +127,7 @@ FactoryGirl.define do
       name nil
     end
   end
-  
+
   factory :variant, :class => PZS::Variant do
     sequence(:sku) {|n| "SKU#{n}"}
     description "Description"

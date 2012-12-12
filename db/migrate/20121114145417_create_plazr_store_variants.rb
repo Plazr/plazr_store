@@ -7,7 +7,7 @@ class CreatePlazrStoreVariants < ActiveRecord::Migration
       t.decimal :price, :null => false, :precision => 8, :scale => 2
       t.decimal :cost_price, :precision => 8, :scale => 2
       t.boolean :visible, :null => false, :default => true
-      t.integer :amount_available, :null => false, :default => -1
+      t.integer :amount_available, :null => false, :default => 0
       t.boolean :is_master, :null => false, :default => false
       t.references :product, :null => false
       # t.datetime :deleted_at
