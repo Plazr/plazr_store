@@ -24,19 +24,23 @@
   %br
   = f.label :restock_date
   = f.date_select :restock_date
-  -# %br
-  -# %h4= "Properties"
-  -# - @properties.each do |prop| 
-  -#   = check_box_tag 'variant[property_ids][]', prop.id, @variant.properties.include?(prop)
-  -#   = prop.display_name
-  -# = hidden_field_tag 'variant[property_ids][]', ''
+  %br
 
-  -# %h4= "Variant Properties"
-  -# - @variant_properties.each do |prop| 
-  -#   = check_box_tag 'variant[variant_property_ids][]', prop.id, @variant.variant_properties.include?(prop)
-  -#   = prop.display_name
-  -# = hidden_field_tag 'variant[variant_property_ids][]', ''
-  -# %br
+  %h4= "Variant Categories"
+  = f.fields_for :variant_variant_categories do |vvc|
+    - if vvc.object.variant_category.is_leaf?
+      = vvc.check_box :_destroy, {:checked => vvc.object.persisted?}, '0', '1'
+    = vvc.label :_destroy, vvc.object.variant_category.name
+    = vvc.hidden_field :variant_category_id
+    %br
+
+  %br
+  %h4= "Variant Properties"
+  = f.fields_for :variant_property_values do |vpv|
+    = vpv.label :value, vpv.object.variant_property.display_name
+    = vpv.text_field :value
+    = vpv.hidden_field :variant_property_id
+    %br
   %br
   = f.submit "Submit"
   = link_to 'Cancel', admin_product_variants_path
