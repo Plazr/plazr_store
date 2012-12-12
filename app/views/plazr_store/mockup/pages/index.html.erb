@@ -32,10 +32,15 @@
 						<li><%= LoremIpsum.short %></li>
 						<li><%= LoremIpsum.short %></li>
 					</ul>
-					<p>
-						<% 5.times do %>
-							<i class="icon-star"></i>
-						<% end %>
+					<p style="font-size:x-large;line-height:2em">
+						<span style="margin:0 1em">
+							<% 5.times do %>
+								<%= image_tag 'glyphicons/star-full.png', :class => 'rating' %>
+							<% end %>
+						</span>
+						<strong>
+							€ <%= rand(1..100) %>
+						</strong>
 					</p>
 				</div>
 			</article>
@@ -57,10 +62,10 @@
 						</p>
 						<p>
 							<% 3.times do %>
-								<i class="icon-star"></i>
+								<%= image_tag 'glyphicons/star-full.png', :class => 'rating' %>
 							<% end %>
 							<% 2.times do %>
-								<i class="icon-star-empty"></i>
+								<%= image_tag 'glyphicons/star-empty.png', :class => 'rating' %>
 							<% end %>
 						</p>
 					</article>
