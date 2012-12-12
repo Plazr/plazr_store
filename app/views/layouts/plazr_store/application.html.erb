@@ -8,7 +8,15 @@
 </head>
 <body>
 
-<%= yield %>
+<table>
+  <tr>
+    <td class="nav">
+      <%= render 'plazr_auth/shared/nav' %>
+    </td>
+    
+    <td class="content"><%= yield %></td>
+  </tr>
+</table>
 
 </body>
 </html>
