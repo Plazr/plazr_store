@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = PlazrStore::VERSION
   s.authors     = ["Bruno Azevedo", "Miguel Palhas"]
   s.email       = ["azevedo.252@gmail.com"]
-  s.homepage    = "Nao existe"
+  s.homepage    = "http://www.plazr.net"
   s.summary     = "Summary of PlazrStore."
   s.description = "Description of PlazrStore."
 
