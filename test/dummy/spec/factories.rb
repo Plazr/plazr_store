@@ -45,12 +45,18 @@ FactoryGirl.define do
       name nil 
     end
 
-    # factory :product_with_properties_and_variant_properties do
-    #   after(:create) do |prot| 
-    #     prot.properties << FactoryGirl.create(:property)
-    #     prot.variant_properties << FactoryGirl.create(:variant_property)
-    #   end
-    # end
+    factory :product_with_properties_and_variant_properties do
+      after(:create) do |p| 
+        p.product_properties << FactoryGirl.create(:product_property, :product_id => p.id)
+        p.variant_properties << FactoryGirl.create(:variant_property)
+      end
+    end
+  end
+
+  factory :product_property, :class => PZS::ProductProperty do
+    association :product
+    association :property
+    value "prop_value"
   end
 
   factory :property, :class => PZS::Property do
@@ -118,7 +124,7 @@ FactoryGirl.define do
       name nil
     end
   end
-  
+
   factory :variant, :class => PZS::Variant do
     sequence(:sku) {|n| "SKU#{n}"}
     description "Description"
