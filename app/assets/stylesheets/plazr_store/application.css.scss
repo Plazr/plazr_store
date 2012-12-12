@@ -16,4 +16,13 @@
 
 body {
 	margin-top: 1em;
+	#layout-container {
+		padding: 0 0 3em 0;
+	}
+}
+
+body > footer {
+	padding: 3em 0 3em 0;
+	color: white;
+	background-color: black;
 }

@@ -10,7 +10,8 @@
 
 		<nav class="container">
 			<ul class="nav nav-pills pull-right">
-				<li><%= link_to 'Home', mockup_index_path %></li>
+				<li><%= link_to 'Store', mockup_index_path %></li>
+				<li><%= link_to 'Single', mockup_single_path %></li>
 				<li><%= link_to 'About', mockup_about_path %></li>
 			</ul>
 		</nav>
@@ -26,7 +27,17 @@
 			</div>
 		</header>
 
-			<%= yield %>
+		<section id="layout-container">
+		<%= yield %>
+		</section>
 
+		<footer>
+			<div class="container">
+				<ul>
+					<li><%= link_to 'Share on Facebook', '#' %></li>
+					<li><%= link_to 'Tweet about this place', '#' %></li>
+				</ul>
+			</div>
+		</footer>
 	</body>
 </html>
