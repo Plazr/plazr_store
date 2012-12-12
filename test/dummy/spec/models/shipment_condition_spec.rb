@@ -8,36 +8,37 @@ describe PZS::ShipmentCondition, :type => :model do
   end
 
   describe "#Relations" do
-    it "has many shipment_condition_variants" do
-      FactoryGirl.create(:shipment_condition).should have_many :shipment_condition_variants
-    end
-
-    it "has many variants through shipment_condition_variants" do
-      FactoryGirl.create(:shipment_condition).should have_many(:variants).through(:shipment_condition_variants)
+    it "has many orders" do
+      FactoryGirl.create(:shipment_condition).should have_many :orders
     end
   end
   
   describe "#Validations" do
     let(:shipment_condition) {FactoryGirl.create(:shipment_condition)}
 
-    it "requires the presence of the shipment_method" do
-      shipment_condition.should validate_presence_of :shipment_method
+    it "requires the presence of the service_name" do
+      shipment_condition.should validate_presence_of :service_name
     end
 
-    it "requires the uniqueness of the shipment_method" do
+    it "requires the presence of the service_details" do
+      shipment_condition.should validate_presence_of :service_details
+    end
+
+
+    it "requires the uniqueness of the service_name" do
       FactoryGirl.create(:shipment_condition_v2)
       FactoryGirl.build(:shipment_condition_v2).should_not be_valid
     end
     
-    describe "value field" do
+    describe "price field" do
       it "must be present" do
-        shipment_condition.should validate_presence_of :value
+        shipment_condition.should validate_presence_of :price
       end
       it "must be numerical" do
-        shipment_condition.should validate_numericality_of :value
+        shipment_condition.should validate_numericality_of :price
       end
       it "and must be equal or greater than 0" do
-        shipment_condition.value.should be_greater_than_or_equal_to 0
+        shipment_condition.price.should be_greater_than_or_equal_to 0
       end
     end
   end
