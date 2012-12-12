@@ -9,5 +9,8 @@ module PlazrStore
 		def single
 
 		end
+		def search
+
+		end
 	end
 end
