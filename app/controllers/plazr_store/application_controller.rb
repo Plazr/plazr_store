@@ -1,6 +1,7 @@
 module PlazrStore
   class ApplicationController < ActionController::Base
-    layout 'plazr_auth/application'
+
+    layout 'application'
 
     def index
     end
