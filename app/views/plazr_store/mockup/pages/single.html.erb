@@ -1,63 +1,84 @@
 <article>
 
-	<header>
-		<h1 id="product_name">T-SHIRT</h1>
-		<p>classificação</p>
+	<header class="row">
+		<div class="span4">
+			<h1>T-SHIRT</h1>
+			<p>classificação</p>
+		</div>
 	</header>
 
-	<section id="product_info">
-
-		<img id="principal_image" src="/assets/plazr_store/1.png"></img>
-		
-		<div id="secundary_image">
-			<button class="nav_button"><</button>
-			<%= render "sec_images" %>
-			<button class="nav_button">></button>
+	<section>
+		<div class="row">
+			<div class="span4">
+				<img src="/assets/plazr_store/1.png"></img>
+			</div>
 		</div>
 		
-		<div id="description">
-			<h3 id="title">Descrição</h3>
-			<div id="text">
-				<p>Referência<p>
-				<p>04379733</p>
-				<p>Utilização</p>
-				<p>FUTEBOL</p>
-				<p id="price">4,99€</p>
+		<div class="row">
+			<div class="span8">
+				<%= render "sec_images" %>
 			</div>
 		</div>
 
-		<div id="op_shopping">
-			<p>Tamanho:</p>
-			<select id="sizes">
-			  <option>M</option>
-			  <option>L</option>
-			  <option>XL</option>
-			</select>
-			<p>Quantidade:</p>
-			<input type="number" value="Quantity" />
+		<div class="row">
+			<h3>Descrição</h3>
+		</div>
+		
+		<div class="row">
+			<div class="span4">
+				<div>
+					<p>Referência<p>
+					<p>04379733</p>
+					<p>Utilização</p>
+					<p>FUTEBOL</p>
+					<p>4,99€</p>
+				</div>
+			</div>
+			<div class="span4">
+				<p>Tamanho:</p>
+				<select>
+				  <option>M</option>
+				  <option>L</option>
+				  <option>XL</option>
+				</select>
+				<p>Quantidade:</p>
+				<input type="number" value="Quantity" />
+			</div>
 		</div>
 
-		<input type="submit" value="Adicionar ao cesto" />
-		<input type="submit" value="Adicionar à wishlist" />
-		<input type="submit" value="Partilhar" />
+		
+		<div class="row">
+			<div class="span4">
+				<input type="submit" value="Adicionar ao cesto" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<input type="submit" value="Adicionar à wishlist" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<input type="submit" value="Partilhar" />
+			</div>
+		</div>
 
 	<section>
 
 	<section>
 
 		<header>
-			<h3 id="package_group">Pacote de produtos</h3>
+			<div class="row">
+				<div class="span4">
+					<h3>Pacote de produtos</h3>
+				</div>
+			</div>
 		</header>
-
 		
-			<div id="package_group_images">
-				<table>
-					<tr>
-					<td><button class="nav_button"><</button></td>
+			<div class="row">
+				<div class="span4">
 					<%= render 'package_group' %>
-					<td><button class="nav_button">></button></td>
-					</tr>
-				</table>
+				</div>
 			</div>
 
 	</section>
@@ -65,29 +86,36 @@
 	<section>
 
 		<header>
-			<h3 id="related_products">Produtos relacionados</h3>
+			<div class="row">
+				<div class="span4">
+					<h3>Produtos relacionados</h3>
+				</div>
+			</div>
 		</header>
 
-		
-			<div id="related_prd_images">
-				<table>
-					<tr>
-					<td><button class="nav_button"><</button></td>
+			<div class="row">
+				<div class="span4">
 					<%= render 'related_products_im' %>
-					<td><button class="nav_button">></button></td>
-					</tr>
-				</table>
+				</div>
 			</div>
 
 	</section>
 
-	<section id="comments">
+	<section>
 
 		<header>
-			<h3 id="comment">Comentários</h3>
+			<div class="row">
+				<div class="span4">
+					<h3>Comentários</h3>
+				</div>
+			</div>
 		</header>
 
-		<%= render 'comment' %>
+		<div class="row">
+			<div class="span4">
+				<%= render 'comment' %>
+			</div>
+		</div>
 
 	</section>
 
