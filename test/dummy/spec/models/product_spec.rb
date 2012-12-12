@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PZS::Product, type: :model, focus: true do
+describe PZS::Product, type: :model do
   it "creates a new instance given a valid attribute" do
     FactoryGirl.create(:product).should be_valid
   end
@@ -78,6 +78,22 @@ describe PZS::Product, type: :model, focus: true do
         p = FactoryGirl.create(:product_with_master_variant)
         PZS::Variant.stub(:master_variant).and_return(p.variants.where(:is_master => true))
         p.master_variant.should eq [p.variants.first]
+      end
+    end
+    describe "#get_unselected_properties_and_order_by_name" do
+      xit "builds product_properties" do 
+        FactoryGirl.create_list(:property, 5)
+        p = FactoryGirl.create(:product_with_properties_and_variant_properties)
+        p.get_unselected_properties_and_order_by_name
+        p.reload
+        puts p.product_properties
+        p.should have(1).product_properties
+        p.product_properties.size.should == 5
+      end
+      xit "returns product_properties" do 
+        pr=FactoryGirl.create_list(:property, 2)
+        p = FactoryGirl.create(:product)
+        p.get_unselected_properties_and_order_by_name.should eq [PZS::ProductProperty.new(:property => pr.first, :product => p), PZS::ProductProperty.new(:property => pr.last, :product => p)]
       end
     end
   end

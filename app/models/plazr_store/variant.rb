@@ -49,7 +49,6 @@ module PlazrStore
       # if this variant is being created after the creation of a product then is_master is set to true
       # if not (meaning a master variant already exists), is_master is set to false
       def set_is_master
-        # self.is_master = !self.product.has_master?
         if self.product.has_master?
           self.is_master = false
         else
