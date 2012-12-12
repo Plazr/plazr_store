@@ -29,9 +29,14 @@
       = @variant.amount_available
   %tr
     %td
-      %b Availability
+      %b Visible
     %td
-      = @variant.available
+      = @variant.visible
+  %tr
+    %td
+      %b Restock Date
+    %td
+      = @variant.restock_date
   %tr
     %td
       %b Product

@@ -7,7 +7,7 @@
       %th Price
       %th Cost Price
       %th Amount Available
-      %th Availability
+      %th Visible
       %th Product
   %tbody
     - @variants.each do |variant|
@@ -23,7 +23,9 @@
         %td
           = variant.amount_available
         %td
-          = variant.available
+          = variant.visible
+        %td
+          = variant.restock_date
         %td
           = variant.product.name
         %td

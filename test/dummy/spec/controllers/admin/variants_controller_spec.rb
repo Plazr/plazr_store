@@ -60,10 +60,10 @@ describe PZS::Admin::VariantsController, :type => :controller do
       get :new, :product_id => p
       assigns(:variant).should be_an_instance_of PZS::Variant
     end
-    it "assigns @variant with attribute 'available' set to true" do
+    it "assigns @variant with attribute 'visible' set to true" do
       p = FactoryGirl.create :product
-      get :new, :product_id => p, :variant => FactoryGirl.attributes_for(:variant, available: true)
-      assigns(:variant).available.should be_true
+      get :new, :product_id => p, :variant => FactoryGirl.attributes_for(:variant, visible: true)
+      assigns(:variant).visible.should be_true
     end
     it "renders the :new template" do
       p = FactoryGirl.create :product
@@ -156,7 +156,7 @@ describe PZS::Admin::VariantsController, :type => :controller do
         assigns(:variant).should eq(existing_instance)      
       end
 
-      [:sku, :price, :available, :is_master, :product_id].each do |var|
+      [:sku, :price, :visible, :is_master, :product_id].each do |var|
         it "changes variant's #{var}" do
           put :update, id: existing_instance, product_id: product, :variant => new_instance
           existing_instance.reload # to check that our updates are actually persisted
@@ -176,7 +176,7 @@ describe PZS::Admin::VariantsController, :type => :controller do
         assigns(:variant).should eq(existing_instance)      
       end
 
-      [:sku, :price, :available, :is_master, :product_id].each do |var|
+      [:sku, :price, :visible, :is_master, :product_id].each do |var|
         it "does not change variant's #{var}" do
           old_var = existing_instance.send(var)
           put :update, id: existing_instance, product_id: product, :variant => FactoryGirl.attributes_for(:invalid_variant)

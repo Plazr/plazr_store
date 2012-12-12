@@ -4,6 +4,11 @@ module PlazrStore
 
     def show
       @product = Product.find(params[:id])
+      if @product.has_variants?
+        @variants = @product.variants_without_master
+      else
+        @variants = @product.master_variant
+      end
     end
 
     def index

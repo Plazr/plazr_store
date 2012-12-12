@@ -126,8 +126,8 @@ FactoryGirl.define do
     sequence(:sku) {|n| "SKU#{n}"}
     description "Description"
     price {rand(50.0)}
-    available true
-    amount_available {rand(20)-10}
+    visible true
+    amount_available {rand(20)}
     is_master true
     association :product
 
@@ -139,7 +139,7 @@ FactoryGirl.define do
     factory :invalid_variant do
       sku nil 
       price nil
-      available nil
+      visible nil
       amount_available nil
       is_master nil
       # product nil

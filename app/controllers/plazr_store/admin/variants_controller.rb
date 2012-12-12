@@ -21,7 +21,7 @@ module PlazrStore
     end
 
     def new
-      @variant = Variant.new(available: true)
+      @variant = Variant.new(visible: true)
     end
 
     def edit
