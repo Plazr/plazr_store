@@ -19,6 +19,7 @@ module PlazrStore
       if @product.save
         redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
       else
+        @brands = Brand.all
         build_relations_for_fields_for
         render :new
       end
@@ -26,6 +27,7 @@ module PlazrStore
 
     def new
       @product = Product.new
+      @brands = Brand.all
       
       # builds a variant so that fields_for can render it, otherwise the relation :variants would be empty and fields_for wouldn't render anything
       @product.variants.build(:visible => true)
@@ -35,6 +37,7 @@ module PlazrStore
 
     def edit
       @product = Product.find params[:id]
+      @brands = Brand.all
 
       build_relations_for_fields_for
     end
@@ -45,6 +48,7 @@ module PlazrStore
       if @product.update_attributes(params[:product])
         redirect_to admin_product_path(@product), :notice => 'Product was successfully updated.'
       else
+        @brands = Brand.all
         build_relations_for_fields_for
         render :edit 
       end

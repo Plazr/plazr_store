@@ -27,6 +27,11 @@
   = f.text_field :available_at
 
   %br
+  -# BRAND
+  = f.label :brand_id
+  = collection_select(:product, :brand_id, @brands, :id, :name, {:prompt => "Pick a brand"}) 
+
+  %br
 
   = f.fields_for :variants do |mv|
     = mv.label :sku
