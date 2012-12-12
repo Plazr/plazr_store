@@ -1,7 +1,8 @@
+<% placeholder_img = 'plazr_store/lipsum-thirt.png' %>
 <div class="container">
 	<header class="row-fluid">
 		<div class="span12">
-			<h1>Le awesome store</h1>
+			<h1>Lorem ipsum</h1>
 		</div>
 	</header>
 
@@ -9,7 +10,7 @@
 		<div class="span12">
 			<!-- This section is meant for the promotional slideshows and videos -->
 			<!-- I need a filler for this -->
-			<%= image_tag 'http://placehold.it/1200x600' %>
+			<%= image_tag 'plazr_store/promotion-banner.jpg' %>
 		</div>
 	</section>
 
@@ -20,15 +21,16 @@
 		<section class="span12">
 			<article class="row-fluid">
 				<div class="span4">
-					<%= image_tag 'http://placehold.it/300' %>
+					<%= image_tag placeholder_img %>
 				</div>
-				<div class="span4">
-					<h5>Josefina</h5>
-					<p>A puta mais fina deste cabaret</p>
+				<div class="span8">
+					<h5><%= LoremIpsum.w(2, format: :title_case) %></h5>
+					<p><%= LoremIpsum.p(1) %></p>
 					<ul>
-						<li>Lava-se</li>
-						<li>Depila-se</li>
-						<li>Come a sopa toda</li>
+						<li><%= LoremIpsum.short %></li>
+						<li><%= LoremIpsum.short %></li>
+						<li><%= LoremIpsum.short %></li>
+						<li><%= LoremIpsum.short %></li>
 					</ul>
 				</div>
 			</article>
@@ -43,8 +45,8 @@
 			<div class="row-fluid">
 				<% 3.times do %>
 					<article class="span4">
-						<%= image_tag 'http://placehold.it/200' %>
-						<h5>Josefina</h5>
+						<%= image_tag placeholder_img %>
+						<h5><%= LoremIpsum.w(2, format: :title_case) %></h5>
 					</article>
 				<% end %>
 			</div>
