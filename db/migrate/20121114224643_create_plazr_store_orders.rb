@@ -17,6 +17,8 @@ class CreatePlazrStoreOrders < ActiveRecord::Migration
       t.integer :bill_address_id
       t.integer :ship_address_id
 
+      t.integer :shipment_condition_id
+
       t.timestamps
     end
     add_index :plazr_store_orders, :cart_id
@@ -26,5 +28,7 @@ class CreatePlazrStoreOrders < ActiveRecord::Migration
     add_index :plazr_store_orders, :user_id
     add_index :plazr_store_orders, :bill_address_id
     add_index :plazr_store_orders, :ship_address_id
+
+    add_index :plazr_store_orders, :shipment_condition_id
   end
 end

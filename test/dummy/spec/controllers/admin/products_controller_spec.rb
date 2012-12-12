@@ -12,15 +12,21 @@ describe PZS::Admin::ProductsController, :type => :controller do
   end
 
   describe "GET #new" do
-    describe "is filtered by #instance_variable_loading" do
-      it_behaves_like 'before filter and assign', :new, :product, [:property, :variant_property]
-    end
     it "assigns a new product to @product" do
-      # PZS::Property.stub( :all ).and_return( FactoryGirl.create :property )
-      # PZS::VariantProperty.stub( :all ).and_return( FactoryGirl.create :variant_property )
-      # controller.stub(:instance_variable_loading)
       get :new
       assigns(:product).should be_an_instance_of PZS::Product 
+    end
+    it "builds a new product's variant" do
+      get :new
+      assigns(:product).variants.should be_present
+    end
+    xit "calls @product.get_unselected_variant_properties_and_order_by_name" do
+      p = FactoryGirl.build(:product)
+      vp = FactoryGirl.create_list(:variant_property, 2)
+      p.product_variant_properties.build(:variant_property => vp[0])
+      p.product_variant_properties.build(:variant_property => vp[1])
+      p.should_receive(:get_unselected_variant_properties_and_order_by_name).and_return(p.product_variant_properties)
+      get :new
     end
     it "renders the :new template" do
       get :new
@@ -29,9 +35,9 @@ describe PZS::Admin::ProductsController, :type => :controller do
   end
 
   describe "GET #edit" do
-    describe "is filtered by #instance_variable_loading" do
-      it_behaves_like 'before filter and assign', :edit, :product, [:property, :variant_property]
-    end
+    # describe "is filtered by #instance_variable_loading" do
+    #   it_behaves_like 'before filter and assign', :edit, :product, [:property, :variant_property]
+    # end
     it "assigns the requested product to @product" do
       p = FactoryGirl.create :product
       get :edit, id: p
