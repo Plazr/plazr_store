@@ -87,17 +87,20 @@ FactoryGirl.define do
   end
 
   factory :shipment_condition, :class => PZS::ShipmentCondition do
-    sequence(:shipment_method) { |n| "Shipment Method #{n}"}
-    value {rand(1000.0)}
+    sequence(:service_name) { |n| "Shipment Service Name #{n}"}
+    price {rand(20.0)}
+    sequence(:service_details) {|n| "Shipment Service Details #{n}"}
 
     factory :shipment_condition_v2 do
-      shipment_method "UPS"
-      value {63.63}
+      service_name "UPS"
+      price {63.63}
+      service_details "Delivery Time : 20 days"
     end
 
     factory :invalid_shipment_condition do
-      shipment_method nil
-      value -1
+      service_name nil
+      price -1
+      service_details nil
     end
   end
 
