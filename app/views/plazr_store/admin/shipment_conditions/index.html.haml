@@ -2,15 +2,15 @@
 %table
   %thead
     %tr
-      %th Shipment Method
-      %th Value
+      %th Service Name
+      %th Price
   %tbody
     - @shipment_conditions.each do |shipment_condition|
       %tr
         %td
-          = shipment_condition.shipment_method
+          = shipment_condition.service_name
         %td
-          #{shipment_condition.value} €
+          #{shipment_condition.price} €
         %td
           = link_to 'Show', admin_shipment_condition_path(shipment_condition)
         %td

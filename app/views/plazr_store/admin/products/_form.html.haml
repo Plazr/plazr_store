@@ -25,26 +25,34 @@
   %br
   = f.label :available_at
   = f.text_field :available_at
+
   %br
+
+  = f.fields_for :variants do |mv|
+    = mv.label :sku
+    = mv.text_field :sku
+    %br
+    = mv.label :price
+    = mv.text_field :price
+    
   %h4= "Properties"
-  - @properties.each do |prop| 
-    = check_box_tag 'product[property_ids][]', prop.id, @product.properties.include?(prop)
-    = prop.display_name
-  = hidden_field_tag 'product[property_ids][]', ''
+  = f.fields_for :product_properties do |ff|
+    = ff.label :value, ff.object.property.display_name
+    = ff.text_field :value
+    = ff.hidden_field :property_id
 
   %h4= "Variant Properties"
-  - @variant_properties.each do |prop| 
-    = check_box_tag 'product[variant_property_ids][]', prop.id, @product.variant_properties.include?(prop)
-    = prop.display_name
-  = hidden_field_tag 'product[variant_property_ids][]', ''
-  %br
-  -# = fields_for @master_variant do |mv|
-  -#   = mv.label :sku
-  -#   = mv.text_field :sku
-  -#   %br
-  -#   = mv.label :price
-  -#   = mv.text_field :price
+  = f.fields_for :product_variant_properties do |ff|
+    -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
+    -# ff.object accesss the current record in the fields_for loop
+    -# ':checked => ff.object.persisted?' means that if the record exists in the database then the box should be checked
+    -# = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
+    = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
+    = ff.label :_destroy, ff.object.variant_property.display_name
+    -# this hidden_field value is empty so that all the associations to f will be destroyed if no checkbox is selected
+    = ff.hidden_field :variant_property_id
 
+  %br
 
   = f.submit "Submit"
   = link_to 'Cancel', admin_products_path
