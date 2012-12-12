@@ -1,52 +1,62 @@
-<header>
-	<h1>The awesome store</h1>
-</header>
-
-<!-- Advertisement -->
-<section>
-Video, or slideshow
-</section>
-
-<section>
-	<header>
-		<h2>Featured</h2>
-	</header>
-	<section>
-		
-		<% 5.times do %>
-			<%= render 'product' %>
-		<% end %>
-	</section>
-</section>
-
-<section>
-<header>
-<h2>Recommended</h2>
-</header>
-<section>
-<% 5.times do %>
-<%= render 'product' %>
-<% end %>
-</section>
-</section>
-
-<section>
-	<header>
-		<h2>Products</h2>
-	</header>
-	<section>
-		<div>
-			Sort by:
-			<select>
-				<option>Date added</option>
-				<option>Popularity</option>
-				<option>Rating</option>
-				<option>Price (ascending)</option>
-				<option>Price (descending)</option>
-			</select>
+<div class="container">
+	<header class="row-fluid">
+		<div class="span12">
+			<h1>Le awesome store</h1>
 		</div>
-		<% 10.times do %>
-			<%= render 'product' %>
-		<% end %>
+	</header>
+
+	<section id="promotion" class="row-fluid">
+		<div class="span12">
+			<!-- This section is meant for the promotional slideshows and videos -->
+			<!-- I need a filler for this -->
+			<%= image_tag 'http://placehold.it/1200x600' %>
+		</div>
 	</section>
-</section>
+
+	<section id="featured" class="row-fluid">
+		<header class="span12">
+			<h2>Featured</h2>
+		</header>
+		<section class="span12">
+			<article class="row-fluid">
+				<div class="span4">
+					<%= image_tag 'http://placehold.it/300' %>
+				</div>
+				<div class="span4">
+					<h5>Josefina</h5>
+					<p>A puta mais fina deste cabaret</p>
+					<ul>
+						<li>Lava-se</li>
+						<li>Depila-se</li>
+						<li>Come a sopa toda</li>
+					</ul>
+				</div>
+			</article>
+		</section>
+	</section>
+
+	<section id="recommended" class="row-fluid">
+		<header class="span12">
+			<h2>Recommended</h2>
+		</header>
+		<section class="span12">
+			<div class="row-fluid">
+				<% 3.times do %>
+					<article class="span4">
+						<%= image_tag 'http://placehold.it/200' %>
+						<h5>Josefina</h5>
+					</article>
+				<% end %>
+			</div>
+		</section>
+	</section>
+
+	<footer class="row-fluid">
+		<div class="span12">
+			<%= link_to 'Share on Facebook', '#' %>
+			<%= link_to 'Tweet about this place', '#' %>
+		</div>
+	</footer>
+</div>
+
+<%#= javascript_include_tag 'plazr_store/mockup/pages/index' %>
