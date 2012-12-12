@@ -1,7 +1,17 @@
-<article>
-  <h5>Josefina</h5>
-  <p>Rating: ***</p><!-- Rating -->
-  <%= image_tag 'http://placehold.it/200' %>
-  <p>A puta mais fina deste cabaret</p>
-  <p>100 €</p>
-</article>
+<% mode ||= :full %>
+<% case mode %>
+	<% when :thumbnail %>
+		<article>
+			<%= image_tag 'http://placehold.it/200' %>
+			<h5>Josefina</h5>
+		</article>
+	<% when :mini %>
+		<article>
+			<h5>Josefina</h5>
+			<p>Rating: ***</p><!-- Rating -->
+			<%= image_tag 'http://placehold.it/200' %>
+			<p>A puta mais fina deste cabaret</p>
+			<p>100 €</p>
+		</article>
+	<% when :full %>
+<% end %>
