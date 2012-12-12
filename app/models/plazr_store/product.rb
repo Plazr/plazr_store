@@ -2,7 +2,7 @@ module PlazrStore
   class Product < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface
-    
+
     ## Relations ##
     belongs_to :brand
     belongs_to :prototype
@@ -13,7 +13,7 @@ module PlazrStore
 
     has_many :product_properties
     has_many :properties, :through => :product_properties
-    
+
     has_many :product_variant_properties
     has_many :variant_properties, :through => :product_variant_properties
 
@@ -22,14 +22,17 @@ module PlazrStore
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
     # rejects any product_property that is selected but value is blank
-    accepts_nested_attributes_for :product_properties, :allow_destroy => true, 
-      :reject_if => proc {|attributes| attributes.any? {|k,v| k == 'value' && v.blank?}}
-
+    accepts_nested_attributes_for :product_properties, :allow_destroy => true#, 
+    # :reject_if => proc {|attributes| attributes.any? {|k,v| k == 'value' && v.blank?}}
 
 
     ## Validations ##
     validates :name, presence: true, uniqueness_without_deleted: true
     validates :slug, :uniqueness_without_deleted => true
+
+
+    ## Callbacks ##
+    before_save :mark_properties_for_removal
 
 
     ## Methods ##
@@ -67,6 +70,14 @@ module PlazrStore
       end
       # to ensure that all properties are always shown in a consistent order
       self.product_properties.sort_by! {|x| x.property.display_name }
+    end
+
+
+    protected
+    def mark_properties_for_removal
+      self.product_properties.each do |pv|
+        pv.mark_for_destruction if pv.value.blank?
+      end
     end
   end
 end

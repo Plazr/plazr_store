@@ -37,19 +37,19 @@
     
   %h4= "Properties"
   = f.fields_for :product_properties do |ff|
-    -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
-    -# ff.object accesss the current record in the fields_for loop
-    -# ':checked => ff.object.persisted?' means that if the record exists in the database then the box should be checked
-    = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
-    = ff.label :_destroy, ff.object.property.display_name
+    = ff.label :value, ff.object.property.display_name
     = ff.text_field :value
-    -# this hidden_field value is empty so that all the associations to f will be destroyed if no checkbox is selected
     = ff.hidden_field :property_id
 
   %h4= "Variant Properties"
   = f.fields_for :product_variant_properties do |ff|
+    -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
+    -# ff.object accesss the current record in the fields_for loop
+    -# ':checked => ff.object.persisted?' means that if the record exists in the database then the box should be checked
+    -# = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
     = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
     = ff.label :_destroy, ff.object.variant_property.display_name
+    -# this hidden_field value is empty so that all the associations to f will be destroyed if no checkbox is selected
     = ff.hidden_field :variant_property_id
 
   %br
