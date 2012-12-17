@@ -18,6 +18,7 @@ module PlazrStore
     
     private
 
+    #set the path where the files are going to be stored based on the model to which the file belongs
     def set_path_based_on_parent
       if !self.variant.nil?
         ":rails_root/public/assets/upload/variants/:id/:style/:basename.:extension"
@@ -26,6 +27,7 @@ module PlazrStore
       end
     end
 
+    #set the url where the files are going to be accessed based on the model to which the file belongs
     def set_url_base_on_parent
       if !self.variant.nil?
         "/assets/upload/variants/:id/:style/:basename.:extension"
