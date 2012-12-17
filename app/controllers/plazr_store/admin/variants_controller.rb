@@ -7,7 +7,8 @@ module PlazrStore
     end
 
     def index
-      @variants = @product.variants
+      @variants = @product.variants_without_master
+      #por para nao mostrar o master variant
     end
 
     def create
@@ -16,13 +17,13 @@ module PlazrStore
       if @variant.save
         redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully created.'
       else
-        build_relations_for_fields_for
+        @variant.get_unselected_variant_categories_and_order_by_name
         render :new
       end
     end
 
     def new
-      @variant = Variant.new(visible: true)
+      @variant = Variant.new(visible: true, :product_id => @product.id)
       build_relations_for_fields_for
     end
 
@@ -37,7 +38,7 @@ module PlazrStore
       if @variant.update_attributes(params[:variant])
         redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully updated.'
       else
-        build_relations_for_fields_for
+        @variant.get_unselected_variant_categories_and_order_by_name
         render :edit 
       end
     end
@@ -57,8 +58,8 @@ module PlazrStore
       def build_relations_for_fields_for
         # builds variant_categories that are not persisted so that fields_for can render them
         @variant.get_unselected_variant_categories_and_order_by_name
-        # builds variant_properties that are not persisted so that fields_for can render them
-        @variant.get_unselected_variant_properties_and_order_by_name
+        # builds variant_property_values regarding the variant_properties of the product
+        @variant.get_variant_properties_from_product
       end
   end
 end

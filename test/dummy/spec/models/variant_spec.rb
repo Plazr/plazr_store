@@ -37,11 +37,11 @@ describe PZS::Variant, type: :model do
     #  FactoryGirl.create(:variant).should have_many(:shipment_conditions).through(:shipment_condition_variants)
     #end
 
-    it "has many variant_property_values" do
-      FactoryGirl.create(:variant).should have_many :variant_property_values
+    it "has many variant_variant_property_values" do
+      FactoryGirl.create(:variant).should have_many :variant_variant_property_values
     end
-    it "has many variant_properties through variant_property_values" do
-      FactoryGirl.create(:variant).should have_many(:variant_properties).through(:variant_property_values)
+    it "has many variant_property_values through variant_variant_property_values" do
+      FactoryGirl.create(:variant).should have_many(:variant_property_values).through(:variant_variant_property_values)
     end
 
     it "has many variant_variant_categories" do

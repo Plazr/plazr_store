@@ -12,10 +12,11 @@ describe PZS::Admin::VariantsController, :type => :controller do
     end
 
     it "assigns variants" do
-      m = FactoryGirl.create :variant
-      p = m.product
+      m1 = FactoryGirl.create :variant
+      p = m1.product
+      m2 = FactoryGirl.create(:variant, :product => p)
       get :index, :product_id => p
-      assigns(:variants).should eq([m])
+      assigns(:variants).should eq([m2])
     end
 
     it "renders the :index template" do

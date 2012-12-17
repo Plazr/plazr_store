@@ -26,10 +26,6 @@ describe PZS::VariantProperty, :type => :model do
     it "has many variant_property_values" do
       FactoryGirl.create(:variant_property).should have_many :variant_property_values
     end
-
-    it "has many variants through variant_property_values" do
-      FactoryGirl.create(:variant_property).should have_many(:variants).through(:variant_property_values)
-    end
   end
   
   describe "#Validations" do

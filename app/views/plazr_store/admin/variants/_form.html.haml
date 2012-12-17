@@ -36,10 +36,9 @@
 
   %br
   %h4= "Variant Properties"
-  = f.fields_for :variant_property_values do |vpv|
-    = vpv.label :value, vpv.object.variant_property.display_name
-    = vpv.text_field :value
-    = vpv.hidden_field :variant_property_id
+  = f.fields_for :variant_variant_property_values do |vvpv|
+    = vvpv.label :display_name, vvpv.object.variant_property_value.variant_property.display_name
+    = vvpv.collection_select :variant_property_value_id, vvpv.object.variant_property_value.variant_property.variant_property_values, :id, :presentation
     %br
   %br
   = f.submit "Submit"

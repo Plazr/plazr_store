@@ -15,5 +15,6 @@ module PlazrStore
 
     ## Validations ##
     validates :display_name, presence: true
+    validates :id_name, :uniqueness_without_deleted => true
   end
 end

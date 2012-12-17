@@ -17,24 +17,25 @@ module PlazrStore
     has_many :shipment_condition_variants
     has_many :shipment_conditions, :through => :shipment_condition_variants
 
-    has_many :variant_property_values
-    has_many :variant_properties, :through => :variant_property_values
-
     has_many :variant_variant_categories
     has_many :variant_categories, :through => :variant_variant_categories
+
+    has_many :variant_variant_property_values
+    has_many :variant_property_values, :through => :variant_variant_property_values
 
     has_many :variant_wishlists
     has_many :wishlists, :through => :variant_wishlists
 
     #Nested Attributes
     accepts_nested_attributes_for :variant_variant_categories, :allow_destroy => true
-    accepts_nested_attributes_for :variant_property_values, :allow_destroy => true
+    accepts_nested_attributes_for :variant_variant_property_values, :allow_destroy => true, 
+          :reject_if => proc {|attributes| attributes.any? {|k,v| v.blank?}}
 
     ## Attributes ##
     attr_accessible :amount_available, :visible, :cost_price, :description, 
                     :is_master, :price, :restock_date, :sku, :product_id, 
                     :variant_variant_categories_attributes, 
-                    :variant_property_values_attributes
+                    :variant_variant_property_values_attributes
 
     ## Validations ##
     validates_presence_of :sku, :visible, :product
@@ -51,7 +52,6 @@ module PlazrStore
     ## Callbacks ##
     #it is only activated if this variant has a product_id
     before_validation :set_is_master, :on => :create#, :if => "!product_id.nil?"
-    before_save :mark_variant_properties_for_removal
 
     def get_unselected_variant_categories_and_order_by_name
       # creates an array for all variant_categories that the variant does not currently have selected
@@ -63,11 +63,11 @@ module PlazrStore
       self.variant_variant_categories.sort_by! {|x| x.variant_category.name}
     end
 
-    def get_unselected_variant_properties_and_order_by_name
-      (VariantProperty.all - self.variant_properties).each do |vp|
-        self.variant_property_values.build(:variant_property => vp) unless self.variant_property_values.map(&:variant_property_id).include?(vp.id)
+    #creates an array for all the variant_properties that are associated to the product of this variant
+    def get_variant_properties_from_product
+      self.product.variant_properties.each do |vp|
+        self.variant_variant_property_values.build(:variant_property_value => vp.variant_property_values.first) unless self.variant_property_values.map(&:variant_property_id).include?(vp.id)
       end
-      self.variant_property_values.sort_by! {|x| x.variant_property.display_name }
     end
 
     protected
@@ -80,12 +80,6 @@ module PlazrStore
           self.is_master = true
         end
         true
-      end
-
-      def mark_variant_properties_for_removal
-        self.variant_property_values.each do |vpv|
-          vpv.mark_for_destruction if vpv.value.blank?
-        end
       end
   end
 end

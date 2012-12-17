@@ -41,6 +41,6 @@ Feature: Brand management
 
     Given I am at the brand's index page
     When I click the delete button
-    And I confirm that decision
+    And I confirm this decision
     Then The deleted brand shouldn't be listed
     And I should be redirected to brand's index page

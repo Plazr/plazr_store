@@ -5,7 +5,7 @@ module PlazrStore
     
     ## Relations ##
     # A relation to itself (categories have two levels)
-    has_many :child_variant_categories, class_name: "VariantCategory", foreign_key: "parent_variant_category_id" 
+    has_many :child_variant_categories, class_name: "VariantCategory", foreign_key: "parent_variant_category_id", :dependent => :destroy
     belongs_to :parent_variant_category, class_name: "VariantCategory"
 
     has_many :variant_variant_categories
