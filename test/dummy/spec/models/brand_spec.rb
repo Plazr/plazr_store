@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PZS::Brand, type: :model, :skip => true do
+describe PZS::Brand, type: :model do
   it "creates a new instance given a valid attribute" do
     FactoryGirl.create(:brand).should be_valid
   end
