@@ -48,13 +48,12 @@
 	</section>
 
 	<section id="recommended" class="row-fluid">
-		<header class="span12">
+		<header>
 			<h2>Recommended</h2>
 		</header>
-		<section class="span12">
-			<div class="row-fluid">
-				<% [1,2,3].each do |n| %>
-					<article class="span4">
+		<section>
+				<% [1,2,3,4].each do |n| %>
+					<article class="span3">
 						<h5><%= LoremIpsum.w(2, format: :title_case) %></h5>
 						<%= image_tag "plazr_store/#{n}.png" %>
 						<p>
@@ -70,7 +69,6 @@
 						</p>
 					</article>
 				<% end %>
-			</div>
 		</section>
 	</section>
 

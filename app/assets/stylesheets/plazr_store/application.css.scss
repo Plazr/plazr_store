@@ -15,6 +15,7 @@
  */
 
 body {
+	text-align: justify;
 	margin-top: 1em;
 	#layout-container {
 		padding: 0 0 3em 0;
@@ -22,7 +23,33 @@ body {
 }
 
 body > footer {
-	padding: 3em 0 3em 0;
+	padding: 2em 0 2em 0;
 	color: white;
 	background-color: black;
+}
+
+footer {
+	ul#share {
+		padding:0; 
+		margin:0; 
+		list-style:none; 
+		margin:0 auto;
+		li {
+			display: inline;
+			list-style-type: none;
+			padding-left: 20px;
+		}
+	}
+}
+
+.product-border {
+	border: 1px solid;
+	text-align: center;
+	margin: 1em 0 1em 0;
+}
+
+#recommended {
+	> section article {
+		border: 1px solid black;
+	}
 }
