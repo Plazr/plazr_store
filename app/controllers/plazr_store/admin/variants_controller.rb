@@ -41,6 +41,7 @@ module PlazrStore
       else
         @variant.get_unselected_variant_categories_and_order_by_name
         @variant.get_multimedia
+        @variant.multimedia.build unless !(@variant.multimedia.count > 1)
         render :edit 
       end
     end
