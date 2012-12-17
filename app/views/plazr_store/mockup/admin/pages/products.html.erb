@@ -1,40 +1,53 @@
-<section>
-	<h3>Products</h3>
-	<button>All</button>
-	<button>None</button>
-	<% 10.times do %>
-		<%= render 'product' %>
-	<% end %>
-</section>
+<% page = 'plazr_store/mockup/admin/pages/products' %>
 
-<section>
-	<h3>Product Packs</h3>
-	<div>
-		Selected:
-		<button>All</button>
-		<button>None</button>
-		Search:
-		<input type="text" />
-	</div>
-	<% 5.times do %>
-		<%= render 'product' %>
-	<% end %>
-</section>
+<%= content_for :head do %>
+	<%= stylesheet_link_tag page, :media => "all" %>
+<% end %>
 
-<aside>
-	<section>
-		<h3>Products</h3>
-		<ul>
-			<li><%= link_to 'Delete', '#' %></li>
-			<li><%= link_to 'Add to selected packs', '#' %></li>
-		</ul>
+<div class="container">
+	<section class="row-fluid">
+		<div class="span9">
+			<h2>Products</h2>
+ 			<div class="row-fluid">
+				<% 10.times do |i| %>
+					<article class="span3 product">
+						<%#= image_tag "plazr_store/#{rand(1..7)}.png", :class => :photo %>
+						<% imgpth = image_path "plazr_store/#{rand(1..7)}" %>
+						<%= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}.png')" } %>
+						<h5><%= LoremIpsum.w(2) %></h5>
+						<!--<p><%#= LoremIpsum.short %></p>
+						<p>
+							<span class="price"><%#= rand(1..100) %></span>
+							<span class="rating">
+								<%# _rating = rand(1..5) %>
+								<%# _rating.times do %>
+									<%#= image_tag 'glyphicons/star-full.png', :class => :rating %>
+								<%# end %>
+								<%# (5 - _rating).times do %>
+									<%#= image_tag 'glyphicons/star-empty.png', :class => :rating %>
+								<%# end %>
+							</span>
+						</p>-->
+					</article>
+				<% end %>
+			</div>
+		</div>
+		<aside class="span3">
+			<h5>Toolbox</h5>
+			<ul>
+				<li><%= link_to 'Add new product', '#' %></li>
+				<li><%= link_to 'Remove selected', '#' %></li>
+				<li><%= link_to 'Add to selected packs:', '#' %>
+					<ul>
+						<li><input type="radio" name="add_to_packs" /><span style="margin-left:1em">All</span></li>
+						<li><input type="radio" name="add_to_packs" /><span style="margin-left:1em">Selected</span></li>
+					</ul>
+				</li>
+			</ul>
+		</aside>
 	</section>
+</div>
 
-	<section>
-		<h3>Product Packs</h3>
-		<ul>
-			<li><%= link_to 'Delete', '#' %></li>
-			<li><%= link_to 'Add selected products', '#' %></li>
-		</ul>
-	</section>
-</aside>
+<%= content_for :script do %>
+	<%= javascript_include_tag page %>
+<% end %>
