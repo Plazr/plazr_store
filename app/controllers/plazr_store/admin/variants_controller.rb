@@ -30,6 +30,7 @@ module PlazrStore
     def edit
       @variant = Variant.find params[:id]
       build_relations_for_fields_for
+        # build another empty multimedia model for the variants that have more than one image already associated
       @variant.multimedia.build unless !(@variant.multimedia.count > 1)
     end
 
@@ -41,6 +42,7 @@ module PlazrStore
       else
         @variant.get_unselected_variant_categories_and_order_by_name
         @variant.get_multimedia
+        # build another empty multimedia model for the variants that have more than one image already associated
         @variant.multimedia.build unless !(@variant.multimedia.count > 1)
         render :edit 
       end
