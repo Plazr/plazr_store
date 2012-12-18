@@ -6,7 +6,6 @@ module PlazrStore
 
     def index
       @products = Product.all
-      # @product_pages, @products = paginate :products
     end
   end
 end
