@@ -9,6 +9,7 @@ PlazrStore::Engine.routes.draw do
 		namespace :admin do
 			get 'index' => 'pages#index'
 			get 'products' => 'pages#products'
+			get 'create' => 'pages#create'
 			root to: 'pages#index'
 		end
 		get 'profile' => 'profiles#index'

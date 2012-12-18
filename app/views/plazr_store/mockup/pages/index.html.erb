@@ -7,44 +7,46 @@
 
 	<section id="promotion" class="row-fluid">
 		<div class="span12">
-			<!-- This section is meant for the promotional slideshows and videos -->
-			<!-- I need a filler for this -->
 			<%= image_tag 'plazr_store/promotion-banner.jpg' %>
 		</div>
 	</section>
 
-	<section id="featured" class="row-fluid">
-		<header class="span12">
-			<h2>Featured</h2>
-		</header>
-		<section class="span12">
-			<article class="row-fluid">
-				<div class="span4">
-					<%= image_tag 'plazr_store/5.png' %>
-				</div>
-				<div class="span8">
-					<h5><%= LoremIpsum.w(2, format: :title_case) %></h5>
+	<section id="featured">
+		<div class="row">
+			<header class="span12">
+				<h2>Featured</h2>
+			</header>
+		</div>
+		<div class="row">
+			<section class="span12">
+				<article class="row-fluid">
+					<div class="span4">
+						<%= image_tag 'plazr_store/5.png' %>
+					</div>
+					<div class="span8">
+						<h5><%= LoremIpsum.w(2, format: :title_case) %></h5>
 
-					<p><%= LoremIpsum.p(1) %></p>
-					<ul>
-						<li><%= LoremIpsum.short %></li>
-						<li><%= LoremIpsum.short %></li>
-						<li><%= LoremIpsum.short %></li>
-						<li><%= LoremIpsum.short %></li>
-					</ul>
-					<p style="font-size:x-large;line-height:2em">
-						<span style="margin:0 1em">
-							<% 5.times do %>
+						<p><%= LoremIpsum.p(1) %></p>
+						<ul>
+							<li><%= LoremIpsum.short %></li>
+							<li><%= LoremIpsum.short %></li>
+							<li><%= LoremIpsum.short %></li>
+							<li><%= LoremIpsum.short %></li>
+						</ul>
+						<p style="font-size:x-large;line-height:2em">
+							<span style="margin:0 1em">
+								<% 5.times do %>
 								<%= image_tag 'glyphicons/star-full.png', :class => 'rating' %>
-							<% end %>
-						</span>
-						<strong>
-							€ <%= rand(1..100) %>
-						</strong>
-					</p>
-				</div>
-			</article>
-		</section>
+								<% end %>
+							</span>
+							<strong>
+								€ <%= rand(1..100) %>
+							</strong>
+						</p>
+					</div>
+				</article>
+			</section>
+		</div>
 	</section>
 
 	<section id="recommended" class="row-fluid">
@@ -52,26 +54,24 @@
 			<h2>Recommended</h2>
 		</header>
 		<section>
-				<% [1,2,3,4].each do |n| %>
-					<article class="span3">
-						<h5><%= LoremIpsum.w(2, format: :title_case) %></h5>
-						<%= image_tag "plazr_store/#{n}.png" %>
-						<p>
-							€ <%= rand(1..100) %>.99
-						</p>
-						<p>
-							<% 3.times do %>
-								<%= image_tag 'glyphicons/star-full.png', :class => 'rating' %>
-							<% end %>
-							<% 2.times do %>
-								<%= image_tag 'glyphicons/star-empty.png', :class => 'rating' %>
-							<% end %>
-						</p>
-					</article>
-				<% end %>
+			<% [1,2,3,4].each do |n| %>
+			<article class="span3">
+				<h5><%= LoremIpsum.w(2, format: :title_case) %></h5>
+				<%= image_tag "plazr_store/#{n}.png" %>
+				<p>
+					€ <%= rand(1..100) %>.99
+				</p>
+				<p>
+					<% 3.times do %>
+					<%= image_tag 'glyphicons/star-full.png', :class => 'rating' %>
+					<% end %>
+					<% 2.times do %>
+					<%= image_tag 'glyphicons/star-empty.png', :class => 'rating' %>
+					<% end %>
+				</p>
+			</article>
+			<% end %>
 		</section>
 	</section>
 
 </div>
-
-<%#= javascript_include_tag 'plazr_store/mockup/pages/index' %>

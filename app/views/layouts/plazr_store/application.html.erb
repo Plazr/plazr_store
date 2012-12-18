@@ -7,7 +7,6 @@
 		<%= csrf_meta_tags %>
 	</head>
 	<body>
-
 		<nav class="container">
 			<ul class="nav nav-pills pull-right">
 				<li><%= link_to 'Store', mockup_index_path %></li>
@@ -17,8 +16,8 @@
 		</nav>
 
 		<header class="container">
-			<div class="row">	
-				<div class="span12">	
+			<div class="row">
+				<div class="span12">
 					<div class="hero-unit">
 						<h1>Plazr Store</h1>
 						<p class="lead">A simplificar o comércio online.</p>
@@ -27,8 +26,10 @@
 			</div>
 		</header>
 
+		<%= render 'layouts/plazr_store/top_bar' %>
+
 		<section id="layout-container">
-		<%= yield %>
+			<%= yield %>
 		</section>
 
 		<footer>
