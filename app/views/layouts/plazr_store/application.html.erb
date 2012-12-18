@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
 		<%= csrf_meta_tags %>
+		<%= javascript_include_tag "plazr_store/application" %>
 		<%= yield :head %>
 	</head>
 	<body>
@@ -29,7 +30,6 @@
 
 			<%= yield %>
 
-		<%= javascript_include_tag "plazr_store/application" %>
 		<%= yield :script %>
 	</body>
 </html>
