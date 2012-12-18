@@ -2,8 +2,22 @@
 	width: 100%;
 }
 
+.topbar {
+	.input-append, select {
+		margin: 0;
+	}
+	background-color: white;
+	input, button {
+		height: 2em;
+	}
+}
+
 .topbar-wrapper.fixed {
 	position: fixed;
 	top: 0;
 	margin: 0 auto;
+	.topbar {
+		padding: 1em 0 0.6em 0;
+		border-bottom: 1px solid #333333;
+	}
 }

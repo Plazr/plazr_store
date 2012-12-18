@@ -1,0 +1,18 @@
+%h1 Show ShipmentCondition
+%p#notice
+  = notice
+%table
+  %tr
+    %td
+      %b Service Name
+    %td
+      = @shipment_condition.service_name
+  %tr
+    %td
+      %b Price
+    %td
+      #{@shipment_condition.price} €
+
+= link_to 'Edit', edit_admin_shipment_condition_path(@shipment_condition)
+|
+= link_to 'Back', admin_shipment_conditions_path

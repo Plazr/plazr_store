@@ -10,7 +10,7 @@ class CreatePlazrStoreAddresses < ActiveRecord::Migration
       t.string :phone
       t.string :alternative_phone
       t.string :company
-      t.boolean :active, :null => false, :default => true
+      # t.datetime :deleted_at
 
       t.timestamps
     end

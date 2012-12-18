@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
-  mount PlazrStore::Engine => '/store'
+  root :to => "plazr_store/application#index"
+
+  mount PlazrStore::Engine => "/"
 
 end

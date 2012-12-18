@@ -55,3 +55,22 @@ footer {
 		border: 1px solid black;
 	}
 }
+table {
+  border-spacing: 0;
+  width: 100%;
+}
+
+table td {
+  vertical-align: top;
+}
+
+.nav {
+  padding: 10px 0 20px 30px;
+  width: 20%;
+  background-color: #EEE;
+}
+
+.content {
+  padding: 10px 0 20px 30px;
+  background-color: #DDD;
+}
