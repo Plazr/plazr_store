@@ -47,6 +47,12 @@
       %b Master
     %td
       = @variant.is_master
+  %tr
+    %td
+      %b Image
+    %td
+      - if !@variant.multimedia.empty?
+        = image_tag @variant.multimedia.first.file.url(:thumb)
 -# %table
 -#   %thead
 -#     %tr

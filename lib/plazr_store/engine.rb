@@ -1,6 +1,7 @@
 require 'haml'
 require 'paranoia'
 require 'paranoia_uniqueness_validator'
+require 'paperclip'
 
 module PlazrStore
   class Engine < ::Rails::Engine

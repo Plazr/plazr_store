@@ -8,7 +8,6 @@ module PlazrStore
 
     def index
       @variants = @product.variants_without_master
-      #por para nao mostrar o master variant
     end
 
     def create
@@ -18,6 +17,7 @@ module PlazrStore
         redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully created.'
       else
         @variant.get_unselected_variant_categories_and_order_by_name
+        @variant.get_multimedia
         render :new
       end
     end
@@ -30,6 +30,8 @@ module PlazrStore
     def edit
       @variant = Variant.find params[:id]
       build_relations_for_fields_for
+        # build another empty multimedia model for the variants that have more than one image already associated
+      @variant.multimedia.build unless !(@variant.multimedia.count > 0)
     end
 
     def update
@@ -39,6 +41,9 @@ module PlazrStore
         redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully updated.'
       else
         @variant.get_unselected_variant_categories_and_order_by_name
+        @variant.get_multimedia
+        # build another empty multimedia model for the variants that have more than one image already associated
+        @variant.multimedia.build unless !(@variant.multimedia.count > 0)
         render :edit 
       end
     end
@@ -60,6 +65,8 @@ module PlazrStore
         @variant.get_unselected_variant_categories_and_order_by_name
         # builds variant_property_values regarding the variant_properties of the product
         @variant.get_variant_properties_from_product
+        # builds multimedia for an image
+        @variant.get_multimedia
       end
   end
 end
