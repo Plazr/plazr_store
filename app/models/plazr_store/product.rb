@@ -5,7 +5,6 @@ module PlazrStore
 
     ## Relations ##
     belongs_to :brand
-    belongs_to :prototype
 
     has_many :feedback_products
     # Specifying the :inverse_of option on associations lets you tell Active Record about inverse relationships and it will optimise object loading
@@ -17,18 +16,23 @@ module PlazrStore
     has_many :product_variant_properties
     has_many :variant_properties, :through => :product_variant_properties
 
+    attr_accessor :prototype
     ## Attributes ##
-    attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id, :prototype_id, :property_ids, :variant_property_ids, :variants_attributes, :product_variant_properties_attributes, :product_properties_attributes
+    attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id, 
+                    :property_ids, :variant_property_ids, 
+                    :variants_attributes, :product_variant_properties_attributes, 
+                    :product_properties_attributes,
+                    :brand_attributes, :prototype
+
+    # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
-    # rejects any product_property that is selected but value is blank
-    accepts_nested_attributes_for :product_properties, :allow_destroy => true#, 
-    # :reject_if => proc {|attributes| attributes.any? {|k,v| k == 'value' && v.blank?}}
-
+    accepts_nested_attributes_for :product_properties, :allow_destroy => true
+    accepts_nested_attributes_for :brand
 
     ## Validations ##
     validates :name, presence: true, uniqueness_without_deleted: true
-    validates :slug, :uniqueness_without_deleted => true
+    validates :slug, presence: true, uniqueness_without_deleted: true
 
 
     ## Callbacks ##
