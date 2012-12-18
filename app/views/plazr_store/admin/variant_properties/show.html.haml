@@ -1,0 +1,17 @@
+%h1 Show VariantProperty
+%p#notice
+  = notice
+%table
+  %tr
+    %td
+      %b Id Name
+    %td
+      = @variant_property.id_name
+    %td
+      %b Display Name
+    %td
+      = @variant_property.display_name
+
+= link_to 'Edit', edit_admin_variant_property_path(@variant_property)
+|
+= link_to 'Back', admin_variant_properties_path

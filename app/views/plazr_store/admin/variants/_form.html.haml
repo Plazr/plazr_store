@@ -1,0 +1,61 @@
+= form_for [:admin, @product, @variant], :html => { :multipart => true } do |f|
+  - if @variant.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@variant.errors.count, "error")} prohibited this variant from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @variant.errors.full_messages.each do |msg|
+            %li= msg
+
+  = f.label :sku
+  = f.text_field :sku
+  %br
+  = f.label :description
+  = f.text_area :description
+  %br
+  = f.label :price
+  = f.text_field :price, :class => 'variant'
+  %br
+  = f.label :cost_price
+  = f.text_field :cost_price, :class => 'variant'
+  %br
+  = f.label :amount_available
+  = f.number_field :amount_available
+  %br
+  = f.label :restock_date
+  = f.date_select :restock_date
+  %br
+  = f.fields_for :multimedia do |m|
+    - if m.object.new_record?
+      = m.label :file, "Image File"
+      = m.file_field :file
+    - else
+      = m.check_box :_destroy
+      = m.label :_destroy, 'Delete Actual Image'
+      %br
+      = image_tag m.object.file.url(:thumb)
+      %br
+      = m.label :file, "Change Current Image"
+      = m.file_field :file
+    %br
+    = m.label :caption
+    = m.text_field :caption
+    %br
+
+  %h4= "Variant Categories"
+  = f.fields_for :variant_variant_categories do |vvc|
+    - if vvc.object.variant_category.is_leaf?
+      = vvc.check_box :_destroy, {:checked => vvc.object.persisted?}, '0', '1'
+    = vvc.label :_destroy, vvc.object.variant_category.name
+    = vvc.hidden_field :variant_category_id
+    %br
+
+  %br
+  %h4= "Variant Properties"
+  = f.fields_for :variant_variant_property_values do |vvpv|
+    = vvpv.label :display_name, vvpv.object.variant_property_value.variant_property.display_name
+    = vvpv.collection_select :variant_property_value_id, vvpv.object.variant_property_value.variant_property.variant_property_values, :id, :presentation
+    %br
+  %br
+  = f.submit "Submit"
+  = link_to 'Cancel', admin_product_variants_path
