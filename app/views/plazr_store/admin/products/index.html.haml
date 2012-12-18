@@ -1,17 +1,41 @@
-%h1 Listing Products
-%table
-  %thead
-    %tr
-      %th Name
-  %tbody
-    - @products.each do |product|
-      %tr
-        %td
-          = product.name
-        %td
-          = link_to 'Show', admin_product_path(product)
-        %td
-          = link_to 'Edit', edit_admin_product_path(product)
-        %td
-          = link_to 'Destroy', admin_product_path(product), :method => :delete, :data => { :confirm => 'Are you sure?' }
-= link_to 'New Product', new_admin_product_path
+/ %h1 Listing Products
+/ %table
+/   %thead
+/     %tr
+/       %th Name
+/   %tbody
+/     - @products.each do |product|
+/       %tr
+/         %td
+/           = product.name
+/         %td
+/           = link_to 'Show', admin_product_path(product)
+/         %td
+/           = link_to 'Edit', edit_admin_product_path(product)
+/         %td
+/           = link_to 'Destroy', admin_product_path(product), :method => :delete, :data => { :confirm => 'Are you sure?' }
+/ = link_to 'New Product', new_admin_product_path
+%section
+    %h1 Products
+    %table
+        %thead
+            %tr
+                %th Name
+        %tbody
+            - @products.each do |product|
+                %tr
+                    %td= product.name
+                    %td= link_to 'Show', admin_product_path(product)
+                    %td= link_to 'Edit', edit_admin_product_path(product)
+                    %td= link_to 'Destroy', admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' }
+    = link_to 'New Product', new_admin_product_path
+
+%section
+    %h1 Packs
+    %table 
+        %thead
+            %tr
+                %th Títulos
+        %tbody
+            %tr
+                %td O Sideshow ignorou a existência deste requisito. Shame on you Sideshow.
