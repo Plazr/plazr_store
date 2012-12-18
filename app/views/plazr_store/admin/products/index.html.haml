@@ -1,41 +1,30 @@
-/ %h1 Listing Products
-/ %table
-/   %thead
-/     %tr
-/       %th Name
-/   %tbody
-/     - @products.each do |product|
-/       %tr
-/         %td
-/           = product.name
-/         %td
-/           = link_to 'Show', admin_product_path(product)
-/         %td
-/           = link_to 'Edit', edit_admin_product_path(product)
-/         %td
-/           = link_to 'Destroy', admin_product_path(product), :method => :delete, :data => { :confirm => 'Are you sure?' }
-/ = link_to 'New Product', new_admin_product_path
 %section
-    %h1 Products
-    %table
-        %thead
-            %tr
-                %th Name
-        %tbody
-            - @products.each do |product|
-                %tr
-                    %td= product.name
-                    %td= link_to 'Show', admin_product_path(product)
-                    %td= link_to 'Edit', edit_admin_product_path(product)
-                    %td= link_to 'Destroy', admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' }
-    = link_to 'New Product', new_admin_product_path
-
-%section
-    %h1 Packs
-    %table 
-        %thead
-            %tr
-                %th Títulos
-        %tbody
-            %tr
-                %td O Sideshow ignorou a existência deste requisito. Shame on you Sideshow.
+	%h1 Products
+	%table.table
+		%thead
+			%tr
+				%th Image
+				%th Name
+				%th Rating
+				%th
+				%th
+				%th
+		%tbody
+			- @products.each do |product|
+				%tr
+					- variant = product.master_variant.first
+					%td
+						- if variant.multimedia.empty?
+							= image_tag 'http://placehold.it/100x100&text=No%20image'
+						- else
+							= image_tag variant.multimedia.first.file.url(:thumb)
+					%td= product.name
+					%td
+						- if product.rating
+							= product.rating
+						- else
+							%em (no rating)
+					%td= link_to 'Show', admin_product_path(product)
+					%td= link_to 'Edit', edit_admin_product_path(product)
+					%td= link_to 'Destroy', admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' }
+	= link_to 'New Product', new_admin_product_path
