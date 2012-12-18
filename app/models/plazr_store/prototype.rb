@@ -12,10 +12,36 @@ module PlazrStore
     has_many :prototype_variant_properties
     has_many :variant_properties, :through => :prototype_variant_properties
 
+    # Nested Attributes
+    accepts_nested_attributes_for :property_prototypes, :allow_destroy => true
+    accepts_nested_attributes_for :prototype_variant_properties, :allow_destroy => true
+
     ## Attributes ##
-    attr_accessible :name, :property_ids, :variant_property_ids
+    attr_accessible :name, :property_prototypes_attributes, 
+                    :prototype_variant_properties_attributes
 
     # Validations
     validates :name, presence: true
+    validates :name, :uniqueness_without_deleted => true
+
+    def get_unselected_properties_and_order_by_name
+      # creates an array for all property_prototypes that the variant does not currently have selected
+      # and builds them in the prototype
+      (Property.all - self.properties).each do |p|
+        self.property_prototypes.build(:property => p) unless self.property_prototypes.map(&:property_id).include?(p.id)
+      end
+      # to ensure that all variant_categories are always shown in a consistent order
+      self.property_prototypes.sort_by! {|x| x.property.display_name}
+    end
+
+    def get_unselected_variant_properties_and_order_by_name
+      # creates an array for all property_prototypes that the variant does not currently have selected
+      # and builds them in the prototype
+      (VariantProperty.all - self.variant_properties).each do |vp|
+        self.prototype_variant_properties.build(:variant_property => vp) unless self.prototype_variant_properties.map(&:variant_property_id).include?(vp.id)
+      end
+      # to ensure that all variant_categories are always shown in a consistent order
+      self.prototype_variant_properties.sort_by! {|x| x.variant_property.display_name}
+    end
   end
 end
