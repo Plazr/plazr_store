@@ -6,6 +6,7 @@ test/dummy/db/*schema.rb
 test/dummy/log/*.log
 test/dummy/tmp/
 test/dummy/.sass-cache
+test/dummy/public/assets/
 Gemfile.lock
 coverage
 .DS_Store

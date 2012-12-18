@@ -21,6 +21,8 @@ Gem::Specification.new do |s|
   s.add_dependency "paranoia"
   s.add_dependency "paranoia_uniqueness_validator"
   s.add_dependency "haml"
+  s.add_dependency 'paperclip'
+  s.add_dependency 'cocaine', '0.3.2'
 
   s.add_development_dependency 'debugger'
   s.add_development_dependency "sqlite3"
