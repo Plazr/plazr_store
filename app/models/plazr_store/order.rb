@@ -8,6 +8,8 @@ module PlazrStore
     belongs_to :bill_address, :class_name => "Address"
     belongs_to :ship_address, :class_name => "Address"
 
+    belongs_to :shipment_condition
+
     ## Attributes ##
     attr_accessible :adjustment_total, :bill_address_id, :completed_at, :email, :item_total, :payment_state, :ship_address_id, :shipment_state, :state, :total, :user
   end

@@ -8,6 +8,6 @@ module PlazrStore
     has_one :order_as_ship, :foreign_key=>:ship_address_id, :class_name=>"Order"
 
     ## Attributes ##
-    attr_accessible :active, :address1, :address2, :alternative_phone, :city, :company, :first_name, :last_name, :phone, :zipcode
+    attr_accessible :address1, :address2, :alternative_phone, :city, :company, :first_name, :last_name, :phone, :zipcode
   end
 end

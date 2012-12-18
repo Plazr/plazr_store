@@ -1,3 +1,4 @@
+
 <% page = 'plazr_store/mockup/pages/single' %>
 
 <% page2 = 'imageSlider/jquery-1.2.6.min' %>
@@ -94,7 +95,6 @@
 					</div>
 
 				</div>
-			
 			</div>
 
 	<!--Fim Teste Imagens-->
@@ -104,20 +104,7 @@
 
 	<section>
 
-		<div class="row">
-			<h3>Descrição</h3>
-		</div>
-		
-		<div class="row">
-			<div class="span4">
-				<div>
-					<p>Referência<p>
-					<p>04379733</p>
-					<p>Utilização</p>
-					<p>FUTEBOL</p>
-					<p>4,99€</p>
-				</div>
-			</div>
+		<div class="row-fluid">
 			<div class="span4">
 				<p>Tamanho:</p>
 				<select>
@@ -127,39 +114,34 @@
 				</select>
 				<p>Quantidade:</p>
 				<input type="number" value="Quantity" />
-			</div>
-		</div>
-
-		
-		<div class="row">
-			<div class="span4">
 				<input type="submit" value="Adicionar ao cesto" />
-			</div>
-		</div>
-		<div class="row">
-			<div class="span4">
 				<input type="submit" value="Adicionar à wishlist" />
 			</div>
-		</div>
-		<div class="row">
-			<div class="span4">
-				<input type="submit" value="Partilhar" />
+			<div class="span8">
+				<dl class="">
+					<dt>Descrição</dt>
+					<dd>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</dd>
+					<dt>Referência<dt>
+					<dd>04379733</dd>
+					<dt>Categoria</dt>
+					<dd>Futebol</dd>
+					<dt>Preço</dt>
+					<dd>€4,99</dd>
+				</dl>
 			</div>
 		</div>
-
-	<section>
 
 	<section>
 
 		<header>
-			<div class="row">
+			<div class="row-fluid">
 				<div class="span4">
-					<h3>Pacote de produtos</h3>
+					<h3>Pacotes onde está incluido</h3>
 				</div>
 			</div>
 		</header>
 		
-			<div class="row">
+			<div class="row-fluid">
 				<div class="span4">
 					<%= render 'package_group' %>
 				</div>
@@ -168,34 +150,30 @@
 	</section>
 
 	<section>
-
 		<header>
-			<div class="row">
+			<div class="row-fluid">
 				<div class="span4">
 					<h3>Produtos relacionados</h3>
 				</div>
 			</div>
 		</header>
 
-			<div class="row">
+			<div class="row-fluid">
 				<div class="span4">
 					<%= render 'related_products_im' %>
 				</div>
 			</div>
-
 	</section>
 
 	<section>
-
 		<header>
-			<div class="row">
+			<div class="row-fluid">
 				<div class="span4">
 					<h3>Comentários</h3>
 				</div>
 			</div>
 		</header>
-
-		<div class="row">
+		<div class="row-fluid">
 			<div class="span4">
 				<%= render 'comment' %>
 			</div>

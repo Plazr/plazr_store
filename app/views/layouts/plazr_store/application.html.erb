@@ -1,35 +1,51 @@
-<!DOCTYPE html>
+
 <html>
 	<head>
 		<title>PlazrStore</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
+		<%= javascript_include_tag "plazr_store/application" %>
 		<%= csrf_meta_tags %>
 		<%= javascript_include_tag "plazr_store/application" %>
 		<%= yield :head %>
 	</head>
 	<body>
-
 		<nav class="container">
 			<ul class="nav nav-pills pull-right">
-				<li><%= link_to 'Home', mockup_index_path %></li>
+				<li><%= link_to 'Store', mockup_index_path %></li>
+				<li><%= link_to 'Single', mockup_single_path %></li>
 				<li><%= link_to 'About', mockup_about_path %></li>
 			</ul>
 		</nav>
 
 		<header class="container">
-			<div class="row">	
-				<div class="span12">	
+			<div class="row">
+				<div class="span12">
 					<div class="hero-unit">
 						<h1>Plazr Store</h1>
-						<p>A simplificar o comércio online.</p>
+						<p class="lead">A simplificar o comércio online.</p>
 					</div>
 				</div>
 			</div>
 		</header>
 
-			<%= yield %>
+		<%= render 'layouts/plazr_store/top_bar' %>
 
+		<section id="layout-container">
+			<%= yield %>
+		</section>
+
+<<<<<<< HEAD
+=======
+		<footer>
+			<div class="container">
+				<ul id="share" class="pull-right">
+					<li><%= image_tag 'plazr_store/icons/facebook.png' %></li>
+					<li><%= image_tag 'plazr_store/icons/twitter.png' %></li>
+				</ul>
+			</div>
+		</footer>
+>>>>>>> 95c6f42b06fb9552ee40ca9c555bfb633dc7b85f
 		<%= yield :script %>
 	</body>
 </html>

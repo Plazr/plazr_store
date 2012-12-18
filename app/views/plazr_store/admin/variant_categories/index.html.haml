@@ -1,0 +1,20 @@
+%h1 Listing VariantCategories
+%table
+  %thead
+    %tr
+      %th Name
+      %th Description
+  %tbody
+    - @variant_categories.each do |variant_category|
+      %tr
+        %td
+          = variant_category.name
+        %td
+          = variant_category.description
+        %td
+          = link_to 'Show', admin_variant_category_path(variant_category)
+        %td
+          = link_to 'Edit', edit_admin_variant_category_path(variant_category)
+        %td
+          = link_to 'Destroy', admin_variant_category_path(variant_category), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New VariantCategory', new_admin_variant_category_path

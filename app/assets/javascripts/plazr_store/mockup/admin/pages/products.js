@@ -6,15 +6,12 @@ function product_photo_resize(){
 }
 
 $(product_photo_resize);
-
-
-$('article.product').each(function(){
-	$(this).selected = true;
-});
+$(window).resize(product_photo_resize)
 
 $('article.product').click(function(){
-	var a = $(this);
-	console.log(a.selected);
+	var article = $(this);
+	article.find(':checkbox').each(function(){
+		var checkbox = $(this)[0];
+		checkbox.checked = !checkbox.checked;
+	});
 });
-
-$(window).resize(product_photo_resize)
