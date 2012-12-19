@@ -12,6 +12,7 @@ class CreatePlazrAuthRoles < ActiveRecord::Migration
       t.string :desc
       
       t.timestamps
+      t.datetime :deleted_at
     end
   end
 end

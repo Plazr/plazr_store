@@ -2,6 +2,7 @@ module PlazrStore
   class Cart < ActiveRecord::Base
     ## Relations ##
     # belongs_to :user TODO metodo que chama api
+    include PZS::ParanoiaInterface
 
     has_one :order
 

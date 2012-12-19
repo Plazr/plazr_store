@@ -24,6 +24,7 @@ class AddOmniauthToDevise < ActiveRecord::Migration
       t.string  :image_url
 
       t.timestamps
+      t.datetime :deleted_at
     end
   end
 

@@ -12,7 +12,12 @@ module PlazrStore
       g.template_engine :haml
       g.integration_tool :rspec
       g.test_framework :rspec
-    end 
+    end
+
+    config.to_prepare do
+      Dir.glob(PlazrStore::Engine.root + "app/decorators/**/*_decorator*.rb").each { |c| require_dependency(c) }
+    end
+
   end
 
   PZS=PlazrStore

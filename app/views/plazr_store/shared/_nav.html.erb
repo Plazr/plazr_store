@@ -2,3 +2,9 @@
   <li><%= link_to 'Products', plazr_store.admin_products_path %></li>
   <li><%= link_to 'Pages', plazr_store.admin_pages_path %></li>
 </ul>
+
+<% if user_signed_in? %>
+  <ul>
+    <li><%= link_to 'My Cart', plazr_store.cart_path %></li>
+  </ul>
+<% end %>

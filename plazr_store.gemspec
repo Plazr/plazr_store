@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency "haml"
   s.add_dependency 'paperclip'
   s.add_dependency 'cocaine', '0.3.2'
+  s.add_dependency 'rails_engine_decorators'
 
   s.add_development_dependency 'debugger'
   s.add_development_dependency "sqlite3"
