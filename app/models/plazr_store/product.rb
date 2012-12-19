@@ -16,13 +16,12 @@ module PlazrStore
     has_many :product_variant_properties
     has_many :variant_properties, :through => :product_variant_properties
 
-    attr_accessor :prototype
+    attr_accessor :prototypes
     ## Attributes ##
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id, 
                     :property_ids, :variant_property_ids, 
                     :variants_attributes, :product_variant_properties_attributes, 
-                    :product_properties_attributes,
-                    :brand_attributes, :prototype
+                    :product_properties_attributes, :brand_attributes, :prototypes
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
@@ -76,6 +75,19 @@ module PlazrStore
       self.product_properties.sort_by! {|x| x.property.display_name }
     end
 
+    def create_all_properties_association(prototype_id)
+      # replicate each property related to the prototype to the product
+      Prototype.find(prototype_id).properties.each do |prop|
+        self.product_properties.create :property => prop, :value => 0
+      end
+    end
+
+    def create_all_variant_properties_association(prototype_id)
+      # replicate each variant_property related to the prototype to the product
+      Prototype.find(prototype_id).variant_properties.each do |vp|
+        self.product_variant_properties.create :variant_property => vp
+      end
+    end
 
     protected
     def mark_properties_for_removal
