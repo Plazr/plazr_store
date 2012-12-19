@@ -13,10 +13,12 @@ module PlazrStore
       @product = Product.new(params[:product])
 
       if @product.save
-        #cycle through each prototype selected
-        params[:product][:prototypes].each do |p|
-          @product.create_all_properties_association(p)
-          @product.create_all_variant_properties_association(p)
+        if !params[:product][:prototypes].nil?
+          #cycle through each prototype selected
+          params[:product][:prototypes].each do |p|
+            @product.create_all_properties_association(p)
+            @product.create_all_variant_properties_association(p)
+          end
         end
         redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
       else
@@ -48,10 +50,12 @@ module PlazrStore
       @product = Product.find(params[:id])
 
       if @product.update_attributes(params[:product])
+        if !params[:product][:prototypes].nil?
         #cycle through each prototype selected
-        params[:product][:prototypes].each do |p|
-          @product.create_all_properties_association(p)
-          @product.create_all_variant_properties_association(p)
+          params[:product][:prototypes].each do |p|
+            @product.create_all_properties_association(p)
+            @product.create_all_variant_properties_association(p)
+          end
         end
         redirect_to admin_product_path(@product), :notice => 'Product was successfully updated.'
       else

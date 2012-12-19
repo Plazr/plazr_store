@@ -3,9 +3,9 @@ PlazrStore::Engine.routes.draw do
     resources :brands
     resources :discount_types
     resources :products do
-       resources :variants
+      resources :product_properties
+      resources :variants
     end
-    # resources :variants
     resources :properties
     resources :prototypes
     resources :shipment_conditions
