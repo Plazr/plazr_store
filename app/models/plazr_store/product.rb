@@ -22,7 +22,7 @@ module PlazrStore
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
     # rejects any product_property that is selected but value is blank
-    accepts_nested_attributes_for :product_properties, :allow_destroy => true#, 
+    accepts_nested_attributes_for :product_properties, :allow_destroy => true#,
     # :reject_if => proc {|attributes| attributes.any? {|k,v| k == 'value' && v.blank?}}
 
 

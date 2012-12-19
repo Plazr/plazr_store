@@ -15,7 +15,9 @@ PlazrStore::Engine.routes.draw do
 		get 'profile' => 'profiles#index'
 	end
 
-	root to: 'mockup/pages#index'
+  get 'index' => 'pages#index'
+	root to: 'pages#index'
+
 
   namespace :admin do
     resources :brands
