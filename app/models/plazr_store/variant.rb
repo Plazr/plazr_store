@@ -55,6 +55,8 @@ module PlazrStore
     #it is only activated if this variant has a product_id
     before_validation :set_is_master, :on => :create#, :if => "!product_id.nil?"
 
+
+    ## Instance Methods ##
     def get_unselected_variant_categories_and_order_by_name
       # creates an array for all variant_categories that the variant does not currently have selected
       # and builds them in the variant
