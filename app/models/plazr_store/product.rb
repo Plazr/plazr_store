@@ -38,13 +38,17 @@ module PlazrStore
     before_save :mark_properties_for_removal
 
 
-    ## Methods ##
+    ## Instance Methods ##
     def has_master?
       self.variants.count >= 1
     end
 
     def master_variant
       self.variants.master_variant
+    end
+
+    def master_price
+      self.variants.master_variant.first.price
     end
 
     def variants_without_master

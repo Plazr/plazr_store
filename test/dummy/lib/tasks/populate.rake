@@ -27,7 +27,8 @@ namespace :db do
       # FactoryGirl.create_list :variant_property, 5
       puts 'Generating prototypes with properties and variant_properties...'
       FactoryGirl.create_list :prototype_with_properties_and_variant_properties, 5
-      puts 'Generating products with master variant...'
-      FactoryGirl.create_list :product_with_master_variant, 5
+      puts 'Generating products with variants...'
+      # FactoryGirl.create_list :product_with_master_variant, 5
+      FactoryGirl.create_list :product_full, 5
   end
 end
