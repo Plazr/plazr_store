@@ -6,14 +6,21 @@ module PlazrStore
     ## Relations ##
     belongs_to :variant_property
 
-    has_many :variant_variant_property_values
+    has_many :variant_variant_property_values, :dependent => :destroy
     has_many :variants, :through => :variant_variant_property_values
 
     ## Attributes ##
     attr_accessible :name, :presentation, :variant_property_id
 
     ##Validations ##
-    validates_presence_of :presentation, :variant_property
+    validates_presence_of :name, :variant_property
     validates :name, :uniqueness_without_deleted => true
+
+    ## Callbacks ##
+    before_save :fill_fields
+
+    def fill_fields
+      self.presentation = self.name unless !self.presentation.blank?
+    end
   end
 end
