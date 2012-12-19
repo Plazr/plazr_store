@@ -8,13 +8,52 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require ../bootstrap/bootstrap.css
- *= require ../bootstrap/bootstrap-responsive.css
+ *= require bootstrap/bootstrap.css
+ *= require bootstrap/bootstrap-responsive.css
  *= require_self
+ *= require plazr_store/topbar
  */
 
 body {
 	margin-top: 1em;
+	#layout-container {
+		padding: 0 0 3em 0;
+	}
+}
+
+body > footer {
+	padding: 2em 0 2em 0;
+	color: white;
+	background-color: black;
+}
+
+footer {
+	ul#share {
+		padding:0;
+		margin:0;
+		list-style:none;
+		margin:0 auto;
+		li {
+			display: inline;
+			list-style-type: none;
+			padding-left: 20px;
+		}
+	}
+}
+
+.product-border {
+	border: 1px solid;
+	text-align: center;
+	margin: 1em 0 1em 0;
+}
+
+#recommended {
+	section {
+		text-align: center;
+	}
+	> section article {
+		border: 1px solid black;
+	}
 }
 table {
   border-spacing: 0;
