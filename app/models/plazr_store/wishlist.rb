@@ -16,5 +16,9 @@ module PlazrStore
     def user
       PlazrAuth::User.find(user_id)
     end
+
+    def self.current_wishlist
+      where('user_id = ?', current_user.id)
+    end
   end
 end

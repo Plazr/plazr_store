@@ -12,6 +12,13 @@
 
 <h2>Current User: <%= current_user.to_s unless Rails.env.test? %></h2>
 
+<%# <%= form_tag request.path, :method => 'get' do %>
+<%#   <%= content_tag :label do %>
+<%#     Search term:
+<%#     <%= text_field_tag :search, params[:search] %>
+<%#   <% end %>
+<%# <% end %>
+
 <table>
   <tr>
     <td class="nav">

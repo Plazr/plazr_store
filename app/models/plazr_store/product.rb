@@ -77,6 +77,17 @@ module PlazrStore
     end
 
 
+    ## Class Methods ##
+    def self.search(search)
+      if search
+        where('name LIKE ?', "%#{search}%")
+      else
+        # returns Model.all in a scope so it can be queriable
+        scoped
+      end
+    end
+
+
     protected
     def mark_properties_for_removal
       self.product_properties.each do |pv|

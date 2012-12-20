@@ -16,6 +16,8 @@ PlazrStore::Engine.routes.draw do
   end
 
   resources :products, :only => [:index, :show]
+  resource :wishlist
+  # match 'wishlist' => 'wishlists#show'
 
   mount PlazrAuth::Engine => '/'
 end

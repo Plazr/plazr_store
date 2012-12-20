@@ -1,8 +1,15 @@
 %h1 Listing Products
--# = pagination_links(@product_pages)
+
+= form_tag request.path, :method => 'get' do
+  = content_tag :label do
+    Search term:
+    = text_field_tag :search, params[:search]
+
 %table
   - @products.each do |product|
     %tr
       %td= link_to product.name, product_path(product)
       %td= product.master_price
       -# %td= image_tag product.master_variant.first.multimedia.first.file.url(:thumb)
+
+= will_paginate @products
