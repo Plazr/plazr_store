@@ -5,7 +5,6 @@ module PlazrStore
     before_filter :get_fields, except: [ :show ]
 
     def show
-
     end
 
     # POST /cart/add/:variant_id

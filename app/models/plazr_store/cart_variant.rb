@@ -5,6 +5,6 @@ module PlazrStore
     belongs_to :variant
 
     ## Attributes ##
-    attr_accessible :amount, :cart_id, :variant_id
+    attr_accessible :amount, :cart_id, :variant, :variant_id
   end
 end
