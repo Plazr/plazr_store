@@ -5,6 +5,6 @@ module PlazrStore
     belongs_to :prototype
     
     ## Attributes ##
-    attr_accessible :property_id, :prototype_id
+    attr_accessible :property_id, :prototype_id, :property
   end
 end

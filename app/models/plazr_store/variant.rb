@@ -58,6 +58,8 @@ module PlazrStore
     # Delegations
     delegate :name, :to => :product
 
+
+    ## Instance Methods ##
     def get_unselected_variant_categories_and_order_by_name
       # creates an array for all variant_categories that the variant does not currently have selected
       # and builds them in the variant

@@ -29,6 +29,26 @@ FactoryGirl.define do
     details "Details"
     sequence(:slug) { |n| "product-#{n}" }
 
+    factory :product_full do
+      ignore do
+        variants_count 5
+      end
+
+      after(:build) do |p| 
+        p.variants << FactoryGirl.create(:variant, product: p)
+      end
+      after(:create) do |p, evaluator| 
+        p.product_properties << FactoryGirl.create(:product_property, :product_id => p.id)
+        p.variant_properties << FactoryGirl.create(:variant_property_with_values)
+        p.variants << FactoryGirl.create_list(:variant, evaluator.variants_count, product: p)
+        p.variants.each do |v|
+          p.variant_properties.each do |pvp|
+            v.variant_property_values << pvp.variant_property_values.first
+          end
+        end
+      end
+    end
+
     factory :product_v2 do
       name "Pro Evolution Soccer 2012" 
       details "A video game which is the eleventh edition in the Pro Evolution Soccer series developed and published by Konami with production assistance from the Blue Sky Team"
@@ -38,6 +58,10 @@ FactoryGirl.define do
     factory :product_with_master_variant do
       after(:build) do |p| 
         p.variants << FactoryGirl.create(:variant, product: p)
+      end
+      after(:create) do |p| 
+        p.product_properties << FactoryGirl.create(:product_property, :product_id => p.id)
+        p.variant_properties << FactoryGirl.create(:variant_property_with_values)
       end
     end
 
@@ -164,6 +188,17 @@ FactoryGirl.define do
     factory :invalid_variant_property do
       display_name nil
     end
+
+    factory :variant_property_with_values do
+      after(:create) do |vp| 
+        vp.variant_property_values << FactoryGirl.create_list(:variant_property_value, 3, variant_property: vp)
+      end
+    end
+  end
+
+  factory :variant_property_value, :class => PZS::VariantPropertyValue do
+    sequence(:name) { |n| "Value #{n}" }
+    sequence(:presentation) { |n| "Presentation #{n}" }
   end
 
   factory :page, :class => PZS::Page do
