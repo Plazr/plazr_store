@@ -6,7 +6,6 @@
 		<%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
 		<%= javascript_include_tag "plazr_store/application" %>
 		<%= csrf_meta_tags %>
-		<%= javascript_include_tag "plazr_store/application" %>
 		<%= yield :head %>
 	</head>
 	<body>
@@ -35,8 +34,6 @@
 			<%= yield %>
 		</section>
 
-<<<<<<< HEAD
-=======
 		<footer>
 			<div class="container">
 				<ul id="share" class="pull-right">
@@ -45,7 +42,7 @@
 				</ul>
 			</div>
 		</footer>
->>>>>>> 95c6f42b06fb9552ee40ca9c555bfb633dc7b85f
+		
 		<%= yield :script %>
 	</body>
 </html>

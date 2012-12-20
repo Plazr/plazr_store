@@ -1,13 +1,9 @@
-- page = 'plazr_store/admin/products/index'
-- content_for :head do
-	= stylesheet_link_tag page, :media => 'all'
-	= javascript_include_tag page
 %div.container-fluid
 	%section
 		%h1 Products
 		.row-fluid
-			.span12
-				.row-fluid.grid
+			.span9
+				.row-fluid
 					- @products.each do |product|
 						.span2.product
 							%article
@@ -19,13 +15,15 @@
 								%div
 									%noscript
 										= image_tag imgpth
-									= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}.png')" }
+									= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
 									= link_to product.name, admin_product_path(product)
 								%div
 									= link_to edit_admin_product_path(product) do
 										= image_tag 'glyphicons/edit.png'
 									= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
 										= image_tag 'glyphicons/remove.png'
+			%aside.span3
+				= link_to 'New Product', new_admin_product_path
 /	%section
 /		%table.table
 /			%thead

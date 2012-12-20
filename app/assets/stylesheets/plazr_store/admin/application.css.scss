@@ -1,7 +1,12 @@
-.row-fluid.grid .product {
+/*
+ *= require bootstrap/bootstrap.css
+ *= require bootstrap/bootstrap-responsive.css
+ *= require_self
+ */
+.product {
 	max-width: 300px;
 	min-width: 200px;
-	margin: 0;
+	margin: 0 !important;
 
 	article {
 		margin: .5em;

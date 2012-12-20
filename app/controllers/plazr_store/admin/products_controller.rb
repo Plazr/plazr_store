@@ -1,5 +1,6 @@
 module PlazrStore
   class Admin::ProductsController < ApplicationController
+    layout 'admin/application'
     def show
       @product = Product.find(params[:id])
       @variants = @product.variants_without_master
@@ -13,7 +14,8 @@ module PlazrStore
       @product = Product.new(params[:product])
 
       if @product.save
-        redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
+        # redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
+        redirect_to admin_products_path, :notice => 'Product was successfully created.'
       else
         @brands = Brand.all
         build_relations_for_fields_for

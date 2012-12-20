@@ -1,6 +1,8 @@
+//= require jquery
+//= require jquery_ujs
+
 // make all photo containers square
 function product_photo_resize(){
-	console.log('Resizing');
 	$('div.photo').each(function(){
 		var d = $(this);
 		d.height(d.width());
