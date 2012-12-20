@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'cocaine', '0.3.2'
   s.add_dependency 'rails_engine_decorators'
   s.add_dependency 'will_paginate', '~> 3.0.0'
+  # s.add_dependency 'fuzzy_match'
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "cucumber-rails"

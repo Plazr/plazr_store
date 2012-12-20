@@ -5,7 +5,7 @@ module PlazrStore
     end
 
     def index
-      @products = Product.search(params[:search]).paginate(:per_page => 5, :page => params[:page])
+      @products = Product.paginate(:per_page => 5, :page => params[:page])
     end
   end
 end

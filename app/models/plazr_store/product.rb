@@ -9,6 +9,7 @@ module PlazrStore
 
     has_many :feedback_products
     # Specifying the :inverse_of option on associations lets you tell Active Record about inverse relationships and it will optimise object loading
+    # It also allows to create a product and a variant belonging to it at the same time, because of presence of product_id validation on variation
     has_many :variants, :dependent => :destroy, :inverse_of => :product
 
     has_many :product_properties
@@ -19,6 +20,8 @@ module PlazrStore
 
     ## Attributes ##
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id, :prototype_id, :property_ids, :variant_property_ids, :variants_attributes, :product_variant_properties_attributes, :product_properties_attributes
+
+    ## Nested Attributes ##
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
     # rejects any product_property that is selected but value is blank
@@ -75,18 +78,6 @@ module PlazrStore
       # to ensure that all properties are always shown in a consistent order
       self.product_properties.sort_by! {|x| x.property.display_name }
     end
-
-
-    ## Class Methods ##
-    def self.search(search)
-      if search
-        where('name LIKE ?', "%#{search}%")
-      else
-        # returns Model.all in a scope so it can be queriable
-        scoped
-      end
-    end
-
 
     protected
     def mark_properties_for_removal
