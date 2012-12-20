@@ -44,7 +44,7 @@ module PlazrStore
     end
 
     def master_variant
-      self.variants.master_variant
+      self.variants.master_variant.first
     end
 
     def master_price
