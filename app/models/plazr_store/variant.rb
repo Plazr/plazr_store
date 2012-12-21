@@ -52,8 +52,7 @@ module PlazrStore
     scope :without_master, where(:is_master => false)
 
     ## Callbacks ##
-    #it is only activated if this variant has a product_id
-    before_validation :set_is_master, :on => :create#, :if => "!product_id.nil?"
+    before_validation :set_is_master, :on => :create
 
 
     ## Instance Methods ##
