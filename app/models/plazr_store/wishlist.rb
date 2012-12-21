@@ -18,7 +18,7 @@ module PlazrStore
     end
 
     def self.current_wishlist
-      where('user_id = ?', current_user.id)
+      # where('user_id = ?', current_user.id)
     end
   end
 end
