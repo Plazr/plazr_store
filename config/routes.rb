@@ -4,6 +4,7 @@ PlazrStore::Engine.routes.draw do
     resources :discount_types
     resources :pages
     resources :products do
+      resources :product_properties
       resources :variants
     end
     resources :properties
