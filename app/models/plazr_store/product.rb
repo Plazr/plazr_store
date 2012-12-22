@@ -5,10 +5,10 @@ module PlazrStore
 
     ## Relations ##
     belongs_to :brand
-    belongs_to :prototype
 
     has_many :feedback_products
     # Specifying the :inverse_of option on associations lets you tell Active Record about inverse relationships and it will optimise object loading
+    # It also allows to create a product and a variant belonging to it at the same time, because of presence of product_id validation on variation
     has_many :variants, :dependent => :destroy, :inverse_of => :product
 
     has_many :product_properties
@@ -17,18 +17,23 @@ module PlazrStore
     has_many :product_variant_properties
     has_many :variant_properties, :through => :product_variant_properties
 
+    attr_accessor :prototypes
     ## Attributes ##
-    attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id, :prototype_id, :property_ids, :variant_property_ids, :variants_attributes, :product_variant_properties_attributes, :product_properties_attributes
+    attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
+                    :property_ids, :variant_property_ids,
+                    :variants_attributes, :product_variant_properties_attributes,
+                    :product_properties_attributes, :brand_attributes, :prototypes
+
+    # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
-    # rejects any product_property that is selected but value is blank
-    accepts_nested_attributes_for :product_properties, :allow_destroy => true#,
-    # :reject_if => proc {|attributes| attributes.any? {|k,v| k == 'value' && v.blank?}}
 
+    accepts_nested_attributes_for :product_properties, :allow_destroy => true
+    accepts_nested_attributes_for :brand
 
     ## Validations ##
     validates :name, presence: true, uniqueness_without_deleted: true
-    validates :slug, :uniqueness_without_deleted => true
+    validates :slug, presence: true, uniqueness_without_deleted: true
 
 
     ## Callbacks ##
@@ -76,6 +81,19 @@ module PlazrStore
       self.product_properties.sort_by! {|x| x.property.display_name }
     end
 
+    def create_all_properties_association(prototype_id)
+      # replicate each property related to the prototype to the product
+      Prototype.find(prototype_id).properties.each do |prop|
+        self.product_properties.create :property => prop, :value => 0
+      end
+    end
+
+    def create_all_variant_properties_association(prototype_id)
+      # replicate each variant_property related to the prototype to the product
+      Prototype.find(prototype_id).variant_properties.each do |vp|
+        self.product_variant_properties.create :variant_property => vp
+      end
+    end
 
     protected
     def mark_properties_for_removal

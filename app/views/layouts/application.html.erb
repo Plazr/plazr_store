@@ -28,6 +28,7 @@
 			<%= yield %>
 		</section>
 
+
 		<footer>
 			<div class="container">
 				<ul id="share" class="pull-right">
@@ -36,6 +37,16 @@
 				</ul>
 			</div>
 		</footer>
+
+<%= form_tag search_path, :method => 'get', :id => "products_search" do %>
+  <%= content_tag :label do %>
+    Search term:
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  <% end %>
+<% end %>
+
+
 
 		<%= yield :script %>
 	</body>

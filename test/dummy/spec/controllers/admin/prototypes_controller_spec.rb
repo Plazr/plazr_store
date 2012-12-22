@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PZS::Admin::PrototypesController, :type => :controller, skip: true do
+describe PZS::Admin::PrototypesController, :type => :controller do
   render_views
 
   describe "GET #index" do

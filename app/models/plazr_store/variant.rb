@@ -26,7 +26,7 @@ module PlazrStore
     has_many :variant_wishlists
     has_many :wishlists, :through => :variant_wishlists
 
-    #Nested Attributes
+    ## Nested Attributes ##
     accepts_nested_attributes_for :variant_variant_categories, :allow_destroy => true
     accepts_nested_attributes_for :variant_variant_property_values, :allow_destroy => true, 
           :reject_if => proc {|attributes| attributes.any? {|k,v| v.blank?}}
@@ -52,8 +52,7 @@ module PlazrStore
     scope :without_master, where(:is_master => false)
 
     ## Callbacks ##
-    #it is only activated if this variant has a product_id
-    before_validation :set_is_master, :on => :create#, :if => "!product_id.nil?"
+    before_validation :set_is_master, :on => :create
 
 
     ## Instance Methods ##
