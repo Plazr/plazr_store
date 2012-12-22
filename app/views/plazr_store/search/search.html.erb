@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="page-header">
+		<h1><%= "Search Results for \"#{params[:search]}\"" %></h1>
+	</div>
+
+	<div class="row">
+		<% @products.each do |product| %>
+		<div class="span3">
+			<h4><%= link_to product.name, product_path(product) %></h4>
+			<%= product.master_price %>
+		</div>
+		<% end %>
+	</div>
+	<%= will_paginate @products %>
+</div>
