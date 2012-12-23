@@ -25,6 +25,8 @@ PlazrStore::Engine.routes.draw do
     match 'remove/:id' => 'cart#remove', :as => :cart_remove, :via => :delete
   end
 
+  # orders controller
+  match 'checkout' => 'orders#new', :as => :checkout, :via => :get
 
   mount PlazrAuth::Engine => '/'
 end

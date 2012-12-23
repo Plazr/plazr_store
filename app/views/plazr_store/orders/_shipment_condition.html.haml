@@ -1,0 +1,4 @@
+- shipment_conditions.each do |sc|
+  = f.radio_button :shipment_condition_id, sc.id
+  = f.label :shipment_condition_id, sc.service_name
+  %br

@@ -11,7 +11,10 @@ module PlazrStore
     before_save :check_amount
 
     ## Delegations ##
-    delegate :price, :to => :variant
+    delegate :info, :to => :variant
+    delegate :name, :to => :variant
+    delegate :price, :to => :variant # talvez o price devesse ser variant.price * amount
+    delegate :unit_price, :to => :variant
 
     ## Public Methods ##
     def add(amount)

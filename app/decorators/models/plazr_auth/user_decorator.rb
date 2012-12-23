@@ -9,4 +9,9 @@ PlazrAuth::User.class_eval do
     PlazrStore::Cart.find_or_create_by_user_id(self.id)
   end
 
+  # has_many :orders
+  def orders
+    PlazrStore::Order.find_all_by_user_id(self.id)
+  end
+
 end

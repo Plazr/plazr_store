@@ -82,6 +82,14 @@ module PlazrStore
       self.multimedia.build unless !self.multimedia.empty?
     end
 
+    # summarizes a variant's information (name and variant properties)
+    def info
+      info = self.name
+      variant_property_values.each do |vpv|
+        info << "; #{vpv.presentation}"
+      end
+    end
+
     protected
       # if this variant is being created after the creation of a product then is_master is set to true
       # if not (meaning a master variant already exists), is_master is set to false
