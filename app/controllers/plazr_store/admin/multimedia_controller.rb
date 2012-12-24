@@ -7,7 +7,7 @@ module PlazrStore
     end
 
     def index
-      @multimedia = Multimedium.where(:variant_id => Variant.where(:product_id => @product).map(&:id))
+      @multimedia = Multimedium.multimedia_from_all_variants_of_a_product(@product)
     end
 
     def create
@@ -53,7 +53,7 @@ module PlazrStore
         @product = Product.find(params[:product_id])
       end
 
-      # collections used on the views for the belongs_to relations
+      # collection used on the views for the belongs_to relation with a variant
       def entity_collection
         @variants = @product.variants
       end

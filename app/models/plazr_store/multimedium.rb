@@ -38,5 +38,9 @@ module PlazrStore
         "/assets/upload/pages/:id/:style/:basename.:extension"
       end
     end
+
+    def self.multimedia_from_all_variants_of_a_product(product)
+      where(:variant_id => Variant.where(:product_id => product).map(&:id))
+    end
   end
 end
