@@ -1,27 +1,26 @@
 module PlazrStore
   class OrdersController < ApplicationController
 
-    # before_filter :get_cart, only: [:new]
-    # before_filter :get_fields, except: [ :show ]
-    before_filter :get_auxiliar_data, only: [:new]
+    before_filter :get_cart, only: [:new, :create]
+    before_filter :get_auxiliar_data, only: [:new, :create]
 
     def new
       @order = Order.new
+      @order.load_user(current_user)
     end
 
-    # POST /cart/add/:variant_id
-    # def add
-    #   amount = params[:amount] || 1
-    #   current_user.cart.add(@variant, amount)
-    #   redirect_to :back
-    # end
+    def create
+      @order = Order.new(params[:order])
+      @order.load_user(current_user)
+      # TODO aqui ou atribui um cart a order ou faz uma copia de cada CartVariant para uma nova relacao OrderVariant
+      # @order.cart
 
-    # # DELETE /cart/remove/:variant_id
-    # def remove
-    #   current_user.cart.remove(@variant)
-    #   redirect_to :back
-    # end
-
+      if @order.save
+        #TODO redirecionar para uma especie de recibo
+      else
+        render :new
+      end
+    end
 
     protected
       def get_auxiliar_data
@@ -29,12 +28,7 @@ module PlazrStore
       end
 
       def get_cart
-        @cart = current_user.cart
+        @cart = Cart.new#current_user.cart
       end
-
-      # def get_fields
-      #   @variant = Variant.find params[:id]
-      #   @amount  = params[:amount]
-      # end
   end
 end
