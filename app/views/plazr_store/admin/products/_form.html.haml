@@ -38,18 +38,11 @@
     %br
     = mv.label :price
     = mv.text_field :price
-    -#%br
-    -#= mv.fields_for :multimedia do |m|
-    -#  = m.label :file, "Image File"
-    -#  = m.file_field :file
-    -#  %br
-    -#  = m.label :caption
-    -#  = m.text_field :caption
 
   %h4="Prototypes"
   - if !@prototypes.empty?
     - @prototypes.each do |p|
-      = check_box_tag "product[prototypes][]", p.id
+      = check_box_tag "prototypes[]", p.id
       = label_tag p.name
   -#= f.label :prototype
   -#= f.collection_select :prototype_id, @prototypes, :id, :name, {:prompt => "Pick a prototype"}

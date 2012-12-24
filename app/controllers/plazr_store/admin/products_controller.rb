@@ -13,9 +13,9 @@ module PlazrStore
       @product = Product.new(params[:product])
 
       if @product.save
-        if !params[:product][:prototypes].nil?
+        if !params[:prototypes].nil?
           #cycle through each prototype selected
-          params[:product][:prototypes].each do |p|
+          params[:prototypes].each do |p|
             @product.create_all_properties_association(p)
             @product.create_all_variant_properties_association(p)
           end
@@ -50,9 +50,9 @@ module PlazrStore
       @product = Product.find(params[:id])
 
       if @product.update_attributes(params[:product])
-        if !params[:product][:prototypes].nil?
+        if !params[:prototypes].nil?
         #cycle through each prototype selected
-          params[:product][:prototypes].each do |p|
+          params[:prototypes].each do |p|
             @product.create_all_properties_association(p)
             @product.create_all_variant_properties_association(p)
           end

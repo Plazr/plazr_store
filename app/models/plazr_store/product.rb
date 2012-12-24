@@ -17,12 +17,11 @@ module PlazrStore
     has_many :product_variant_properties
     has_many :variant_properties, :through => :product_variant_properties
 
-    attr_accessor :prototypes
     ## Attributes ##
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
                     :property_ids, :variant_property_ids, 
                     :variants_attributes, :product_variant_properties_attributes, 
-                    :product_properties_attributes, :brand_attributes, :prototypes
+                    :product_properties_attributes, :brand_attributes
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true

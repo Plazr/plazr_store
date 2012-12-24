@@ -25,22 +25,6 @@
   = f.label :restock_date
   = f.date_select :restock_date
   %br
-  -#= f.fields_for :multimedia do |m|
-  -#  - if m.object.new_record?
-  -#    = m.label :file, "Image File"
-  -#    = m.file_field :file
-  -#  - else
-  -#    = m.check_box :_destroy
-  -#    = m.label :_destroy, 'Delete Actual Image'
-  -#    %br
-  -#    = image_tag m.object.file.url(:thumb)
-  -#    %br
-  -#    = m.label :file, "Change Current Image"
-  -#    = m.file_field :file
-  -#  %br
-  -#  = m.label :caption
-  -#  = m.text_field :caption
-  -#  %br
 
   %h4= "Variant Categories"
   = f.fields_for :variant_variant_categories do |vvc|
