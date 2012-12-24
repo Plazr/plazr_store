@@ -44,7 +44,9 @@ module PlazrStore
 
     def destroy
       @multimedium = Multimedium.find(params[:id])
-      @multimedium.destroy
+      if @multimedium.destroy
+        FileUtils.rm_rf(":rails_root/public/assets/upload/variants/" << params[:id])  
+      end
       redirect_to admin_product_multimedia_path(@product)
     end
 
