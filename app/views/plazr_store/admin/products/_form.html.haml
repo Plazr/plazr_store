@@ -38,13 +38,13 @@
     %br
     = mv.label :price
     = mv.text_field :price
-    %br
-    = mv.fields_for :multimedia do |m|
-      = m.label :file, "Image File"
-      = m.file_field :file
-      %br
-      = m.label :caption
-      = m.text_field :caption
+    -#%br
+    -#= mv.fields_for :multimedia do |m|
+    -#  = m.label :file, "Image File"
+    -#  = m.file_field :file
+    -#  %br
+    -#  = m.label :caption
+    -#  = m.text_field :caption
 
   %h4="Prototypes"
   - if !@prototypes.empty?

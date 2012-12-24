@@ -9,7 +9,7 @@ module PlazrStore
     has_many :cart_variants
     has_many :carts, :through => :cart_variants
 
-    has_many :multimedia, :class_name => "Multimedia", :dependent => :destroy
+    has_many :multimedia, :dependent => :destroy
 
     has_many :promotion_variants
     has_many :promotions, :through => :promotion_variants
@@ -29,15 +29,13 @@ module PlazrStore
     ## Nested Attributes ##
     accepts_nested_attributes_for :variant_variant_categories, :allow_destroy => true
     accepts_nested_attributes_for :variant_variant_property_values, :allow_destroy => true, 
-          :reject_if => proc {|attributes| attributes.any? {|k,v| v.blank?}}
-    accepts_nested_attributes_for :multimedia, :allow_destroy => true, 
-          :reject_if => proc { |t| t['file'].nil? }
+          :reject_if => proc {|attributes| attributes.any? {|_,v| v.blank?}}
 
     ## Attributes ##
     attr_accessible :amount_available, :visible, :cost_price, :description, 
                     :is_master, :price, :restock_date, :sku, :product_id, 
                     :variant_variant_categories_attributes, 
-                    :variant_variant_property_values_attributes, :multimedia_attributes
+                    :variant_variant_property_values_attributes
 
     ## Validations ##
     validates_presence_of :sku, :visible, :product
@@ -71,11 +69,6 @@ module PlazrStore
       self.product.variant_properties.each do |vp|
         self.variant_variant_property_values.build(:variant_property_value => vp.variant_property_values.first) unless self.variant_property_values.map(&:variant_property_id).include?(vp.id)
       end
-    end
-
-    #creates the model for the nested resources of multimedia if the variant still doesn't have the multimedia model
-    def get_multimedia
-      self.multimedia.build unless !self.multimedia.empty?
     end
 
     protected

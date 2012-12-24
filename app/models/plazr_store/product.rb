@@ -34,11 +34,6 @@ module PlazrStore
     validates :name, presence: true, uniqueness_without_deleted: true
     validates :slug, presence: true, uniqueness_without_deleted: true
 
-
-    ## Callbacks ##
-    before_save :mark_properties_for_removal
-
-
     ## Instance Methods ##
     def has_master?
       self.variants.count >= 1
@@ -91,13 +86,6 @@ module PlazrStore
       # replicate each variant_property related to the prototype to the product
       Prototype.find(prototype_id).variant_properties.each do |vp|
         self.product_variant_properties.create :variant_property => vp
-      end
-    end
-
-    protected
-    def mark_properties_for_removal
-      self.product_properties.each do |pv|
-        pv.mark_for_destruction if pv.value.blank?
       end
     end
   end

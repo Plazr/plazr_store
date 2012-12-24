@@ -1,0 +1,22 @@
+= form_for [:admin, @product, @multimedium], :html => { :multipart => true } do |f|
+  - if @multimedium.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@multimedium.errors.count, "error")} prohibited this multimedium from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @multimedium.errors.full_messages.each do |msg|
+            %li= msg
+
+  = f.label :file
+  = f.file_field :file
+  %br
+  = f.label :caption
+  = f.text_field :caption
+
+  %br
+  -# VARIANT
+  = f.label :variant
+  = f.collection_select :variant_id, @variants, :id, :id, {:prompt => "Pick a variant"}
+  %br
+  = f.submit "Submit"
+  = link_to 'Cancel', admin_product_multimedia_path
