@@ -24,7 +24,6 @@ module PlazrStore
       else
         entities_collections
         build_relations_for_fields_for
-        @product.variants.first.multimedia.build
         render :new
       end
     end
@@ -34,7 +33,6 @@ module PlazrStore
       
       # builds a variant so that fields_for can render it, otherwise the relation :variants would be empty and fields_for wouldn't render anything
       @product.variants.build(:visible => true)
-      @product.variants.first.multimedia.build
 
       entities_collections
       build_relations_for_fields_for

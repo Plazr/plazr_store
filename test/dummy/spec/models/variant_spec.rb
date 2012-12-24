@@ -19,7 +19,7 @@ describe PZS::Variant, type: :model do
     end
 
     it "has many multimedia" do 
-      FactoryGirl.create(:variant).should have_many :multimedia
+      FactoryGirl.create(:variant).should have_many(:multimedia).dependent(:destroy)
     end
 
     it "has many promotion_variants" do
