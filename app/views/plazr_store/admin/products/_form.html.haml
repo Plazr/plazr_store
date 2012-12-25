@@ -33,11 +33,13 @@
 
   %br
   = f.fields_for :variants do |v|
-    = v.label :sku
-    = v.text_field :sku
+    - if v.object.is_master?
+      = v.label :sku
+      = v.text_field :sku
+      %br
+      = v.label :price
+      = v.text_field :price
     %br
-    = v.label :price
-    = v.text_field :price
 
   %h4="Prototypes"
   - if !@prototypes.empty?

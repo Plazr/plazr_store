@@ -23,7 +23,6 @@ module PlazrStore
         redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
       else
         entities_collections
-        build_relations_for_fields_for
         render :new
       end
     end
@@ -32,16 +31,13 @@ module PlazrStore
       @product = Product.new
       
       # builds a variant so that fields_for can render it, otherwise the relation :variants would be empty and fields_for wouldn't render anything
-      @product.variants.build(:visible => true)
-
+      @product.variants.build(:visible => true, :is_master => true)
       entities_collections
-      build_relations_for_fields_for
     end
 
     def edit
       @product = Product.find params[:id]
       entities_collections
-      build_relations_for_fields_for
     end
 
     def update
@@ -58,7 +54,6 @@ module PlazrStore
         redirect_to admin_product_path(@product), :notice => 'Product was successfully updated.'
       else
         entities_collections
-        build_relations_for_fields_for
         render :edit 
       end
     end
@@ -75,14 +70,6 @@ module PlazrStore
     def entities_collections
       @brands = Brand.all
       @prototypes = Prototype.all
-    end
-
-    # builds certain product relations so that fields_for can render properly
-    def build_relations_for_fields_for
-      # builds variant_properties that are not persisted so that fields_for can render them
-      @product.get_unselected_variant_properties_and_order_by_name
-      # builds properties that are not persisted so that fields_for can render them
-      @product.get_unselected_properties_and_order_by_name
     end
   end
 end

@@ -71,6 +71,23 @@ module PlazrStore
       end
     end
 
+    #method to display descriptive information about a individual variant
+    def variant_descriptions
+      if self.is_master?
+        "All"
+      else
+        res = ""
+        self.variant_variant_property_values.each do |vvpv|
+          if res.blank?
+            res << "#{vvpv.variant_property_value.variant_property.id_name}: #{vvpv.variant_property_value.name}"
+          else
+            res << ", #{vvpv.variant_property_value.variant_property.id_name}: #{vvpv.variant_property_value.name}"
+          end
+        end
+        res
+      end
+    end
+
     protected
       # if this variant is being created after the creation of a product then is_master is set to true
       # if not (meaning a master variant already exists), is_master is set to false
