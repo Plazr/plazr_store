@@ -79,7 +79,6 @@ module PlazrStore
       def entities_collections
         @brands = Brand.all
         @prototypes = Prototype.all
-        #@variant_categories = VariantCategory.parent_categories.sort_by! {|x| x.name }
       end
     
       # builds certain product relations so that fields_for can render properly
