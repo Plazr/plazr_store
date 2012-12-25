@@ -78,13 +78,9 @@ module PlazrStore
       else
         res = ""
         self.variant_variant_property_values.each do |vvpv|
-          if res.blank?
-            res << "#{vvpv.variant_property_value.variant_property.id_name}: #{vvpv.variant_property_value.name}"
-          else
-            res << ", #{vvpv.variant_property_value.variant_property.id_name}: #{vvpv.variant_property_value.name}"
-          end
+          res << "#{vvpv.variant_property_value.variant_property.id_name}: #{vvpv.variant_property_value.name}, "
         end
-        res
+        res.chop.chop
       end
     end
 
