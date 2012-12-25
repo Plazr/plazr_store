@@ -26,7 +26,7 @@ module PlazrStore
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
-    accepts_nested_attributes_for :product_properties, :allow_destroy => true
+    #accepts_nested_attributes_for :product_properties, :allow_destroy => true
     accepts_nested_attributes_for :brand
 
     ## Validations ##
@@ -62,16 +62,6 @@ module PlazrStore
       end
       # to ensure that all variant_properties are always shown in a consistent order
       self.product_variant_properties.sort_by! {|x| x.variant_property.display_name }
-    end
-
-    def get_unselected_properties_and_order_by_name
-      # creates an array for all properties that the product does not currently have selected
-      # and builds them in the product
-      (Property.all - self.properties).each do |prop|
-        self.product_properties.build(:property => prop) unless self.product_properties.map(&:property_id).include?(prop.id)
-      end
-      # to ensure that all properties are always shown in a consistent order
-      self.product_properties.sort_by! {|x| x.property.display_name }
     end
 
     def create_all_properties_association(prototype_id)

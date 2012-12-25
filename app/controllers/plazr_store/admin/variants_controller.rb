@@ -53,7 +53,7 @@ module PlazrStore
         @product = Product.find(params[:product_id])
       end
 
-      # builds certain product relations so that fields_for can render properly
+      # builds certain variant relations so that fields_for can render properly
       def build_relations_for_fields_for
         # builds variant_categories that are not persisted so that fields_for can render them
         @variant.get_unselected_variant_categories_and_order_by_name
