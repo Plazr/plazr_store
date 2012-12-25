@@ -20,6 +20,11 @@ module PlazrStore
             @product.create_all_variant_properties_association(p)
           end
         end
+        if !params[:variant_categories].nil?
+          params[:variant_categories].each do |vc|
+            @product.master_variant.first.create_category_relation_with_variant(vc)
+          end
+        end
         redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
       else
         entities_collections
@@ -32,13 +37,14 @@ module PlazrStore
       @product = Product.new
       
       # builds a variant so that fields_for can render it, otherwise the relation :variants would be empty and fields_for wouldn't render anything
-      @product.variants.build(:visible => true, :is_master => true)
+      @product.variants.build(:visible => true, :is_master => true)#.get_unselected_variant_categories_and_order_by_name
       entities_collections
       build_relations_for_fields_for
     end
 
     def edit
       @product = Product.find params[:id]
+      #@product.master_variant.first.get_unselected_variant_categories_and_order_by_name
       entities_collections
       build_relations_for_fields_for
     end
@@ -73,6 +79,7 @@ module PlazrStore
       def entities_collections
         @brands = Brand.all
         @prototypes = Prototype.all
+        #@variant_categories = VariantCategory.parent_categories.sort_by! {|x| x.name }
       end
     
       # builds certain product relations so that fields_for can render properly

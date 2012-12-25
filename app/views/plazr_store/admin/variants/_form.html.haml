@@ -30,8 +30,8 @@
   = f.fields_for :variant_variant_categories do |vvc|
     - if vvc.object.variant_category.is_leaf?
       = vvc.check_box :_destroy, {:checked => vvc.object.persisted?}, '0', '1'
+      = vvc.hidden_field :variant_category_id
     = vvc.label :_destroy, vvc.object.variant_category.name
-    = vvc.hidden_field :variant_category_id
     %br
 
   %br

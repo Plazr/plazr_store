@@ -57,11 +57,19 @@ module PlazrStore
     def get_unselected_variant_categories_and_order_by_name
       # creates an array for all variant_categories that the variant does not currently have selected
       # and builds them in the variant
-      (VariantCategory.all - self.variant_categories).each do |vc|
-        self.variant_variant_categories.build(:variant_category => vc) unless self.variant_variant_categories.map(&:variant_category_id).include?(vc.id)
-      end
+      #(VariantCategory.all - self.variant_categories).each do |vc|
+      #  self.variant_variant_categories.build(:variant_category => vc) unless self.variant_variant_categories.map(&:variant_category_id).include?(vc.id)
+      #end
       # to ensure that all variant_categories are always shown in a consistent order
-      self.variant_variant_categories.sort_by! {|x| x.variant_category.name}
+      #self.variant_variant_categories.sort_by! {|x| x.variant_category.name}
+      VariantCategory.parent_categories.sort_by! { |x| x.name }
+      VariantCategory.parent_categories.each do |vc|
+        self.variant_variant_categories.build(:variant_category => vc)# unless self.variant_variant_categories.map(&:variant_category_id).include?(vc.id)
+        vc.child_variant_categories.sort_by! { |x| x.name }
+        vc.child_variant_categories.each do |cvc|
+          self.variant_variant_categories.build(:variant_category => cvc) unless self.variant_variant_categories.map(&:variant_category_id).include?(cvc.id)
+        end
+      end
     end
 
     #creates an array for all the variant_properties that are associated to the product of this variant
@@ -73,6 +81,7 @@ module PlazrStore
 
     #method to display descriptive information about a individual variant
     def variant_descriptions
+      #if it is the master_variant, then the image is aplicable to all variants
       if self.is_master?
         "All"
       else
@@ -80,6 +89,7 @@ module PlazrStore
         self.variant_variant_property_values.each do |vvpv|
           res << "#{vvpv.variant_property_value.variant_property.id_name}: #{vvpv.variant_property_value.name}, "
         end
+        # drops the last two spaces of the resulting string (', ')
         res.chop.chop
       end
     end
