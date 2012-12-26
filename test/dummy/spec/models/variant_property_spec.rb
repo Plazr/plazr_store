@@ -8,7 +8,7 @@ describe PZS::VariantProperty, :type => :model do
 
   describe "#Relations" do
     it "has many product_variant_properties" do
-      FactoryGirl.create(:variant_property).should have_many :product_variant_properties
+      FactoryGirl.create(:variant_property).should have_many(:product_variant_properties).dependent(:destroy)
     end
 
     it "has many products through product_variant_properties" do
@@ -16,7 +16,7 @@ describe PZS::VariantProperty, :type => :model do
     end
 
     it "has many prototype_variant_properties" do
-      FactoryGirl.create(:variant_property).should have_many :prototype_variant_properties
+      FactoryGirl.create(:variant_property).should have_many(:prototype_variant_properties).dependent(:destroy)
     end
 
     it "has many prototypes through prototype_variant_properties" do
@@ -24,13 +24,17 @@ describe PZS::VariantProperty, :type => :model do
     end
 
     it "has many variant_property_values" do
-      FactoryGirl.create(:variant_property).should have_many :variant_property_values
+      FactoryGirl.create(:variant_property).should have_many(:variant_property_values).dependent(:destroy)
     end
   end
   
   describe "#Validations" do
-    it "requires the presence of a name" do
-      FactoryGirl.create(:variant_property).should validate_presence_of :display_name
+    it "requires the presence of a id_name" do
+      FactoryGirl.create(:variant_property).should validate_presence_of :id_name
+    end
+    it "does not allow duplicate id_name" do
+      FactoryGirl.create(:variant_property_v2)
+      FactoryGirl.build(:variant_property_v2).should_not be_valid
     end
   end
 end

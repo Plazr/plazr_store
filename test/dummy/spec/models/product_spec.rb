@@ -10,10 +10,6 @@ describe PZS::Product, type: :model do
       FactoryGirl.create(:product).should belong_to :brand
     end
 
-    it "belongs to prototype" do 
-      FactoryGirl.create(:product).should belong_to :prototype
-    end
-
     it "has many feedback_products" do 
       FactoryGirl.create(:product).should have_many :feedback_products
     end
@@ -41,6 +37,9 @@ describe PZS::Product, type: :model do
   describe "#Validations" do
     it "requires name to be set" do
       FactoryGirl.create(:product).should validate_presence_of :name
+    end
+    it "requires slug to be set" do
+      FactoryGirl.create(:product).should validate_presence_of :slug
     end
     it "does not allow duplicate name" do
       FactoryGirl.create(:product_v2)

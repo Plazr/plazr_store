@@ -17,8 +17,7 @@ module PlazrStore
     attr_accessible :display_name, :id_name, :product_properties_attributes
 
     ## Validations ##
-    validates :id_name, presence: true
-    validates :id_name, :uniqueness_without_deleted => true
+    validates :id_name, presence: true, :uniqueness_without_deleted => true
 
     ## Callbacks ##
     before_save :fill_fields
