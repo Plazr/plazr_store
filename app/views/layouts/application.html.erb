@@ -1,28 +1,53 @@
-<!DOCTYPE html>
+
 <html>
-<head>
-  <title>PlazrStore</title>
-  <%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
-  <%= javascript_include_tag "plazr_store/application" %>
-  <%= csrf_meta_tags %>
-  <%= yield :head %>
-</head>
-<body>
+	<head>
+		<title>PlazrStore</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
+		<%= javascript_include_tag "plazr_store/application" %>
+		<%= csrf_meta_tags %>
+		<%= javascript_include_tag "plazr_store/application" %>
+		<%= yield :head %>
+	</head>
+	<body>
 
-<h1>Plazr Store</h1>
+		<header class="container">
+			<div class="row">
+				<div class="span12">
+					<div class="hero-unit">
+						<h1>Plazr Store</h1>
+						<p class="lead">A simplificar o comércio online.</p>
+					</div>
+				</div>
+			</div>
+		</header>
 
-<!-- <h2>Current User: <%#= current_user.to_s unless Rails.env.test? %></h2> -->
+		<%= render 'layouts/top_bar' %>
 
-<!-- <table>
-  <tr>
-    <td class="nav">
-      <%#= render 'plazr_store/shared/nav' %>
-      <%#= render 'plazr_auth/shared/nav' unless Rails.env.test? %>
-    </td>
-    
-    <td class="content"><%#= yield %></td>
-  </tr>
-</table> -->
-  <%= yield %>
-</body>
+		<section id="layout-container">
+			<%= yield %>
+		</section>
+
+
+		<footer>
+			<div class="container">
+				<ul id="share" class="pull-right">
+					<li><%= image_tag 'plazr_store/icons/facebook.png' %></li>
+					<li><%= image_tag 'plazr_store/icons/twitter.png' %></li>
+				</ul>
+			</div>
+		</footer>
+
+<%= form_tag search_path, :method => 'get', :id => "products_search" do %>
+  <%= content_tag :label do %>
+    Search term:
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  <% end %>
+<% end %>
+
+
+
+		<%= yield :script %>
+	</body>
 </html>

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PZS::Prototype, type: :model, :skip => true do
+describe PZS::Prototype, type: :model do
   it "creates a new instance given a valid attribute" do
     FactoryGirl.create(:prototype).should be_valid
   end

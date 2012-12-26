@@ -15,14 +15,17 @@ PlazrStore::Engine.routes.draw do
 		get 'profile' => 'profiles#index'
 	end
 
-	root to: 'mockup/pages#index'
+  get 'index' => 'pages#index'
+	root to: 'pages#index'
+
 
   namespace :admin do
     resources :brands
     resources :discount_types
     resources :pages
     resources :products do
-       resources :variants
+      resources :product_properties
+      resources :variants
     end
     resources :properties
     resources :prototypes
@@ -34,6 +37,10 @@ PlazrStore::Engine.routes.draw do
   end
 
   resources :products, :only => [:index, :show]
+  # search controller
+  scope '/search' do
+    match '/' => 'search#search', :as => :search, :via => :get, :controller => "search"
+  end
 
   mount PlazrAuth::Engine => '/'
 end

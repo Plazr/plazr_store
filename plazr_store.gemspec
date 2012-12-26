@@ -27,8 +27,11 @@ Gem::Specification.new do |s|
   s.add_dependency "haml"
   s.add_dependency 'paperclip'
   s.add_dependency 'cocaine', '0.3.2'
+  s.add_dependency 'turbolinks'
+  s.add_dependency 'rails_engine_decorators'
+  s.add_dependency 'will_paginate', '~> 3.0.0'
+  # s.add_dependency 'fuzzy_match'
 
-  s.add_development_dependency 'debugger'
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "puma"
   s.add_development_dependency "cucumber-rails"
@@ -36,7 +39,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "guard-spork"
-  # s.add_development_dependency "mocha"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "shoulda-matchers"
   s.add_development_dependency "fuubar"

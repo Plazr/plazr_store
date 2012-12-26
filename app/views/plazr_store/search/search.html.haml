@@ -1,10 +1,9 @@
-%h1 Listing Products
+%h1= "Search Results for \"#{params[:search]}\""
 
 %table
   - @products.each do |product|
     %tr
       %td= link_to product.name, product_path(product)
       %td= product.master_price
-      -# %td= image_tag product.master_variant.first.multimedia.first.file.url(:thumb)
 
 = will_paginate @products
