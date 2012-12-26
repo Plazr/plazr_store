@@ -28,6 +28,7 @@ PlazrStore::Engine.routes.draw do
   # orders controller
   match 'checkout' => 'orders#new', :as => :checkout, :via => :get
   match 'checkout' => 'orders#create', :as => :checkout, :via => :post
+  match "receipt" => "orders#receipt", :as => :receipt
 
   mount PlazrAuth::Engine => '/'
 end

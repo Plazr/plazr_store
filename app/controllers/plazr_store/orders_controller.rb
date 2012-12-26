@@ -4,11 +4,6 @@ module PlazrStore
     before_filter :get_cart, only: [:new, :create]
     before_filter :get_auxiliar_data, only: [:new, :create]
 
-    def new
-      @order = Order.new
-      @order.load_user(current_user)
-    end
-
     def create
       @order = Order.new(params[:order])
       @order.load_user(current_user)
@@ -16,19 +11,37 @@ module PlazrStore
       # @order.cart
 
       if @order.save
-        #TODO redirecionar para uma especie de recibo
+        # indicates which is the last order when the receipt action is called
+        session[:last_order] = @order.id
+        # redirects to last_order receipt
+        redirect_to receipt_url
       else
         render :new
       end
     end
 
-    protected
-      def get_auxiliar_data
-        @shipment_conditions = ShipmentCondition.all
+    def new
+      @order = Order.new
+      @order.load_user(current_user)
+      @cart = Cart.new
+    end
+
+    def receipt
+      if !session.has_key?(:last_order)
+        redirect_to root_url 
+        return
       end
 
-      def get_cart
-        @cart = Cart.new#current_user.cart
-      end
+      @order = Order.find(session[:last_order])
+    end
+
+    protected
+    def get_auxiliar_data
+      @shipment_conditions = ShipmentCondition.all
+    end
+
+    def get_cart
+      @cart = Cart.new#current_user.cart
+    end
   end
 end

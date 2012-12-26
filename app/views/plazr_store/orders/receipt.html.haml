@@ -1,0 +1,37 @@
+%h1= "Thanks for your Order"
+
+-# = render "details", :order => @order
+
+%table
+  %tr
+    %th= "Item"
+    %th= "Price"
+    %th= "Quantity"
+    %th= "Subtotal"
+  - @order.cart.cart_variants.each do |line_item|
+    %tr
+      %td= line_item.info
+      %td= number_to_currency line_item.unit_price
+      %td= line_item.amount
+      %td= number_to_currency line_item.price
+  %tr
+    %td{colspan: "2"}
+    %td= "Subtotal"
+    %td= number_to_currency cart.total_price
+  %tr
+    %td{colspan: "2"}
+    %td= "Shipment Condition"
+    %td= number_to_currency @order.shipment_condition.price
+  %tr
+    %td{colspan: "2"}
+    %td= "Total"
+    %td= number_to_currency @order.total
+
+Email: 
+= @order.email
+
+%h3= "Billing Information"
+= raw @order.billing_address.display
+
+%h3= "Shipping Information"
+= raw @order.shipping_address.display
