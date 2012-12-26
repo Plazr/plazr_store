@@ -39,11 +39,13 @@ module PlazrStore
     end
 
     def master_variant
-      self.variants.master_variant
+      variants.where(:is_master => true).first
+      # self.variants.master_variant
     end
 
     def master_price
-      self.variants.master_variant.first.price
+      # self.variants.master_variant.first.price
+      self.master_variant.price
     end
 
     def variants_without_master

@@ -67,16 +67,17 @@ describe PZS::Product, type: :model do
       end
     end
     describe "#master_variant" do
-      it "calls master_variant in Variant" do
-        p = FactoryGirl.create(:product_with_master_variant)
-        PZS::Variant.should_receive(:master_variant).and_return(p.variants.where(:is_master => true))
-        p.master_variant
-      end
+      # it "calls master_variant in Variant" do
+      #   p = FactoryGirl.create(:product_with_master_variant)
+      #   PZS::Variant.should_receive(:master_variant).and_return(p.variants.where(:is_master => true))
+      #   p.master_variant
+      # end
       it "returns the master variant" do
         # nao sei se este teste está bem feito
         p = FactoryGirl.create(:product_with_master_variant)
-        PZS::Variant.stub(:master_variant).and_return(p.variants.where(:is_master => true))
-        p.master_variant.should eq [p.variants.first]
+        # PZS::Variant.stub(:master_variant).and_return(p.variants.where(:is_master => true))
+        p.master_variant.should eq p.variants.first
+        # p.master_variant.should eq [p.variants.first]
       end
     end
     describe "#get_unselected_properties_and_order_by_name" do
