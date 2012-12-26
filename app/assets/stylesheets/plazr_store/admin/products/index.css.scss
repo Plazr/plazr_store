@@ -1,0 +1,20 @@
+//= require ../application
+//= require_self
+.product {
+	max-width: 300px;
+	min-width: 200px;
+	margin: 0 !important;
+
+	article {
+		margin: .5em;
+		text-align: center;
+
+		div.photo {
+			width: 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+			-webkit-background-size: cover;
+			background-size: cover;
+		}
+	}
+}

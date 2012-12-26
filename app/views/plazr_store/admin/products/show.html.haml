@@ -1,3 +1,6 @@
+- page = 'plazr_store/admin/products/show'
+- content_for :head do
+	= stylesheet_link_tag page, :media => 'all'
 - if notice
 	%section
 		%p#notice
@@ -7,58 +10,59 @@
 		%li= link_to 'Back to Products', admin_products_path
 %section
 	.row-fluid
-		.span3.product
-			%article
-				- variant = @product.master_variant.first
-				- imgpth = if variant.multimedia.empty?
-					- 'http://placehold.it/100x100&text=No%20image'
-				- else
-					- variant.multimedia.first.file.url(:thumb)
-				%noscript
-					= image_tag imgpth, :class => :photo
-				= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
-		.span6
-			%h1= @product.name
-			- if @product.brand
-				%p= "by #{@product.brand.name}"
-			- if @product.available_at.past?
-				%p= "Available since #{@product.available_at.to_date}"
-			- else
-				%p= "Will be available after #{@product.available_at.to_date}"
-			%h6= @product.slug
-			.rating
-				%span
-					- if @product.rating
-						= @product.rating
+		.span10
+			%article.row-fluid
+				.span3
+					- variant = @product.master_variant.first
+					- imgpth = if variant.multimedia.empty?
+						- 'http://placehold.it/100x100&text=No%20image'
 					- else
-						%em (no rating)
-			%p= @product.details
-		%aside.span3
+						- variant.multimedia.first.file.url(:thumb)
+					%noscript
+						= image_tag imgpth, :class => :photo
+					= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
+				.span5
+					%h1= @product.name
+					- if @product.brand
+						%p= "by #{@product.brand.name}"
+					- if @product.available_at.past?
+						%p= "Available since #{@product.available_at.to_date}"
+					- else
+						%p= "Will be available after #{@product.available_at.to_date}"
+					%h6= @product.slug
+					.rating
+						%span
+							- if @product.rating
+								= @product.rating
+							- else
+								%em (no rating)
+					%p= @product.details
+				#variants.span4
+					.row-fluid
+						- variants = @product.variants_without_master
+						- unless variants.empty?
+							- variants.each do |variant|
+								.span4.cell
+									%article
+										%div
+											- imgpth = if variant.multimedia.empty?
+												- 'http://placehold.it/100x100&text=No%20image'
+											- else
+												- variant.multimedia.first.file.url(:thumb)
+											%noscript
+												= image_tag imgpth, :class => :photo
+											= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
+											%strong
+												= link_to variant.sku, admin_product_variant_path(@product, variant)
+										%div
+											= link_to edit_admin_product_variant_path(@product, variant) do
+												= image_tag 'glyphicons/edit.png'
+											= link_to admin_product_variant_path(@product, variant), :method => :delete, data: { confirm: 'Are you sure?' } do
+												= image_tag 'glyphicons/remove.png'
+		%aside.span2
+			%h5 Product
 			%ul
 				%li= link_to 'Edit', edit_admin_product_path(@product)
-/ %table
-/   %tr
-/ 	%td
-/ 	  %b Name
-/ 	%td
-/ 	  = @product.name
-/ %table
-/   %thead
-/ 	%tr
-/ 	  %th Properties
-/ 	%tbody
-/ 	  - @product.properties.each do |p|
-/ 		%tr
-/ 		  %td= p.display_name
-/ %table
-/   %thead
-/ 	%tr
-/ 	  %th Variant Properties
-/ 	%tbody
-/ 	  - @product.variant_properties.each do |p|
-/ 		%tr
-/ 		  %td= p.display_name
-
-/ = link_to 'Edit', edit_admin_product_path(@product)
-/ |
-/ = link_to 'Back', admin_products_path
+			%h5 Variants
+			%ul
+				%li= link_to 'New variant', new_admin_product_variant_path(@product)
