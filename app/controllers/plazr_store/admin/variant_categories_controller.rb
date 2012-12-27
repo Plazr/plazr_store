@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::VariantCategoriesController < ApplicationController
+  class Admin::VariantCategoriesController < Admin::ApplicationController
 
     def show
       @variant_category = VariantCategory.find(params[:id])

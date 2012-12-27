@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::MultimediaController < ApplicationController
+  class Admin::MultimediaController < Admin::ApplicationController
     before_filter :get_product
 
     def show

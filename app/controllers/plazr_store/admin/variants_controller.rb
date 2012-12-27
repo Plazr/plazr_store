@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::VariantsController < ApplicationController
+  class Admin::VariantsController < Admin::ApplicationController
     before_filter :get_product
 
     def show
