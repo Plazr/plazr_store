@@ -1,6 +1,5 @@
 module PlazrStore
-  class Admin::ProductsController < ApplicationController
-    layout 'admin/application'
+  class Admin::ProductsController < AdminController
     def show
       @product = Product.find(params[:id])
       @variants = @product.variants_without_master

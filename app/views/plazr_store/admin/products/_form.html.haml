@@ -1,79 +1,91 @@
-= form_for [:admin, @product] do |f|
-  - if @product.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
-      %div{:class=>["alert","alert-error"]}
-        %ul
-          - @product.errors.full_messages.each do |msg|
-            %li= msg
-  -# - if @master_variant.errors.any?
-  -#   #error_explanation
-  -#     %h2= "#{pluralize(@master_variant.errors.count, "error")} prohibited this product from being saved:"
-  -#     %div{:class=>["alert","alert-error"]}
-  -#       %ul
-  -#         - @master_variant.errors.full_messages.each do |msg|
-  -#           %li= msg
+= form_for [:admin, @product] do |frm|
+	- if @product.errors.any?
+		%ul.alert.alert-error
+			- @product.errors.full_messages.each do |msg|
+				%li= msg
+	.field
+		= frm.text_field :name, placeholder: 'Product name'
+	.field
+		= frm.text_area :details, placeholder: 'Product description'
+	.field
+		= frm.text_field :available_at, :class => 'datepicker', 'data-date-format' => 'dd/mm/yyyy'
 
-  = f.label :name
-  = f.text_field :name
-  %br
-  = f.label :details
-  = f.text_area :details
-  %br
-  = f.label :slug
-  = f.text_field :slug
-  %br
-  = f.label :available_at
-  = f.text_field :available_at
+/ = form_for [:admin, @product] do |f|
+/   - if @product.errors.any?
+/     #error_explanation
+/       %h2= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
+/       %div{:class=>["alert","alert-error"]}
+/         %ul
+/           - @product.errors.full_messages.each do |msg|
+/             %li= msg
+/   -# - if @master_variant.errors.any?
+/   -#   #error_explanation
+/   -#     %h2= "#{pluralize(@master_variant.errors.count, "error")} prohibited this product from being saved:"
+/   -#     %div{:class=>["alert","alert-error"]}
+/   -#       %ul
+/   -#         - @master_variant.errors.full_messages.each do |msg|
+/   -#           %li= msg
 
-  %br
-  -# BRAND
-  = f.label :brand_id
-  = f.collection_select :brand_id, @brands, :id, :name, {:prompt => "Pick a brand"}
+/   = f.label :name
+/   = f.text_field :name
+/   %br
+/   = f.label :details
+/   = f.text_area :details
+/   %br
+/   = f.label :slug
+/   = f.text_field :slug
+/   %br
+/   = f.label :available_at
+/   = f.text_field :available_at
 
-  %br
-  = f.fields_for :variants do |mv|
-    = mv.label :sku
-    = mv.text_field :sku
-    %br
-    = mv.label :price
-    = mv.text_field :price
-    %br
-    = mv.fields_for :multimedia do |m|
-      = m.label :file, "Image File"
-      = m.file_field :file
-      %br
-      = m.label :caption
-      = m.text_field :caption
+/   %br
+/   -# BRAND
+/   = f.label :brand_id
+/   = f.collection_select :brand_id, @brands, :id, :name, {:prompt => "Pick a brand"}
 
-  %h4="Prototypes"
-  - if !@prototypes.empty?
-    - @prototypes.each do |p|
-      = check_box_tag "product[prototypes][]", p.id
-      = label_tag p.name
-  -#= f.label :prototype
-  -#= f.collection_select :prototype_id, @prototypes, :id, :name, {:prompt => "Pick a prototype"}
-  %br
+/   %br
+/   = f.fields_for :variants do |mv|
+/     = mv.label :sku
+/     = mv.text_field :sku
+/     %br
+/     = mv.label :price
+/     = mv.text_field :price
+/     %br
+/     = mv.fields_for :multimedia do |m|
+/       = m.label :file, "Image File"
+/       = m.file_field :file
+/       %br
+/       = m.label :caption
+/       = m.text_field :caption
 
-    
-  -#%h4= "Properties"
-  -#= f.fields_for :product_properties do |ff|
-  -#  = ff.label :value, ff.object.property.display_name
-  -#  = ff.text_field :value
-  -#  = ff.hidden_field :property_id
+/   %h4="Prototypes"
+/   - if !@prototypes.empty?
+/     - @prototypes.each do |p|
+/       = check_box_tag "product[prototypes][]", p.id
+/       = label_tag p.name
+/   -#= f.label :prototype
+/   -#= f.collection_select :prototype_id, @prototypes, :id, :name, {:prompt => "Pick a prototype"}
+/   %br
 
-  -#%h4= "Variant Properties"
-  -#= f.fields_for :product_variant_properties do |ff|
-    -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
-    -# ff.object accesss the current record in the fields_for loop
-    -# ':checked => ff.object.persisted?' means that if the record exists in the database then the box should be checked
-    -# = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
-    -#= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
-    -#= ff.label :_destroy, ff.object.variant_property.display_name
-    -# this hidden_field value is empty so that all the associations to f will be destroyed if no checkbox is selected
-    -#= ff.hidden_field :variant_property_id
+		
+/   -#%h4= "Properties"
+/   -#= f.fields_for :product_properties do |ff|
+/   -#  = ff.label :value, ff.object.property.display_name
+/   -#  = ff.text_field :value
+/   -#  = ff.hidden_field :property_id
 
-  %br
+/   -#%h4= "Variant Properties"
+/   -#= f.fields_for :product_variant_properties do |ff|
+/     -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
+/     -# ff.object accesss the current record in the fields_for loop
+/     -# ':checked => ff.object.persisted?' means that if the record exists in the database then the box should be checked
+/     -# = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
+/     -#= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
+/     -#= ff.label :_destroy, ff.object.variant_property.display_name
+/     -# this hidden_field value is empty so that all the associations to f will be destroyed if no checkbox is selected
+/     -#= ff.hidden_field :variant_property_id
 
-  = f.submit "Submit"
-  = link_to 'Cancel', admin_products_path
+/   %br
+
+/   = f.submit "Submit"
+/   = link_to 'Cancel', admin_products_path
