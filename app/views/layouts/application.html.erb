@@ -8,11 +8,17 @@
 </head>
 <body>
 
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
+<% end %>
+
 <h1>Plazr Store (Dummy App)</h1>
 
 <h2>Current User: <%= current_user.to_s unless Rails.env.test? %></h2>
 
-<%= form_tag search_path, :method => 'get', :id => "products_search" do %>
+<%= form_tag plazr_store.search_path, :method => 'get', :id => "products_search" do %>
   <%= content_tag :label do %>
     Search term:
     <%= text_field_tag :search, params[:search] %>

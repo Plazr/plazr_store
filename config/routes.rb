@@ -1,4 +1,7 @@
 PlazrStore::Engine.routes.draw do
+
+  root :to => 'application#index'
+
   namespace :admin do
     resources :brands
     resources :discount_types
