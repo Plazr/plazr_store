@@ -35,9 +35,7 @@
           %td= vpv.variant_property.display_name
           %td= vpv.presentation
     = add_to_cart_form(v.id)
-    /= link_to 'Add to cart', cart_add_path(v.id), method: :post
 - else
   = add_to_cart_form(@product.master_variant.id)
-  /= link_to 'Add to cart', cart_add_path(@product.master_variant.id), method: :post
 
 = link_to 'Back', products_path
