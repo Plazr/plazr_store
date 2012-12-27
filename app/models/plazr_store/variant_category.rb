@@ -8,7 +8,7 @@ module PlazrStore
     has_many :child_variant_categories, class_name: "VariantCategory", foreign_key: "parent_variant_category_id", :dependent => :destroy
     belongs_to :parent_variant_category, class_name: "VariantCategory"
 
-    has_many :variant_variant_categories
+    has_many :variant_variant_categories, :dependent => :destroy
     has_many :variants, :through => :variant_variant_categories
     
     ## Attributes ##
@@ -16,11 +16,16 @@ module PlazrStore
 
     ## Validations ##
     validates :name, presence: true
+    validates :parent_variant_category_id, presence: true, :if => :is_child?
 
     ## Scopes ##
     scope :parent_categories, where(:is_leaf => false)
   
-    def self.parent_categories_without_self(id)
+    def is_child?
+      self.is_leaf?
+    end
+
+    def self.parent_categories_without(id)
       where("is_leaf = ? AND id != ?", false, id)
     end
   end

@@ -7,26 +7,56 @@ describe PZS::VariantCategory, :type => :model do
   end
 
   describe "#Relations" do
+    it "has many child_variant_categories" do
+      FactoryGirl.create(:variant_category).should have_many(:child_variant_categories).class_name("VariantCategory").dependent(:destroy)
+    end
+
+    it "belongs to parent_variant_category" do
+      FactoryGirl.create(:variant_category).should belong_to(:parent_variant_category).class_name("VariantCategory")
+    end
+
     it "has many variant_variant_categories" do
-      FactoryGirl.create(:variant_category).should have_many :variant_variant_categories
+      FactoryGirl.create(:variant_category).should have_many(:variant_variant_categories).dependent(:destroy)
     end
 
     it "has many variants through variant_variant_categories" do
       FactoryGirl.create(:variant_category).should have_many(:variants).through(:variant_variant_categories)
-    end
-
-    it "has many second_variant_categories" do
-      FactoryGirl.create(:variant_category).should have_many(:child_variant_categories).class_name("VariantCategory")
-    end
-
-    it "belongs to first_variant_category" do
-      FactoryGirl.create(:variant_category).should belong_to(:parent_variant_category).class_name("VariantCategory")
     end
   end
   
   describe "#Validations" do
     it "requires the presence of a name" do
       FactoryGirl.create(:variant_category).should validate_presence_of :name
+    end
+    context "it is a child category" do
+      it "requires the presence of a parent_variant_category_id" do
+        FactoryGirl.create(:variant_category_leaf).should validate_presence_of :parent_variant_category_id
+      end
+    end
+  end
+
+  describe "#Public Methods" do
+    describe "#is_child?" do
+      context "it is a child category" do
+        it "returns true" do
+          vc = FactoryGirl.create(:variant_category_leaf)
+          vc.is_child?.should be_true
+        end
+      end
+      context "it is a parent category" do
+        it "returns false" do
+          vc = FactoryGirl.create(:variant_category)
+          vc.is_child?.should be_false
+        end
+      end
+    end
+    describe "#self.parent_categories_without(id)" do
+      it "returns all the parent_categories minus the one corresponding to the id argument" do
+        vc = FactoryGirl.create_list(:variant_category, 5)
+        vc1 = FactoryGirl.create(:variant_category)
+        child = FactoryGirl.create(:variant_category_leaf)
+        PZS::VariantCategory.parent_categories_without(vc1.id).should eq vc << child.parent_variant_category
+      end
     end
   end
 end

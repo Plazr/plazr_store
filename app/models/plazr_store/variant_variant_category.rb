@@ -8,6 +8,10 @@ module PlazrStore
     ## Attributes ##
     attr_accessible :variant_id, :variant_category_id, :variant_category
 
+    ## Validations ##
+    validates :variant, presence: true
+    validates :variant_category, presence: true
+
     # returns true if the variant_category selected is already associated with the 
     # master variant of the given product
     def category_master_variant?(product)

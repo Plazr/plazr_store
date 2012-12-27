@@ -15,7 +15,7 @@ module PlazrStore
     end
 
     def edit
-      @variant_categories = VariantCategory.parent_categories_without_self(params[:id])
+      @variant_categories = VariantCategory.parent_categories_without(params[:id])
       @variant_category = VariantCategory.find(params[:id])
     end
 

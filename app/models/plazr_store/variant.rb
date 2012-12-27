@@ -52,7 +52,6 @@ module PlazrStore
     ## Callbacks ##
     before_validation :set_is_master, :on => :create
 
-
     ## Instance Methods ##
     def get_unselected_variant_categories_and_order_by_name
       # creates an array for all variant_categories that the variant does not currently have selected
@@ -67,7 +66,11 @@ module PlazrStore
         self.variant_variant_categories.build(:variant_category => vc)# unless self.variant_variant_categories.map(&:variant_category_id).include?(vc.id)
         vc.child_variant_categories.sort_by! { |x| x.name }
         vc.child_variant_categories.each do |cvc|
-          self.variant_variant_categories.build(:variant_category => cvc) unless self.variant_variant_categories.map(&:variant_category_id).include?(cvc.id)
+          exist = VariantVariantCategory.find_by_variant_id_and_variant_category_id(self.id, cvc.id)
+          if !exist
+            self.variant_variant_categories.build(:variant_category => cvc)# unless self.variant_variant_categories.map(&:variant_category_id).include?(cvc.id)
+          else
+          end
         end
       end
     end

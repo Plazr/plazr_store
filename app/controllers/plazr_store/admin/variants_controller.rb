@@ -24,9 +24,6 @@ module PlazrStore
     def new
       @variant = Variant.new(visible: true, :product_id => @product.id)
       build_relations_for_fields_for
-      @variant.variant_variant_categories.each do |vvc|
-        puts vvc.inspect
-      end
     end
 
     def edit
