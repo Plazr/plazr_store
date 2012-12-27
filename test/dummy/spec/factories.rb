@@ -1,4 +1,13 @@
 FactoryGirl.define do
+  factory :address, :class => PZS::Address do
+    sequence(:address1) { |n| "Address1_#{n}" }
+    sequence(:city) { |n| "City#{n}" }
+    sequence(:first_name) { |n| "FirstName#{n}" }
+    sequence(:last_name) { |n| "LastName#{n}" }
+    sequence(:phone) { |n| "Phone_#{n}" }
+    sequence(:zipcode) { |n| "Zipcode_#{n}" }
+  end
+
   factory :brand, :class => PZS::Brand do
     sequence(:name) { |n| "Brand #{n}" }
 
@@ -8,6 +17,13 @@ FactoryGirl.define do
 
     factory :invalid_brand do
       name nil 
+    end
+  end
+
+  factory :cart, :class => PZS::Cart do
+    # association :user, factory: :specific_user
+    after(:build) do |c| 
+      c.user_id = FactoryGirl.create(:specific_user).id
     end
   end
 
@@ -134,24 +150,6 @@ FactoryGirl.define do
     end
   end
 
-  factory :variant_category, :class => PZS::VariantCategory do
-    sequence(:name) { |n| "Name #{n}" }
-    description "Description"
-    is_leaf false
-    parent_variant_category_id ""
-
-    factory :variant_category_not_leaf do
-    end
-
-    factory :variant_category_v2 do
-      name "Sapatilhas"
-    end
-
-    factory :invalid_variant_category do
-      name nil
-    end
-  end
-
   factory :variant, :class => PZS::Variant do
     sequence(:sku) {|n| "SKU#{n}"}
     description "Description"
@@ -173,6 +171,24 @@ FactoryGirl.define do
       amount_available nil
       is_master nil
       # product nil
+    end
+  end
+
+  factory :variant_category, :class => PZS::VariantCategory do
+    sequence(:name) { |n| "Name #{n}" }
+    description "Description"
+    is_leaf false
+    parent_variant_category_id ""
+
+    factory :variant_category_not_leaf do
+    end
+
+    factory :variant_category_v2 do
+      name "Sapatilhas"
+    end
+
+    factory :invalid_variant_category do
+      name nil
     end
   end
 

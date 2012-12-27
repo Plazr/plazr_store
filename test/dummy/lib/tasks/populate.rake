@@ -8,6 +8,7 @@ namespace :db do
     puts 'Deleting all records from all tables'
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.clean
+      PlazrAuth::User.destroy_all
 
     # ActiveRecord::Base.send(:subclasses).each(&:delete_all)
     # ActiveRecord::Base.send(:subclasses).each do |s|
@@ -29,5 +30,9 @@ namespace :db do
       FactoryGirl.create_list :prototype_with_properties_and_variant_properties, 5
       puts 'Generating products with variants...'
       FactoryGirl.create_list :product_full, 5
+      puts 'Generating carts with new user'
+      FactoryGirl.create_list :cart, 2
+      puts 'Generating addresses'
+      FactoryGirl.create_list :address, 5
   end
 end

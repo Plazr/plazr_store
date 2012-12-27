@@ -1,9 +1,8 @@
 module PlazrStore
   class Cart < ActiveRecord::Base
-    ## Relations ##
-    # belongs_to :user TODO metodo que chama api
     include PZS::ParanoiaInterface
 
+    ## Relations ##
     has_one :order
 
     has_many :cart_variants
@@ -11,6 +10,9 @@ module PlazrStore
 
     ## Attributes ##
     attr_accessible :item_amount, :total_price, :user_id
+
+    ## Validations ##
+    validates :user_id, presence: true
 
     ## Callbacks ##
     after_save { logger.info "cart updated" }
@@ -27,5 +29,14 @@ module PlazrStore
       self.cart_variants.find_by_variant_id(variant.id).remove
     end
 
+    def user
+      # Get this cart's owner
+      PlazrAuth::User.find(self.user_id)
+    end
+
+    # def user=(user)
+    #   # Set this cart's owner
+    #   self.user_id = PlazrAuth::User.find(user.id)
+    # end
   end
 end

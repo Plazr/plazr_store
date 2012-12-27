@@ -7,8 +7,7 @@ module PlazrStore
     def create
       @order = Order.new(params[:order])
       @order.load_user(current_user)
-      # TODO aqui ou atribui um cart a order ou faz uma copia de cada CartVariant para uma nova relacao OrderVariant
-      # @order.cart
+      @order.add_cart_and_update_status(@cart)
 
       if @order.save
         # indicates which is the last order when the receipt action is called
@@ -23,25 +22,24 @@ module PlazrStore
     def new
       @order = Order.new
       @order.load_user(current_user)
-      @cart = Cart.new
     end
 
     def receipt
-      if !session.has_key?(:last_order)
+      # redirects to the last order receipt view
+      if session.has_key?(:last_order)
+        @order = Order.find(session[:last_order])
+      else
         redirect_to root_url 
-        return
       end
-
-      @order = Order.find(session[:last_order])
     end
 
     protected
-    def get_auxiliar_data
-      @shipment_conditions = ShipmentCondition.all
-    end
+      def get_auxiliar_data
+        @shipment_conditions = ShipmentCondition.all
+      end
 
-    def get_cart
-      @cart = Cart.new#current_user.cart
-    end
+      def get_cart
+        @cart = Cart.new#current_user.cart
+      end
   end
 end
