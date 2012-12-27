@@ -11,16 +11,18 @@ module PlazrStore
 
     has_many :multimedia, :dependent => :destroy
 
-    has_many :promotion_variants
+    has_many :promotion_variants, :dependent => :destroy
     has_many :promotions, :through => :promotion_variants
 
-    has_many :shipment_condition_variants
-    has_many :shipment_conditions, :through => :shipment_condition_variants
+    #has_many :shipment_condition_variants, :dependent => :destroy
+    #has_many :shipment_conditions, :through => :shipment_condition_variants
 
-    has_many :variant_variant_categories
+    # Specifying the :inverse_of option on associations lets you tell Active Record about inverse relationships and it will optimise object loading
+    # It also allows to create a variant and a variant_category belonging to it at the same time, because of presence of variant_id validation on variant_variant_category
+    has_many :variant_variant_categories, :dependent => :destroy, :inverse_of => :variant
     has_many :variant_categories, :through => :variant_variant_categories
 
-    has_many :variant_variant_property_values
+    has_many :variant_variant_property_values, :dependent => :destroy
     has_many :variant_property_values, :through => :variant_variant_property_values
 
     has_many :variant_wishlists

@@ -20,11 +20,6 @@ module PlazrStore
             @product.create_all_variant_properties_association(p)
           end
         end
-        if !params[:variant_categories].nil?
-          params[:variant_categories].each do |vc|
-            @product.master_variant.first.create_category_relation_with_variant(vc)
-          end
-        end
         redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
       else
         entities_collections

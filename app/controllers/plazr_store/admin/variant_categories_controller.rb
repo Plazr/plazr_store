@@ -15,8 +15,11 @@ module PlazrStore
     end
 
     def edit
-      @variant_categories = VariantCategory.parent_categories_without(params[:id])
       @variant_category = VariantCategory.find(params[:id])
+      @variant_categories = []
+      if @variant_category.child_variant_categories.empty?
+        @variant_categories = VariantCategory.parent_categories_without(params[:id])
+      end 
     end
 
     def create
@@ -42,7 +45,10 @@ module PlazrStore
         end
         redirect_to admin_variant_category_path(@variant_category), :notice => 'VariantCategory was created sucessfully'
       else
-        @variant_categories = VariantCategory.parent_categories_without_self(params[:id])
+        @variant_categories = []
+        if @variant_category.child_variant_categories.empty?
+          @variant_categories = VariantCategory.parent_categories_without(params[:id])
+        end 
         render :edit
       end
     end

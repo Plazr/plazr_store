@@ -28,14 +28,23 @@ describe PZS::VariantCategory, :type => :model do
     it "requires the presence of a name" do
       FactoryGirl.create(:variant_category).should validate_presence_of :name
     end
-    context "it is a child category" do
-      it "requires the presence of a parent_variant_category_id" do
-        FactoryGirl.create(:variant_category_leaf).should validate_presence_of :parent_variant_category_id
-      end
-    end
   end
 
   describe "#Public Methods" do
+    describe "#set_leaf" do
+      context "the parent_variant_category_id is blank" do
+        it "is_leaf is set to false" do
+          vc = FactoryGirl.create(:variant_category, :parent_variant_category_id => nil)
+          vc.is_leaf.should be_false
+        end
+      end
+      context "the parent_variant_category_id is not blank" do
+        it "is_leaf is set to true" do
+          vc = FactoryGirl.create(:variant_category_leaf)
+          vc.is_leaf.should be_true
+        end
+      end
+    end
     describe "#is_child?" do
       context "it is a child category" do
         it "returns true" do

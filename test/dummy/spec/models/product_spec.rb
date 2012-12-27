@@ -15,14 +15,14 @@ describe PZS::Product, type: :model do
     end
 
     it "has many product_properties" do
-      FactoryGirl.create(:product).should have_many :product_properties
+      FactoryGirl.create(:product).should have_many(:product_properties).dependent(:destroy)
     end
     it "has many properties through product_properties" do
       FactoryGirl.create(:product).should have_many(:properties).through(:product_properties)
     end
 
     it "has many product_variant_properties" do
-      FactoryGirl.create(:product).should have_many :product_variant_properties
+      FactoryGirl.create(:product).should have_many(:product_variant_properties).dependent(:destroy)
     end
     it "has many variant_properties through product_variant_properties" do
       FactoryGirl.create(:product).should have_many(:variant_properties).through(:product_variant_properties)

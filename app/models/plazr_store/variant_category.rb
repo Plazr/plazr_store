@@ -20,6 +20,18 @@ module PlazrStore
 
     ## Scopes ##
     scope :parent_categories, where(:is_leaf => false)
+
+    ## Callback ##
+    before_validation :set_leaf
+
+    def set_leaf
+      if self.parent_variant_category_id.blank?
+        self.is_leaf = false
+      else
+        self.is_leaf = true
+      end
+      true
+    end
   
     def is_child?
       self.is_leaf?

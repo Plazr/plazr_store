@@ -23,14 +23,14 @@ describe PZS::Variant, type: :model do
     end
 
     it "has many promotion_variants" do
-      FactoryGirl.create(:variant).should have_many :promotion_variants
+      FactoryGirl.create(:variant).should have_many(:promotion_variants).dependent(:destroy)
     end
     it "has many promotions through promotion_variants" do
       FactoryGirl.create(:variant).should have_many(:promotions).through(:promotion_variants)
     end
 
     #it "has many shipment_condition_variants" do
-    #  FactoryGirl.create(:variant).should have_many :shipment_condition_variants
+    #  FactoryGirl.create(:variant).should have_many(:shipment_condition_variants).dependent(:destroy)
     #end
     
     #it "has many shipment_conditions through shipment_condition_variants" do
@@ -38,14 +38,14 @@ describe PZS::Variant, type: :model do
     #end
 
     it "has many variant_variant_categories" do
-      FactoryGirl.create(:variant).should have_many :variant_variant_categories
+      FactoryGirl.create(:variant).should have_many(:variant_variant_categories).dependent(:destroy)
     end
     it "has many variant_categories through variant_variant_categories" do
       FactoryGirl.create(:variant).should have_many(:variant_categories).through(:variant_variant_categories)
     end
 
     it "has many variant_variant_property_values" do
-      FactoryGirl.create(:variant).should have_many :variant_variant_property_values
+      FactoryGirl.create(:variant).should have_many(:variant_variant_property_values).dependent(:destroy)
     end
     it "has many variant_property_values through variant_variant_property_values" do
       FactoryGirl.create(:variant).should have_many(:variant_property_values).through(:variant_variant_property_values)

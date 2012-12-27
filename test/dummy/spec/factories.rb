@@ -161,28 +161,6 @@ FactoryGirl.define do
     end
   end
 
-  factory :variant_category, :class => PZS::VariantCategory do
-    sequence(:name) { |n| "Name #{n}" }
-    description "Description"
-    is_leaf false
-    parent_variant_category_id ""
-
-    factory :variant_category_leaf do
-      is_leaf true
-      after(:build) do |vc| 
-        vc.parent_variant_category_id = FactoryGirl.create(:variant_category).id
-      end
-    end
-
-    factory :variant_category_v2 do
-      name "Sapatilhas"
-    end
-
-    factory :invalid_variant_category do
-      name nil
-    end
-  end
-
   factory :variant, :class => PZS::Variant do
     sequence(:sku) {|n| "SKU#{n}"}
     description "Description"
@@ -215,6 +193,28 @@ FactoryGirl.define do
       after(:create) do |v|
       v.variant_variant_property_values << FactoryGirl.create(:variant_variant_property_value, :variant_id => v.id)
       end
+    end
+  end
+
+  factory :variant_category, :class => PZS::VariantCategory do
+    sequence(:name) { |n| "Name #{n}" }
+    description "Description"
+    is_leaf false
+    parent_variant_category_id ""
+
+    factory :variant_category_leaf do
+      is_leaf true
+      after(:build) do |vc| 
+        vc.parent_variant_category_id = FactoryGirl.create(:variant_category).id
+      end
+    end
+
+    factory :variant_category_v2 do
+      name "Sapatilhas"
+    end
+
+    factory :invalid_variant_category do
+      name nil
     end
   end
 
