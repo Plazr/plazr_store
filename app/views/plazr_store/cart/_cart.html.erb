@@ -1,8 +1,9 @@
 <ul>
-  <% @cart.variants.each do |variant| %>
+  <% @cart.cart_variants.each do |cart_variant| %>
     <li>
-      <%= link_to variant.name, product_path(variant.product) %>
-      <%= link_to 'Delete', cart_remove_path(variant), method: :delete %>
+      [<%= cart_variant.amount %>]
+      <%= link_to cart_variant.name, product_path(cart_variant.product) %>
+      <%= link_to 'Delete', cart_remove_path(cart_variant.variant), method: :delete %>
     </li>
   <% end %>
 </ul>
