@@ -7,12 +7,12 @@ module PlazrStore
     end
 
 
-    private
 
-      def current_ability
-        logger.info namespace
-        Ability.new(current_user, namespace)
-      end
+    def current_ability
+      @current_ability ||= Ability.new(current_user, namespace)
+    end
+
+    protected
 
       def namespace
         controller_name_segments = params[:controller].split('/')

@@ -6,8 +6,10 @@ module PlazrStore
     protected
 
       def check_admin
-        flash[:error] = 'You don\'t have permission to access this'
-        redirect_to root_path unless can? :admin, :all
+        unless can? :admin, :store
+          flash[:error] = 'You don\'t have permission to access this'
+          redirect_to root_path
+        end
       end
 
   end
