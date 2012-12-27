@@ -8,6 +8,7 @@ module PlazrStore
 
     has_many :feedback_products
     # Specifying the :inverse_of option on associations lets you tell Active Record about inverse relationships and it will optimise object loading
+    # It also allows to create a product and a variant belonging to it at the same time, because of presence of product_id validation on variation
     has_many :variants, :dependent => :destroy, :inverse_of => :product
 
     has_many :product_properties
@@ -16,27 +17,21 @@ module PlazrStore
     has_many :product_variant_properties
     has_many :variant_properties, :through => :product_variant_properties
 
-    attr_accessor :prototypes
     ## Attributes ##
-    attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id, 
+    attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
                     :property_ids, :variant_property_ids, 
                     :variants_attributes, :product_variant_properties_attributes, 
-                    :product_properties_attributes, :brand_attributes, :prototypes
+                    :product_properties_attributes, :brand_attributes
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
-    accepts_nested_attributes_for :product_properties, :allow_destroy => true
+    #accepts_nested_attributes_for :product_properties, :allow_destroy => true
     accepts_nested_attributes_for :brand
 
     ## Validations ##
     validates :name, presence: true, uniqueness_without_deleted: true
     validates :slug, presence: true, uniqueness_without_deleted: true
-
-
-    ## Callbacks ##
-    before_save :mark_properties_for_removal
-
 
     ## Instance Methods ##
     def has_master?
@@ -44,11 +39,13 @@ module PlazrStore
     end
 
     def master_variant
-      self.variants.master_variant.first
+      variants.where(:is_master => true).first
+      # self.variants.master_variant.first
     end
 
     def master_price
-      self.variants.master_variant.first.price
+      # self.variants.master_variant.first.price
+      self.master_variant.price
     end
 
     def variants_without_master
@@ -69,16 +66,6 @@ module PlazrStore
       self.product_variant_properties.sort_by! {|x| x.variant_property.display_name }
     end
 
-    def get_unselected_properties_and_order_by_name
-      # creates an array for all properties that the product does not currently have selected
-      # and builds them in the product
-      (Property.all - self.properties).each do |prop|
-        self.product_properties.build(:property => prop) unless self.product_properties.map(&:property_id).include?(prop.id)
-      end
-      # to ensure that all properties are always shown in a consistent order
-      self.product_properties.sort_by! {|x| x.property.display_name }
-    end
-
     def create_all_properties_association(prototype_id)
       # replicate each property related to the prototype to the product
       Prototype.find(prototype_id).properties.each do |prop|
@@ -90,13 +77,6 @@ module PlazrStore
       # replicate each variant_property related to the prototype to the product
       Prototype.find(prototype_id).variant_properties.each do |vp|
         self.product_variant_properties.create :variant_property => vp
-      end
-    end
-
-    protected
-    def mark_properties_for_removal
-      self.product_properties.each do |pv|
-        pv.mark_for_destruction if pv.value.blank?
       end
     end
   end

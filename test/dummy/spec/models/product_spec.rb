@@ -10,10 +10,6 @@ describe PZS::Product, type: :model do
       FactoryGirl.create(:product).should belong_to :brand
     end
 
-    it "belongs to prototype" do 
-      FactoryGirl.create(:product).should belong_to :prototype
-    end
-
     it "has many feedback_products" do 
       FactoryGirl.create(:product).should have_many :feedback_products
     end
@@ -42,6 +38,9 @@ describe PZS::Product, type: :model do
     it "requires name to be set" do
       FactoryGirl.create(:product).should validate_presence_of :name
     end
+    it "requires slug to be set" do
+      FactoryGirl.create(:product).should validate_presence_of :slug
+    end
     it "does not allow duplicate name" do
       FactoryGirl.create(:product_v2)
       FactoryGirl.build(:product_v2).should_not be_valid
@@ -68,16 +67,17 @@ describe PZS::Product, type: :model do
       end
     end
     describe "#master_variant" do
-      it "calls master_variant in Variant" do
-        p = FactoryGirl.create(:product_with_master_variant)
-        PZS::Variant.should_receive(:master_variant).and_return(p.variants.where(:is_master => true))
-        p.master_variant
-      end
+      # it "calls master_variant in Variant" do
+      #   p = FactoryGirl.create(:product_with_master_variant)
+      #   PZS::Variant.should_receive(:master_variant).and_return(p.variants.where(:is_master => true))
+      #   p.master_variant
+      # end
       it "returns the master variant" do
         # nao sei se este teste está bem feito
         p = FactoryGirl.create(:product_with_master_variant)
-        PZS::Variant.stub(:master_variant).and_return(p.variants.where(:is_master => true))
-        p.master_variant.should eq [p.variants.first]
+        # PZS::Variant.stub(:master_variant).and_return(p.variants.where(:is_master => true))
+        p.master_variant.should eq p.variants.first
+        # p.master_variant.should eq [p.variants.first]
       end
     end
     describe "#get_unselected_properties_and_order_by_name" do

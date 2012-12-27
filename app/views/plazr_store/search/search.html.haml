@@ -1,4 +1,4 @@
-%h1 Listing Products
+%h1= "Search Results for \"#{params[:search]}\""
 
 %table
   - @products.each do |product|

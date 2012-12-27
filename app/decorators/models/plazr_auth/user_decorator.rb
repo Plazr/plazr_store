@@ -1,5 +1,4 @@
 PlazrAuth::User.class_eval do
-
   # has_many :cart
   def carts
     PlazrStore::Cart.with_deleted.find_all_by_user_id(self.id)
@@ -14,4 +13,7 @@ PlazrAuth::User.class_eval do
     PlazrStore::Order.find_all_by_user_id(self.id)
   end
 
+  def wishlist
+    PZS::Wishlist.find_all_by_user_id(self.id)
+  end
 end

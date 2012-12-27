@@ -4,8 +4,9 @@ PlazrStore::Engine.routes.draw do
     resources :discount_types
     resources :pages
     resources :products do
-      resources :product_properties
+      resources :product_properties, :only => [:index, :create, :destroy]
       resources :variants
+      resources :multimedia
     end
     resources :properties
     resources :prototypes
@@ -17,6 +18,10 @@ PlazrStore::Engine.routes.draw do
   end
 
   resources :products, :only => [:index, :show]
+  # search controller
+  scope '/search' do
+    match '/' => 'search#search', :as => :search, :via => :get, :controller => "search"
+  end
 
   # carts controller
   scope '/cart' do

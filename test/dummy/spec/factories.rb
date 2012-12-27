@@ -93,7 +93,7 @@ FactoryGirl.define do
     end
 
     factory :invalid_property do
-      display_name nil
+      id_name nil
     end
   end
 
@@ -186,7 +186,7 @@ FactoryGirl.define do
     end
 
     factory :invalid_variant_property do
-      display_name nil
+      id_name nil
     end
 
     factory :variant_property_with_values do
