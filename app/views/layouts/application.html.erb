@@ -8,6 +8,12 @@
 </head>
 <body>
 
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
+<% end %>
+
 <h1>Plazr Store (Dummy App)</h1>
 
 <h2>Current User: <%= current_user.to_s unless Rails.env.test? %></h2>
