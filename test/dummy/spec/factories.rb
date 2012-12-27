@@ -21,10 +21,20 @@ FactoryGirl.define do
   end
 
   factory :cart, :class => PZS::Cart do
-    # association :user, factory: :specific_user
     after(:build) do |c| 
       c.user_id = FactoryGirl.create(:specific_user).id
     end
+    after(:create) do |c|
+      p = FactoryGirl.create(:product_full)
+      FactoryGirl.create :cart_variant, cart_id: c.id, variant_id: p.variants.first.id
+    end
+  end
+
+  factory :cart_variant, :class => PZS::CartVariant do
+    association :cart
+    association :variant
+    amount 1
+    state "pending"
   end
 
   factory :discount_type, :class => PZS::DiscountType do 
@@ -47,7 +57,7 @@ FactoryGirl.define do
 
     factory :product_full do
       ignore do
-        variants_count 5
+        variants_count 2
       end
 
       after(:build) do |p| 

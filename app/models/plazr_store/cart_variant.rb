@@ -5,10 +5,11 @@ module PlazrStore
     belongs_to :variant
 
     ## Attributes ##
-    attr_accessible :amount, :cart_id, :variant, :variant_id
+    attr_accessible :amount, :cart_id, :variant, :variant_id, :state
 
     ## Validations ##
     validates_numericality_of :amount
+    validates_inclusion_of :state, :in => %w( pending processing shipped )
 
     ## Callbacks ##
     after_save :check_amount
@@ -18,7 +19,7 @@ module PlazrStore
     delegate :name, :to => :variant
     delegate :product, :to => :variant
 
-    ## Public Methods ##
+    ## Instance Methods ##
     def add(amount)
       self.update_attribute(:amount, self.amount + amount)
       self.save
