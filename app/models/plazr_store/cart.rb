@@ -23,8 +23,8 @@ module PlazrStore
       #self.cart_variants << CartVariant.create(:variant )
     end
 
-    def remove(variant, amount = 1)
-
+    def remove(variant)
+      self.cart_variants.find_by_variant_id(variant.id).remove
     end
 
   end

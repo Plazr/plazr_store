@@ -9,14 +9,13 @@ module PlazrStore
 
     # POST /cart/add/:variant_id
     def add
-      amount = params[:amount] || 1
-      current_user.cart.add(@variant, amount)
+      current_user.cart.add(@variant, @amount)
       redirect_to :back
     end
 
     # DELETE /cart/remove/:variant_id
     def remove
-      current_user.cart.remove(@variant)
+      current_user.cart.remove(@variant)#, @amount)
       redirect_to :back
     end
 
@@ -29,7 +28,7 @@ module PlazrStore
 
       def get_fields
         @variant = Variant.find params[:id]
-        @amount  = params[:amount]
+        @amount  = params[:amount].to_i || 1
       end
 
   end
