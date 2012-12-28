@@ -11,10 +11,10 @@ module PlazrStore
     # It also allows to create a product and a variant belonging to it at the same time, because of presence of product_id validation on variation
     has_many :variants, :dependent => :destroy, :inverse_of => :product
 
-    has_many :product_properties
+    has_many :product_properties, :dependent => :destroy
     has_many :properties, :through => :product_properties
 
-    has_many :product_variant_properties
+    has_many :product_variant_properties, :dependent => :destroy
     has_many :variant_properties, :through => :product_variant_properties
 
     ## Attributes ##
@@ -26,7 +26,6 @@ module PlazrStore
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
-    #accepts_nested_attributes_for :product_properties, :allow_destroy => true
     accepts_nested_attributes_for :brand
 
     ## Validations ##
@@ -40,7 +39,6 @@ module PlazrStore
 
     def master_variant
       variants.where(:is_master => true).first
-      # self.variants.master_variant.first
     end
 
     def master_price

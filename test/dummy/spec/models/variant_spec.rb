@@ -23,32 +23,32 @@ describe PZS::Variant, type: :model do
     end
 
     it "has many promotion_variants" do
-      FactoryGirl.create(:variant).should have_many :promotion_variants
+      FactoryGirl.create(:variant).should have_many(:promotion_variants).dependent(:destroy)
     end
     it "has many promotions through promotion_variants" do
       FactoryGirl.create(:variant).should have_many(:promotions).through(:promotion_variants)
     end
 
     #it "has many shipment_condition_variants" do
-    #  FactoryGirl.create(:variant).should have_many :shipment_condition_variants
+    #  FactoryGirl.create(:variant).should have_many(:shipment_condition_variants).dependent(:destroy)
     #end
     
     #it "has many shipment_conditions through shipment_condition_variants" do
     #  FactoryGirl.create(:variant).should have_many(:shipment_conditions).through(:shipment_condition_variants)
     #end
 
-    it "has many variant_variant_property_values" do
-      FactoryGirl.create(:variant).should have_many :variant_variant_property_values
-    end
-    it "has many variant_property_values through variant_variant_property_values" do
-      FactoryGirl.create(:variant).should have_many(:variant_property_values).through(:variant_variant_property_values)
-    end
-
     it "has many variant_variant_categories" do
-      FactoryGirl.create(:variant).should have_many :variant_variant_categories
+      FactoryGirl.create(:variant).should have_many(:variant_variant_categories).dependent(:destroy)
     end
     it "has many variant_categories through variant_variant_categories" do
       FactoryGirl.create(:variant).should have_many(:variant_categories).through(:variant_variant_categories)
+    end
+
+    it "has many variant_variant_property_values" do
+      FactoryGirl.create(:variant).should have_many(:variant_variant_property_values).dependent(:destroy)
+    end
+    it "has many variant_property_values through variant_variant_property_values" do
+      FactoryGirl.create(:variant).should have_many(:variant_property_values).through(:variant_variant_property_values)
     end
 
     it "has many variant_wishlists" do
@@ -66,7 +66,7 @@ describe PZS::Variant, type: :model do
     it "requires visible to be set" do
       FactoryGirl.create(:variant).should validate_presence_of :visible
     end
-    it "requires product_id to be set" do
+    it "requires product to be set" do
       FactoryGirl.create(:variant).should validate_presence_of :product
     end
 
@@ -142,6 +142,60 @@ describe PZS::Variant, type: :model do
           v = FactoryGirl.build(:variant) 
           v.valid?
           v.is_master.should be_true
+        end
+      end
+    end
+  end
+
+  describe "#Public Methods" do
+    describe "#get_unselected_variant_categories_and_order_by_name" do
+      it "builds variant_variant_categories" do 
+        vc = FactoryGirl.create_list(:variant_category, 2)
+        vcc = FactoryGirl.create(:variant_category_leaf)
+        v = FactoryGirl.create(:variant)
+        v.get_unselected_variant_categories_and_order_by_name
+        res = v.variant_variant_categories
+        v.reload
+        v.variant_variant_categories.build(:variant_category => vc[0])
+        v.variant_variant_categories.build(:variant_category => vc[1])
+        v.variant_variant_categories.build(:variant_category => vcc.parent_variant_category)
+        v.variant_variant_categories.build(:variant_category => vcc)
+        res.inspect.should eq v.variant_variant_categories.inspect
+      end
+    end
+    describe "#get_variant_properties_from_product" do
+      it "builds all variant_variant_property_values associated with product_variant_properties
+          of the product to which this variant belongs to" do 
+        #creates a product with master_variant and another variant and two variant_properties associated
+        # with the product and variant_property_values for this variant_properties
+        p = FactoryGirl.create(:product_with_properties_and_variant_properties)
+        var = FactoryGirl.create(:variant, :product_id => p.id)
+        vp = FactoryGirl.create(:variant_property_with_values)
+        FactoryGirl.create(:product_variant_property, :product_id => p.id, :variant_property => vp)
+        # calls the method, store the result in a variable and clears the array
+        var.get_variant_properties_from_product
+        res = var.variant_variant_property_values
+        var.reload
+        # build the association, by hand, as it is supposed to be and compare both results
+        var.variant_variant_property_values.build(:variant_property_value => p.variant_properties.first.variant_property_values.first)
+        var.variant_variant_property_values.build(:variant_property_value => p.variant_properties.second.variant_property_values.first)
+        res.inspect.should eq var.variant_variant_property_values.inspect
+      end
+    end
+    describe "#variant_descriptions" do
+      context "it is called by the master_variant" do
+        it "returns the string 'All'" do 
+          v = FactoryGirl.create(:variant)
+          v.variant_descriptions.should eq 'All'
+        end
+      end
+      context "it is called by a variant that is not master" do
+        it "returns a string with information about all the variant_properties associated" do
+          p = FactoryGirl.create(:product_with_master_variant)
+          v = FactoryGirl.create(:variant_with_variant_property_values, :product_id => p.id)
+          #create string, by hand, as it is supposed to return
+          v.variant_descriptions.should eq v.variant_variant_property_values.first.variant_property_value.variant_property.id_name << 
+            ": " << v.variant_variant_property_values.first.variant_property_value.name
         end
       end
     end
