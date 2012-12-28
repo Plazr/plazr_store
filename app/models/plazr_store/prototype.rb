@@ -4,10 +4,10 @@ module PlazrStore
     include PZS::ParanoiaInterface
 
     ## Relations ##
-    has_many :property_prototypes
+    has_many :property_prototypes, :dependent => :destroy
     has_many :properties, :through => :property_prototypes
 
-    has_many :prototype_variant_properties
+    has_many :prototype_variant_properties, :dependent => :destroy
     has_many :variant_properties, :through => :prototype_variant_properties
 
     # Nested Attributes
