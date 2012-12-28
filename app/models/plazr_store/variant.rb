@@ -48,7 +48,7 @@ module PlazrStore
     validates :cost_price, numericality: {:greater_than_or_equal_to => 0}, :allow_nil => true
 
     ## Scopes ##
-    scope :master_variant, where(:is_master => true)
+    # scope :master_variant, where(:is_master => true)
     scope :without_master, where(:is_master => false)
 
     ## Callbacks ##
