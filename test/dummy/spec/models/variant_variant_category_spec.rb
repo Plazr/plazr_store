@@ -31,7 +31,7 @@ describe PZS::VariantVariantCategory, :type => :model do
           vcl = FactoryGirl.create(:variant_category_leaf)
           p = FactoryGirl.create(:product_with_master_variant)
           var = FactoryGirl.create(:variant_not_master, :product => p)
-          FactoryGirl.create(:variant_variant_category, :variant_id => p.master_variant.first.id, :variant_category => vcl)
+          FactoryGirl.create(:variant_variant_category, :variant_id => p.master_variant.id, :variant_category => vcl)
           vvc = FactoryGirl.build(:variant_variant_category, :variant_id => var.id, :variant_category => vcl)
           vvc.category_master_variant?(p).should be_true
         end
