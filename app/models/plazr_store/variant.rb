@@ -85,7 +85,7 @@ module PlazrStore
     end
 
     #method to display descriptive information about a individual variant
-    def variant_descriptions
+    def variant_description
       #if it is the master_variant, then the image is aplicable to all variants
       if self.is_master?
         "All"
