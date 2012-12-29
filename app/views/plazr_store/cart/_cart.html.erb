@@ -2,7 +2,7 @@
   <% @cart.cart_variants.each do |cart_variant| %>
     <li>
       [<%= cart_variant.amount %>]
-      <%= link_to cart_variant.name, product_path(cart_variant.product) %>
+      <%= link_to cart_variant.info, product_path(cart_variant.product) %>
       <%= link_to 'Delete', cart_remove_path(cart_variant.variant), method: :delete %>
     </li>
   <% end %>
@@ -10,6 +10,6 @@
 <p>
 	Total price: <%= @cart.total_price %>
 </p>
-<p>
-	<%= link_to "Checkout", checkout_path %>
-</p>
+
+<%= link_to 'Checkout', plazr_store.checkout_path, method: :get %>
+

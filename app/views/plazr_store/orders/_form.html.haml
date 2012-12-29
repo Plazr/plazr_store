@@ -1,10 +1,10 @@
-= form_for @order, :url => { :controller => "orders", :action => "new" } do |f|
-  - if @order.errors.any?
+= form_for order, :url => { :controller => "orders", :action => "new" } do |f|
+  - if order.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
+      %h2= "#{pluralize(order.errors.count, "error")} prohibited this order from being saved:"
       %div{:class=>["alert","alert-error"]}
         %ul
-          - @order.errors.full_messages.each do |msg|
+          - order.errors.full_messages.each do |msg|
             %li= msg
 
   
@@ -13,12 +13,15 @@
   = render :partial => 'shipping_address', :locals => { f: f }
 
   %h2 Shipment Condition
-  = render :partial => 'shipment_condition', :locals => { f: f, shipment_conditions: @shipment_conditions }
+  = render :partial => 'shipment_condition', :locals => { f: f, shipment_conditions: shipment_conditions }
 
   %h2 Payment
   = render :partial => 'payment', :locals => { f: f }
 
+  -# %h2 Promotional Code
+  -# = render :partial => 'promotional_code', :locals => { f: f }
+
   = f.submit "Place Order"
 
   %h2= "Order Summary"
-  = render :partial => 'summary', :locals => { f: f, cart: @cart }
+  = render :partial => 'summary', :locals => { f: f, cart: cart }

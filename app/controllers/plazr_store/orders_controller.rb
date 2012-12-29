@@ -30,6 +30,10 @@ module PlazrStore
       end
     end
 
+    def history
+      redirect_to root_url if current_user.nil?
+    end
+
     def new
       @order = Order.new
       #@order.load_user(current_user)
@@ -50,7 +54,7 @@ module PlazrStore
       end
 
       def get_cart
-        @cart = Cart.new#current_user.cart
+        @cart = current_user.cart
       end
   end
 end

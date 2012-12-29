@@ -2,7 +2,6 @@ module PlazrStore
   class Order < ActiveRecord::Base
     belongs_to :cart
     belongs_to :promotional_code
-    belongs_to :coupon
     belongs_to :billing_address, :class_name => "Address"
     belongs_to :shipping_address, :class_name => "Address"
     belongs_to :shipment_condition
@@ -12,16 +11,16 @@ module PlazrStore
 
     ## Attributes ##
     attr_accessible :adjustment_total, :billing_address_id, :cart_id, :completed_at, :email, :item_total, 
-      :payment_state, :shipping_address_id, :shipment_condition_id, :shipment_state,
-      :state, :total, :user_id
-    attr_accessor :to_be_cancelled
+      :payment_state, :shipping_address_id, :shipment_condition_id, :shipment_state, :promotional_code_id,
+      :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes
+    attr_accessor :to_be_cancelled, :promotional_code
 
 
     ## Validations ##
     validates :email,:item_total, :adjustment_total, :total, :payment_state, :shipment_state, :state,
               :shipment_condition_id, :cart_id, presence: true
     validate :completed_at_and_state_match, :on => :update
-    validates_inclusion_of :state, :in => %w( processing shipped cancelled )
+    validates_inclusion_of :state, :in => %w( processing shipped cancelled paid )
 
 
     ## Nested Attributes ##
@@ -35,6 +34,7 @@ module PlazrStore
 
     ## Callbacks ##
     after_initialize :load_defaults
+    before_validation :set_promotional_code_and_validate_code
     before_save :update_state
     after_save :deliver_order_confirmation#, :if => Proc.new { |order| alguma_coisa_aqui != "admin" }
 
@@ -50,7 +50,7 @@ module PlazrStore
 
     def load_user(user)
       if user
-        self.user = user
+        self.user_id = user.id
         self.email = user.email 
       end
     end
@@ -76,6 +76,9 @@ module PlazrStore
       self.payment_state = "processing"
       self.shipment_state = "processing"
       self.state = "processing"
+    end
+
+    def set_promotional_code_and_validate_code
     end
 
     def update_state
