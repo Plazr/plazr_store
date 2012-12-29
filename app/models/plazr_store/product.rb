@@ -32,11 +32,9 @@ module PlazrStore
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
-<<<<<<< HEAD
-
-    accepts_nested_attributes_for :product_properties, :allow_destroy => true
-=======
->>>>>>> develop
+    ### TODO: clean this up, conflict merging develop into mockup (PC, 29 Dez 2012 16:28)
+    ### this was in the mockup branch
+    #accepts_nested_attributes_for :product_properties, :allow_destroy => true
     accepts_nested_attributes_for :brand
 
     ## Validations ##
