@@ -4,7 +4,7 @@ module PlazrStore
     include PZS::ParanoiaInterface
 
     ## Relations ##
-    has_many :multimedia, class_name: "Multimedia"
+    has_many :multimedia
 
     ## Attributes ##
     attr_accessible :content, :slug, :title

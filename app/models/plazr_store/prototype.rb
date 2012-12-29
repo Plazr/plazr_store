@@ -4,10 +4,10 @@ module PlazrStore
     include PZS::ParanoiaInterface
 
     ## Relations ##
-    has_many :property_prototypes
+    has_many :property_prototypes, :dependent => :destroy
     has_many :properties, :through => :property_prototypes
 
-    has_many :prototype_variant_properties
+    has_many :prototype_variant_properties, :dependent => :destroy
     has_many :variant_properties, :through => :prototype_variant_properties
 
     # Nested Attributes
@@ -19,8 +19,7 @@ module PlazrStore
                     :prototype_variant_properties_attributes
 
     # Validations
-    validates :name, presence: true
-    validates :name, :uniqueness_without_deleted => true
+    validates :name, presence: true, :uniqueness_without_deleted => true
 
     def get_unselected_properties_and_order_by_name
       # creates an array for all property_prototypes that the prototype does not currently have selected

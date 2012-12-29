@@ -1,0 +1,23 @@
+%h1 Listing Multimedia
+%table
+  %thead
+    %tr
+      %th Multimedia
+      %th Caption
+      %th Variant
+  %tbody
+    - @multimedia.each do |multimedium|
+      %tr
+        %td
+          = image_tag multimedium.file.url(:thumb)
+        %td
+          = multimedium.caption
+        %td
+          = multimedium.variant.id
+        %td
+          = link_to 'Show', admin_product_multimedium_path(@product, multimedium)
+        %td
+          = link_to 'Edit', edit_admin_product_multimedium_path(@product, multimedium)
+        %td
+          = link_to 'Destroy', admin_product_multimedium_path(@product, multimedium), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New Multimedium', new_admin_product_multimedium_path
