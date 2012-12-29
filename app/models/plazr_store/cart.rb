@@ -33,6 +33,14 @@ module PlazrStore
       # Get this cart's owner
       PlazrAuth::User.find(self.user_id)
     end
+    
+    def update_total_price
+      total = 0 
+      self.cart_variants.each do |cv|
+        total += cv.price
+      end
+      self.update_attribute(:total_price, total)
+    end
 
     # def user=(user)
     #   # Set this cart's owner

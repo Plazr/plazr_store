@@ -9,19 +9,20 @@ module PlazrStore
 
     # POST /cart/add/:variant_id
     def add
-      current_user.cart.add(@variant, @amount)
+      @cart.add(@variant, @amount)
+      @cart.update_total_price
       redirect_to :back
     end
 
     # DELETE /cart/remove/:variant_id
     def remove
-      current_user.cart.remove(@variant)#, @amount)
+      @cart.remove(@variant)#, @amount)
+      @cart.update_total_price
       redirect_to :back
     end
 
 
     protected
-
       def get_cart
         @cart = current_user.cart
       end

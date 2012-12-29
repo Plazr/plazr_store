@@ -32,7 +32,7 @@ module PlazrStore
 
     def new
       @order = Order.new
-      @order.load_user(current_user)
+      #@order.load_user(current_user)
     end
 
     def receipt
