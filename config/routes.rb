@@ -35,6 +35,7 @@ PlazrStore::Engine.routes.draw do
   match 'checkout' => 'orders#create', :as => :checkout, :via => :post
   match "receipt" => "orders#receipt", :as => :receipt
   match "/orders" => "orders#history", :as => :orders_history
+  match "express" => "orders#express", :as => :express
 
   mount PlazrAuth::Engine => '/'
 end

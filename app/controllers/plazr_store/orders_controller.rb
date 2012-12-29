@@ -36,7 +36,7 @@ module PlazrStore
 
     def new
       @order = Order.new
-      #@order.load_user(current_user)
+      @order.load_user(current_user)
     end
 
     def receipt
@@ -47,7 +47,31 @@ module PlazrStore
         redirect_to root_url 
       end
     end
+    
+    def gateway
+      
+      #read store_id from the yml file
+      #read paypall store data
+      
+      paypal_account = PaypalAccount.first
 
+      @gateway ||= ActiveMerchant::Billing::PaypalExpressGateway.new(
+        :login => paypal_account.login,
+        :password => paypal_account.password,
+        :signature => paypal_account.signature
+      )
+    end
+    
+    def express
+      response = gateway.setup_purchase(current_cart.build_order.price_in_cents,
+        :ip => request.remote_ip,
+        :return_url => new_order_url,
+        :cancel_return_url => products_url
+        )
+
+      redirect_to gateway.redirect_url_for(response.token)
+    end
+    
     protected
       def get_auxiliar_data
         @shipment_conditions = ShipmentCondition.all
