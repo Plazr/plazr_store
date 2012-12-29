@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 = form_for [:admin, @product] do |frm|
 	- if @product.errors.any?
 		%ul.alert.alert-error
@@ -47,95 +46,40 @@
 /   %br
 /   = f.label :available_at
 /   = f.text_field :available_at
-
-<<<<<<< HEAD
-/   %br
-/   -# BRAND
-/   = f.label :brand_id
-/   = f.collection_select :brand_id, @brands, :id, :name, {:prompt => "Pick a brand"}
-
-/   %br
-/   = f.fields_for :variants do |mv|
-/     = mv.label :sku
-/     = mv.text_field :sku
+/ %br
+/ = f.fields_for :variants do |v|
+/   - if v.object.is_master?
+/     = v.label :sku
+/     = v.text_field :sku
 /     %br
-/     = mv.label :price
-/     = mv.text_field :price
-/     %br
-/     = mv.fields_for :multimedia do |m|
-/       = m.label :file, "Image File"
-/       = m.file_field :file
+/     = v.label :price
+/     = v.text_field :price
+/     -# this is needed to load all the variant_categories to the master_variant
+/     - v.object.get_unselected_variant_categories_and_order_by_name
+
+/     %h4= "Variant Categories"
+/     = v.fields_for :variant_variant_categories do |vvc|
+/       - if vvc.object.variant_category.is_leaf?
+/         = vvc.check_box :_destroy, {:checked => vvc.object.persisted?}, '0', '1'
+/         = vvc.hidden_field :variant_category_id
+/       = vvc.label :_destroy, vvc.object.variant_category.name
 /       %br
-/       = m.label :caption
-/       = m.text_field :caption
-
-/   %h4="Prototypes"
-/   - if !@prototypes.empty?
-/     - @prototypes.each do |p|
-/       = check_box_tag "product[prototypes][]", p.id
-/       = label_tag p.name
-/   -#= f.label :prototype
-/   -#= f.collection_select :prototype_id, @prototypes, :id, :name, {:prompt => "Pick a prototype"}
 /   %br
 
-		
-/   -#%h4= "Properties"
-/   -#= f.fields_for :product_properties do |ff|
-/   -#  = ff.label :value, ff.object.property.display_name
-/   -#  = ff.text_field :value
-/   -#  = ff.hidden_field :property_id
+/ %h4="Prototypes"
+/ - if !@prototypes.empty?
+/   - @prototypes.each do |p|
+/     = check_box_tag "prototypes[]", p.id
+/     = label_tag p.name
+/ %br
 
-/   -#%h4= "Variant Properties"
-/   -#= f.fields_for :product_variant_properties do |ff|
-/     -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
-/     -# ff.object accesss the current record in the fields_for loop
-/     -# ':checked => ff.object.persisted?' means that if the record exists in the database then the box should be checked
-/     -# = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
-/     -#= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
-/     -#= ff.label :_destroy, ff.object.variant_property.display_name
-/     -# this hidden_field value is empty so that all the associations to f will be destroyed if no checkbox is selected
-/     -#= ff.hidden_field :variant_property_id
-=======
-  %br
-  = f.fields_for :variants do |v|
-    - if v.object.is_master?
-      = v.label :sku
-      = v.text_field :sku
-      %br
-      = v.label :price
-      = v.text_field :price
-      -# this is needed to load all the variant_categories to the master_variant
-      - v.object.get_unselected_variant_categories_and_order_by_name
-
-      %h4= "Variant Categories"
-      = v.fields_for :variant_variant_categories do |vvc|
-        - if vvc.object.variant_category.is_leaf?
-          = vvc.check_box :_destroy, {:checked => vvc.object.persisted?}, '0', '1'
-          = vvc.hidden_field :variant_category_id
-        = vvc.label :_destroy, vvc.object.variant_category.name
-        %br
-    %br
-
-  %h4="Prototypes"
-  - if !@prototypes.empty?
-    - @prototypes.each do |p|
-      = check_box_tag "prototypes[]", p.id
-      = label_tag p.name
-  %br
-
-  %h4= "Variant Properties"
-  = f.fields_for :product_variant_properties do |ff|
-    -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
-    -# ff.object accesss the current record in the fields_for loop
-    -# ':checked => ff.object.persisted?' means that if the record exists in the database then the box should be checked
-    = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
-    = ff.label :_destroy, ff.object.variant_property.display_name
-    -# this hidden_field value is empty so that all the associations to f will be destroyed if no checkbox is selected
-    = ff.hidden_field :variant_property_id
-  %br
->>>>>>> develop
-
-/   %br
-
-/   = f.submit "Submit"
-/   = link_to 'Cancel', admin_products_path
+/ %h4= "Variant Properties"
+/ = f.fields_for :product_variant_properties do |ff|
+/   -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
+/   -# ff.object accesss the current record in the fields_for loop
+/   -# ':checked => ff.object.persisted?' means that if the record exists in the database then the box should be checked
+/   = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
+/   = ff.label :_destroy, ff.object.variant_property.display_name
+/   -# this hidden_field value is empty so that all the associations to f will be destroyed if no checkbox is selected
+/   = ff.hidden_field :variant_property_id
+/ %br
