@@ -182,11 +182,11 @@ describe PZS::Variant, type: :model do
         res.inspect.should eq var.variant_variant_property_values.inspect
       end
     end
-    describe "#variant_descriptions" do
+    describe "#variant_description" do
       context "it is called by the master_variant" do
         it "returns the string 'All'" do 
           v = FactoryGirl.create(:variant)
-          v.variant_descriptions.should eq 'All'
+          v.variant_description.should eq 'All'
         end
       end
       context "it is called by a variant that is not master" do
@@ -194,7 +194,7 @@ describe PZS::Variant, type: :model do
           p = FactoryGirl.create(:product_with_master_variant)
           v = FactoryGirl.create(:variant_with_variant_property_values, :product_id => p.id)
           #create string, by hand, as it is supposed to return
-          v.variant_descriptions.should eq v.variant_variant_property_values.first.variant_property_value.variant_property.id_name << 
+          v.variant_description.should eq v.variant_variant_property_values.first.variant_property_value.variant_property.id_name << 
             ": " << v.variant_variant_property_values.first.variant_property_value.name
         end
       end
