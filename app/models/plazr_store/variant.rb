@@ -108,6 +108,7 @@ module PlazrStore
       variant_property_values.each do |vpv|
         info << "; #{vpv.presentation}"
       end
+      info
     end
 
     protected

@@ -1,14 +1,14 @@
 <ul>
-  <li><%= link_to 'Products', plazr_store.admin_products_path %></li>
-  <li><%= link_to 'Pages', plazr_store.admin_pages_path %></li>
-  <li><%= link_to 'Prototypes', plazr_store.admin_prototypes_path %></li>
-  <li><%= link_to 'Variant Categories', plazr_store.admin_variant_categories_path %></li>
-  <li><%= link_to 'Variant Properties', plazr_store.admin_variant_properties_path %></li>
-  <li><%= link_to 'Properties', plazr_store.admin_properties_path %></li>
+  <li><%= link_to 'Products', plazr_store.products_path %></li>
+  <%# <li><%= link_to 'Pages', plazr_store.admin_pages_path %></li>
+  <%# <li><%= link_to 'Prototypes', plazr_store.admin_prototypes_path %></li>
+  <%# <li><%= link_to 'Variant Categories', plazr_store.admin_variant_categories_path %></li>
+  <%# <li><%= link_to 'Variant Properties', plazr_store.admin_variant_properties_path %></li>
+  <%# <li><%= link_to 'Properties', plazr_store.admin_properties_path %></li>
 </ul>
 
-<%# <% if user_signed_in? %>
-<%#   <ul>
-<%#     <li><%= link_to 'My Cart', plazr_store.cart_path %></li>
-<%#   </ul>
-<%# <% end %>
+<% if user_signed_in? %>
+  <ul>
+    <li><%= link_to 'My Cart', plazr_store.cart_path %></li>
+  </ul>
+<% end %>

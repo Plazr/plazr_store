@@ -9,7 +9,9 @@ module PlazrStore
 
     # POST /cart/add/:variant_id
     def add
-      current_user.cart.add(@variant, @amount)
+      ActiveRecord::Base.transaction do # so that cart and cart_variant updates are atomically saved
+        current_user.cart.add(@variant, @amount)
+      end
       redirect_to :back
     end
 

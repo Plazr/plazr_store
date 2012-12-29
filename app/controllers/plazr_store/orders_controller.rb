@@ -50,7 +50,7 @@ module PlazrStore
       end
 
       def get_cart
-        @cart = Cart.new#current_user.cart
+        @cart = current_user.cart
       end
   end
 end

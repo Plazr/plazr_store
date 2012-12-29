@@ -17,7 +17,7 @@
   %tr
     %td{colspan: "2"}
     %td= "Subtotal"
-    %td= number_to_currency cart.total_price
+    %td= number_to_currency @order.cart.total_price
   %tr
     %td{colspan: "2"}
     %td= "Shipment Condition"

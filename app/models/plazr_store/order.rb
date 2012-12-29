@@ -13,7 +13,7 @@ module PlazrStore
     ## Attributes ##
     attr_accessible :adjustment_total, :billing_address_id, :cart_id, :completed_at, :email, :item_total, 
       :payment_state, :shipping_address_id, :shipment_condition_id, :shipment_state,
-      :state, :total, :user_id
+      :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes
     attr_accessor :to_be_cancelled
 
 
@@ -50,7 +50,7 @@ module PlazrStore
 
     def load_user(user)
       if user
-        self.user = user
+        self.user_id = user.id
         self.email = user.email 
       end
     end
