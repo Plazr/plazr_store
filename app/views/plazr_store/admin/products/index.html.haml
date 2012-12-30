@@ -10,11 +10,11 @@
 					- @products.each do |product|
 						.span2.product
 							%article
-								- variant = product.master_variant.first
-								- imgpth = if variant.multimedia.empty?
-									- 'http://placehold.it/100x100&text=No%20image'
-								- else
-									- variant.multimedia.first.file.url(:thumb)
+								-# variant = product.master_variant.first
+								-# imgpth = if variant.multimedia.empty?
+								- imgpth = 'http://placehold.it/100x100&text=No%20image'
+								-# else
+									-# variant.multimedia.first.file.url(:thumb)
 								%div
 									%noscript
 										= image_tag imgpth

@@ -3,12 +3,49 @@
 		%ul.alert.alert-error
 			- @product.errors.full_messages.each do |msg|
 				%li= msg
-	.field
-		= frm.text_field :name, placeholder: 'Product name'
-	.field
-		= frm.text_area :details, placeholder: 'Product description'
-	.field
-		= frm.text_field :available_at, :class => 'datepicker', 'data-date-format' => 'dd/mm/yyyy'
+	#basic-info.section
+		.field
+			= frm.text_field :name, :class => :full, placeholder: 'Product name', autofocus: true
+		.field
+			= frm.text_area :details, :class => :full, placeholder: 'Product description', rows: '5'
+		.field.row-fluid
+			.span6.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
+				= frm.text_field :date, :class => 'input-small', value: Date.current.to_s(:db), readonly: true
+				%span.add-on
+					= image_tag 'glyphicons/calendar.png', :class => :icon
+			.span6.input-append.bootstrap-timepicker-component
+				= frm.text_field :time, :class => ['input-small', :timepicker], value: Time.now.to_s(:time), readonly: true
+				%span.add-on
+					= image_tag 'glyphicons/clock.png', :class => :icon
+	#brand.section
+		.field
+			- if @brands.empty?
+				%p.text-warning No brands known.
+			- else
+				= frm.label :brand_id
+				= frm.collection_select :brand_id, @brands, :id, :name, prompt: 'Pick a brand'
+	-# isn't there an easier way to do this?
+	#variants.section
+		= frm.fields_for :variants do |v|
+			- if v.object.is_master?
+				.field
+					= v.text_field :sku, :class => :full, placeholder: 'SKU'
+				.field.input-append
+					= v.text_field :price, :class => :number, placeholder: 'price'
+					%span.add-on
+						= image_tag 'glyphicons/euro.png', :class => :icon
+	#prototypes.section
+		.field
+			- if @prototypes.empty?
+				%p.text-warning No prototypes to associate.
+			- else
+				- @prototypes.each do |prototype|
+					= check_box_tag 'prototypes[]', prototype.id
+					= label_tag p.name
+	.section
+		.field
+			= frm.submit 'Save'
+			= link_to 'Cancel', admin_products_path
 / =======
 / = form_for [:admin, @product] do |f|
 /   - if @product.errors.any?

@@ -27,7 +27,10 @@ module PlazrStore
                     ### this was in the develop branch
                     :property_ids, :variant_property_ids, 
                     :variants_attributes, :product_variant_properties_attributes, 
-                    :product_properties_attributes, :brand_attributes
+                    :product_properties_attributes, :brand_attributes,
+                    :date, :time
+    # Virtual attributes
+    attr_writer :date, :time
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
@@ -40,6 +43,11 @@ module PlazrStore
     ## Validations ##
     validates :name, presence: true, uniqueness_without_deleted: true
     validates :slug, presence: true, uniqueness_without_deleted: true
+
+    ## Filters ##
+    before_save :create_available_at
+    before_validation :create_slug
+
 
     ## Instance Methods ##
     def has_master?
@@ -81,11 +89,29 @@ module PlazrStore
       end
     end
 
+    def date
+      @date.nil? ? available_at.to_date : @date
+    end
+
+    def time
+      @time.nil? ? available_at.to_time : @time
+    end
+
     def create_all_variant_properties_association(prototype_id)
       # replicate each variant_property related to the prototype to the product
       Prototype.find(prototype_id).variant_properties.each do |vp|
         self.product_variant_properties.create :variant_property => vp
       end
+    end
+
+    protected
+
+    def create_available_at
+      self.available_at = "#{@date} #{@time}" unless @date.nil? || @time.nil?
+    end
+
+    def create_slug
+      self.slug = self.name.parameterize
     end
   end
 end

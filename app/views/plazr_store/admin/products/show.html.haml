@@ -13,11 +13,11 @@
 		.span10
 			%article.row-fluid
 				.span3
-					- variant = @product.master_variant.first
-					- imgpth = if variant.multimedia.empty?
-						- 'http://placehold.it/100x100&text=No%20image'
-					- else
-						- variant.multimedia.first.file.url(:thumb)
+					-# variant = @product.master_variant.first
+					-# imgpth = if variant.multimedia.empty?
+					- imgpth = 'http://placehold.it/100x100&text=No%20image'
+					-# else
+						-# variant.multimedia.first.file.url(:thumb)
 					%noscript
 						= image_tag imgpth, :class => :photo
 					= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
@@ -25,10 +25,11 @@
 					%h1= @product.name
 					- if @product.brand
 						%p= "by #{@product.brand.name}"
-					- if @product.available_at.past?
-						%p= "Available since #{@product.available_at.to_date}"
-					- else
-						%p= "Will be available after #{@product.available_at.to_date}"
+					- if @product.available_at
+						- if @product.available_at.past?
+							%p= "Available since #{@product.available_at.to_s(:short)}"
+						- else
+							%p= "Will be available after #{@product.available_at.to_date}"
 					%h6= @product.slug
 					.rating
 						%span
