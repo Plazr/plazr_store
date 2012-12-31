@@ -4,14 +4,14 @@ module PlazrStore
     before_filter :get_cart, only: [:new, :create]
     before_filter :get_auxiliar_data, only: [:new, :create]
 
-    def cancel
-      @order = Order.find(params[:id])
-      # TODO apenas o admin pode fazer isto (talvez staff)
-      @order.to_be_cancelled = true
+    # def cancel
+    #   @order = Order.find(params[:id])
+    #   # TODO apenas o admin pode fazer isto (talvez staff)
+    #   @order.to_be_cancelled = true
 
-      # flash[:notice] = "Order #{@order.id} set to be cancelled"
-      # redirect_to admin_edit_order_path(@order.id)
-    end
+    #   # flash[:notice] = "Order #{@order.id} set to be cancelled"
+    #   # redirect_to admin_edit_order_path(@order.id)
+    # end
 
     def create
       ActiveRecord::Base.transaction do # so that order's cart changes aren't presisted if an error occurs
@@ -31,7 +31,7 @@ module PlazrStore
     end
 
     def history
-      redirect_to root_url if current_user.nil?
+      redirect_to plazr_auth_url if current_user.nil?
     end
 
     def new
@@ -44,7 +44,7 @@ module PlazrStore
       if session.has_key?(:last_order)
         @order = Order.find(session[:last_order])
       else
-        redirect_to root_url 
+        redirect_to plazr_auth_url 
       end
     end
 
