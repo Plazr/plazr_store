@@ -1,7 +1,7 @@
 module PlazrStore
   
-  path = File.expand_path '../../../../..',__FILE__
-	APP_CONFIG = YAML.load_file(path + '/config/config.yml')
+  #path = File.expand_path '../../../../..',__FILE__
+	#APP_CONFIG = YAML.load_file(path + '/config/config.yml')
   
   class Admin::PaypalAccountsController < ApplicationController
     
@@ -11,7 +11,7 @@ module PlazrStore
     
     def new
       #enviar como parametro o id da store
-      @paypal_account = PlazrAuth::PaypalAccount.new(:store_id => APP_CONFIG['store_id'])
+      @paypal_account = PlazrAuth::PaypalAccount.new(:store_id => STORE['store_id'])
     end
     
     def create
@@ -24,7 +24,7 @@ module PlazrStore
     end
     
     def index
-      @paypal_account = PlazrAuth::PaypalAccount.find_by_store_id(APP_CONFIG['store_id'])
+      @paypal_account = PlazrAuth::PaypalAccount.find_by_store_id(STORE['store_id'])
     end
     
     def edit

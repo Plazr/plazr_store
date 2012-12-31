@@ -12,8 +12,10 @@ module PlazrStore
     ## Attributes ##
     attr_accessible :adjustment_total, :billing_address_id, :cart_id, :completed_at, :email, :item_total, 
       :payment_state, :shipping_address_id, :shipment_condition_id, :shipment_state, :promotional_code_id,
-      :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes
-    attr_accessor :to_be_cancelled, :promotional_code
+      :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes,
+      :express_token, :gateway
+      
+    attr_accessor :to_be_cancelled, :promotional_code, :gateway
 
 
     ## Validations ##
