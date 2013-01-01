@@ -13,11 +13,13 @@ module PlazrStore
 
     ## Callbacks ##
     after_save :check_amount
+    after_save :update_cart
 
     ## Delegations ##
     delegate :info, :to => :variant
     delegate :name, :to => :variant
     delegate :product, :to => :variant
+    delegate :price, :to => :variant
 
     ## Instance Methods ##
     def add(amount)
@@ -43,6 +45,10 @@ module PlazrStore
       if amount <= 0
         self.destroy
       end
+    end
+
+    def update_cart
+      self.cart.update_amount_and_price
     end
 
   end
