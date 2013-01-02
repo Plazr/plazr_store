@@ -3,6 +3,7 @@ PlazrStore::Engine.routes.draw do
     resources :brands
     resources :discount_types
     resources :pages
+    resources :product_categories
     resources :products do
       resources :product_properties, :only => [:index, :create, :destroy]
       resources :variants
@@ -11,7 +12,6 @@ PlazrStore::Engine.routes.draw do
     resources :properties
     resources :prototypes
     resources :shipment_conditions
-    resources :variant_categories
     resources :variant_properties do
       resources :variant_property_values
     end
