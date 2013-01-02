@@ -19,7 +19,6 @@ module PlazrStore
     delegate :info, :to => :variant
     delegate :name, :to => :variant
     delegate :product, :to => :variant
-    delegate :price, :to => :variant
 
     ## Instance Methods ##
     def add(amount)
