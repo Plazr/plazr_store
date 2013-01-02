@@ -69,6 +69,10 @@ GEM
     addressable (2.3.2)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    better_errors (0.3.2)
+      coderay (>= 1.0.0)
+      erubis (>= 2.7.0)
+    binding_of_caller (0.6.8)
     bourne (1.1.2)
       mocha (= 0.10.5)
     builder (3.0.4)
@@ -346,6 +350,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors
+  binding_of_caller
   cucumber-rails
   database_cleaner
   factory_girl_rails
