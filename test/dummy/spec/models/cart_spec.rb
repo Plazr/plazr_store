@@ -13,7 +13,7 @@ describe PZS::Cart, type: :model do
   end
 
   describe "#Relations" do
-    it "have one order" do
+    it "has one order" do
       @cart.should have_one(:order)
     end
 
