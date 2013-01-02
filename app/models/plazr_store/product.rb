@@ -57,6 +57,10 @@ module PlazrStore
       self.variants.count >= 1
     end
 
+    def comments
+      self.feedback_products.all
+    end
+
     def master_variant
       variants.where(:is_master => true).first
       # self.variants.master_variant
@@ -65,6 +69,14 @@ module PlazrStore
     def master_price
       # self.variants.master_variant.first.price
       self.master_variant.price
+    end
+
+    def images
+      self.variants.master_variant.first.multimedia
+    end
+
+    def sku
+      self.variants.master_variant.first.sku
     end
 
     def variants_without_master
