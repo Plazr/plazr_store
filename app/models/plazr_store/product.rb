@@ -78,5 +78,9 @@ module PlazrStore
         self.product_variant_properties.create :variant_property => vp
       end
     end
+
+    #def related(count = 5)
+    #  Product.
+    #end
   end
 end
