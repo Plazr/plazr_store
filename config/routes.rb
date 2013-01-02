@@ -38,6 +38,7 @@ PlazrStore::Engine.routes.draw do
   match 'checkout' => 'orders#create', :as => :checkout, :via => :post
   match "receipt" => "orders#receipt", :as => :receipt
   match "/orders" => "orders#history", :as => :orders_history
+  match 'paypal_express_purchase' => 'paypal_express#purchase', :as => :paypal_express_purchase
   
 
   mount PlazrAuth::Engine => '/'

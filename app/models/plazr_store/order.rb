@@ -13,9 +13,9 @@ module PlazrStore
     attr_accessible :adjustment_total, :billing_address_id, :cart_id, :completed_at, :email, :item_total, 
       :payment_state, :shipping_address_id, :shipment_condition_id, :shipment_state, :promotional_code_id,
       :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes,
-      :express_token, :gateway
+      :express_token, :payer_id, :gateway
       
-    attr_accessor :to_be_cancelled, :promotional_code, :gateway
+    attr_accessor :to_be_cancelled, :promotional_code, :payer_id, :express_token, :gateway
 
 
     ## Validations ##
@@ -95,5 +95,6 @@ module PlazrStore
         self.state = "processing"
       end
     end
+    
   end
 end

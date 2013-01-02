@@ -1,6 +1,6 @@
 %h3
   = "Shipping Address"
   = link_to "Copy from billing", "#", id: "copy"
-= f.fields_for :shipping_address do |address|
+= f.fields_for :shipping_address, @address do |address|
   = render 'address_form', address: address, type: "shipping"
 

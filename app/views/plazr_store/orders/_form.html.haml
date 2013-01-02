@@ -7,15 +7,23 @@
           - order.errors.full_messages.each do |msg|
             %li= msg
 
-  %h2= "Order Summary"
-  = render :partial => 'summary', :locals => { f: f, cart: cart }
+  
+  %h2 Address Details
+  = render :partial => 'billing_address', :locals => { f: f, address: address}
+  = render :partial => 'shipping_address', :locals => { f: f, address: address}
 
+  %h2 Shipment Condition
+  = render :partial => 'shipment_condition', :locals => { f: f, shipment_conditions: shipment_conditions }
 
-  %h2 Payment Method
+  %h2 Payment
   = render :partial => 'payment', :locals => { f: f }
+  = f.hidden_field :express_token
+  = f.hidden_field :payer_id
 
   -# %h2 Promotional Code
   -# = render :partial => 'promotional_code', :locals => { f: f }
-
+  
   = f.submit "Place Order"
 
+  %h2= "Order Summary"
+  = render :partial => 'summary', :locals => { f: f, cart: cart }
