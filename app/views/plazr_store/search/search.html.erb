@@ -5,7 +5,7 @@
 
 	<div class="row">
 		<% @products.each do |product| %>
-			<%= render 'shared/product', product: product %>
+			<%= render 'product', product: product %>
 		<% end %>
 	</div>
 	<%= will_paginate @products %>
