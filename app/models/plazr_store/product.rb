@@ -18,7 +18,7 @@ module PlazrStore
     has_many :variant_properties, :through => :product_variant_properties
 
     ## Attributes ##
-    attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
+    attr_accessible :details, :name, :slug, :rating, :brand_id,
                     ### TODO: clean this up, conflict merging develop into mockup (PC, 29 Dez 2012 16:28)
                     ### this was in the mockup branch
                     # :property_ids, :variant_property_ids,
@@ -28,9 +28,7 @@ module PlazrStore
                     :property_ids, :variant_property_ids,
                     :variants_attributes, :product_variant_properties_attributes,
                     :product_properties_attributes, :brand_attributes,
-                    :date, :time
-    # Virtual attributes
-    #attr_writer :date, :time
+                    :available_at_date_string, :available_at_time_string
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
@@ -44,8 +42,8 @@ module PlazrStore
     validates :name, presence: true, uniqueness_without_deleted: true
     validates :slug, presence: true, uniqueness_without_deleted: true
 
-    ## Filters ##
-    # before_save :create_available_at
+    ## Callbacks ##
+    before_save :create_available_at
     before_validation :create_slug
 
 
@@ -101,34 +99,6 @@ module PlazrStore
       end
     end
 
-    # def date
-    #   @date || (available_at || created_at).to_date
-    # end
-
-    # def time
-    #   @time || Time.parse('00:00')
-    # end
-
-    # => Getter for date
-    def date_string
-      available_at.to_date.to_s(:db)
-    end
-
-    # => Getter for time
-    def time_string
-      available_at.to_s(:time)
-    end
-
-    # => Setter for date
-    def date_string=(date_str)
-      self.available_at = Time.parse("#{date_str} #{self.available_at.to_time.to_s(:time)}")
-    end
-
-    # => Setter for time
-    def time_string=(time_str)
-      self.available_at = Time.parse("#{self.available_at.to_date.to_s(:db)} #{time_str}")
-    end
-
 
     def create_all_variant_properties_association(prototype_id)
       # replicate each variant_property related to the prototype to the product
@@ -137,11 +107,40 @@ module PlazrStore
       end
     end
 
+
+
+    ### Virtual attributes
+
+    # => Getter for date
+    def available_at_date_string
+      @available_at_date_string || (available_at || created_at || Time.now).to_date.to_s(:db)
+    end
+
+    # => Getter for time
+    def available_at_time_string
+      @available_at_time_string || (available_at || created_at || Time.now).to_s(:time)
+    end
+
+
+
+    # => Setter for date
+    def available_at_date_string=(date_str)
+      @available_at_date_string = date_str
+    end
+
+    # => Setter for time
+    def available_at_time_string=(time_str)
+      @available_at_time_string = time_str
+    end
+
+
+
+
     protected
 
-    # def create_available_at
-    #   self.available_at = "#{@date} #{@time}" unless @date.nil? || @time.nil?
-    # end
+    def create_available_at
+      self.available_at = Time.parse("#{@available_at_date_string} #{@available_at_time_string}")
+    end
 
     def create_slug
       self.slug = self.name.parameterize

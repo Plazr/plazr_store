@@ -10,13 +10,11 @@
 			= frm.text_area :details, :class => :full, placeholder: 'Product description', rows: '5'
 		.field.row-fluid
 			.span6.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
-				=# frm.text_field :date, :class => 'input-small', value: Date.current.to_s(:db), readonly: true
-				= frm.text_field :date_string, :class => 'input-small', readonly: true
+				= frm.text_field :available_at_date_string, :class => 'input-small', readonly: true
 				%span.add-on
 					= image_tag 'glyphicons/calendar.png', :class => :icon
 			.span6.input-append.bootstrap-timepicker-component
-				=# frm.text_field :time, :class => ['input-small', :timepicker], value: Time.now.to_s(:time), readonly: true
-				= frm.text_field :time_string, :class => ['input-small', :timepicker], readonly: true
+				= frm.text_field :available_at_time_string, :class => ['input-small', :timepicker], readonly: true
 				%span.add-on
 					= image_tag 'glyphicons/clock.png', :class => :icon
 	#brand.section
@@ -26,17 +24,19 @@
 			- else
 				= frm.label :brand_id
 				= frm.collection_select :brand_id, @brands, :id, :name, prompt: 'Pick a brand'
-	-# isn't there an easier way to do this?
 	#variants.section
 		= render 'subform_variants', form: frm
 	#prototypes.section
-		.field
+		.field.row-fluid
 			- if @prototypes.empty?
-				%p.text-warning No prototypes to associate.
+				.span12
+					%p.text-warning No prototypes to associate.
 			- else
 				- @prototypes.each do |prototype|
-					= check_box_tag 'prototypes[]', prototype.id
-					= label_tag prototype.name
+					.span3.cell
+						%div
+							= label_tag prototype.name
+							= check_box_tag 'prototypes[]', prototype.id
 	.section
 		.field
 			= frm.submit 'Save'
