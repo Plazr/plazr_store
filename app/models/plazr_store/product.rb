@@ -40,12 +40,24 @@ module PlazrStore
       self.variants.count >= 1
     end
 
+    def comments
+      self.feedback_products.all
+    end
+
     def master_variant
       self.variants.master_variant
     end
 
     def master_price
       self.variants.master_variant.first.price
+    end
+
+    def images
+      self.variants.master_variant.first.multimedia
+    end
+
+    def sku
+      self.variants.master_variant.first.sku
     end
 
     def variants_without_master
