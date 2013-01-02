@@ -5,13 +5,13 @@ describe PZS::Order, type: :model do
     it "creates a new instance given valid attributes" do
       FactoryGirl.create(:order_full).should be_valid
     end
-    it "validates promotional_code and sets it to the order when validated" do
+    xit "validates promotional_code and sets it to the order when validated" do
       # sets ...
       # part.valid?
       # assertion
     end
     describe "updates state" do
-      let(:order) { FactoryGirl.build(:order_full) }
+      let!(:order) { FactoryGirl.build(:order_full) }
       context "state is 'cancelled'" do
         it "does nothing" do
           order.state = "cancelled"
@@ -28,19 +28,23 @@ describe PZS::Order, type: :model do
       end
       context "all order variants state is 'shipped'" do
         it "sets state to 'shipped'" do
-          order.cart.cart_variants.each do |c|
-            c.state = "shipped"
+          ActiveRecord::Base.transaction do
+            order.cart.cart_variants.each do |c|
+              c.update_attributes :state => "shipped"
+            end
+            order.save
           end
-          order.save
           order.state.should eq "shipped"
         end
       end
       context "all order variants state is 'processing'" do
         it "sets state to 'processing'" do
-          order.cart.cart_variants.each do |c|
-            c.state = "processing"
+          ActiveRecord::Base.transaction do
+            order.cart.cart_variants.each do |c|
+              c.update_attributes :state => "processing"
+            end
+            order.save
           end
-          order.save
           order.state.should eq "processing"
         end
       end
@@ -121,6 +125,13 @@ describe PZS::Order, type: :model do
         cart = FactoryGirl.create :cart
         order.add_cart_and_update_status(cart)
         order.cart_id.should eq cart.id
+      end
+    end
+    describe "#cart" do
+      it "gets the cart even if it is marked as deleted" do
+        order = FactoryGirl.create :order_full
+        PZS::Cart.find(order.cart.id).delete
+        order.cart.should eq PZS::Cart.with_deleted.find(order.cart.id)
       end
     end
     describe "#load_user" do

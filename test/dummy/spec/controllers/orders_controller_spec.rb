@@ -10,9 +10,9 @@ describe PZS::OrdersController, :type => :controller do
 
   describe "POST #create" do
     it "assigns cart to @cart" do
-      FactoryGirl.create :cart
+      cart_id = current_user.cart.id
       post :create, :order => build_attributes(:order_with_addresses)
-      assigns(:cart).id.should eq(current_user.cart.id)
+      assigns(:cart).id.should eq cart_id
     end
     it "assigns all shipment_conditions to @shipment_conditions" do
       v = FactoryGirl.create :shipment_condition
@@ -34,14 +34,19 @@ describe PZS::OrdersController, :type => :controller do
       o.should_receive(:add_cart_and_update_status).with(assigns(:cart))
     end
     it "sets order's cart" do
+      cart_id = current_user.cart.id
       post :create, :order => build_attributes(:order_with_addresses)
-      assigns(:order).cart_id.should eq current_user.cart.id
+      assigns(:order).cart_id.should eq cart_id
     end
     context "with valid attributes for order and cart" do
       it "saves the new order in the database" do
         expect{
           post :create, :order => build_attributes(:order_with_addresses)
         }.to change(PZS::Order, :count).by(1)
+      end
+      it "marks the cart as deleted" do
+        post :create, :order => build_attributes(:order_with_addresses)
+        lambda{ PZS::Cart.find(assigns(:order).cart.id)  }.should raise_error(ActiveRecord::RecordNotFound)
       end
       it "sets session variable :last_order" do
         post :create, :order => build_attributes(:order_with_addresses)
@@ -80,9 +85,9 @@ describe PZS::OrdersController, :type => :controller do
 
   describe "GET #new" do
     it "assigns cart to @cart" do
-      FactoryGirl.create :cart
+      # FactoryGirl.create :cart
       get :new
-      assigns(:cart).id.should eq(current_user.cart.id)
+      assigns(:cart).id.should eq current_user.cart.id
     end
     it "assigns all shipment_conditions to @shipment_conditions" do
       v = FactoryGirl.create :shipment_condition

@@ -18,8 +18,11 @@ module PlazrStore
         @order = Order.new(params[:order])
         @order.load_user(current_user)
         @order.add_cart_and_update_status(@cart)
+        #TODO atualizar totais das orders
 
         if @order.save
+          # marks the cart as deleted 
+          PZS::Cart.find(@order.cart.id).delete
           # indicates which is the last order when the receipt action is called
           session[:last_order] = @order.id
           # redirects to last_order receipt

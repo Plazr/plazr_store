@@ -50,6 +50,11 @@ module PlazrStore
       end
     end
 
+    def cart
+      # gets the cart even if it is marked as deleted
+      PZS::Cart.with_deleted.find(self.cart_id)
+    end
+
     def load_user(user)
       # loads current_user id and email to this order
       if user
