@@ -15,6 +15,7 @@ module PlazrStore
     ##Validations ##
     validates_presence_of :name, :variant_property
     validates :name, :uniqueness_without_deleted => true
+    validates :variant_property, :presence => true
 
     ## Callbacks ##
     before_save :fill_fields

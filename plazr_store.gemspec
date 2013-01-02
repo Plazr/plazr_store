@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.9"
   s.add_dependency 'sass-rails'
   s.add_dependency 'compass-rails'
+  # s.add_dependency 'less-rails'
   s.add_dependency 'lorem_ipsum_amet'
   # s.add_dependency "jquery-rails"
   s.add_dependency "rb-readline"

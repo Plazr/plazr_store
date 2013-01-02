@@ -1,57 +1,29 @@
 - page = 'plazr_store/admin/products/index'
 - content_for :head do
 	= stylesheet_link_tag page, :media => 'all'
-	= javascript_include_tag page
 %div.container-fluid
 	%section
 		%h1 Products
 		.row-fluid
-			.span12
-				.row-fluid.grid
+			.span10
+				.row-fluid
 					- @products.each do |product|
 						.span2.product
 							%article
-								- variant = product.master_variant.first
-								- imgpth = if variant.multimedia.empty?
-									- 'http://placehold.it/100x100&text=No%20image'
-								- else
-									- variant.multimedia.first.file.url(:thumb)
+								-# variant = product.master_variant.first
+								-# imgpth = if variant.multimedia.empty?
+								- imgpth = 'http://placehold.it/100x100&text=No%20image'
+								-# else
+									-# variant.multimedia.first.file.url(:thumb)
 								%div
 									%noscript
 										= image_tag imgpth
-									= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}.png')" }
+									= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
 									= link_to product.name, admin_product_path(product)
 								%div
 									= link_to edit_admin_product_path(product) do
 										= image_tag 'glyphicons/edit.png'
 									= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
 										= image_tag 'glyphicons/remove.png'
-/	%section
-/		%table.table
-/			%thead
-/				%tr
-/					%th Image
-/					%th Name
-/					%th Rating
-/					%th
-/					%th
-/					%th
-/			%tbody
-/				- @products.each do |product|
-/					%tr
-/						- variant = product.master_variant.first
-/						%td
-/							- if variant.multimedia.empty?
-/								= image_tag 'http://placehold.it/100x100&text=No%20image'
-/							- else
-/								= image_tag variant.multimedia.first.file.url(:thumb)
-/						%td= product.name
-/						%td
-/							- if product.rating
-/								= product.rating
-/							- else
-/								%em (no rating)
-/						%td= link_to 'Show', admin_product_path(product)
-/						%td= link_to 'Edit', edit_admin_product_path(product)
-/						%td= link_to 'Destroy', admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' }
-/		= link_to 'New Product', new_admin_product_path
+			%aside.span2
+				= link_to 'New Product', new_admin_product_path

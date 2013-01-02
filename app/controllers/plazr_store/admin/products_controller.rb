@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::ProductsController < ApplicationController
+  class Admin::ProductsController < AdminController
     def show
       @product = Product.find(params[:id])
       @variants = @product.variants_without_master
@@ -30,15 +30,16 @@ module PlazrStore
 
     def new
       @product = Product.new
-      
+
       # builds a variant so that fields_for can render it, otherwise the relation :variants would be empty and fields_for wouldn't render anything
-      @product.variants.build(:visible => true, :is_master => true)
+      @product.variants.build(:visible => true, :is_master => true)#.get_unselected_variant_categories_and_order_by_name
       entities_collections
       build_relations_for_fields_for
     end
 
     def edit
       @product = Product.find params[:id]
+      #@product.master_variant.first.get_unselected_variant_categories_and_order_by_name
       entities_collections
       build_relations_for_fields_for
     end
@@ -58,7 +59,7 @@ module PlazrStore
       else
         entities_collections
         build_relations_for_fields_for
-        render :edit 
+        render :edit
       end
     end
 
@@ -74,7 +75,7 @@ module PlazrStore
         @brands = Brand.all
         @prototypes = Prototype.all
       end
-    
+
       # builds certain product relations so that fields_for can render properly
       def build_relations_for_fields_for
         # builds variant_properties that are not persisted so that fields_for can render them

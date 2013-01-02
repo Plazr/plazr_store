@@ -11,21 +11,32 @@ module PlazrStore
     # It also allows to create a product and a variant belonging to it at the same time, because of presence of product_id validation on variation
     has_many :variants, :dependent => :destroy, :inverse_of => :product
 
-    has_many :product_properties
+    has_many :product_properties, :dependent => :destroy
     has_many :properties, :through => :product_properties
 
-    has_many :product_variant_properties
+    has_many :product_variant_properties, :dependent => :destroy
     has_many :variant_properties, :through => :product_variant_properties
 
     ## Attributes ##
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
+                    ### TODO: clean this up, conflict merging develop into mockup (PC, 29 Dez 2012 16:28)
+                    ### this was in the mockup branch
+                    # :property_ids, :variant_property_ids,
+                    # :variants_attributes, :product_variant_properties_attributes,
+                    # :product_properties_attributes, :brand_attributes, :prototypes
+                    ### this was in the develop branch
                     :property_ids, :variant_property_ids,
                     :variants_attributes, :product_variant_properties_attributes,
-                    :product_properties_attributes, :brand_attributes
+                    :product_properties_attributes, :brand_attributes,
+                    :date, :time
+    # Virtual attributes
+    attr_writer :date, :time
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
+    ### TODO: clean this up, conflict merging develop into mockup (PC, 29 Dez 2012 16:28)
+    ### this was in the mockup branch
     #accepts_nested_attributes_for :product_properties, :allow_destroy => true
     accepts_nested_attributes_for :brand
 
@@ -33,17 +44,27 @@ module PlazrStore
     validates :name, presence: true, uniqueness_without_deleted: true
     validates :slug, presence: true, uniqueness_without_deleted: true
 
+<<<<<<< HEAD
+=======
+    ## Filters ##
+    before_save :create_available_at
+    before_validation :create_slug
+
+
+>>>>>>> ac9cc606b52e6a2ff90237bd0e46e4ea2ee6b29e
     ## Instance Methods ##
     def has_master?
       self.variants.count >= 1
     end
 
     def master_variant
-      self.variants.master_variant
+      variants.where(:is_master => true).first
+      # self.variants.master_variant
     end
 
     def master_price
-      self.variants.master_variant.first.price
+      # self.variants.master_variant.first.price
+      self.master_variant.price
     end
 
     def variants_without_master
@@ -71,11 +92,32 @@ module PlazrStore
       end
     end
 
+    def date
+      @date.nil? ? available_at.to_date : @date
+    end
+
+    def time
+      @time.nil? ? available_at.to_time : @time
+    end
+
     def create_all_variant_properties_association(prototype_id)
       # replicate each variant_property related to the prototype to the product
       Prototype.find(prototype_id).variant_properties.each do |vp|
         self.product_variant_properties.create :variant_property => vp
       end
     end
+<<<<<<< HEAD
+=======
+
+    protected
+
+    def create_available_at
+      self.available_at = "#{@date} #{@time}" unless @date.nil? || @time.nil?
+    end
+
+    def create_slug
+      self.slug = self.name.parameterize
+    end
+>>>>>>> ac9cc606b52e6a2ff90237bd0e46e4ea2ee6b29e
   end
 end

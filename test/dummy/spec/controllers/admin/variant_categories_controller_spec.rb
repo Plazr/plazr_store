@@ -13,7 +13,7 @@ describe PZS::Admin::VariantCategoriesController, :type => :controller do
 
   describe "GET #new" do
     it "assigns all variant_categories that aren't leaf to @variant_categories" do
-      m = FactoryGirl.create_list(:variant_category_not_leaf, 5)
+      m = FactoryGirl.create_list(:variant_category, 5)
       get :new
       assigns(:variant_categories).should eq(m)
     end
@@ -22,10 +22,10 @@ describe PZS::Admin::VariantCategoriesController, :type => :controller do
 
   describe "GET #edit" do
     it "assigns all variant_categories except the one to be edited to @variant_categories" do
-      m = FactoryGirl.create_list(:variant_category_not_leaf, 5)
-      n = FactoryGirl.create :variant_category
+      m = FactoryGirl.create_list(:variant_category, 5)
+      n = FactoryGirl.create(:variant_category_leaf)
       get :edit, id: n
-      assigns(:variant_categories).should eq(m)
+      assigns(:variant_categories).should eq(m << n.parent_variant_category)
     end
     it_behaves_like 'default admin show and edit methods', :edit, :variant_category
   end
