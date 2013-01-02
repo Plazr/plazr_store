@@ -1,5 +1,5 @@
 module PlazrStore
-  class WishlistVariant < ActiveRecord::Base
+  class VariantWishlist < ActiveRecord::Base
     ## Relations ##
     belongs_to :variant
     belongs_to :wishlist
