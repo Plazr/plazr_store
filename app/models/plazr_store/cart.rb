@@ -3,6 +3,7 @@ module PlazrStore
     include PZS::ParanoiaInterface
 
     ## Relations ##
+
     has_one :order
 
     has_many :cart_variants
@@ -14,16 +15,11 @@ module PlazrStore
     ## Validations ##
     validates :user_id, presence: true
 
+
     ## Instance Methods ##
     def add(variant, amount = 1)
       cart_variant = self.cart_variants.find_or_initialize_by_variant_id(variant.id)
       cart_variant.add(amount)
-
-      # self.update_attribute(:item_amount, self.item_amount + amount)
-      # self.update_attribute(:total_price, self.total_price + (amount * variant.price))
-
-      #cart_variant ||= self.cart_variants.build(variant_id: )
-      #self.cart_variants << CartVariant.create(:variant )
     end
 
     def remove(variant)
