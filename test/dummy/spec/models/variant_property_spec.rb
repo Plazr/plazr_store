@@ -36,5 +36,11 @@ describe PZS::VariantProperty, :type => :model do
       FactoryGirl.create(:variant_property_v2)
       FactoryGirl.build(:variant_property_v2).should_not be_valid
     end
+    context "display_name is blank and id_name isn't" do
+      it "becomes the same as id_name" do
+        vp = FactoryGirl.create(:variant_property, :display_name => nil)
+        vp.display_name.should eq vp.id_name
+      end
+    end
   end
 end
