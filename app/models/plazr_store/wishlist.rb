@@ -4,8 +4,8 @@ module PlazrStore
     include PZS::ParanoiaInterface
     
     ## Relations ##
-    has_many :wishlist_variants
-    has_many :variants, :through => :wishlist_variants
+    has_many :variant_wishlists
+    has_many :variants, :through => :variant_wishlists
 
     ## Attributes ##
     attr_accessible :is_private, :name, :user_id
@@ -15,11 +15,11 @@ module PlazrStore
 
     ## Instance Methods ##
     def add(variant)
-      wishlist_variant = self.wishlist_variants.find_or_create_by_variant_id(variant.id)
+      wishlist_variant = self.variant_wishlists.find_or_create_by_variant_id(variant.id)
     end
 
     def remove(variant)
-      self.wishlist_variants.find_by_variant_id(variant.id).remove
+      self.variant_wishlists.find_by_variant_id(variant.id).remove
     end
 
     # belongs_to :user
