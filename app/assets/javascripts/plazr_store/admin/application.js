@@ -21,7 +21,8 @@ $(function(){
 	$('.timepicker').each(function(){
 		$(this).timepicker({
 			minuteStep: 1,
-			showMeridian: false
+			showMeridian: false,
+			defaultTime: 'value'
 		});
 		$(this).focus(function(){
 			$(this).siblings('span.add-on').each(function(){

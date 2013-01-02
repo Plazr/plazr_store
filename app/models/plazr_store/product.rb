@@ -30,7 +30,7 @@ module PlazrStore
                     :product_properties_attributes, :brand_attributes,
                     :date, :time
     # Virtual attributes
-    attr_writer :date, :time
+    #attr_writer :date, :time
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
@@ -45,7 +45,7 @@ module PlazrStore
     validates :slug, presence: true, uniqueness_without_deleted: true
 
     ## Filters ##
-    before_save :create_available_at
+    # before_save :create_available_at
     before_validation :create_slug
 
 
@@ -101,13 +101,34 @@ module PlazrStore
       end
     end
 
-    def date
-      @date.nil? ? available_at.to_date : @date
+    # def date
+    #   @date || (available_at || created_at).to_date
+    # end
+
+    # def time
+    #   @time || Time.parse('00:00')
+    # end
+
+    # => Getter for date
+    def date_string
+      available_at.to_date.to_s(:db)
     end
 
-    def time
-      @time.nil? ? available_at.to_time : @time
+    # => Getter for time
+    def time_string
+      available_at.to_s(:time)
     end
+
+    # => Setter for date
+    def date_string=(date_str)
+      self.available_at = Time.parse("#{date_str} #{self.available_at.to_time.to_s(:time)}")
+    end
+
+    # => Setter for time
+    def time_string=(time_str)
+      self.available_at = Time.parse("#{self.available_at.to_date.to_s(:db)} #{time_str}")
+    end
+
 
     def create_all_variant_properties_association(prototype_id)
       # replicate each variant_property related to the prototype to the product
@@ -118,9 +139,9 @@ module PlazrStore
 
     protected
 
-    def create_available_at
-      self.available_at = "#{@date} #{@time}" unless @date.nil? || @time.nil?
-    end
+    # def create_available_at
+    #   self.available_at = "#{@date} #{@time}" unless @date.nil? || @time.nil?
+    # end
 
     def create_slug
       self.slug = self.name.parameterize
