@@ -21,6 +21,13 @@ describe PZS::Product, type: :model do
       FactoryGirl.create(:product).should have_many(:properties).through(:product_properties)
     end
 
+    it "has many product_product_categories" do
+      FactoryGirl.create(:product).should have_many(:product_product_categories).dependent(:destroy)
+    end
+    it "has many product_categories through product_product_categories" do
+      FactoryGirl.create(:product).should have_many(:product_categories).through(:product_product_categories)
+    end
+
     it "has many product_variant_properties" do
       FactoryGirl.create(:product).should have_many(:product_variant_properties).dependent(:destroy)
     end
@@ -106,6 +113,21 @@ describe PZS::Product, type: :model do
           p = FactoryGirl.create(:product_with_master_variant)
           p.has_variants?.should be_false
         end
+      end
+    end
+    describe "#get_unselected_product_categories_and_order_by_name" do
+      it "builds product_product_categories" do 
+        pc = FactoryGirl.create_list(:product_category, 2)
+        pcc = FactoryGirl.create(:product_category_leaf)
+        p = FactoryGirl.create(:product)
+        p.get_unselected_product_categories_and_order_by_name
+        res = p.product_product_categories
+        p.reload
+        p.product_product_categories.build(:product_category => pc[0])
+        p.product_product_categories.build(:product_category => pc[1])
+        p.product_product_categories.build(:product_category => pcc.parent_product_category)
+        p.product_product_categories.build(:product_category => pcc)
+        res.inspect.should eq p.product_product_categories.inspect
       end
     end
     describe "#get_unselected_variant_properties_and_order_by_name" do
