@@ -30,6 +30,12 @@ PlazrStore::Engine.routes.draw do
     match 'remove/:id' => 'cart#remove', :as => :cart_remove, :via => :delete
   end
 
+  scope '/wishlist' do
+    match '/' => 'wishlist#show', :as => :wishlist, :via => :get
+    match 'add/:id'    => 'wishlist#add',    :as => :wishlist_add,    :via => :post
+    match 'remove/:id' => 'wishlist#remove', :as => :wishlist_remove, :via => :delete
+  end
+
   # orders controller
   match 'checkout' => 'orders#new', :as => :checkout, :via => :get
   match 'checkout' => 'orders#create', :as => :checkout, :via => :post
