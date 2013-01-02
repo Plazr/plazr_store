@@ -5,6 +5,7 @@ class CreatePlazrStoreMultimedia < ActiveRecord::Migration
       t.attachment :file
       t.references :variant
       t.references :page
+      t.string     :type, :default => ""
 
       t.timestamps
     end

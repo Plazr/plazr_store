@@ -99,6 +99,15 @@ module PlazrStore
       end
     end
 
+    def image
+      images = self.multimedia
+      if images.size > 1
+        images.first
+      else
+        Multimedium::new(type: 'variant')
+      end
+    end
+
     protected
       # if this variant is being created after the creation of a product then is_master is set to true
       # if not (meaning a master variant already exists), is_master is set to false

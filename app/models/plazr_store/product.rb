@@ -79,8 +79,12 @@ module PlazrStore
       end
     end
 
-    #def related(count = 5)
-    #  Product.
-    #end
+    def image
+      self.master_variant.image
+    end
+
+    def related(count = 5)
+      #Product.
+    end
   end
 end

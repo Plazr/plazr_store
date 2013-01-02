@@ -5,12 +5,13 @@ module PlazrStore
     belongs_to :page
 
     ## Attributes ##
-    attr_accessible :file, :caption, :variant_id
+    attr_accessible :file, :caption, :variant_id, :type
 
     ## Paperclip ##
     has_attached_file :file, :styles => { :thumb => "300x300"},
       :url  => :set_url_base_on_parent!, 
-      :path => :set_path_based_on_parent!
+      :path => :set_path_based_on_parent!,
+      :default_url => :default_url_method
     
     # this model need to have a variant or a page association
     validates :variant, :presence => true, :if => :page_nil?
@@ -52,5 +53,16 @@ module PlazrStore
     def self.multimedia_from_all_variants_of_a_product(product)
       where(:variant_id => Variant.where(:product_id => product).map(&:id))
     end
+
+    protected
+
+      def default_url_method
+        if self.type == 'variant'
+          "/assets/no_image_avail/#{self.type}.png"
+        else
+          "/assets/no_image/avail/generic.png"
+        end
+      end
+
   end
 end
