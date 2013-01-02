@@ -49,23 +49,24 @@ module PlazrStore
           return
         end
 
+        unless @order.save
+          render :new
+          return
+        end
+        
         purchase_params = get_purchase_params request, params
         purchase = @gateway.purchase current_user.cart.total_price, purchase_params
 
         if purchase.success?
           # you might want to destroy your cart here if you have a shopping cart 
-          if @order.save
-            notice = "Thanks! Your purchase is now complete!"
-            # indicates which is the last order when the receipt action is called
-            session[:last_order] = @order.id
-            # redirects to last_order receipt
-            redirect_to receipt_url
-          else
-            render :new
-          end
+          notice = "Thanks! Your purchase is now complete!"
+          # indicates which is the last order when the receipt action is called
+          session[:last_order] = @order.id
+          # redirects to last_order receipt
+          redirect_to receipt_url 
         else
-          notice = "Woops. Something went wrong while we were trying to complete the purchase with Paypal. Btw, here's what Paypal said: #{purchase.message}"
-          redirect_to cart_url
+          @order.destroy
+          redirect_to cart_url :notice => "Woops. Something went wrong while we were trying to complete the purchase with Paypal. Btw, here's what Paypal said: #{purchase.message}"
         end
       end
     end
