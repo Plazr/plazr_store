@@ -1,0 +1,35 @@
+<article class="row-fluid">
+	<div class="span4">
+		<%= image_tag @featured.master_variant.first.multimedia %>
+	</div>
+	<div class="span8">
+		<span class="rating">
+			<% 5.times do %>
+			<%= image_tag 'glyphicons/star-full.png'%>
+			<% end %>
+		</span>
+
+		<h4><%= @featured.name %></h4>
+
+		<p><%= @featured.details %></p>
+
+		<% unless @featured.variants_without_master.empty? %>
+		<h3>Variants</h3>
+		<% @featured.variants_without_master.each do |variant|  %>
+		<ul>
+			<li>
+				<% variant.variant_property_values.each do |vpv| %>
+				<b><%= vpv.variant_property.display_name %>:</b> <%= vpv.presentation %>
+				<% end %>
+			</li>
+		</ul>
+		<% end %>
+		<% end %>
+
+		<p style="font-size:x-large;line-height:2em">
+			<strong>
+				€ <%= @featured.master_price %>
+			</strong>
+		</p>
+	</div>
+</article>

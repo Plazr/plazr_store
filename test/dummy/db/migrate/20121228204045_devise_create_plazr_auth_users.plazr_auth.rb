@@ -44,6 +44,7 @@ class DeviseCreatePlazrAuthUsers < ActiveRecord::Migration
 
 
       t.timestamps
+      t.datetime :deleted_at
     end
 
     add_index :plazr_auth_users, :email,                :unique => true

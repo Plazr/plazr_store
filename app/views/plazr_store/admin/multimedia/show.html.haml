@@ -1,0 +1,23 @@
+%h1 Show Multimedium
+%p#notice
+  = notice
+%table
+  %tr
+    %td
+      %b Multimedium
+    %td
+      = image_tag @multimedium.file.url(:thumb)
+  %tr
+    %td
+      %b Caption
+    %td
+      = @multimedium.caption
+  %tr
+    %td
+      %b Variant
+    %td
+      = @multimedium.variant.id
+
+= link_to 'Edit', edit_admin_product_multimedium_path(@product, @multimedium)
+|
+= link_to 'Back', admin_product_multimedia_path

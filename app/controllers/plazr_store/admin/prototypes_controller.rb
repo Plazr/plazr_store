@@ -1,6 +1,5 @@
 module PlazrStore
   class Admin::PrototypesController < ApplicationController
-    before_filter :instance_variable_loading, :only => [:new, :edit]
 
     def show
       @prototype = Prototype.find(params[:id])
@@ -23,10 +22,12 @@ module PlazrStore
 
     def new
       @prototype = Prototype.new
+      instance_variable_loading
     end
 
     def edit
       @prototype = Prototype.find params[:id]
+      instance_variable_loading
     end
 
     def update
@@ -48,8 +49,8 @@ module PlazrStore
 
     protected
       def instance_variable_loading
-        @properties = Property.all
-        @variant_properties = VariantProperty.all
+        @prototype.get_unselected_properties_and_order_by_name
+        @prototype.get_unselected_variant_properties_and_order_by_name
       end
   end
 end

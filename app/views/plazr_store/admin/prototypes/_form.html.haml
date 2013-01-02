@@ -11,16 +11,18 @@
   = f.text_field :name
   %br
   %h4= "Properties"
-  - @properties.each do |prop| 
-    = check_box_tag 'prototype[property_ids][]', prop.id, @prototype.properties.include?(prop)
-    = prop.display_name
-  = hidden_field_tag 'prototype[property_ids][]', ''
-
+  = f.fields_for :property_prototypes do |pp|
+    = pp.check_box :_destroy, {:checked => pp.object.persisted?}, '0', '1'
+    = pp.label :_destroy, pp.object.property.display_name
+    = pp.hidden_field :property_id
+  %br
+  
   %h4= "Variant Properties"
-  - @variant_properties.each do |prop| 
-    = check_box_tag 'prototype[variant_property_ids][]', prop.id, @prototype.variant_properties.include?(prop)
-    = prop.display_name
-  = hidden_field_tag 'prototype[variant_property_ids][]', ''
+  = f.fields_for :prototype_variant_properties do |pvp|
+    = pvp.check_box :_destroy, {:checked => pvp.object.persisted?}, '0', '1'
+    = pvp.label :_destroy, pvp.object.variant_property.display_name
+    = pvp.hidden_field :variant_property_id
+  %br
   %br
 
   = f.submit "Submit"

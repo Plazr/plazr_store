@@ -9,6 +9,7 @@ class AddRoleUserN2N < ActiveRecord::Migration
     create_table :plazr_auth_role_users do |t|
       t.integer :user_id
       t.integer :role_id
+      t.datetime :deleted_at
     end
   end
 

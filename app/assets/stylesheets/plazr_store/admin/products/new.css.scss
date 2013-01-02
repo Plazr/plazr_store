@@ -1,0 +1,34 @@
+//= require ../application
+//= require_self
+article {
+	text-align: center;
+
+	div.section {
+		padding: .5em 0;
+
+		div.field {
+			max-width: 500px;
+			min-width: 100px;
+			width: 100%;
+			margin: 0 auto;
+
+			.full {
+				width: 100%;
+			}
+
+			.number {
+				text-align: right;
+			}
+
+			.input-append {
+				input[type="text"] {
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+
+span img.icon {
+	height: 1em;
+}
