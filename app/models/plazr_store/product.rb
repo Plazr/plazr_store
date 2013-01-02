@@ -74,10 +74,10 @@ module PlazrStore
         pc.child_product_categories.sort_by! { |x| x.name }
         pc.child_product_categories.each do |cpc|
           exist = ProductProductCategory.find_by_product_id_and_product_category_id(self.id, cpc.id)
-          if !exist
-            self.product_product_categories.build(:product_category => cpc)# unless self.variant_variant_categories.map(&:variant_category_id).include?(cvc.id)
-          else
-          end
+          #if !exist
+            self.product_product_categories.build(:product_category => cpc) unless self.product_product_categories.map(&:product_category_id).include?(cpc.id)
+          #else
+          #end
         end
       end
     end

@@ -25,8 +25,6 @@
   = f.collection_select :brand_id, @brands, :id, :name, {:prompt => "Pick a brand"}
 
   %br
-  -# this is needed to load all the product_categories to the master_variant
-  - f.object.get_unselected_product_categories_and_order_by_name
   %h4= "Product Categories"
   = f.fields_for :product_product_categories do |ppc|
     - if ppc.object.product_category.is_leaf?

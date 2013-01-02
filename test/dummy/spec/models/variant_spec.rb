@@ -37,13 +37,6 @@ describe PZS::Variant, type: :model do
     #  FactoryGirl.create(:variant).should have_many(:shipment_conditions).through(:shipment_condition_variants)
     #end
 
-    it "has many variant_variant_categories" do
-      FactoryGirl.create(:variant).should have_many(:variant_variant_categories).dependent(:destroy)
-    end
-    it "has many variant_categories through variant_variant_categories" do
-      FactoryGirl.create(:variant).should have_many(:variant_categories).through(:variant_variant_categories)
-    end
-
     it "has many variant_variant_property_values" do
       FactoryGirl.create(:variant).should have_many(:variant_variant_property_values).dependent(:destroy)
     end
@@ -148,21 +141,6 @@ describe PZS::Variant, type: :model do
   end
 
   describe "#Public Methods" do
-    describe "#get_unselected_variant_categories_and_order_by_name" do
-      it "builds variant_variant_categories" do 
-        vc = FactoryGirl.create_list(:variant_category, 2)
-        vcc = FactoryGirl.create(:variant_category_leaf)
-        v = FactoryGirl.create(:variant)
-        v.get_unselected_variant_categories_and_order_by_name
-        res = v.variant_variant_categories
-        v.reload
-        v.variant_variant_categories.build(:variant_category => vc[0])
-        v.variant_variant_categories.build(:variant_category => vc[1])
-        v.variant_variant_categories.build(:variant_category => vcc.parent_variant_category)
-        v.variant_variant_categories.build(:variant_category => vcc)
-        res.inspect.should eq v.variant_variant_categories.inspect
-      end
-    end
     describe "#get_variant_properties_from_product" do
       it "builds all variant_variant_property_values associated with product_variant_properties
           of the product to which this variant belongs to" do 

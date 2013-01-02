@@ -46,7 +46,7 @@ module PlazrStore
         redirect_to admin_product_category_path(@product_category), :notice => 'ProductCategory was created sucessfully'
       else
         @product_categories = []
-        if @product_category.child_variant_categories.empty?
+        if @product_category.child_product_categories.empty?
           @product_categories = ProductCategory.parent_categories_without(params[:id])
         end 
         render :edit
