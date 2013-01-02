@@ -94,10 +94,7 @@ module PlazrStore
         self.variant_variant_property_values.each do |vvpv|
           res << "#{vvpv.variant_property_value.variant_property.id_name}: #{vvpv.variant_property_value.name}, "
         end
-<<<<<<< HEAD
-=======
         # drops the last two spaces of the resulting string (', ')
->>>>>>> ac9cc606b52e6a2ff90237bd0e46e4ea2ee6b29e
         res.chop.chop
       end
     end

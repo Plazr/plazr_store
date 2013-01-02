@@ -44,14 +44,11 @@ module PlazrStore
     validates :name, presence: true, uniqueness_without_deleted: true
     validates :slug, presence: true, uniqueness_without_deleted: true
 
-<<<<<<< HEAD
-=======
     ## Filters ##
     before_save :create_available_at
     before_validation :create_slug
 
 
->>>>>>> ac9cc606b52e6a2ff90237bd0e46e4ea2ee6b29e
     ## Instance Methods ##
     def has_master?
       self.variants.count >= 1
@@ -118,8 +115,6 @@ module PlazrStore
         self.product_variant_properties.create :variant_property => vp
       end
     end
-<<<<<<< HEAD
-=======
 
     protected
 
@@ -130,6 +125,5 @@ module PlazrStore
     def create_slug
       self.slug = self.name.parameterize
     end
->>>>>>> ac9cc606b52e6a2ff90237bd0e46e4ea2ee6b29e
   end
 end
