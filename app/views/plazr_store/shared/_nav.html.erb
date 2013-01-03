@@ -9,3 +9,11 @@
 </ul>
 
 <%= render 'plazr_store/shared/admin_nav' %>
+
+<% if user_signed_in? %>
+  <ul>
+    <li><%= link_to 'My Cart', plazr_store.cart_path %></li>
+    <li><%= link_to 'My Orders', plazr_store.orders_history_path %></li>
+    <li><%= link_to 'My Wishlist', plazr_store.wishlist_path %></li>
+  </ul>
+<% end %>

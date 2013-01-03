@@ -6,5 +6,10 @@ module PlazrStore
     
     ## Attributes ##
     attr_accessible :variant_id, :wishlist_id
+
+    ## Delegations
+    delegate :info, :to => :variant
+    delegate :name, :to => :variant
+    delegate :product, :to => :variant
   end
 end

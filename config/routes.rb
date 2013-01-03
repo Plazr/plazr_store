@@ -26,5 +26,24 @@ PlazrStore::Engine.routes.draw do
     match '/' => 'search#search', :as => :search, :via => :get, :controller => "search"
   end
 
+  # carts controller
+  scope '/cart' do
+    match '/' => 'cart#show', :as => :cart, :via => :get
+    match 'add/:id'    => 'cart#add',    :as => :cart_add,    :via => :post
+    match 'remove/:id' => 'cart#remove', :as => :cart_remove, :via => :delete
+  end
+
+  scope '/wishlist' do
+    match '/' => 'wishlist#show', :as => :wishlist, :via => :get
+    match 'add/:id'    => 'wishlist#add',    :as => :wishlist_add,    :via => :post
+    match 'remove/:id' => 'wishlist#remove', :as => :wishlist_remove, :via => :delete
+  end
+
+  # orders controller
+  match 'checkout' => 'orders#new', :as => :checkout, :via => :get
+  match 'checkout' => 'orders#create', :as => :checkout, :via => :post
+  match "receipt" => "orders#receipt", :as => :receipt
+  match "/orders" => "orders#history", :as => :orders_history
+
   mount PlazrAuth::Engine => '/'
 end

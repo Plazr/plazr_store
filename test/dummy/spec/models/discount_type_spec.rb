@@ -7,8 +7,8 @@ describe PZS::DiscountType, :type => :model, :skip => true do
   end
 
   describe "#Relations" do
-    it "has many coupons" do
-      FactoryGirl.create(:discount_type).should have_many :coupons 
+    it "has many promotional_codes" do
+      FactoryGirl.create(:discount_type).should have_many :promotional_codes 
     end
 
     it "has many promotions" do

@@ -3,6 +3,9 @@ module PlazrStore
 
     layout 'application'
 
+    #def resource
+    #  @resource ||= 
+
     def index
     end
 
