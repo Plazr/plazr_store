@@ -18,6 +18,10 @@ PlazrStore::Engine.routes.draw do
   end
 
   resources :products, :only => [:index, :show]
+  scope '/pages' do
+    match '/:slug' => 'pages#show', :as => :page, :via => :get, :controller => "pages"
+  end
+
   # search controller
   scope '/search' do
     match '/' => 'search#search', :as => :search, :via => :get, :controller => "search"
