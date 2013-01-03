@@ -19,13 +19,14 @@ Spork.prefork do
   require 'capybara/rspec'
   require 'factory_girl_rails'
   require 'shoulda/matchers'
+  require 'database_cleaner'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
   RSpec.configure do |config|
     config.mock_with :rspec
     # config.mock_with :mocha
-    config.use_transactional_fixtures = true
+    config.use_transactional_fixtures = false
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run focus: true # runs only :focus examples
     config.run_all_when_everything_filtered = true # runs everything if none match
@@ -34,8 +35,18 @@ Spork.prefork do
     config.order = "random"
     config.include Devise::TestHelpers, :type => :controller
 
+    config.before(:suite) do
+      DatabaseCleaner[:active_record, {:connection => :test}].strategy       = :truncation
+      DatabaseCleaner[:active_record, {:connection => :users_test}].strategy = :truncation
+    end
+
     config.before(:each) do
       @routes = PZS::Engine.routes
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
     end
   end
 
