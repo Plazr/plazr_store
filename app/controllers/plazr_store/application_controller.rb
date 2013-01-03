@@ -1,6 +1,10 @@
 module PlazrStore
   class ApplicationController < ActionController::Base
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to plazr_auth_url, :alert => exception.message
+  end
+
     layout 'application'
 
     #def resource

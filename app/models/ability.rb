@@ -24,6 +24,9 @@ class Ability
     unregistered
     # can manage his own cart
     can :manage, PZS::Cart, user_id: @user.id
+
+    can :access, :orders_actions
+    can :create, PZS::Order, user_id: @user.id
   end
 
 

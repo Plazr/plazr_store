@@ -1,6 +1,7 @@
 module PlazrStore
   class OrdersController < ApplicationController
 
+    before_filter :check_authorization
     before_filter :get_cart, only: [:new, :create]
     before_filter :get_auxiliar_data, only: [:new, :create]
 
@@ -19,6 +20,8 @@ module PlazrStore
         @order.load_user(current_user)
         @order.add_cart_and_update_status(@cart)
         #TODO atualizar totais das orders
+
+        authorize! :create, @order
 
         if @order.save
           # marks the cart as deleted 
@@ -39,7 +42,13 @@ module PlazrStore
 
     def new
       @order = Order.new
+      # current_ability.attributes_for(:create, Order).each do |key, value|
+      #   @order.send("#{key}=", value)
+      # end
+      # @order.attributes = params[:order]
       @order.load_user(current_user)
+      raise current_user.roles
+      authorize! :create, @order
     end
 
     def receipt
@@ -52,6 +61,10 @@ module PlazrStore
     end
 
     protected
+      def check_authorization
+        authorize! :access, :orders_actions
+      end
+
       def get_auxiliar_data
         @shipment_conditions = ShipmentCondition.all
       end
