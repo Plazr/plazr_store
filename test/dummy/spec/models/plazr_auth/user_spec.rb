@@ -14,10 +14,4 @@ describe PZA::User, type: :model do
     end
   end
 
-  context :admin, focus: true do
-    it 'should create an admin' do
-      FactoryGirl.create(:admin).should be_valid
-    end
-  end
-
 end

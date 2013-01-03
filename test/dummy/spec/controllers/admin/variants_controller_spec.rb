@@ -3,6 +3,7 @@ require 'spec_support'
 
 describe PZS::Admin::VariantsController, :type => :controller do
   render_views
+  login_admin
 
   describe "GET #index" do
     it "assigns the requested product to @product" do
