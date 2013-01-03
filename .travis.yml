@@ -1,5 +1,12 @@
-script: cd test/dummy; rake db:test:load; rake travis
+language: ruby
 rvm:
     - 1.9.3
+env:
+    - DB=sqlite
+script:
+    - cd test/dummy
+    - RAILS_ENV=test bundle exec rake db:migrate --trace
+    - bundle exec rake db:test:prepare
+    - bundle exec rspec
 gemfile:
     - Gemfile
