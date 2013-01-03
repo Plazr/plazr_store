@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::PrototypesController < ApplicationController
+  class Admin::PrototypesController < Admin::ApplicationController
 
     def show
       @prototype = Prototype.find(params[:id])

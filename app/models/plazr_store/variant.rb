@@ -47,6 +47,10 @@ module PlazrStore
     ## Callbacks ##
     before_validation :set_is_master, :on => :create
 
+    # Delegations
+    delegate :name, :to => :product
+
+
     ## Instance Methods ##
 
     #creates an array for all the variant_properties that are associated to the product of this variant
@@ -66,9 +70,26 @@ module PlazrStore
         self.variant_variant_property_values.each do |vvpv|
           res << "#{vvpv.variant_property_value.variant_property.id_name}: #{vvpv.variant_property_value.name}, "
         end
-        # drops the last two spaces of the resulting string (', ')
         res.chop.chop
       end
+    end
+
+    def image
+      images = self.multimedia
+      if images.size > 1
+        images.first
+      else
+        Multimedium::new(type: 'variant')
+      end
+    end
+
+    def info
+      # summarizes a variant's information (name and variant properties)
+      info = self.name
+      variant_property_values.each do |vpv|
+        info << "; #{vpv.presentation}"
+      end
+      info
     end
 
     protected

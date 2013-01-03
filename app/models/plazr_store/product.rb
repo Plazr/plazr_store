@@ -44,7 +44,6 @@ module PlazrStore
 
     def master_variant
       variants.where(:is_master => true).first
-      # self.variants.master_variant
     end
 
     def master_price
@@ -104,6 +103,14 @@ module PlazrStore
       Prototype.find(prototype_id).variant_properties.each do |vp|
         self.product_variant_properties.create :variant_property => vp
       end
+    end
+
+    def image
+      self.master_variant.image
+    end
+
+    def related(count = 5)
+      #Product.
     end
   end
 end

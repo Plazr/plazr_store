@@ -10,4 +10,4 @@ gem "jquery-rails"
 
 gem 'pry-rails'
 
-gem 'plazr_auth', :git => 'git@github.com:Plazr/plazr_auth.git'
+gem 'plazr_auth', :git => 'https://github.com/Plazr/plazr_auth.git'

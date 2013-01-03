@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::PropertiesController < ApplicationController
+  class Admin::PropertiesController < Admin::ApplicationController
 
     def show
       @property = Property.find(params[:id])
