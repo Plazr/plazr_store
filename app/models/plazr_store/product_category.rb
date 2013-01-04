@@ -1,22 +1,22 @@
 module PlazrStore
-  class VariantCategory < ActiveRecord::Base
+  class ProductCategory < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface
     
     ## Relations ##
     # A relation to itself (categories have two levels)
-    has_many :child_variant_categories, class_name: "VariantCategory", foreign_key: "parent_variant_category_id", :dependent => :destroy
-    belongs_to :parent_variant_category, class_name: "VariantCategory"
+    has_many :child_product_categories, class_name: "ProductCategory", foreign_key: "parent_product_category_id", :dependent => :destroy
+    belongs_to :parent_product_category, class_name: "ProductCategory"
 
-    has_many :variant_variant_categories, :dependent => :destroy
-    has_many :variants, :through => :variant_variant_categories
+    has_many :product_product_categories, :dependent => :destroy
+    has_many :products, :through => :product_product_categories
     
     ## Attributes ##
-    attr_accessible :description, :name, :is_leaf, :parent_variant_category_id
+    attr_accessible :description, :name, :is_leaf, :parent_product_category_id
 
     ## Validations ##
     validates :name, presence: true
-    validates :parent_variant_category_id, presence: true, :if => :is_child?
+    validates :parent_product_category_id, presence: true, :if => :is_child?
 
     ## Scopes ##
     scope :parent_categories, where(:is_leaf => false)
@@ -25,7 +25,7 @@ module PlazrStore
     before_validation :set_leaf
 
     def set_leaf
-      if self.parent_variant_category_id.blank?
+      if self.parent_product_category_id.blank?
         self.is_leaf = false
       else
         self.is_leaf = true

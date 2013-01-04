@@ -14,6 +14,9 @@ module PlazrStore
     has_many :product_properties, :dependent => :destroy
     has_many :properties, :through => :product_properties
 
+    has_many :product_product_categories, :dependent => :destroy, :inverse_of => :product
+    has_many :product_categories, :through => :product_product_categories
+
     has_many :product_variant_properties, :dependent => :destroy
     has_many :variant_properties, :through => :product_variant_properties
 
@@ -21,10 +24,12 @@ module PlazrStore
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
                     :property_ids, :variant_property_ids, 
                     :variants_attributes, :product_variant_properties_attributes, 
-                    :product_properties_attributes, :brand_attributes
+                    :product_properties_attributes, :brand_attributes,
+                    :product_product_categories_attributes
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
+    accepts_nested_attributes_for :product_product_categories, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
     accepts_nested_attributes_for :brand
 
@@ -54,6 +59,28 @@ module PlazrStore
       self.variants_without_master.count >= 1
     end
 
+    def get_unselected_product_categories_and_order_by_name
+      # creates an array for all product_categories that the product does not currently have selected
+      # and builds them in the product
+      #(VariantCategory.all - self.variant_categories).each do |vc|
+      #  self.variant_variant_categories.build(:variant_category => vc) unless self.variant_variant_categories.map(&:variant_category_id).include?(vc.id)
+      #end
+      # to ensure that all variant_categories are always shown in a consistent order
+      #self.variant_variant_categories.sort_by! {|x| x.variant_category.name}
+      ProductCategory.parent_categories.sort_by! { |x| x.name }
+      ProductCategory.parent_categories.each do |pc|
+        self.product_product_categories.build(:product_category => pc)# unless self.variant_variant_categories.map(&:variant_category_id).include?(vc.id)
+        pc.child_product_categories.sort_by! { |x| x.name }
+        pc.child_product_categories.each do |cpc|
+          exist = ProductProductCategory.find_by_product_id_and_product_category_id(self.id, cpc.id)
+          #if !exist
+            self.product_product_categories.build(:product_category => cpc) unless self.product_product_categories.map(&:product_category_id).include?(cpc.id)
+          #else
+          #end
+        end
+      end
+    end
+
     def get_unselected_variant_properties_and_order_by_name
       # creates an array for all variant_properties that the product does not currently have selected
       # and builds them in the product
@@ -76,6 +103,14 @@ module PlazrStore
       Prototype.find(prototype_id).variant_properties.each do |vp|
         self.product_variant_properties.create :variant_property => vp
       end
+    end
+
+    def image
+      self.master_variant.image
+    end
+
+    def related(count = 5)
+      #Product.
     end
   end
 end

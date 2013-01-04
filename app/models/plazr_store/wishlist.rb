@@ -10,14 +10,22 @@ module PlazrStore
     ## Attributes ##
     attr_accessible :is_private, :name, :user_id
 
+    ## Validations ##
+    validates :user_id, presence: true
+
     ## Instance Methods ##
+    def add(variant)
+      wishlist_variant = self.variant_wishlists.find_or_create_by_variant_id(variant.id)
+    end
+
+    def remove(variant)
+      self.variant_wishlists.find_by_variant_id(variant.id).remove
+    end
+
     # belongs_to :user
     def user
       PlazrAuth::User.find(user_id)
     end
 
-    def self.current_wishlist
-      # where('user_id = ?', current_user.id)
-    end
   end
 end

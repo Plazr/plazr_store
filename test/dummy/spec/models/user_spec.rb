@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-PZA=PlazrAuth
-
 describe PZA::User, type: :model do
 
   context 'users database should be cleaned between tests' do

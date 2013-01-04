@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::ProductsController < ApplicationController
+  class Admin::ProductsController < Admin::ApplicationController
     def show
       @product = Product.find(params[:id])
       @variants = @product.variants_without_master
@@ -80,6 +80,7 @@ module PlazrStore
       def build_relations_for_fields_for
         # builds variant_properties that are not persisted so that fields_for can render them
         @product.get_unselected_variant_properties_and_order_by_name
+        @product.get_unselected_product_categories_and_order_by_name
       end
   end
 end

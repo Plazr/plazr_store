@@ -19,8 +19,8 @@ module PlazrStore
 
 
     ## Validations ##
-    validates :email,:item_total, :adjustment_total, :total, :payment_state, :shipment_state, :state,
-              :shipment_condition_id, :cart_id, presence: true
+    validates :email, :item_total, :adjustment_total, :total, :payment_state, :shipment_state, :state,
+              :shipment_condition_id, :cart_id, :user_id, presence: true
     validate :completed_at_and_state_match, :on => :update
     validates_inclusion_of :state, :in => %w( processing shipped cancelled paid )
 
@@ -43,14 +43,22 @@ module PlazrStore
 
     ## Intance Methods ##
     def add_cart_and_update_status(cart)
+      # associates current_user.cart to this order and updates cart's product's state to 'processing'
       cart.cart_variants.each do |c|
         c.state = "processing"
       end
-      cart.save
-      self.cart = cart
+      if cart.save
+        self.cart = cart
+      end
+    end
+
+    def cart
+      # gets the cart even if it is marked as deleted
+      PZS::Cart.with_deleted.find(self.cart_id)
     end
 
     def load_user(user)
+      # loads current_user id and email to this order
       if user
         self.user_id = user.id
         self.email = user.email 
@@ -64,14 +72,17 @@ module PlazrStore
 
     protected
     def completed_at_and_state_match
-      errors.add(:base, "'shipped' state doesn't match completed_at") unless completed_at && state == "shipped"
+      # valid if completd_at is defined and state is 'shipped' 
+      errors.add(:base, "'shipped' state doesn't match completed_at") if completed_at && state != "shipped"
     end
 
     def deliver_order_confirmation
+      # send an order notification to the order's owner
       Notifier.order_notification(self).deliver
     end
 
     def load_defaults
+      # loads default data into this order
       self.billing_address ||= Address.new
       self.shipping_address ||= Address.new
 
@@ -81,10 +92,11 @@ module PlazrStore
     end
 
     def set_promotional_code_and_validate_code
+      # validates promotional code inserted in the form and sets it to this order
     end
 
     def update_state
-      # Updates the order status depending on cart's variants status
+      # Updates the order state depending on cart's variants status
       return if self.state == "cancelled"
       
       if self.to_be_cancelled

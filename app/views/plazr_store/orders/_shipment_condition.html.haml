@@ -1,4 +1,7 @@
 - shipment_conditions.each do |sc|
-  = f.radio_button :shipment_condition_id, sc.id
+  - if order.shipment_condition_id.nil?
+    = f.radio_button :shipment_condition_id, sc.id
+  - else 
+    = f.radio_button :shipment_condition_id, sc.id, :disabled => true
   = f.label :shipment_condition_id, "#{sc.service_name} - #{number_to_currency sc.price}"
   %br

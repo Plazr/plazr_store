@@ -1,8 +1,12 @@
 PlazrStore::Engine.routes.draw do
+
+  root :to => 'application#index'
+
   namespace :admin do
     resources :brands
     resources :discount_types
     resources :pages
+    resources :product_categories
     resources :products do
       resources :product_properties, :only => [:index, :create, :destroy]
       resources :variants
@@ -11,7 +15,6 @@ PlazrStore::Engine.routes.draw do
     resources :properties
     resources :prototypes
     resources :shipment_conditions
-    resources :variant_categories
     resources :variant_properties do
       resources :variant_property_values
     end
@@ -31,9 +34,15 @@ PlazrStore::Engine.routes.draw do
     match 'remove/:id' => 'cart#remove', :as => :cart_remove, :via => :delete
   end
 
+  scope '/wishlist' do
+    match '/' => 'wishlist#show', :as => :wishlist, :via => :get
+    match 'add/:id'    => 'wishlist#add',    :as => :wishlist_add,    :via => :post
+    match 'remove/:id' => 'wishlist#remove', :as => :wishlist_remove, :via => :delete
+  end
+
   # orders controller
   match 'express_checkout' => 'paypal_express#checkout', :as => :express_checkout
-  match 'review' => 'paypal_express#review', :as => :review
+  match 'review' => 'orders#review', :as => :review
   match 'checkout' => 'orders#new', :as => :checkout, :via => :get
   match 'checkout' => 'orders#create', :as => :checkout, :via => :post
   match "receipt" => "orders#receipt", :as => :receipt

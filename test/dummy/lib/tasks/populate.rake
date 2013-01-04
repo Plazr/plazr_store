@@ -20,8 +20,8 @@ namespace :db do
       FactoryGirl.create_list :brand, 10
       puts 'Generating discount_types...'
       FactoryGirl.create_list :discount_type, 5
-      puts 'Generating variant_categories...'
-      FactoryGirl.create_list :variant_category, 5
+      puts 'Generating product_categories...'
+      FactoryGirl.create_list :product_category, 5
       puts 'Generating shipment_conditions...'
       FactoryGirl.create_list :shipment_condition, 5
       puts 'Generating prototypes with properties and variant_properties...'

@@ -19,7 +19,7 @@ module PlazrStore
       
       return {
         :ip => request.remote_ip,
-        :return_url => checkout_url,
+        :return_url => review_url,
         :cancel_return_url => cart_url,
         :subtotal => current_user.cart.total_price,
         :shipping => 0,

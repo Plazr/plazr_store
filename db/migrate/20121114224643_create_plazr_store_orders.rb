@@ -11,7 +11,6 @@ class CreatePlazrStoreOrders < ActiveRecord::Migration
       t.string :state, :null => false
       t.references :cart, :null => false
       t.references :promotional_code
-      t.references :coupon
       t.references :user, :null => false
       t.integer :billing_address_id
       t.integer :shipping_address_id
@@ -22,7 +21,6 @@ class CreatePlazrStoreOrders < ActiveRecord::Migration
     end
     add_index :plazr_store_orders, :cart_id
     add_index :plazr_store_orders, :promotional_code_id
-    add_index :plazr_store_orders, :coupon_id
     add_index :plazr_store_orders, :user_id
     add_index :plazr_store_orders, :billing_address_id
     add_index :plazr_store_orders, :shipping_address_id

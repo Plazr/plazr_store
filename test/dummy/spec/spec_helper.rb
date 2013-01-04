@@ -32,6 +32,7 @@ Spork.prefork do
     # config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.infer_base_class_for_anonymous_controllers = false
     config.order = "random"
+    config.include Devise::TestHelpers, :type => :controller
 
     config.before(:each) do
       @routes = PZS::Engine.routes
