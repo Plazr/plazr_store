@@ -1,6 +1,7 @@
 module PlazrStore
   class WishlistController < ApplicationController
 
+    before_filter :check_authorization
     before_filter :get_wishlist
     before_filter :get_fields, except: [ :show ]
 
@@ -23,6 +24,10 @@ module PlazrStore
 
 
     protected
+
+      def check_authorization
+        authorize! :access, :wishlist_actions
+      end
 
       def get_wishlist
         @wishlist = current_user.wishlist

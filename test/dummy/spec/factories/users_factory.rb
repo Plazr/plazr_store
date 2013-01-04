@@ -10,6 +10,10 @@ FactoryGirl.define do
       sequence(:password_confirmation) { |n| "bigpassword#{n}" }
       confirmed_at { Time.now }
 
+      factory :user_with_user_role do
+        after(:create) { |u| u.roles << FactoryGirl.create(:user_role) }
+      end
+
       factory :admin do
         #after(:create) { |u| u.roles << PlazrAuth::Role.find_by_name('admin') }
         after(:create) { |u| u.roles << FactoryGirl.create(:admin_role) }
@@ -22,6 +26,10 @@ FactoryGirl.define do
 
     factory :admin_role do
       name 'admin'
+    end
+
+    factory :user_role do
+      name 'user'
     end
   end
   

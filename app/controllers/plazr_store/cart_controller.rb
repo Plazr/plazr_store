@@ -1,6 +1,7 @@
 module PlazrStore
   class CartController < ApplicationController
 
+    before_filter :check_authorization
     before_filter :get_cart
     before_filter :get_fields, except: [ :show ]
 
@@ -23,6 +24,10 @@ module PlazrStore
 
 
     protected
+
+      def check_authorization
+        authorize! :access, :cart_actions
+      end
 
       def get_cart
         @cart = current_user.cart

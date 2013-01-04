@@ -21,6 +21,7 @@ PlazrStore::Engine.routes.draw do
   end
 
   resources :products, :only => [:index, :show]
+
   scope '/pages' do
     match '/:slug' => 'pages#show', :as => :page, :via => :get, :controller => "pages"
   end
@@ -47,7 +48,11 @@ PlazrStore::Engine.routes.draw do
   match 'checkout' => 'orders#new', :as => :checkout, :via => :get
   match 'checkout' => 'orders#create', :as => :checkout, :via => :post
   match "receipt" => "orders#receipt", :as => :receipt
-  match "/orders" => "orders#history", :as => :orders_history
+  # match "/orders" => "orders#history", :as => :orders_history
+  scope '/orders' do
+    match "/" => "orders#history", :as => :orders_history
+    match '/:id' => 'orders#show', :as => :order, :via => :get
+  end
 
   mount PlazrAuth::Engine => '/'
 end

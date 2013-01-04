@@ -37,17 +37,13 @@ module PlazrStore
     end
 
     def history
-      redirect_to plazr_auth_url if current_user.nil?
+      @orders = current_user.orders.paginate(:per_page => 5, :page => params[:page])
     end
 
     def new
       @order = Order.new
-      # current_ability.attributes_for(:create, Order).each do |key, value|
-      #   @order.send("#{key}=", value)
-      # end
-      # @order.attributes = params[:order]
       @order.load_user(current_user)
-      raise current_user.roles
+
       authorize! :create, @order
     end
 
@@ -55,22 +51,32 @@ module PlazrStore
       # redirects to the last order receipt view
       if session.has_key?(:last_order)
         @order = Order.find(session[:last_order])
+        authorize! :read, @order, :message => "You are not authorized to see the receipt of this order!"
       else
         redirect_to plazr_auth_url 
       end
     end
 
+    def show
+      @order = Order.find(params[:id])
+      begin
+        authorize! :show, @order, :message => "You are not authorized to see this order!"
+      rescue CanCan::AccessDenied => exception
+        redirect_to orders_history_url, :alert => exception.message
+      end
+    end
+
     protected
-      def check_authorization
-        authorize! :access, :orders_actions
-      end
+    def check_authorization
+      authorize! :access, :orders_actions
+    end
 
-      def get_auxiliar_data
-        @shipment_conditions = ShipmentCondition.all
-      end
+    def get_auxiliar_data
+      @shipment_conditions = ShipmentCondition.all
+    end
 
-      def get_cart
-        @cart = current_user.cart
-      end
+    def get_cart
+      @cart = current_user.cart
+    end
   end
 end

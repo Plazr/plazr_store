@@ -1,0 +1,9 @@
+%h2= "Order ##{@order.id}"
+State: 
+= @order.state
+%br
+Created at: 
+= @order.created_at.strftime("%m-%d-%Y")
+%br
+= render "details", :order => @order
+

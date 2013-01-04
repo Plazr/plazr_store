@@ -3,7 +3,7 @@ require 'spec_helper'
 describe PZS::OrdersController, :type => :controller do
   render_views
 
-  let(:current_user) { FactoryGirl.create(:specific_user) }
+  let(:current_user) { FactoryGirl.create(:user_with_user_role) }
   before(:each) do
     sign_in current_user
   end
@@ -72,15 +72,20 @@ describe PZS::OrdersController, :type => :controller do
   end
 
   describe "GET #history" do
-    it "renders the :history template when the user is logged in" do
+    it "assigns @orders" do
+      m = FactoryGirl.create :order_full
+      get :history
+      assigns(:orders).should eq([m])
+    end
+    it "renders the :history template" do
       get :history
       response.should render_template :history
     end
-    it "redirects to root when the user is not logged in" do
-      sign_out current_user
-      get :history
-      response.should redirect_to :plazr_auth
-    end
+    # it "redirects to root when the user is not logged in" do
+    #   sign_out current_user
+    #   get :history
+    #   response.should redirect_to :plazr_auth
+    # end
   end
 
   describe "GET #new" do
@@ -126,6 +131,18 @@ describe PZS::OrdersController, :type => :controller do
         get :receipt
         response.should redirect_to :plazr_auth
       end
+    end
+  end
+
+  describe "GET #show" do
+    it "assigns the requested order to @order" do
+      m = FactoryGirl.create :order_full
+      get :show, id: m
+      assigns(:order).should eq(m)
+    end
+    it "renders the :show template" do
+      get :show, id: FactoryGirl.create(:order_full)
+      response.should render_template :show
     end
   end
 end
