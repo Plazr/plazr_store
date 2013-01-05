@@ -11,8 +11,8 @@ module PlazrStore
          redirect_to cart_url, :notice => 'Woops! No Paypal support for this store!' 
          return
       end
-      
       total, setup_purchase_params = get_setup_purchase_params request
+      
       setup_response = @gateway.setup_purchase(total, setup_purchase_params)
 
       redirect_to @gateway.redirect_url_for(setup_response.token)

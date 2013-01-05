@@ -58,40 +58,43 @@ module PlazrStore
           session[:shipment_condition] = params[:order][:shipment_condition_id]
           redirect_to :controller => 'paypal_express', :action => 'checkout'
           return
-        else 
-          shipment_price = ShipmentCondition.find(params[:order][:shipment_condition_id]).price
+        #else 
+        #  raise @order.inspect
+        #  shipment_price = ShipmentCondition.find(params[:order][:shipment_condition_id]).price
         end
       else 
         if defined? session[:shipment_condition]
           @order.shipment_condition_id = session[:shipment_condition]
         end
-        shipment_price = ShipmentCondition.find(@order.shipment_condition_id).price
+        #shipment_price = ShipmentCondition.find(@order.shipment_condition_id).price
       end
       
       ActiveRecord::Base.transaction do # so that order's cart changes aren't presisted if an error occurs
         @order.load_user(current_user)
         @order.add_cart_and_update_status(@cart)
+
+        shipment_price = ShipmentCondition.find(@order.shipment_condition_id).price         
         @order.total = current_user.cart.total_price + shipment_price
         
-        if @order.express_token.nil?
-          redirect_to cart_url, :notice => "Sorry! Something went wrong with the Paypal purchase. Please try again later." 
-          return
-        end
-        
-        purchase_params = get_purchase_params request, params
-        purchase = @gateway.purchase @order.total, purchase_params
-
-        #if purchase.success?
-          # you might want to destroy your cart here if you have a shopping cart 
-        #  notice = "Thanks! Your purchase is now complete!"
-        #else
-        #  @order.destroy
-        #  redirect_to cart_url :notice => "Woops. Something went wrong while we were trying to complete the purchase with Paypal. Btw, here's what Paypal said: #{purchase.message}"
-        #end
-
-
-
         if @order.save
+          if params['payment_method']['name'] == "Paypal" 
+            if @order.express_token.nil?
+              redirect_to cart_url, :notice => "Sorry! Something went wrong with the Paypal purchase. Please try again later." 
+              return
+            else 
+              total, purchase_params = get_purchase_params request, params
+              purchase = @gateway.purchase total, purchase_params
+
+              if purchase.success?
+                # you might want to destroy your cart here if you have a shopping cart 
+                notice = "Thanks! Your purchase is now complete!"
+              else
+                @order.destroy
+                redirect_to cart_url :notice => "Woops. Something went wrong while we were trying to complete the purchase with Paypal. Btw, here's what Paypal said: #{purchase.message}"
+                return
+              end
+            end
+          end
           # marks the cart as deleted 
           PZS::Cart.find(@order.cart.id).delete
           # indicates which is the last order when the receipt action is called
@@ -115,10 +118,11 @@ module PlazrStore
     end
     
     def get_purchase_params(request, params)
-      {
+      return to_cents(@order.total), {
         :ip => request.remote_ip,
         :token => params[:order][:express_token],
-        :payer_id => params[:order][:payer_id]
+        :payer_id => params[:order][:payer_id],
+        :currency => 'EUR'
       }
     end
         
