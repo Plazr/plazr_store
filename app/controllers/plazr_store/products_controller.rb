@@ -2,6 +2,8 @@ module PlazrStore
   class ProductsController < ApplicationController
     def show
       @product = Product.find(params[:id])
+      puts "HERE "+@product.inspect
+      puts "HERE "+@product.master_variant.inspect
     end
 
     def index

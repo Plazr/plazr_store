@@ -8,94 +8,86 @@
 
 
 <%= content_for :head do %>
-  <%= stylesheet_link_tag page, :media => "all" %>
-  <%= javascript_include_tag page2 %>
-  <%= javascript_include_tag page3 %>
-  <%= javascript_include_tag page4 %>
-  <%= javascript_include_tag page5 %>
-  <%= javascript_include_tag page %>
+<%= stylesheet_link_tag page, :media => "all" %>
+<%= javascript_include_tag page2 %>
+<%= javascript_include_tag page3 %>
+<%= javascript_include_tag page4 %>
+<%= javascript_include_tag page5 %>
+<%= javascript_include_tag page %>
 <% end %>
 
 
-<article>
-  <div class="row">
-    <div class="span11 offset1">
-      <p>Claças > fato de treino</p>
+<article class="container">
+
+  <div class="row-fluid">
+    <div class="span12">
+      <p>Claças</p>
     </div>
   </div>
 
-  <header class="row">
-    <div class="span7 offset1">
+  <header class="row-fluid">
+    <div class="span8">
       <h2><%=@product.name%></h2>
       <p>Classificação</p>
     </div>
     <div class="span4">
-      <h2><%=@product.master_price%> €</h2>
+      <h2><%= @product.master_price %> €</h2>
     </div>
   </header>
 
 
-  <!--Teste imagens-->
+  <!-- Images Begin -->
 
-  <!--teste-->
-  <div class="row">
-      <div  class="span8 offset1">
-
-        <div id="page-wrap">
-          <div class="slider-wrap">
-            <div id="main-photo-slider" class="csw">
-              <div class="panelContainer">
-                <% @product.images.each_with_index do |im, index| %>
-                  <div class="panel" title=("Panel" + index)>
-                    <div class="wrapper">
-                      <img src=<%=im.file%> alt="temp" />
-                    </div>
-                  </div>
-                <% end %>
-
-              </div>
-            </div>
-            <div id="movers-row">
+  <div class="row-fluid">
+    <div  class="span9">
+      <div id="page-wrap">
+        <div class="slider-wrap">
+          <div id="main-photo-slider" class="csw">
+            <div class="panelContainer">
               <% @product.images.each do |im| %>
-                <div><a href="#5" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
+              <div class="panel">
+                <div class="wrapper">
+                  <img src="<%= im.file %>" alt="temp" />
+                </div>
+              </div>
               <% end %>
             </div>
-
           </div>
-        </div>
-
-      </div>
-        <div class="span3">
-          <div class="row">
-            <div>
-              <button>x</button><br>
-              <button>x</button><br>
-              <button>x</button><br>
-            </div>
-            <div>
-              <button>x</button><br>
-              <button>x</button><br>
-              <button>x</button><br>
-            </div>
+          <div id="movers-row">
+            <% @product.images.each do |im| %>
+            <div><a href="#5" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
+            <% end %>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
 
-  <!--Fim Teste Imagens-->
+    <div class="span3">
+      <div class="row">
+        <div>
+          <button>x</button><br>
+          <button>x</button><br>
+          <button>x</button><br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Images End -->
 
   <section>
 
     <div class="row">
       <div class="span11 offset1">
         <% if !@product.variants_without_master.empty? %>
-          <p>Variantes:</p>
-          <select>
+        <p>Variantes:</p>
+        <select>
           <% @product.variants_without_master.each do |v| %>
-              <% v.variant_property_values.each_with_index do |vpv, index| %>
-                  <option><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
-              <% end %>
+          <% v.variant_property_values.each_with_index do |vpv, index| %>
+          <option><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
+          <% end %>
           <% end %>
         </select>
         <% end %>
@@ -110,7 +102,7 @@
     </div>
 
     <div class="row">
-      
+
       <div class="span5 offset1">
         <dl>
           <dt>Descrição</dt>
@@ -120,40 +112,41 @@
         </dl>
       </div>
     </div>
+    </section>
 
-  <section>
+    <section>
 
-    <div>
-      <div class="row">
-        <div class="span9 offset1" align="center">
-          <h3>Artigos relacionados</h3>
+      <div>
+        <div class="row">
+          <div class="span9 offset1" align="center">
+            <h3>Artigos relacionados</h3>
+          </div>
         </div>
+
+        <!--Ainda tem de ser alterado-->
+
+        <div class="row">
+          <div class="span3 offset1">
+            <%= render 'related_products_im' %>
+          </div>
+
+          <div class="span3">
+            <%= render 'related_products_im' %>
+          </div>
+
+          <div class="span3">
+            <%= render 'related_products_im' %>
+          </div>
+
+        </div>
+
+        <!--+++++++++++++++++++++++++++++++-->
+
       </div>
 
-      <!--Ainda tem de ser alterado-->
+    </section>
 
-      <div class="row">
-        <div class="span3 offset1">
-          <%= render 'related_products_im' %>
-        </div>
-
-        <div class="span3">
-          <%= render 'related_products_im' %>
-        </div>
-
-        <div class="span3">
-          <%= render 'related_products_im' %>
-        </div>
-
-      </div>
-
-      <!--+++++++++++++++++++++++++++++++-->
-
-    </div>
-
-  </section>
-
-  <% if !@product.comments.empty? %>
+    <% if !@product.comments.empty? %>
     <section>
       <div class="row">
         <div class="span11 offset1">
@@ -162,18 +155,18 @@
       </div>
 
       <% @product.comments.each do |c| %>
-        <div class="row">
-          <div class="span4 offset1">
-            <h3>Nome</h3>
-            <p><%= PlazrAuth::User.find(@product.id).first_name %></p>
-            <p><%= c.rating %></p>
-          </div>
-
-          <div class="span5">
-            <p><%= c.comment %></p>
-          </div>
+      <div class="row">
+        <div class="span4 offset1">
+          <h3>Nome</h3>
+          <p><%= PlazrAuth::User.find(@product.id).first_name %></p>
+          <p><%= c.rating %></p>
         </div>
+
+        <div class="span5">
+          <p><%= c.comment %></p>
+        </div>
+      </div>
       <% end %>
     </section>
-  <% end %>
-</article>
+    <% end %>
+  </article>

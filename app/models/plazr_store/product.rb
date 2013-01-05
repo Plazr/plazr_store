@@ -69,11 +69,11 @@ module PlazrStore
     end
 
     def images
-      self.variants.master_variant.first.multimedia
+      master_variant.multimedia
     end
 
     def sku
-      self.variants.master_variant.first.sku
+      self.master_variant.sku
     end
 
     def variants_without_master
