@@ -46,7 +46,7 @@ class Ability
 
   def admin
     staff
-    can :admin,  :store
+    can :admin, :store
   end
 
   # in plazr_store, a root can do the same as an admin

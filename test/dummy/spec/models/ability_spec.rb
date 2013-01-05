@@ -4,7 +4,7 @@ require "cancan/matchers"
 describe Ability do
   describe PlazrAuth::User do
     describe "Abilities" do
-      context "when user isn't logged in (role: 'unregistered')", focus: true do
+      context "when user isn't logged in (role: 'unregistered')" do
         current_user = nil
         subject(:ability){ Ability.new(current_user) }
 
@@ -24,7 +24,7 @@ describe Ability do
         end
       end
       context "when user is logged in" do
-        context "when user is client (role: 'user')", focus: true do
+        context "when user is client (role: 'user')" do
           current_user = FactoryGirl.create :user_with_user_role
           subject(:ability){ Ability.new(current_user) }
 
@@ -46,7 +46,7 @@ describe Ability do
           it_behaves_like 'unregistered role'
           it_behaves_like 'user role', current_user
           it_behaves_like 'staff role'
-          it "cannot admin the store", focus: true do
+          xit "cannot admin the store" do
             should_not be_able_to(:admin, :store)
           end
         end
