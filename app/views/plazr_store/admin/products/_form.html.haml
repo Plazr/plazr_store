@@ -10,11 +10,11 @@
 			= frm.text_area :details, :class => :full, placeholder: 'Product description', rows: '5'
 		.field.row-fluid
 			.span6.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
-				= frm.text_field :date, :class => 'input-small', value: Date.current.to_s(:db), readonly: true
+				= frm.text_field :available_at_date_string, :class => 'input-small', readonly: true
 				%span.add-on
 					= image_tag 'glyphicons/calendar.png', :class => :icon
 			.span6.input-append.bootstrap-timepicker-component
-				= frm.text_field :time, :class => ['input-small', :timepicker], value: Time.now.to_s(:time), readonly: true
+				= frm.text_field :available_at_time_string, :class => ['input-small', :timepicker], readonly: true
 				%span.add-on
 					= image_tag 'glyphicons/clock.png', :class => :icon
 	#brand.section
@@ -24,99 +24,20 @@
 			- else
 				= frm.label :brand_id
 				= frm.collection_select :brand_id, @brands, :id, :name, prompt: 'Pick a brand'
-	-# isn't there an easier way to do this?
 	#variants.section
-		= frm.fields_for :variants do |v|
-			- if v.object.is_master?
-				.field
-					= v.text_field :sku, :class => :full, placeholder: 'SKU'
-				.field.input-append
-					= v.text_field :price, :class => :number, placeholder: 'price'
-					%span.add-on
-						= image_tag 'glyphicons/euro.png', :class => :icon
+		= render 'subform_variants', form: frm
 	#prototypes.section
-		.field
+		.field.row-fluid
 			- if @prototypes.empty?
-				%p.text-warning No prototypes to associate.
+				.span12
+					%p.text-warning No prototypes to associate.
 			- else
 				- @prototypes.each do |prototype|
-					= check_box_tag 'prototypes[]', prototype.id
-					= label_tag p.name
+					.span3.cell
+						%div
+							= label_tag prototype.name
+							= check_box_tag 'prototypes[]', prototype.id
 	.section
 		.field
 			= frm.submit 'Save'
 			= link_to 'Cancel', admin_products_path
-/ =======
-/ = form_for [:admin, @product] do |f|
-/   - if @product.errors.any?
-/     #error_explanation
-/       %h2= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
-/       %div{:class=>["alert","alert-error"]}
-/         %ul
-/           - @product.errors.full_messages.each do |msg|
-/             %li= msg
-
-/ = form_for [:admin, @product] do |f|
-/   - if @product.errors.any?
-/     #error_explanation
-/       %h2= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
-/       %div{:class=>["alert","alert-error"]}
-/         %ul
-/           - @product.errors.full_messages.each do |msg|
-/             %li= msg
-/   -# - if @master_variant.errors.any?
-/   -#   #error_explanation
-/   -#     %h2= "#{pluralize(@master_variant.errors.count, "error")} prohibited this product from being saved:"
-/   -#     %div{:class=>["alert","alert-error"]}
-/   -#       %ul
-/   -#         - @master_variant.errors.full_messages.each do |msg|
-/   -#           %li= msg
-
-/   = f.label :name
-/   = f.text_field :name
-/   %br
-/   = f.label :details
-/   = f.text_area :details
-/   %br
-/   = f.label :slug
-/   = f.text_field :slug
-/   %br
-/   = f.label :available_at
-/   = f.text_field :available_at
-/ %br
-/ = f.fields_for :variants do |v|
-/   - if v.object.is_master?
-/     = v.label :sku
-/     = v.text_field :sku
-/     %br
-/     = v.label :price
-/     = v.text_field :price
-/     -# this is needed to load all the variant_categories to the master_variant
-/     - v.object.get_unselected_variant_categories_and_order_by_name
-
-/     %h4= "Variant Categories"
-/     = v.fields_for :variant_variant_categories do |vvc|
-/       - if vvc.object.variant_category.is_leaf?
-/         = vvc.check_box :_destroy, {:checked => vvc.object.persisted?}, '0', '1'
-/         = vvc.hidden_field :variant_category_id
-/       = vvc.label :_destroy, vvc.object.variant_category.name
-/       %br
-/   %br
-
-/ %h4="Prototypes"
-/ - if !@prototypes.empty?
-/   - @prototypes.each do |p|
-/     = check_box_tag "prototypes[]", p.id
-/     = label_tag p.name
-/ %br
-
-/ %h4= "Variant Properties"
-/ = f.fields_for :product_variant_properties do |ff|
-/   -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
-/   -# ff.object accesss the current record in the fields_for loop
-/   -# ':checked => ff.object.persisted?' means that if the record exists in the database then the box should be checked
-/   = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
-/   = ff.label :_destroy, ff.object.variant_property.display_name
-/   -# this hidden_field value is empty so that all the associations to f will be destroyed if no checkbox is selected
-/   = ff.hidden_field :variant_property_id
-/ %br

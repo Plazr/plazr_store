@@ -13,11 +13,11 @@
 		.span10
 			%article.row-fluid
 				.span3
-					-# variant = @product.master_variant.first
-					-# imgpth = if variant.multimedia.empty?
-					- imgpth = 'http://placehold.it/100x100&text=No%20image'
-					-# else
-						-# variant.multimedia.first.file.url(:thumb)
+					- variant = @product.master_variant
+					- imgpth = if variant.multimedia.empty?
+						- 'http://placehold.it/100x100&text=No%20image'
+					- else
+						- variant.multimedia.first.file.url(:thumb)
 					%noscript
 						= image_tag imgpth, :class => :photo
 					= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
@@ -25,12 +25,22 @@
 					%h1= @product.name
 					- if @product.brand
 						%p= "by #{@product.brand.name}"
-					- if @product.available_at
-						- if @product.available_at.past?
-							%p= "Available since #{@product.available_at.to_s(:short)}"
+					-# if @product.available_at
+						-# if @product.available_at.past?
+							%p=# "Available since #{@product.available_at.to_s(:short)}"
 						- else
-							%p= "Will be available after #{@product.available_at.to_date}"
+							%p=# "Will be available after #{@product.available_at.to_date}"
+					- Time::DATE_FORMATS[:long_at] = '%B %d, %Y at %H:%M'
+					- available_at = Time.parse("#{@product.available_at_date_string} #{@product.available_at_time_string}")
+					- if available_at.past?
+						%p= "Available since #{available_at.to_s(:long_at)}"
+					- else
+						%p= "Will be available after #{available_at.to_s(:long_at)}"
 					%h6= @product.slug
+					%p
+						%strong SKU:
+						= @product.master_variant.sku
+					%h4= "€ #{@product.master_variant.price}"
 					.rating
 						%span
 							- if @product.rating
@@ -67,37 +77,3 @@
 			%h5 Variants
 			%ul
 				%li= link_to 'New variant', new_admin_product_variant_path(@product)
-/ %h1 Show Product
-/ %p#notice
-/   = notice
-/ %table
-/   %tr
-/     %td
-/       %b Name
-/     %td
-/       = @product.name
-/ %table
-/   %thead
-/     %tr
-/       %th Properties
-/     %tbody
-/       - @product.properties.each do |p|
-/         %tr
-/           %td= p.display_name
-/ %table
-/   %thead
-/     %tr
-/       %th Variant Properties
-/     %tbody
-/       - @product.variant_properties.each do |p|
-/         %tr
-/           %td= p.display_name
-/ = link_to 'Edit', edit_admin_product_path(@product)
-/ |
-/ = link_to 'Back', admin_products_path
-/ |
-/ = link_to 'Variants', admin_product_variants_path(@product)
-/ |
-/ = link_to 'Product Properties', admin_product_product_properties_path(@product)
-/ |
-/ = link_to 'Images', admin_product_multimedia_path(@product)

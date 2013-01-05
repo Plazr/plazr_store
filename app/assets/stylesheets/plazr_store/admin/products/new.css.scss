@@ -32,3 +32,14 @@ article {
 span img.icon {
 	height: 1em;
 }
+
+.cell {
+	margin: 0 !important;
+	max-width: 300px;
+	min-width: 100px;
+
+	div {
+		margin: .5em;
+		text-align: center;
+	}
+}

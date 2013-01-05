@@ -1,0 +1,13 @@
+<%= form.fields_for :variants do |variant| %>
+	<% if variant.object.is_master? %>
+		<div class="field">
+			<%= variant.text_field :sku, :class => :full, placeholder: 'SKU' %>
+		</div>
+		<div class="field input-append">
+			<%= variant.text_field :price, :class => :number, placeholder: 'price' %>
+			<span class="add-on">
+				<%= image_tag 'glyphicons/euro.png', :class => :icon %>
+			</span>
+		</div>
+	<% end %>
+<% end %>
