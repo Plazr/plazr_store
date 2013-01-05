@@ -25,5 +25,9 @@ shared_examples_for 'user role' do |current_user|
   it "cannot show an order that doesn't belong to him" do
     should_not be_able_to(:read, PZS::Order.new)
   end
+
+  it "cannot manage nor admin the store" do
+    should_not be_able_to(:manage, :store)
+  end
 end
 

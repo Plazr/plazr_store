@@ -4,12 +4,12 @@ require "cancan/matchers"
 describe Ability do
   describe PlazrAuth::User do
     describe "Abilities" do
-      context "when user isn't logged in (role: 'unregistered')" do
+      context "when user isn't logged in (role: 'unregistered')", focus: true do
         current_user = nil
         subject(:ability){ Ability.new(current_user) }
 
         pending "Waiting for the logged out user to have a role"
-        # it_behaves_like 'unregistered role'
+        it_behaves_like 'unregistered role'
       end
       context "when user is logged in" do
         context "when user is client (role: 'user')" do
