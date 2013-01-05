@@ -74,8 +74,6 @@ describe PZS::OrdersController, :type => :controller do
   describe "GET #history" do
     it "assigns @orders" do
       m = FactoryGirl.create :order_without_user, user_id: current_user.id
-      puts "current_user.id:#{current_user.id}"
-      puts "Order's user id: #{m.user.id}"
       get :history
       assigns(:orders).should eq([m])
     end
