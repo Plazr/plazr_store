@@ -47,9 +47,6 @@ module PlazrStore
     
     def create
       @order = Order.new(params[:order])
-      if defined? session[:shipment_condition]
-        @order.shipment_condition_id = session[:shipment_condition]
-      end
             
       if @order.express_token == ""
         if params[:order][:shipment_condition_id].nil?
@@ -65,7 +62,10 @@ module PlazrStore
           shipment_price = ShipmentCondition.find(params[:order][:shipment_condition_id]).price
         end
       else 
-        shipment_price = ShipmentCondition.find(session['shipment_condition']).price
+        if defined? session[:shipment_condition]
+          @order.shipment_condition_id = session[:shipment_condition]
+        end
+        shipment_price = ShipmentCondition.find(@order.shipment_condition_id).price
       end
       
       ActiveRecord::Base.transaction do # so that order's cart changes aren't presisted if an error occurs
@@ -100,9 +100,14 @@ module PlazrStore
           # redirects to last_order receipt
           redirect_to receipt_url
           return 
-        else 
-          render 'review'
-          return
+        else
+          if params['payment_method']['name'] == "Paypal"   
+            render 'review'
+            return
+          else 
+            render 'new'
+            return
+          end
         end
 
         render receipt

@@ -15,18 +15,19 @@ module PlazrStore
     end
     
     def get_setup_purchase_params(request)
-      #subtotal, shipping, total = get_totals
+      subtotal, shipping, total = get_totals
       
-      return {
+      return to_cents(total), {
         :ip => request.remote_ip,
         :return_url => review_url,
         :cancel_return_url => cart_url,
-        :subtotal => current_user.cart.total_price,
-        :shipping => 0,
+        :subtotal => to_cents(subtotal),
+        :shipping => to_cents(shipping),
         :handling => 0,
-        :tax =>      0,
+        #:tax =>      0,
         :allow_note =>  true,
-        #:items => get_items
+        #:items => get_items,
+        :currency => 'EUR'
       }
     end
     
@@ -60,11 +61,10 @@ module PlazrStore
     end
     
     def get_totals
-      #subtotal = current_user.cart.subtotal
-      #shipping = current_user.cart.shipping_cost
-      total = current_user.cart.total_price
-      #return subtotal, shipping, total
-      return total
+      subtotal = current_user.cart.total_price
+      shipping = ShipmentCondition.find(session['shipment_condition']).price
+      total = subtotal + shipping
+      return subtotal, shipping, total
     end
     
     def to_cents(money)
