@@ -39,7 +39,7 @@ describe PZS::Prototype, type: :model do
         pr_v2 = FactoryGirl.create(:property_v2)
         # get the result and store it in variable 'res'
         res = p.get_unselected_properties_and_order_by_name
-        # clears the prototype's relation created
+        # clears the prototype's relation created 
         p.reload
         # creates the new relations, by hand, as it was supposed to be created
         p.property_prototypes.build(:property => pr_v2)
@@ -53,10 +53,10 @@ describe PZS::Prototype, type: :model do
       it "builds all the variant_properties with the prototype" do
         vp = FactoryGirl.create_list(:variant_property, 2)
         p = FactoryGirl.create(:prototype)
-        vp_v2 = FactoryGirl.create(:variant_property_v2)
+        vp_v2 = FactoryGirl.create(:variant_property_v2) 
         # get the result and store it in variable 'res'
         res = p.get_unselected_variant_properties_and_order_by_name
-        # clears the prototype's relation created
+        # clears the prototype's relation created 
         p.reload
         # creates the new relations, by hand, as it was supposed to be created
         p.prototype_variant_properties.build(:variant_property => vp_v2)

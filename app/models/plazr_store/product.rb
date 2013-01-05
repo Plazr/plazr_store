@@ -66,13 +66,13 @@ module PlazrStore
       self.master_variant.price
     end
 
-    def images
-      self.variants.master_variant.first.multimedia
-    end
+    # def images
+    #   self.variants.master_variant.first.multimedia
+    # end
 
-    def sku
-      self.variants.master_variant.first.sku
-    end
+    # def sku
+    #   self.variants.master_variant.first.sku
+    # end
 
     def variants_without_master
       self.variants.without_master

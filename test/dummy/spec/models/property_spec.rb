@@ -40,5 +40,11 @@ describe PZS::Property, :type => :model do
       end
 >>>>>>> ac9cc606b52e6a2ff90237bd0e46e4ea2ee6b29e
     end
+    context "display_name is blank and id_name isn't" do
+      it "becomes the same as id_name" do
+        p = FactoryGirl.create(:property, :display_name => nil)
+        p.display_name.should eq p.id_name
+      end
+    end
   end
 end
