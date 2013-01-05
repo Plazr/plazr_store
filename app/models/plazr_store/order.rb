@@ -37,6 +37,7 @@ module PlazrStore
     before_validation :set_promotional_code_and_validate_code
     before_save :update_state
     after_save :deliver_order_confirmation#, :if => Proc.new { |order| alguma_coisa_aqui != "admin" }
+    # after_commit :mark_cart_as_deleted
 
 
     ## Intance Methods ##
@@ -53,6 +54,14 @@ module PlazrStore
     def cart
       # gets the cart even if it is marked as deleted
       PZS::Cart.with_deleted.find(self.cart_id)
+    end
+
+    def info
+      # summarizes an order's information (id, state and created_at)
+      info = "Order ##{self.id}"
+      info << "; State: #{self.state}"
+      info << "; Creation Date: #{self.created_at.strftime("%m-%d-%Y")}"
+      info
     end
 
     def load_user(user)
@@ -88,6 +97,11 @@ module PlazrStore
       self.shipment_state = "processing"
       self.state = "processing"
     end
+
+    # def mark_cart_as_deleted
+    #   # marks this order's cart as deleted 
+    #   PZS::Cart.find(this.cart.id).delete
+    # end
 
     def set_promotional_code_and_validate_code
       # validates promotional code inserted in the form and sets it to this order

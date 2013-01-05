@@ -1,0 +1,54 @@
+require 'spec_helper'
+require "cancan/matchers"
+
+describe Ability do
+  describe PlazrAuth::User do
+    describe "Abilities" do
+      context "when user isn't logged in (role: 'unregistered')" do
+        current_user = nil
+        subject(:ability){ Ability.new(current_user) }
+
+        pending "Waiting for the logged out user to have a role"
+        # it_behaves_like 'unregistered role'
+      end
+      context "when user is logged in" do
+        context "when user is client (role: 'user')" do
+          current_user = FactoryGirl.create :user_with_user_role
+          subject(:ability){ Ability.new(current_user) }
+
+          it_behaves_like 'unregistered role'
+          it_behaves_like 'user role', current_user
+        end
+
+        context "when user is staff (role: 'staff')" do
+          current_user = FactoryGirl.create :staff
+          subject(:ability){ Ability.new(current_user) }
+
+          it_behaves_like 'unregistered role'
+          it_behaves_like 'user role', current_user
+          it_behaves_like 'staff role'
+        end
+
+        context "when user is admin (role: 'admin')" do
+          current_user = FactoryGirl.create :admin
+          subject(:ability){ Ability.new(current_user) }
+
+          it_behaves_like 'unregistered role'
+          it_behaves_like 'user role', current_user
+          it_behaves_like 'staff role'
+          it_behaves_like 'admin role'
+        end
+
+        context "when user is root (role: 'root')" do
+          current_user = FactoryGirl.create :root
+          subject(:ability){ Ability.new(current_user) }
+
+          it_behaves_like 'unregistered role'
+          it_behaves_like 'user role', current_user
+          it_behaves_like 'staff role'
+          it_behaves_like 'admin role'
+        end
+      end
+    end
+  end
+end
