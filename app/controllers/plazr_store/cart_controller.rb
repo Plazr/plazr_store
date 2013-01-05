@@ -31,6 +31,7 @@ module PlazrStore
 
       def get_cart
         @cart = current_user.cart
+        authorize! :manage, @cart
       end
 
       def get_fields

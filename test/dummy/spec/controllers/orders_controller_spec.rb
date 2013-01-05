@@ -73,7 +73,9 @@ describe PZS::OrdersController, :type => :controller do
 
   describe "GET #history" do
     it "assigns @orders" do
-      m = FactoryGirl.create :order_full
+      m = FactoryGirl.create :order_without_user, user_id: current_user.id
+      puts "current_user.id:#{current_user.id}"
+      puts "Order's user id: #{m.user.id}"
       get :history
       assigns(:orders).should eq([m])
     end
@@ -90,7 +92,6 @@ describe PZS::OrdersController, :type => :controller do
 
   describe "GET #new" do
     it "assigns cart to @cart" do
-      # FactoryGirl.create :cart
       get :new
       assigns(:cart).id.should eq current_user.cart.id
     end
@@ -136,12 +137,12 @@ describe PZS::OrdersController, :type => :controller do
 
   describe "GET #show" do
     it "assigns the requested order to @order" do
-      m = FactoryGirl.create :order_full
+      m = FactoryGirl.create :order_without_user, user_id: current_user.id
       get :show, id: m
       assigns(:order).should eq(m)
     end
     it "renders the :show template" do
-      get :show, id: FactoryGirl.create(:order_full)
+      get :show, id: FactoryGirl.create(:order_without_user, user_id: current_user.id)
       response.should render_template :show
     end
   end

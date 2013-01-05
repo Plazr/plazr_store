@@ -37,6 +37,7 @@ module PlazrStore
     end
 
     def history
+      authorize! :index, Order
       @orders = current_user.orders.paginate(:per_page => 5, :page => params[:page])
     end
 

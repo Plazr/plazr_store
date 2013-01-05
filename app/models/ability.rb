@@ -24,11 +24,11 @@ class Ability
     unregistered
     # can manage his own wishlist
     can :access, :wishlist_actions
-    # can :manage, PZS::Wishlist, user_id: @user.id
+    can :manage, PZS::Wishlist, user_id: @user.id
 
     # can manage his own cart
     can :access, :cart_actions
-    # can :manage, PZS::Cart, user_id: @user.id
+    can :manage, PZS::Cart, user_id: @user.id
 
     # can access and create his own orders
     can :access, :orders_actions

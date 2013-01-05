@@ -31,6 +31,7 @@ module PlazrStore
 
       def get_wishlist
         @wishlist = current_user.wishlist
+        authorize! :manage, @wishlist
       end
 
       def get_fields

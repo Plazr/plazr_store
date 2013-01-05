@@ -98,11 +98,26 @@ FactoryGirl.define do
 
       factory :order_full do
         association :cart
-
-        factory :order_without_user do
-          user_id nil
-        end
       end
+    end
+  end
+
+  factory :order_without_user, :class => PZS::Order do
+    sequence(:email) { |n| "someweirdunrepeatableemail#{n}@yourcousin.com" }
+    total 0
+    item_total 0
+    adjustment_total 0
+    payment_state "processing"
+    shipment_state "processing"
+    state "processing"
+
+    association :shipment_condition
+    association :cart
+
+    after(:build) do |o| 
+      a = FactoryGirl.create(:address)
+      o.billing_address_id = a.id
+      o.shipping_address_id = a.id
     end
   end
 
