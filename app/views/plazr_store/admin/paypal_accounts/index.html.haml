@@ -1,0 +1,10 @@
+%h1 Paypal Account
+-if @paypal_account.nil? 
+  = link_to "Register", new_admin_paypal_account_path
+-else
+  = link_to "View", admin_paypal_account_path(@paypal_account)
+  %br
+  = link_to "Edit", edit_admin_paypal_account_path(@paypal_account)
+  
+
+  

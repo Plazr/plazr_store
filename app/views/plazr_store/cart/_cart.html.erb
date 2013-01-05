@@ -1,3 +1,7 @@
+<% if flash[params[:notice]] -%>
+  <p class='notice'><%=h flash[params[:notice]] %></p>
+<% end %>
+
 <ul>
   <% @cart.cart_variants.each do |cart_variant| %>
     <li>
@@ -7,4 +11,9 @@
     </li>
   <% end %>
 </ul>
+<p>
+	Total price: <%= @cart.total_price %>
+</p>
+
 <%= link_to 'Checkout', plazr_store.checkout_path, method: :get %>
+

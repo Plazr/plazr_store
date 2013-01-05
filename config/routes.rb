@@ -18,6 +18,7 @@ PlazrStore::Engine.routes.draw do
     resources :variant_properties do
       resources :variant_property_values
     end
+    resources :paypal_accounts
   end
 
   resources :products, :only => [:index, :show]
@@ -47,11 +48,15 @@ PlazrStore::Engine.routes.draw do
   # orders controller
   match 'checkout' => 'orders#new', :as => :checkout, :via => :get
   match 'checkout' => 'orders#create', :as => :checkout, :via => :post
+  match 'express_checkout' => 'paypal_express#checkout', :as => :express_checkout
+  match 'paypal_express_purchase' => 'paypal_express#purchase', :as => :paypal_express_purchase
   match "receipt" => "orders#receipt", :as => :receipt
+  match 'review' => 'orders#review', :as => :review
   scope '/orders' do
     match "/" => "orders#history", :as => :orders_history
     match '/:id' => 'orders#show', :as => :order, :via => :get
   end
+  
 
   mount PlazrAuth::Engine => '/'
 end

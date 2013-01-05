@@ -1,0 +1,7 @@
+store_id: 1
+name: loja
+description: descricao
+email: email@gmail.com
+phone: 911
+url: store.com
+payment_methods: [ "Paypal", "Envio à cobrança" ]
