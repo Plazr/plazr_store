@@ -48,7 +48,6 @@ PlazrStore::Engine.routes.draw do
   match 'checkout' => 'orders#new', :as => :checkout, :via => :get
   match 'checkout' => 'orders#create', :as => :checkout, :via => :post
   match "receipt" => "orders#receipt", :as => :receipt
-  # match "/orders" => "orders#history", :as => :orders_history
   scope '/orders' do
     match "/" => "orders#history", :as => :orders_history
     match '/:id' => 'orders#show', :as => :order, :via => :get
