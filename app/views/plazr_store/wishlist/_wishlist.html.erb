@@ -3,7 +3,7 @@
     <li>
       <%= link_to variant_wishlist.info, product_path(variant_wishlist.product) %>
       <%= link_to 'Delete', wishlist_remove_path(variant_wishlist.variant), method: :delete %>
-      <%= link_to 'Add to Cart', cart_add_path(variant_wishlist.variant) %>
+      <%= add_to_cart_form(variant_wishlist.variant.id) %>
     </li>
   <% end %>
 </ul>

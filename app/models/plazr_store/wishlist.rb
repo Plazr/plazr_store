@@ -19,7 +19,7 @@ module PlazrStore
     end
 
     def remove(variant)
-      self.variant_wishlists.find_by_variant_id(variant.id).remove
+      self.variant_wishlists.find_by_variant_id(variant.id).destroy
     end
 
     # belongs_to :user
