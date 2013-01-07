@@ -176,7 +176,11 @@ module PlazrStore
     protected
 
     def create_available_at
-      self.available_at = Time.parse("#{@available_at_date_string} #{@available_at_time_string}")
+      self.available_at = if @available_at_date_string && @available_at_time_string
+        Time.parse("#{@available_at_date_string} #{@available_at_time_string}")
+      else
+        Time.current
+      end
     end
 
     def create_slug
