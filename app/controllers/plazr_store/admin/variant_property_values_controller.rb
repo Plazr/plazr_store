@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::VariantPropertyValuesController < ApplicationController
+  class Admin::VariantPropertyValuesController < Admin::ApplicationController
     before_filter :get_variant_property
 
     def show

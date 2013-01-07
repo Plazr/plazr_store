@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::DiscountTypesController < ApplicationController
+  class Admin::DiscountTypesController < Admin::ApplicationController
 
     def show
       @discount_type = DiscountType.find(params[:id])

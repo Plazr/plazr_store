@@ -18,5 +18,12 @@ module PlazrStore
     validates :service_name, presence: true, uniqueness_without_deleted: true
     validates :price, presence: true, numericality: {:greater_than_or_equal_to => 0}
     validates :service_details, presence: true
+
+    ## Instance Methods ##
+    # summarizes a shipment condition's information (service_name and price)
+    def info
+      info = "#{self.service_name} - #{self.price}"
+      info
+    end
   end
 end

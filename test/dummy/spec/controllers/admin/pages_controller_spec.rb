@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe PZS::Admin::PagesController, :type => :controller do 
-  #render_views
+  render_views
+  login_admin
+
 
   describe "GET #index" do
     it_behaves_like 'default admin index method', :page

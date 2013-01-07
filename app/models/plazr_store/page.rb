@@ -11,6 +11,7 @@ module PlazrStore
 
     ## Validations ##
     validates :title, presence: true
-    validates :slug, uniqueness_without_deleted: true
+    validates :slug, presence: true, uniqueness_without_deleted: true
+    validates :content, presence: true
   end
 end

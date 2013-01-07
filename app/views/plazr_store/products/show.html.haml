@@ -33,5 +33,10 @@
         %tr
           %td= vpv.variant_property.display_name
           %td= vpv.presentation
+    = add_to_cart_form(v.id)
+    = add_to_wishlist_form(v.id)
+- else
+  = add_to_cart_form(@product.master_variant.id)
+  = add_to_wishlist_form(@product.master_variant.id)
 
 = link_to 'Back', products_path

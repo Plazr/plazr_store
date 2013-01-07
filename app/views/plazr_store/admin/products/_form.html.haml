@@ -86,14 +86,30 @@
 /         = vvc.label :_destroy, vvc.object.variant_category.name
 /         %br
 /     %br
+/ %br
+/ %h4= "Product Categories"
+/ = f.fields_for :product_product_categories do |ppc|
+/   - if ppc.object.product_category.is_leaf?
+/     = ppc.check_box :_destroy, {:checked => ppc.object.persisted?}, '0', '1'
+/     = ppc.hidden_field :product_category_id
+/   = ppc.label :_destroy, ppc.object.product_category.name
+/   %br
 
+/ %br
+/ = f.fields_for :variants do |v|
+/   - if v.object.is_master?
+/     = v.label :sku
+/     = v.text_field :sku
+/     %br
+/     = v.label :price
+/     = v.text_field :price
+/   %br
 /   %h4="Prototypes"
 /   - if !@prototypes.empty?
 /     - @prototypes.each do |p|
 /       = check_box_tag "prototypes[]", p.id
 /       = label_tag p.name
 /   %br
-
 /   %h4= "Variant Properties"
 /   = f.fields_for :product_variant_properties do |ff|
 /     -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
