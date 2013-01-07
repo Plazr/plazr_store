@@ -164,9 +164,6 @@ FactoryGirl.define do
 
     factory :invalid_product do
       name nil 
-      after(:build) do |p| 
-        p.variants << FactoryGirl.build(:variant, product: p)
-      end
     end
 
     factory :product_with_properties_and_variant_properties do

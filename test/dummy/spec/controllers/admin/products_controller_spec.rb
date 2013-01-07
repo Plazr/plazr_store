@@ -50,9 +50,9 @@ describe PZS::Admin::ProductsController, :type => :controller do
     end
   end
 
-  describe "POST #create" do
-    it_behaves_like 'default admin create method', :product, PZS::Product
-  end
+  #describe "POST #create" do
+  #  it_behaves_like 'default admin create method', :product, PZS::Product
+  #end
 
   describe 'PUT #update' do
     it_behaves_like 'default admin update method', :product, [:name]
