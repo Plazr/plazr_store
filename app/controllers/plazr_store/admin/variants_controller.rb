@@ -16,6 +16,7 @@ module PlazrStore
       if @variant.save
         redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully created.'
       else
+        @variant.multimedia.build
         render :new
       end
     end
@@ -23,6 +24,7 @@ module PlazrStore
     def new
       @variant = Variant.new(visible: true, :product_id => @product.id)
       build_relations_for_fields_for
+      @variant.multimedia.build
     end
 
     def edit
