@@ -1,12 +1,14 @@
 module PlazrStore
   class Coupon < ActiveRecord::Base
     ## Relations ##
-    belongs_to :discount_type
+    belongs_to :promotional_code
     # belongs_to :user TODO metodo que chama api
     
-    has_many :orders
-
     ## Attributes ##
-    attr_accessible :code, :description, :expires_at, :minimum_cart, :starts_at, :uses_allowed, :value
+    attr_accessible :promotional_code_id, :user_id
+
+    ## Validations ##
+    validates :promotional_code_id, :user_id, presence: true
+    validates :promotional_code, uniqueness: true
   end
 end

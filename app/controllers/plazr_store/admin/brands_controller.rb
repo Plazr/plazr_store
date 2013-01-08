@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::BrandsController < ApplicationController
+  class Admin::BrandsController < Admin::ApplicationController
     def show
       @brand = Brand.find(params[:id])
     end

@@ -1,4 +1,13 @@
 FactoryGirl.define do
+  factory :address, :class => PZS::Address do
+    sequence(:address1) { |n| "Address1_#{n}" }
+    sequence(:city) { |n| "City#{n}" }
+    sequence(:first_name) { |n| "FirstName#{n}" }
+    sequence(:last_name) { |n| "LastName#{n}" }
+    sequence(:phone) { |n| "Phone_#{n}" }
+    sequence(:zipcode) { |n| "Zipcode_#{n}" }
+  end
+
   factory :brand, :class => PZS::Brand do
     sequence(:name) { |n| "Brand #{n}" }
 
@@ -9,6 +18,23 @@ FactoryGirl.define do
     factory :invalid_brand do
       name nil 
     end
+  end
+
+  factory :cart, :class => PZS::Cart do
+    after(:build) do |c| 
+      c.user_id = FactoryGirl.create(:specific_user).id
+    end
+    after(:create) do |c|
+      p = FactoryGirl.create(:product_full)
+      FactoryGirl.create :cart_variant, cart_id: c.id, variant_id: p.variants.first.id
+    end
+  end
+
+  factory :cart_variant, :class => PZS::CartVariant do
+    association :cart
+    association :variant
+    amount 1
+    state "pending"
   end
 
   factory :discount_type, :class => PZS::DiscountType do 
@@ -27,7 +53,7 @@ FactoryGirl.define do
   factory :multimedium, :class => PZS::Multimedium do
     sequence(:caption) { |n| "Caption #{n}" }
     file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
-    
+
     factory :multimedium_v2 do
       caption "Good Multimedium"
       association :variant
@@ -46,6 +72,55 @@ FactoryGirl.define do
     end
   end
 
+  factory :order, :class => PZS::Order do 
+    sequence(:email) { |n| "someweirdunrepeatableemail#{n}@yourcousin.com" }
+    total 0
+    item_total 0
+    adjustment_total 0
+    payment_state "processing"
+    shipment_state "processing"
+    state "processing"
+
+    # association :cart
+    association :shipment_condition
+    # promotional_code
+
+    after(:build) do |o| 
+      o.user_id = FactoryGirl.create(:specific_user).id
+    end
+
+    factory :order_with_addresses do
+      after(:build) do |o| 
+        a = FactoryGirl.create(:address)
+        o.billing_address_id = a.id
+        o.shipping_address_id = a.id
+      end
+
+      factory :order_full do
+        association :cart
+      end
+    end
+  end
+
+  factory :order_without_user, :class => PZS::Order do
+    sequence(:email) { |n| "someweirdunrepeatableemail#{n}@yourcousin.com" }
+    total 0
+    item_total 0
+    adjustment_total 0
+    payment_state "processing"
+    shipment_state "processing"
+    state "processing"
+
+    association :shipment_condition
+    association :cart
+
+    after(:build) do |o| 
+      a = FactoryGirl.create(:address)
+      o.billing_address_id = a.id
+      o.shipping_address_id = a.id
+    end
+  end
+
   factory :product, :class => PZS::Product do
     sequence(:name) { |n| "Product#{n}" }
     details "Details"
@@ -53,7 +128,7 @@ FactoryGirl.define do
 
     factory :product_full do
       ignore do
-        variants_count 5
+        variants_count 2
       end
 
       after(:build) do |p| 
@@ -97,6 +172,33 @@ FactoryGirl.define do
         p.variant_properties << FactoryGirl.create(:variant_property_with_values)
       end
     end
+  end
+
+  factory :product_category, :class => PZS::ProductCategory do
+    sequence(:name) { |n| "Name #{n}" }
+    description "Description"
+    is_leaf false
+    parent_product_category_id ""
+
+    factory :product_category_leaf do
+      is_leaf true
+      after(:build) do |vc| 
+        vc.parent_product_category_id = FactoryGirl.create(:product_category).id
+      end
+    end
+
+    factory :product_category_v2 do
+      name "Sapatilhas"
+    end
+
+    factory :invalid_product_category do
+      name nil
+    end
+  end
+
+  factory :product_product_category, :class => PZS::ProductProductCategory do
+    association :product
+    association :product_category
   end
 
   factory :product_property, :class => PZS::ProductProperty do
@@ -191,30 +293,8 @@ FactoryGirl.define do
     factory :variant_with_variant_property_values do
       is_master false
       after(:create) do |v|
-      v.variant_variant_property_values << FactoryGirl.create(:variant_variant_property_value, :variant_id => v.id)
+        v.variant_variant_property_values << FactoryGirl.create(:variant_variant_property_value, :variant_id => v.id)
       end
-    end
-  end
-
-  factory :variant_category, :class => PZS::VariantCategory do
-    sequence(:name) { |n| "Name #{n}" }
-    description "Description"
-    is_leaf false
-    parent_variant_category_id ""
-
-    factory :variant_category_leaf do
-      is_leaf true
-      after(:build) do |vc| 
-        vc.parent_variant_category_id = FactoryGirl.create(:variant_category).id
-      end
-    end
-
-    factory :variant_category_v2 do
-      name "Sapatilhas"
-    end
-
-    factory :invalid_variant_category do
-      name nil
     end
   end
 
@@ -251,11 +331,6 @@ FactoryGirl.define do
     factory :invalid_variant_property_value do
       name nil
     end
-  end
-
-  factory :variant_variant_category, :class => PZS::VariantVariantCategory do
-    association :variant
-    association :variant_category
   end
 
   factory :variant_variant_property_value, :class => PZS::VariantVariantPropertyValue do

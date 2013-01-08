@@ -1,0 +1,8 @@
+%h1= "My Orders"
+
+%table
+  - @orders.each do |order|
+    %tr
+      %td= link_to order.info, order_path(order)
+
+= will_paginate @orders

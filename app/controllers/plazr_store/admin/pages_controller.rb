@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::PagesController < ApplicationController
+  class Admin::PagesController < Admin::ApplicationController
     def show
       @page = Page.find(params[:id])
     end

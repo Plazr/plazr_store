@@ -9,9 +9,11 @@ class CreatePlazrStorePromotionalCodes < ActiveRecord::Migration
       t.datetime :expires_at
       t.integer :uses_allowed, :default => 1
       t.integer :times_used, :default => 0
+      t.references :discount_type, :null => false
 
       t.timestamps
     end
     add_index :plazr_store_promotional_codes, :code
+    add_index :plazr_store_promotional_codes, :discount_type_id
   end
 end

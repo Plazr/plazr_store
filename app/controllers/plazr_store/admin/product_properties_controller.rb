@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::ProductPropertiesController < ApplicationController
+  class Admin::ProductPropertiesController < Admin::ApplicationController
     before_filter :get_product
 
     def index

@@ -1,0 +1,4 @@
+%h3= "Billing Address"
+= f.fields_for :billing_address do |address|
+  = render 'address_form', address: address, type: "billing"
+
