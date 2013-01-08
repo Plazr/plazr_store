@@ -14,7 +14,7 @@
 			%article.row-fluid
 				.span3
 					- variant = @product.master_variant
-					- imgpth = if variant.multimedia.empty?
+					- imgpth = if variant.nil? || variant.multimedia.empty?
 						- 'http://placehold.it/100x100&text=No%20image'
 					- else
 						- variant.multimedia.first.file.url(:thumb)

@@ -186,7 +186,7 @@ module PlazrStore
     end
 
     def create_slug
-      self.slug = self.name.parameterize
+      self.slug = (self.name || '').parameterize 
     end
 
     def image
