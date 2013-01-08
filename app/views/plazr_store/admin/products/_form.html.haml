@@ -67,25 +67,6 @@
 /   = f.label :brand_id
 /   = f.collection_select :brand_id, @brands, :id, :name, {:prompt => "Pick a brand"}
 
-/   %br
-/   = f.fields_for :variants do |v|
-/     - if v.object.is_master?
-/       = v.label :sku
-/       = v.text_field :sku
-/       %br
-/       = v.label :price
-/       = v.text_field :price
-/       -# this is needed to load all the variant_categories to the master_variant
-/       - v.object.get_unselected_variant_categories_and_order_by_name
-
-/       %h4= "Variant Categories"
-/       = v.fields_for :variant_variant_categories do |vvc|
-/         - if vvc.object.variant_category.is_leaf?
-/           = vvc.check_box :_destroy, {:checked => vvc.object.persisted?}, '0', '1'
-/           = vvc.hidden_field :variant_category_id
-/         = vvc.label :_destroy, vvc.object.variant_category.name
-/         %br
-/     %br
 / %br
 / %h4= "Product Categories"
 / = f.fields_for :product_product_categories do |ppc|
@@ -94,6 +75,26 @@
 /     = ppc.hidden_field :product_category_id
 /   = ppc.label :_destroy, ppc.object.product_category.name
 /   %br
+
+/ %br
+/ = f.fields_for :variants do |v|
+/   - if v.object.is_master?
+/     = v.label :sku
+/     = v.text_field :sku
+/     %br
+/     = v.label :price
+/     = v.text_field :price
+/     %br
+
+/     = v.fields_for :multimedia do |m|
+/       - if m.object.new_record?
+/         = m.label :file, "Image File"
+/         = m.file_field :file
+/         %br
+/         = m.label :caption
+/         = m.text_field :caption
+/   -# the two slashes in the line below are needed to end the first if statement
+/   //    
 
 / %br
 / = f.fields_for :variants do |v|

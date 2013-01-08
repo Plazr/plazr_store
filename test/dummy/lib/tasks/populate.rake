@@ -32,5 +32,7 @@ namespace :db do
       FactoryGirl.create_list :cart, 2
       puts 'Generating addresses'
       FactoryGirl.create_list :address, 5
+      puts 'Generating admin user'
+      FactoryGirl.create :admin, email: "admin@gmail.com", password: "asdasd", password_confirmation: "asdasd"
   end
 end
