@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>PlazrStore</title>
-  <%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
-  <%= javascript_include_tag "plazr_store/application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>PlazrStore</title>
+    <%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
+    <%= javascript_include_tag "plazr_store/application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
+<% end %>
 
 <h1>Plazr Store (Dummy App)</h1>
 
-<h2>Current User: <%= current_user.to_s unless Rails.env.test? %></h2>
+    <h2>Current User: <%= current_user.to_s unless Rails.env.test? %></h2>
 
-<table>
-  <tr>
-    <td class="nav">
-      <%= render 'plazr_store/shared/nav' %>
-      <%= render 'plazr_auth/shared/nav' unless Rails.env.test? %>
-    </td>
-    
-    <td class="content"><%= yield %></td>
-  </tr>
-</table>
+    <%= form_tag plazr_store.search_path, :method => 'get', :id => "products_search" do %>
+      <%= content_tag :label do %>
+        Search term:
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search", :name => nil %>
+      <% end %>
+    <% end %>
 
-</body>
+    <table>
+      <tr>
+        <td class="nav">
+          <%= render 'plazr_store/shared/nav' %>
+          <%= render 'plazr_auth/shared/nav' unless Rails.env.test? %>
+        </td>
+
+        <td class="content"><%= yield %></td>
+      </tr>
+    </table>
+
+  </body>
 </html>

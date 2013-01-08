@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::VariantPropertiesController < ApplicationController
+  class Admin::VariantPropertiesController < Admin::ApplicationController
 
     def show
       @variant_property = VariantProperty.find(params[:id])

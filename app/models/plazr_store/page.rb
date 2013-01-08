@@ -4,13 +4,14 @@ module PlazrStore
     include PZS::ParanoiaInterface
 
     ## Relations ##
-    has_many :multimedia, class_name: "Multimedia"
+    has_many :multimedia
 
     ## Attributes ##
     attr_accessible :content, :slug, :title
 
     ## Validations ##
     validates :title, presence: true
-    validates :slug, uniqueness_without_deleted: true
+    validates :slug, presence: true, uniqueness_without_deleted: true
+    validates :content, presence: true
   end
 end

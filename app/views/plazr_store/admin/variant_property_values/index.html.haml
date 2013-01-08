@@ -1,0 +1,23 @@
+%h1 Listing Variant Property Values
+%table
+  %thead
+    %tr
+      %th Name
+      %th Presentation
+      %th Variant Property
+  %tbody
+    - @variant_property_values.each do |variant_property_value|
+      %tr
+        %td
+          = variant_property_value.name
+        %td
+          = variant_property_value.presentation
+        %td
+          = variant_property_value.variant_property.display_name
+        %td
+          = link_to 'Show', admin_variant_property_variant_property_value_path(@variant_property, variant_property_value)
+        %td
+          = link_to 'Edit', edit_admin_variant_property_variant_property_value_path(@variant_property, variant_property_value)
+        %td
+          = link_to 'Destroy', admin_variant_property_variant_property_value_path(@variant_property, variant_property_value), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New Variant', new_admin_variant_property_variant_property_value_path

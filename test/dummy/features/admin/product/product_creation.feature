@@ -19,7 +19,7 @@ Feature: Product creation
 
     When I fill in all required fields for product
     And I fill in all required fields for a master variant
-    And I submit that data
+    And I submit this data
     Then I should see a success message
     And The new product should be stored in the database
     And A variant marked as master should be stored in the database
