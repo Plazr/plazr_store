@@ -1,6 +1,6 @@
 module PlazrStore
   class Notifier < ActionMailer::Base
-    default :from => "notification@example.com"
+    default :from => "geral@plazr.net"
 
     def order_notification(order)
       @order = order
