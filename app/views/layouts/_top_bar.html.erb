@@ -1,25 +1,22 @@
 <div class="topbar-wrapper">
 	<div class="container">
 		<div class="topbar clearfix">
-			<!-- <nav>
+			<nav>
 				<ul class="nav nav-pills pull-left">
-					<li><%#= link_to 'Store', index_path %></li>
-					<li><%#= link_to 'Admin', admin_products_path %></li>
+					<li><%= link_to 'Store', plazr_store.index_path %></li>
+					<li><%= link_to 'Admin', plazr_store.admin_products_path %></li>
 				</ul>
-
-
-			</nav> -->
-			<%= render 'plazr_auth/shared/nav' %>
-			<%#= form_tag search_path, :method => 'get', :class => "form-search pull-right" do %>
+			</nav>
+			<%= form_tag search_path, :method => 'get', :class => "form-search pull-right" do %>
 				<select>
-					<option value="volvo">--</option>
-					<option value="saab">Camisolas</option>
-					<option value="opel">Calças</option>
-					<option value="audi">Sapatilhas</option>
+					<option value="default">--</option>
+					<option value="camisolas">Camisolas</option>
+					<option value="calcas">Calças</option>
+					<option value="sapatilhas">Sapatilhas</option>
 				</select>
-				 <%= text_field_tag :search, params[:search], :placeholder => "search something", :class => "input-large" %>
-				  <%= submit_tag "Search", :name => nil, :class=>"btn" %>
-			<%# end %>
+				<%= text_field_tag :search, params[:search], :placeholder => "search something", :class => "input-large" %>
+				<%= submit_tag "Search", :name => nil, :class=>"btn" %>
+			<% end %>
 
 		</div>
 	</div>

@@ -80,9 +80,9 @@ module PlazrStore
       self.master_variant.price
     end
 
-    # def images
-    #   self.variants.master_variant.first.multimedia
-    # end
+    def images
+      master_variant.multimedia
+    end
 
     # def sku
     #   self.variants.master_variant.first.sku

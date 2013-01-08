@@ -1,5 +1,4 @@
 
-<% page = 'plazr_store/mockup/pages/single' %>
 
 <% page2 = 'imageSlider/jquery-1.2.6.min' %>
 <% page3 = 'imageSlider/jquery-easing-1.3.pack' %>
@@ -8,16 +7,14 @@
 
 
 <%= content_for :head do %>
-<%= stylesheet_link_tag page, :media => "all" %>
 <%= javascript_include_tag page2 %>
 <%= javascript_include_tag page3 %>
 <%= javascript_include_tag page4 %>
 <%= javascript_include_tag page5 %>
-<%= javascript_include_tag page %>
 <% end %>
 
 
-<article class="container">
+<article class="container" id="product-show">
 
   <div class="row-fluid">
     <div class="span12">
