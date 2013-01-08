@@ -18,8 +18,6 @@ namespace :db do
     puts 'Generating test data. This might take a while...'
       puts 'Generating brands...'
       FactoryGirl.create_list :brand, 10
-      puts 'Generating discount_types...'
-      FactoryGirl.create_list :discount_type, 5
       puts 'Generating product_categories...'
       FactoryGirl.create_list :product_category, 5
       puts 'Generating shipment_conditions...'

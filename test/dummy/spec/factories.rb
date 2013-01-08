@@ -40,9 +40,11 @@ FactoryGirl.define do
   factory :discount_type, :class => PZS::DiscountType do 
     sequence(:name) { |n| "Discount #{n}" }
     description "Discount Description"
+    scope {0}
 
     factory :discount_type_v2 do
       name "Black Friday"
+      scope {2}
     end
 
     factory :invalid_discount_type do
@@ -139,6 +141,7 @@ FactoryGirl.define do
         p.variant_properties << FactoryGirl.create(:variant_property_with_values)
         p.variants << FactoryGirl.create_list(:variant, evaluator.variants_count, product: p)
         p.variants.each do |v|
+          v.multimedia << FactoryGirl.create_list(:multimedium, 2, variant: v)
           p.variant_properties.each do |pvp|
             v.variant_property_values << pvp.variant_property_values.first
           end

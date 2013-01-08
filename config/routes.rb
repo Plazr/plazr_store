@@ -4,8 +4,8 @@ PlazrStore::Engine.routes.draw do
 
   namespace :admin do
     resources :brands
-    resources :discount_types
     resources :pages
+    resources :promotions
     resources :product_categories
     resources :products do
       resources :product_properties, :only => [:index, :create, :destroy]
