@@ -93,7 +93,7 @@ module PlazrStore
       self.billing_address ||= Address.new
       self.shipping_address ||= Address.new
 
-      self.payment_state = "processing"
+      self.payment_state = "pending"
       self.shipment_state = "processing"
       self.state = "processing"
     end
