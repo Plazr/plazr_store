@@ -3,6 +3,7 @@
 //= require bootstrap/datepicker/core.js
 //= require bootstrap/datepicker/locales/bootstrap-datepicker.pt.js
 //= require bootstrap/timepicker.js
+//= require ddlc/ddlc-1.4-min.js
 
 // make all photo containers square
 function product_photo_resize(){

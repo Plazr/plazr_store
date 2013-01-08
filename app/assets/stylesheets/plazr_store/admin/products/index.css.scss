@@ -4,6 +4,7 @@
 	max-width: 300px;
 	min-width: 200px;
 	margin: 0 !important;
+	padding-bottom: 1em;
 
 	article {
 		margin: .5em;
@@ -13,8 +14,25 @@
 			width: 100%;
 			background-repeat: no-repeat;
 			background-position: center center;
-			-webkit-background-size: cover;
-			background-size: cover;
+			background-size: contain;
+			-webkit-background-size: contain;
+		}
+
+		div.actions {
+			padding: .5em;
+
+			a:hover {
+				text-decoration: none;
+			}
+
+			button {
+				display: inline;
+			}
+		}
+
+		h6 {
+			font-size: larger;
+			font-weight: normal;
 		}
 	}
 }
