@@ -17,7 +17,7 @@ Feature: Brand creation
     I should be able to create a new brand
 
     When I fill in all fields for brand
-    And I submit that data
+    And I submit this data
     Then I should see a success message
     And The new brand should be stored in the database
     And I should be redirected to brand's index page
@@ -29,6 +29,6 @@ Feature: Brand creation
     without filling in all the required fields
 
     When I leave the brand's name blank
-    And I submit that data
+    And I submit this data
     Then I should see an error message
     And I should stay at the brand's creation page

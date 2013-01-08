@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::ShipmentConditionsController < ApplicationController
+  class Admin::ShipmentConditionsController < Admin::ApplicationController
 
     def show
       @shipment_condition = ShipmentCondition.find(params[:id])

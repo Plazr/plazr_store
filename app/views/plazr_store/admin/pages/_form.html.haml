@@ -9,12 +9,16 @@
 
   = f.label :title
   = f.text_field :title
+  %br
 
   = f.label :slug
   = f.text_field :slug
+  %br
 
   = f.label :content
-  = f.text_area :content
+  =# f.text_area :content
+  = f.text_area :content, :class => "redactor", :rows => 40, :cols => 20
+  %br
 
   = f.submit "Submit"
   = link_to 'Cancel', admin_pages_path

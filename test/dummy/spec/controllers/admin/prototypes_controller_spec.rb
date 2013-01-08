@@ -1,7 +1,8 @@
 require 'spec_helper'
 
-describe PZS::Admin::PrototypesController, :type => :controller, skip: true do
+describe PZS::Admin::PrototypesController, :type => :controller do
   render_views
+  login_admin
 
   describe "GET #index" do
     it_behaves_like 'default admin index method', :prototype
@@ -12,16 +13,10 @@ describe PZS::Admin::PrototypesController, :type => :controller, skip: true do
   end
 
   describe "GET #new" do
-    describe "is filtered by #instance_variable_loading" do
-      it_behaves_like 'before filter and assign', :new, :prototype, [:property, :variant_property]
-    end
     it_behaves_like 'default admin new method', :prototype, PZS::Prototype
   end
 
   describe "GET #edit" do
-    describe "is filtered by #instance_variable_loading" do
-      it_behaves_like 'before filter and assign', :edit, :prototype, [:property, :variant_property]
-    end
     it_behaves_like 'default admin show and edit methods', :edit, :prototype
   end
 

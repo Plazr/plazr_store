@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe PZS::Admin::ShipmentConditionsController, :type => :controller do
   render_views
+  login_admin
 
   describe "GET #index" do
     it_behaves_like 'default admin index method', :shipment_condition

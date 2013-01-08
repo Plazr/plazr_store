@@ -2,10 +2,14 @@ class CreatePlazrStoreMultimedia < ActiveRecord::Migration
   def change
     create_table :plazr_store_multimedia do |t|
       t.text :caption
-      t.integer :size
-      t.text :link
+      t.attachment :file
+      t.references :variant
+      t.references :page
+      t.string     :type, :default => ""
 
       t.timestamps
     end
+    add_index :plazr_store_multimedia, :variant_id
+    add_index :plazr_store_multimedia, :page_id
   end
 end

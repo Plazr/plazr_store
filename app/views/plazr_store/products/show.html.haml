@@ -1,0 +1,42 @@
+%h1 Show Product
+%p#notice
+  = notice
+%table
+  %tr
+    %td
+      %b Name
+    %td
+      = @product.name
+  %tr
+    %td
+      %b Details
+    %td
+      = @product.details
+
+
+- if !@product.product_properties.empty?
+  %h3 Properties
+  %table{:border => 1}
+    - @product.product_properties.each do |p|
+      %tr
+        %td= p.property.display_name
+        %td= p.value
+    %tr
+      %td= "Brand"
+      %td= @product.brand
+
+- if !@product.variants_without_master.empty?
+  %h3 Variants
+  - @product.variants_without_master.each do |v|
+    %table{border: 1}
+      - v.variant_property_values.each do |vpv|
+        %tr
+          %td= vpv.variant_property.display_name
+          %td= vpv.presentation
+    = add_to_cart_form(v.id)
+    = add_to_wishlist_form(v.id)
+- else
+  = add_to_cart_form(@product.master_variant.id)
+  = add_to_wishlist_form(@product.master_variant.id)
+
+= link_to 'Back', products_path

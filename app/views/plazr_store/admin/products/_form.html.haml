@@ -6,13 +6,6 @@
         %ul
           - @product.errors.full_messages.each do |msg|
             %li= msg
-  -# - if @master_variant.errors.any?
-  -#   #error_explanation
-  -#     %h2= "#{pluralize(@master_variant.errors.count, "error")} prohibited this product from being saved:"
-  -#     %div{:class=>["alert","alert-error"]}
-  -#       %ul
-  -#         - @master_variant.errors.full_messages.each do |msg|
-  -#           %li= msg
 
   = f.label :name
   = f.text_field :name
@@ -27,31 +20,55 @@
   = f.text_field :available_at
 
   %br
+  -# BRAND
+  = f.label :brand_id
+  = f.collection_select :brand_id, @brands, :id, :name, {:prompt => "Pick a brand"}
 
-  = f.fields_for :variants do |mv|
-    = mv.label :sku
-    = mv.text_field :sku
+  %br
+  %h4= "Product Categories"
+  = f.fields_for :product_product_categories do |ppc|
+    - if ppc.object.product_category.is_leaf?
+      = ppc.check_box :_destroy, {:checked => ppc.object.persisted?}, '0', '1'
+      = ppc.hidden_field :product_category_id
+    = ppc.label :_destroy, ppc.object.product_category.name
     %br
-    = mv.label :price
-    = mv.text_field :price
-    
-  %h4= "Properties"
-  = f.fields_for :product_properties do |ff|
-    = ff.label :value, ff.object.property.display_name
-    = ff.text_field :value
-    = ff.hidden_field :property_id
+
+  %br
+  = f.fields_for :variants do |v|
+    - if v.object.is_master?
+      = v.label :sku
+      = v.text_field :sku
+      %br
+      = v.label :price
+      = v.text_field :price
+      %br
+
+      = v.fields_for :multimedia do |m|
+        - if m.object.new_record?
+          = m.label :file, "Image File"
+          = m.file_field :file
+          %br
+          = m.label :caption
+          = m.text_field :caption
+    -# the two slashes in the line below are needed to end the first if statement
+    //    
+
+  %h4="Prototypes"
+  - if !@prototypes.empty?
+    - @prototypes.each do |p|
+      = check_box_tag "prototypes[]", p.id
+      = label_tag p.name
+  %br
 
   %h4= "Variant Properties"
   = f.fields_for :product_variant_properties do |ff|
     -# when the check box is unchecked we want _destroy to be true, and when it is checked we want to keep the record around. That is what the last two parameters to check_box do (‘0’ and ‘1’): set the checked and unchecked values respectively, flipping them from their defaults
     -# ff.object accesss the current record in the fields_for loop
     -# ':checked => ff.object.persisted?' means that if the record exists in the database then the box should be checked
-    -# = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
     = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
     = ff.label :_destroy, ff.object.variant_property.display_name
     -# this hidden_field value is empty so that all the associations to f will be destroyed if no checkbox is selected
     = ff.hidden_field :variant_property_id
-
   %br
 
   = f.submit "Submit"
