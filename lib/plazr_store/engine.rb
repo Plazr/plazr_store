@@ -3,6 +3,9 @@ require 'paranoia'
 require 'paranoia_uniqueness_validator'
 require 'paperclip'
 require 'better_errors'
+require 'redactor-rails'
+require 'carrierwave'
+require 'mini_magick'
 
 module PlazrStore
   class Engine < ::Rails::Engine
