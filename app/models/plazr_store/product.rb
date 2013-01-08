@@ -24,7 +24,7 @@ module PlazrStore
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
                     :property_ids, :variant_property_ids, 
                     :variants_attributes, :product_variant_properties_attributes, 
-                    :product_properties_attributes, :brand_attributes,
+                    :brand_attributes,
                     :product_product_categories_attributes
 
     # Nested Attributes

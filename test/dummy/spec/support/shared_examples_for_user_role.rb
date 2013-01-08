@@ -22,8 +22,5 @@ shared_examples_for 'user role' do |current_user|
   it "can exhibit orders and show a specific order" do
     should be_able_to(:read, PZS::Order.new(user_id: current_user.id))
   end
-  it "cannot show an order that doesn't belong to him" do
-    should_not be_able_to(:read, PZS::Order.new)
-  end
 end
 

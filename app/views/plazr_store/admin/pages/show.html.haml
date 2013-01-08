@@ -16,7 +16,7 @@
     %td
       %b Content
     %td
-      = @page.content
+      = raw(@page.content)
 
 
 = link_to 'Edit', edit_admin_page_path(@page)

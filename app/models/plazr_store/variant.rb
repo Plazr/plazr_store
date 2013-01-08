@@ -9,7 +9,7 @@ module PlazrStore
     has_many :cart_variants
     has_many :carts, :through => :cart_variants
 
-    has_many :multimedia, :dependent => :destroy
+    has_many :multimedia, :dependent => :destroy, :inverse_of => :variant
 
     has_many :promotion_variants, :dependent => :destroy
     has_many :promotions, :through => :promotion_variants
@@ -26,11 +26,14 @@ module PlazrStore
     ## Nested Attributes ##
     accepts_nested_attributes_for :variant_variant_property_values, :allow_destroy => true, 
           :reject_if => proc {|attributes| attributes.any? {|_,v| v.blank?}}
+    accepts_nested_attributes_for :multimedia, :allow_destroy => true,
+          :reject_if => proc { |t| t['file'].nil? }
 
     ## Attributes ##
     attr_accessible :amount_available, :visible, :cost_price, :description, 
                     :is_master, :price, :restock_date, :sku, :product_id, 
-                    :variant_variant_property_values_attributes
+                    :variant_variant_property_values_attributes,
+                    :multimedia_attributes
 
     ## Validations ##
     validates_presence_of :sku, :visible, :product

@@ -41,7 +41,17 @@
       %br
       = v.label :price
       = v.text_field :price
-    %br
+      %br
+
+      = v.fields_for :multimedia do |m|
+        - if m.object.new_record?
+          = m.label :file, "Image File"
+          = m.file_field :file
+          %br
+          = m.label :caption
+          = m.text_field :caption
+    -# the two slashes in the line below are needed to end the first if statement
+    //    
 
   %h4="Prototypes"
   - if !@prototypes.empty?
