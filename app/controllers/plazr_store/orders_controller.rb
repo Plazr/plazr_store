@@ -2,7 +2,6 @@ module PlazrStore
   class OrdersController < ApplicationController
     include PaypalExpressHelper
     
-    before_filter :check_authorization
     before_filter :get_cart, only: [:new, :create, :review]
     before_filter :get_auxiliar_data, only: [:new, :create, :review]
     before_filter :assigns_gateway, only: [:create, :review]
@@ -15,23 +14,39 @@ module PlazrStore
     #   # redirect_to admin_edit_order_path(@order.id)
     # end
     
-    def confirm
-      #if params[:token].nil?
-      #  redirect_to cart_path, :notice => 'Woops! Something went wrong!' 
-      #  return
-      #end
-      
-      #gateway_response = @gateway.details_for(params[:token])
-
-      #unless gateway_response.success?
-      #  redirect_to cart_url, :notice => "Sorry! Something went wrong with the Paypal purchase. Here's what Paypal said: #{gateway_response.message}" 
-      #  return
-      #end
-      
-      #order_address = get_order_info gateway_response
-      #@address = Address.new(order_address[:address])
+    def new
+      @order = Order.new
+      @order.load_user(current_user)        
     end
-     
+    
+    def review
+      if params[:token].nil?
+       redirect_to cart_path, :notice => 'Woops! Something went wrong!' 
+       return
+      end
+       
+       
+
+      gateway_response = @gateway.details_for(params[:token])
+
+      unless gateway_response.success?
+       redirect_to cart_url, :notice => "Sorry! Something went wrong with the Paypal purchase. Here's what Paypal said: #{gateway_response.message}" 
+       return
+      end
+
+      order_address = get_order_info gateway_response
+      @address = Address.new(order_address[:address])
+      total = ShipmentCondition.find(session[:shipment_condition]).price + @cart.total_price
+
+      @order = Order.new(
+       :express_token => order_address[:gateway_details][:token], 
+       :payer_id => order_address[:gateway_details][:payer_id],
+       :shipment_condition_id => session[:shipment_condition],
+       :total => total
+      )
+      @order.load_user(current_user)
+    end
+    
     def create
       @order = Order.new(params[:order])
             
@@ -59,8 +74,6 @@ module PlazrStore
       ActiveRecord::Base.transaction do # so that order's cart changes aren't presisted if an error occurs
         @order.load_user(current_user)
         @order.add_cart_and_update_status(@cart)
-
-        authorize! :create, @order
 
         shipment_price = ShipmentCondition.find(@order.shipment_condition_id).price         
         @order.total = current_user.cart.total_price + shipment_price
@@ -116,67 +129,36 @@ module PlazrStore
     end
         
     def history
-      authorize! :index, Order
-      @orders = current_user.orders.paginate(:per_page => 5, :page => params[:page])
-    end
-
-    def new
-      @order = Order.new
-      @order.load_user(current_user)
-
-      authorize! :create, @order
+      redirect_to plazr_auth_url if current_user.nil?
     end
 
     def receipt
       # redirects to the last order receipt view
       if session.has_key?(:last_order)
         @order = Order.find(session[:last_order])
-        authorize! :read, @order, :message => "You are not authorized to see the receipt of this order!"
       else
         redirect_to plazr_auth_url 
       end
     end
+    
+    def confirm
+      #if params[:token].nil?
+      #  redirect_to cart_path, :notice => 'Woops! Something went wrong!' 
+      #  return
+      #end
+      
+      #gateway_response = @gateway.details_for(params[:token])
 
-    def review
-      if params[:token].nil?
-       redirect_to cart_path, :notice => 'Woops! Something went wrong!' 
-       return
-      end
-
-      gateway_response = @gateway.details_for(params[:token])
-
-      unless gateway_response.success?
-       redirect_to cart_url, :notice => "Sorry! Something went wrong with the Paypal purchase. Here's what Paypal said: #{gateway_response.message}" 
-       return
-      end
-
-      order_address = get_order_info gateway_response
-      @address = Address.new(order_address[:address])
-      total = ShipmentCondition.find(session[:shipment_condition]).price + @cart.total_price
-
-      @order = Order.new(
-       :express_token => order_address[:gateway_details][:token], 
-       :payer_id => order_address[:gateway_details][:payer_id],
-       :shipment_condition_id => session[:shipment_condition],
-       :total => total
-      )
-      @order.load_user(current_user)
+      #unless gateway_response.success?
+      #  redirect_to cart_url, :notice => "Sorry! Something went wrong with the Paypal purchase. Here's what Paypal said: #{gateway_response.message}" 
+      #  return
+      #end
+      
+      #order_address = get_order_info gateway_response
+      #@address = Address.new(order_address[:address])
     end
     
-    def show
-      @order = Order.find(params[:id])
-      begin
-        authorize! :show, @order, :message => "You are not authorized to see this order!"
-      rescue CanCan::AccessDenied => exception
-        redirect_to orders_history_url, :alert => exception.message
-      end
-    end
-
     protected
-      def check_authorization
-        authorize! :access, :orders_actions
-      end
-
       def get_auxiliar_data
         @shipment_conditions = ShipmentCondition.all
       end
