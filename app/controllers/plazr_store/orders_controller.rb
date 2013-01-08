@@ -24,6 +24,8 @@ module PlazrStore
        redirect_to cart_path, :notice => 'Woops! Something went wrong!' 
        return
       end
+       
+       
 
       gateway_response = @gateway.details_for(params[:token])
 
