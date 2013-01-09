@@ -96,6 +96,13 @@ FactoryGirl.define do
         o.shipping_address_id = a.id
       end
 
+      factory :order_paypal do
+        # express_token order_address[:gateway_details][:token]
+        # payer_id order_address[:gateway_details][:payer_id]
+        # shipment_condition_id session[:shipment_condition]
+        total 50
+      end
+
       factory :order_full do
         association :cart
       end

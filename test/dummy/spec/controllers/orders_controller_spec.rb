@@ -11,7 +11,7 @@ describe PZS::OrdersController, :type => :controller do
   describe "POST #create" do
     it "assigns cart to @cart" do
       cart_id = current_user.cart.id
-      post :create, :order => build_attributes(:order_with_addresses)
+      post :create, :order => FactoryGirl.create(:order_with_addresses)
       assigns(:cart).id.should eq cart_id
     end
     it "assigns all shipment_conditions to @shipment_conditions" do
