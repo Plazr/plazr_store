@@ -16,10 +16,14 @@
 		</div>
 	</section> -->
 
-	<section id="featured">
-
-		<%= render 'featured' if @featured %>
-	</section>
+	<div class="row-fluid">
+		<section id="featured" class="span7">
+			<%= render 'featured' if @featured %>
+		</section>
+		<section class="span5">
+			<%= render 'best' if @best %>
+		</section>
+	</div>
 
 	<section id="recommended">
 		<header class="page-header">

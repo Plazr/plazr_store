@@ -11,33 +11,35 @@
 </head>
 <body>
 
-	<header class="container">
-		<div class="row">
-			<div class="span12">
-				<div class="hero-unit">
-					<h1>Plazr Store</h1>
-					<p class="lead">A simplificar o comércio online.</p>
+	<div class="hero-wrap">
+		<header class="container">
+			<div class="row">
+				<div class="span12">
+					<div class="hero-unit">
+						<h1>Plazr Store</h1>
+						<p class="lead">A simplificar o comércio online.</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	</header>
+		</header>
+	</div>
 
 	<%= render 'layouts/top_bar' %>
 
 	<% unless flash.empty? %>
-		<div class="container">
-			<div class="row-fluid">
-				<div class="span12 text-info">
-					<% flash.each do |name, msg| %>
-						<% if msg.is_a?(String) %>
-							<span class="pull-right flash-messages">
-								<%= content_tag :div, msg, :id => "flash_#{name}" %>
-							</span>
-						<% end %>
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span12 text-info">
+				<% flash.each do |name, msg| %>
+					<% if msg.is_a?(String) %>
+					<span class="pull-right flash-messages">
+						<%= content_tag :div, msg, :id => "flash_#{name}" %>
+					</span>
 					<% end %>
-				</div>
+				<% end %>
 			</div>
 		</div>
+	</div>
 	<% end %>
 
 	<section id="layout-container">
@@ -52,8 +54,6 @@
 			</ul>
 		</div>
 	</footer>
-
 	<%= yield :script %>
-
-  </body>
+</body>
 </html>

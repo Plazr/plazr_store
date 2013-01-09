@@ -5,12 +5,18 @@
  *= require plazr_store/topbar
  *= require plazr_store/products/single
  *= require plazr_store/search/search
+ *= require plazr_store/pages/index
  */
 
-.hero-unit {
-	color: white;
+.hero-wrap {
 	background-image: url("<%= image_path('banner3.jpg') %>");
-	margin-bottom: 10px;
+	background-position: left;
+	.hero-unit {
+		padding-left: 0;
+		color: white;
+		margin-bottom: 10px;
+		background: transparent;
+	}
 }
 
 .flash-messages {
@@ -18,10 +24,10 @@
 }
 
 body {
-	margin-top: 1em;
 	#layout-container {
 		padding: 0 0 3em 0;
 	}
+	background-color: white;
 }
 
 body > footer {
