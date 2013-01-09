@@ -1,0 +1,46 @@
+= form_for [:admin, @product, @promotion] do |f|
+  - if @promotion.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@promotion.errors.count, "error")} prohibited this promotion from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @promotion.errors.full_messages.each do |msg|
+            %li= msg
+
+  = f.label :name
+  = f.text_field :name
+  %br
+
+  = f.label :description
+  = f.text_field :description
+  %br
+
+  = f.label :discount_type
+  = f.collection_select :discount_type_id, @discount_types, :id, :name, {:prompt => "Pick a discount type"}
+  %br
+
+  = f.label :value
+  = f.text_field :value
+  %br
+
+  = f.label :min_filter
+  = f.text_field :min_filter
+  %br
+
+  = f.label :starts_at
+  = f.text_field :starts_at
+  %br
+
+  = f.label :expires_at
+  = f.text_field :expires_at
+  %br
+
+  %h4= "Products"
+  = f.fields_for :product_promotions, @promotion.initialized_products do |pp|
+    = pp.check_box :enabled, {:checked => pp.object.product_id.to_s == @prod || pp.object.persisted?}, '0', '1'
+    = pp.label :enabled, pp.object.product.name
+    = pp.hidden_field :product_id
+  %br
+
+  = f.submit "Submit"
+  = link_to 'Cancel', admin_promotions_path

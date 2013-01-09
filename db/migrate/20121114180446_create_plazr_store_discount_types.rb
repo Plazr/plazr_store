@@ -4,6 +4,7 @@ class CreatePlazrStoreDiscountTypes < ActiveRecord::Migration
       t.string :name, :null => false
       t.text :description
       t.integer :scope 
+      t.integer :type_id
 
       t.timestamps
     end

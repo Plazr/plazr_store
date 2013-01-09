@@ -1,4 +1,4 @@
-class VariantWishlists < ActiveRecord::Migration
+class CreatePlazrStoreVariantWishlists < ActiveRecord::Migration
   def change
     create_table :plazr_store_variant_wishlists do |t|
     t.references :variant, :null => false

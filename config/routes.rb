@@ -5,13 +5,13 @@ PlazrStore::Engine.routes.draw do
   namespace :admin do
     resources :brands
     resources :pages
-    resources :promotions
     resources :product_categories
     resources :products do
       resources :product_properties, :only => [:index, :create, :destroy]
       resources :variants
       resources :multimedia
     end
+    resources :promotions
     resources :properties
     resources :prototypes
     resources :shipment_conditions

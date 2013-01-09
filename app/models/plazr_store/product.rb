@@ -11,6 +11,9 @@ module PlazrStore
     # It also allows to create a product and a variant belonging to it at the same time, because of presence of product_id validation on variation
     has_many :variants, :dependent => :destroy, :inverse_of => :product
 
+    has_many :product_promotions, :dependent => :destroy
+    has_many :promotions, :through => :product_promotions
+
     has_many :product_properties, :dependent => :destroy
     has_many :properties, :through => :product_properties
 
