@@ -39,7 +39,7 @@
 					%h6= @product.slug
 					%p
 						%strong SKU:
-						= @product.master_variant.sku
+						= @product.master_variant.sku if @product.master_variant
 					%h4= "€ #{@product.master_variant.price}"
 					.rating
 						%span
