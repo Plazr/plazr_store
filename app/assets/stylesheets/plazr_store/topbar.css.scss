@@ -1,0 +1,26 @@
+.topbar-wrapper {
+	width: 100%;
+}
+
+.topbar {
+	border-bottom: 1px solid #EEE;
+	padding: 0.6em 0 0.6em 0;
+	background-color: white;
+
+	nav ul.nav {
+		margin: 0;
+		padding: 0;
+	}
+
+	form.form-inline {
+		margin: 0;
+		select {
+		}
+	}
+}
+
+.topbar-wrapper.fixed {
+	position: fixed;
+	top: 0;
+	margin: 0 auto;
+}
