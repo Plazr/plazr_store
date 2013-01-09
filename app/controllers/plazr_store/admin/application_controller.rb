@@ -5,6 +5,9 @@ module PlazrStore
 
     layout 'admin/application'
 
+    def index
+    end
+
     protected
 
       def check_admin

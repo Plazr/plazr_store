@@ -10,6 +10,7 @@ PlazrStore::Engine.routes.draw do
   mount RedactorRails::Engine => '/redactor_rails'
 
   namespace :admin do
+    root :to => 'application#index'
     resources :brands
     resources :discount_types
     resources :pages
