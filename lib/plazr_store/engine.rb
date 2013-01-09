@@ -1,10 +1,13 @@
-require 'lorem_ipsum_amet'
+require 'jquery-rails'
 require 'haml'
 require 'paranoia'
 require 'paranoia_uniqueness_validator'
 require 'paperclip'
 require 'turbolinks'
 require 'better_errors'
+require 'redactor-rails'
+require 'carrierwave'
+require 'mini_magick'
 
 module PlazrStore
   class Engine < ::Rails::Engine

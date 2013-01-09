@@ -21,26 +21,9 @@ module PlazrStore
     has_many :variant_properties, :through => :product_variant_properties
 
     ## Attributes ##
-    ### Merging 'develop' into 'mockup'
-    ### PC, 7 Jan 2013 13:14
-    ### TODO: clean this up
-    ### The following code was in 'mockup'
-    # attr_accessible :details, :name, :slug, :rating, :brand_id,
-    #                 ### TODO: clean this up, conflict merging develop into mockup (PC, 29 Dez 2012 16:28)
-    #                 ### this was in the mockup branch
-    #                 # :property_ids, :variant_property_ids,
-    #                 # :variants_attributes, :product_variant_properties_attributes,
-    #                 # :product_properties_attributes, :brand_attributes, :prototypes
-    #                 ### this was in the develop branch
-    #                 :property_ids, :variant_property_ids,
-    #                 :variants_attributes, :product_variant_properties_attributes,
-    #                 :product_properties_attributes, :brand_attributes,
-    #                 :available_at_date_string, :available_at_time_string
-    ### The following code was in 'develop'
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
-                    :property_ids, :variant_property_ids,
-                    :variants_attributes, :product_variant_properties_attributes,
-                    # :product_properties_attributes, :brand_attributes,
+                    :property_ids, :variant_property_ids, 
+                    :variants_attributes, :product_variant_properties_attributes, 
                     :brand_attributes,
                     :product_product_categories_attributes,
                     :available_at_date_string, :available_at_time_string
@@ -49,9 +32,6 @@ module PlazrStore
     accepts_nested_attributes_for :variants, :allow_destroy => true
     accepts_nested_attributes_for :product_product_categories, :allow_destroy => true
     accepts_nested_attributes_for :product_variant_properties, :allow_destroy => true
-    ### TODO: clean this up, conflict merging develop into mockup (PC, 29 Dez 2012 16:28)
-    ### this was in the mockup branch
-    #accepts_nested_attributes_for :product_properties, :allow_destroy => true
     accepts_nested_attributes_for :brand
 
     ## Validations ##
@@ -77,17 +57,12 @@ module PlazrStore
     end
 
     def master_price
-      # self.variants.master_variant.first.price
       self.master_variant.price
     end
 
     def images
       master_variant.multimedia
     end
-
-    # def sku
-    #   self.variants.master_variant.first.sku
-    # end
 
     def variants_without_master
       self.variants.without_master
@@ -144,6 +119,13 @@ module PlazrStore
       end
     end
 
+    def image
+      self.master_variant.image
+    end
+
+    def related(count = 5)
+      #Product.
+    end
 
     ### Virtual attributes
 
@@ -190,12 +172,5 @@ module PlazrStore
       self.slug = (self.name || '').parameterize
     end
 
-    def image
-      self.master_variant.image
-    end
-
-    def related(count = 5)
-      #Product.
-    end
   end
 end

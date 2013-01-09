@@ -24,21 +24,6 @@ module PlazrStore
     has_many :wishlists, :through => :variant_wishlists
 
     ## Nested Attributes ##
-
-    ### Merging 'develop' into 'mockup'
-    ### TODO: clean this
-    ### PC, 7 Jan 2013 13:19
-    ### This code was in 'mockup'
-    # accepts_nested_attributes_for :variant_variant_categories, :allow_destroy => true
-    # accepts_nested_attributes_for :variant_variant_property_values, :allow_destroy => true,
-    #       :reject_if => proc {|attributes| attributes.any? {|_,v| v.blank?}}
-
-    # ## Attributes ##
-    # attr_accessible :amount_available, :visible, :cost_price, :description,
-    #                 :is_master, :price, :restock_date, :sku, :product_id,
-    #                 :variant_variant_categories_attributes,
-    ### This code was in 'develop'
-
     accepts_nested_attributes_for :variant_variant_property_values, :allow_destroy => true, 
           :reject_if => proc {|attributes| attributes.any? {|_,v| v.blank?}}
     accepts_nested_attributes_for :multimedia, :allow_destroy => true,
@@ -47,10 +32,8 @@ module PlazrStore
     ## Attributes ##
     attr_accessible :amount_available, :visible, :cost_price, :description, 
                     :is_master, :price, :restock_date, :sku, :product_id, 
-    ### end of conflict
                     :variant_variant_property_values_attributes,
                     :multimedia_attributes
-
 
     ## Validations ##
     validates_presence_of :sku, :visible, :product

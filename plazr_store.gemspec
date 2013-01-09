@@ -19,9 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.9"
   s.add_dependency 'sass-rails'
   s.add_dependency 'compass-rails'
-  # s.add_dependency 'less-rails'
-  s.add_dependency 'lorem_ipsum_amet'
-  # s.add_dependency "jquery-rails"
+  s.add_dependency "jquery-rails"
   s.add_dependency "rb-readline"
   s.add_dependency "paranoia"
   s.add_dependency "paranoia_uniqueness_validator"
@@ -32,7 +30,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails_engine_decorators'
   s.add_dependency 'will_paginate', '~> 3.0.0'
   s.add_dependency 'cancan'
-  # s.add_dependency 'fuzzy_match'
+  s.add_dependency 'redactor-rails'
+  s.add_dependency 'carrierwave'
+  s.add_dependency 'mini_magick'
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "puma"

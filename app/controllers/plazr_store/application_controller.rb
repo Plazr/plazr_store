@@ -9,6 +9,9 @@ module PlazrStore
 
   layout 'application'
 
+  #def resource
+  #  @resource ||= 
+
   def index
   end
 
@@ -18,7 +21,6 @@ module PlazrStore
   end
 
   def get_pages
-    Rails.logger.info "HERE I AAAAAAAAAAAM"
     @pages = Page.all
   end
 
