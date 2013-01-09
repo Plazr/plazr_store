@@ -5,7 +5,7 @@
 
 	<div class="row-fuild">
 
-		<div class="span3 form">
+		<div class="span3" id="filters">
 			<span>Preço: </span>
 			<input type="text" man="min_price">
 			<span> € a </span>
@@ -17,8 +17,9 @@
 			<span>Marca: </span>
 			<select>
 				<option> </option>
-				<option>Adidas</option>
-				<option>Nike</option>
+				<% @products.uniq.each do |product| %>
+					<option><%= product.brand.name %></option>
+				<% end %>
 			</select>
 		</div>
 
