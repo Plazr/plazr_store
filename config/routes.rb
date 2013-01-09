@@ -1,10 +1,16 @@
 PlazrStore::Engine.routes.draw do
 
+  get 'index' => 'pages#index'
+	# root to: 'pages#index'
+
+
+
+  root :to => 'pages#index'
+
   mount RedactorRails::Engine => '/redactor_rails'
 
-  root :to => 'application#index'
-
   namespace :admin do
+    root :to => 'application#index'
     resources :brands
     resources :discount_types
     resources :pages
@@ -25,7 +31,9 @@ PlazrStore::Engine.routes.draw do
 
   resources :products, :only => [:index, :show]
 
+  #pages
   scope '/pages' do
+    match 'index' => 'pages#index', :via => :get
     match '/:slug' => 'pages#show', :as => :page, :via => :get, :controller => "pages"
   end
 
@@ -57,6 +65,8 @@ PlazrStore::Engine.routes.draw do
   scope '/orders' do
     match "/" => "orders#history", :as => :orders_history
     match '/:id' => 'orders#show', :as => :order, :via => :get
+    match '/:id/feedbacks/:product_id' => 'feedback_products#new', :as => :new_feedback_product, :via => :get
+    match '/:id/feedbacks/:product_id' => 'feedback_products#create', :as => :feedback_product, :via => :post
   end
   
 

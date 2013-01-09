@@ -3,6 +3,11 @@ module PlazrStore
 
     before_filter :check_admin
 
+    layout 'admin/application'
+
+    def index
+    end
+
     protected
 
       def check_admin

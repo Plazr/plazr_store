@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PlazrStore | Profile</title>
+    <%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
+    <%= javascript_include_tag "plazr_store/application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <header>
+      <h1>Store Name</h1>
+      <p>Slogan</p>
+    </header>
+
+    <nav>
+      <ul>
+        <li>Basket</li>
+        <li>Whishlist</li>
+        <li>History</li>
+        <li>Settings</li>
+      </ul>
+    </nav>
+
+    <%= yield %>
+
+  </body>
+
+</html>
