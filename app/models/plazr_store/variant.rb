@@ -56,16 +56,13 @@ module PlazrStore
     def price
       promotion = self.product.promotions.active_promotions.first
       if promotion.nil?
-        self.price
+        read_attribute(:price)
+      elsif promotion.discount_type.type_id == 1
+        read_attribute(:price) - (read_attribute(:price) * (promotion.value/100))
+      elsif promotion.discount_type.type_id == 3
+        promotion.value
       else
-        case promotion.discount_type.type_id
-        when 1
-          self.price - (self.price * (promotion.value/100))
-        when 3
-          promotion.value
-        else
-          self.price
-        end
+        read_attribute(:price)
       end
     end
 
