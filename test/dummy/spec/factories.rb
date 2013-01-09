@@ -128,6 +128,7 @@ FactoryGirl.define do
     details "Details"
     sequence(:slug) { |n| "product-#{n}" }
     association :brand
+
     factory :product_full do
       ignore do
         variants_count 2
@@ -213,6 +214,15 @@ FactoryGirl.define do
   factory :product_variant_property, :class => PZS::ProductVariantProperty do
     association :product
     association :variant_property
+  end
+
+  factory :promotion, :class => PZS::Promotion do
+    sequence(:name) { |n| "Name #{n}" }
+    sequence(:description) { |n| "Description #{n}" }
+    starts_at "01-01-2013"
+    expires_at "31-02-2013"
+    value 25
+    association :discount_type
   end
 
   factory :property, :class => PZS::Property do

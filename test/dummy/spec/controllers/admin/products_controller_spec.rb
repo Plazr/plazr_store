@@ -8,7 +8,7 @@ describe PZS::Admin::ProductsController, :type => :controller do
     it_behaves_like 'default admin index method', :product
   end
 
-  describe "GET #show" do
+  describe "GET #show", focus: true do
     it_behaves_like 'default admin show and edit methods', :show, :product
   end
 

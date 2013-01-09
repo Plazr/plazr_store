@@ -52,7 +52,7 @@ describe PZS::Variant, type: :model do
     it "requires visible to be set" do
       FactoryGirl.create(:variant).should validate_presence_of :visible
     end
-    it "requires product to be set" do
+    it "requires product to be set", focus: true do
       FactoryGirl.create(:variant).should validate_presence_of :product
     end
 
