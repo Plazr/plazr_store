@@ -1,3 +1,6 @@
+<header class="row-fluid">
+	<h3><%= @featured.name %></h3>
+</header>
 <article class="row-fluid">
 	<div class="span4">
 		<%= image_tag @featured.master_variant.multimedia %>
@@ -8,8 +11,6 @@
 			<%= image_tag 'glyphicons/star-full.png'%>
 			<% end %>
 		</span>
-
-		<h4><%= @featured.name %></h4>
 
 		<p><%= @featured.details %></p>
 

@@ -22,11 +22,23 @@
 		</div>
 	</header>
 
-
-
-
-	<%= render 'layouts/user' %>
 	<%= render 'layouts/top_bar' %>
+
+	<% unless flash.empty? %>
+		<div class="container">
+			<div class="row-fluid">
+				<div class="span12 text-info">
+					<% flash.each do |name, msg| %>
+						<% if msg.is_a?(String) %>
+							<span class="pull-right flash-messages">
+								<%= content_tag :div, msg, :id => "flash_#{name}" %>
+							</span>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	<% end %>
 
 	<section id="layout-container">
 		<%= yield %>
@@ -42,29 +54,6 @@
 	</footer>
 
 	<%= yield :script %>
-
-<!-- <h1>Plazr Store (Dummy App)</h1>
-
-    <h2>Current User: <%#= current_user.to_s unless Rails.env.test? %></h2>
-
-    <%#= form_tag plazr_store.search_path, :method => 'get', :id => "products_search" do %>
-      <%#= content_tag :label do %>
-        Search term:
-        <%#= text_field_tag :search, params[:search] %>
-        <%#= submit_tag "Search", :name => nil %>
-      <%# end %>
-    <%# end %>
-
-    <table>
-      <tr>
-        <td class="nav">
-          <%#= render 'plazr_store/shared/nav' %>
-          <%#= render 'plazr_auth/shared/nav' unless Rails.env.test? %>
-        </td>
-
-        <td class="content"><%#= yield %></td>
-      </tr>
-  </table> -->
 
 </body>
 </html>

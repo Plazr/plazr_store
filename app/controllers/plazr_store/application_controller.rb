@@ -1,14 +1,13 @@
 module PlazrStore
   class ApplicationController < ActionController::Base
 
+  before_filter :get_pages
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to plazr_auth_url, :alert => exception.message
   end
 
   layout 'application'
-
-  #def resource
-  #  @resource ||= 
 
   def index
   end
@@ -16,6 +15,11 @@ module PlazrStore
 
   def current_ability
     @current_ability ||= Ability.new(current_user, namespace)
+  end
+
+  def get_pages
+    Rails.logger.info "HERE I AAAAAAAAAAAM"
+    @pages = Page.all
   end
 
   protected
