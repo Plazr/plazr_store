@@ -38,10 +38,12 @@ module PlazrStore
     #                 :available_at_date_string, :available_at_time_string
     ### The following code was in 'develop'
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
-                    :property_ids, :variant_property_ids, 
-                    :variants_attributes, :product_variant_properties_attributes, 
-                    :product_properties_attributes, :brand_attributes,
-                    :product_product_categories_attributes
+                    :property_ids, :variant_property_ids,
+                    :variants_attributes, :product_variant_properties_attributes,
+                    # :product_properties_attributes, :brand_attributes,
+                    :brand_attributes,
+                    :product_product_categories_attributes,
+                    :available_at_date_string, :available_at_time_string
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
@@ -79,9 +81,9 @@ module PlazrStore
       self.master_variant.price
     end
 
-    # def images
-    #   self.variants.master_variant.first.multimedia
-    # end
+    def images
+      master_variant.multimedia
+    end
 
     # def sku
     #   self.variants.master_variant.first.sku
@@ -142,6 +144,7 @@ module PlazrStore
       end
     end
 
+
     ### Virtual attributes
 
     # => Getter for date
@@ -184,7 +187,7 @@ module PlazrStore
     end
 
     def create_slug
-      self.slug = self.name.parameterize
+      self.slug = (self.name || '').parameterize
     end
 
     def image

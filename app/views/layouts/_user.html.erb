@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="pull-right">
+		<% flash.each do |name, msg| %>
+		<% if msg.is_a?(String) %>
+		<%= content_tag :div, msg, :id => "flash_#{name}" %>
+		<% end %>
+		<% end %>
+
+		<div class="btn-group">
+			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+				<%= current_user.to_s unless Rails.env.test? %>
+				<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu">
+				<% if user_signed_in? %>
+					<li><%= link_to t('plazr_auth.links.profile'),  plazr_auth.profile_path(current_user) %>
+					<li><%= link_to t('plazr_auth.links.edit'),     plazr_auth.edit_user_registration_path %>
+					<li><%= link_to t('plazr_auth.links.sign_out'), plazr_auth.destroy_user_session_path, :method => :delete %>
+					<% if current_user.role?('admin') %>
+						<li><%= link_to 'Admin', plazr_auth.admin_path %>
+					<% end %>
+				<% else %>
+					<li><%= link_to t('plazr_auth.links.log_in'),  plazr_auth.new_user_session_path %>
+					<li><%= link_to t('plazr_auth.links.sign_up'), plazr_auth.new_user_registration_path %>
+					<li><%= link_to t('plazr_auth.links.forgot'),  new_password_path(:user) %>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>

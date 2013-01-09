@@ -1,13 +1,33 @@
 <%= form.fields_for :variants do |variant| %>
 	<% if variant.object.is_master? %>
-		<div class="field">
-			<%= variant.text_field :sku, :class => :full, placeholder: 'SKU' %>
+		<div class="field control-group">
+			<%= variant.label :sku, 'SKU', :class => 'control-label' %>
+			<div class="controls">
+				<%= variant.text_field :sku, :class => :full, placeholder: 'SKU' %>
+			</div>
 		</div>
-		<div class="field input-append">
-			<%= variant.text_field :price, :class => :number, placeholder: 'price' %>
-			<span class="add-on">
-				<%= image_tag 'glyphicons/euro.png', :class => :icon %>
-			</span>
+		<div class="field control-group">
+			<%= variant.label :price, :class => 'control-label' %>
+			<div class="controls">
+				<div class="input-append">
+					<%= variant.text_field :price, :class => :number, placeholder: 'price' %>
+					<span class="add-on">
+						<%= image_tag 'glyphicons/euro.png', :class => :icon %>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="field control-group">
+			<%= variant.fields_for :multimedia do |multimedium| %>
+				<% if multimedium.object.new_record? %>
+					<%= multimedium.label :file, 'Image file', :class => 'control-label' %>
+					<div class="controls">
+						<%= multimedium.file_field :file %>
+						<%#= multimedium.label :caption %>
+						<%= multimedium.text_field :caption, :class => :full, placeholder: 'Caption', style: 'display:block' %>
+					</div>
+				<% end %>
+			<% end %>
 		</div>
 	<% end %>
 <% end %>

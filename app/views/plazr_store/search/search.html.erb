@@ -3,10 +3,41 @@
 		<h1><%= "Search Results for \"#{params[:search]}\"" %></h1>
 	</div>
 
+	<div class="row-fuild">
+
+		<div class="span3">
+			<span>Preço: </span>
+			<input type="text" man="min_price" style="width:50px">
+			<span> € a </span>
+			<input type="text" man="max_price" style="width:50px">
+			<span> €</span>
+		</div>
+
+		<div class="span4">
+			<span>Marca: </span>
+			<select>
+				<option> </option>
+				<option>Adidas</option>
+				<option>Nike</option>
+			</select>
+		</div>
+
+		<div class="span4">
+			<span>Preço: </span>
+			<select>
+				<option></option>
+				<option>Ascendente</option>
+				<option>Descendente</option>
+			</select>
+		</div>
+
+	</div>
+
 	<div class="row">
 		<% @products.each do |product| %>
 			<%= render 'product', product: product %>
 		<% end %>
 	</div>
+
 	<%= will_paginate @products %>
 </div>
