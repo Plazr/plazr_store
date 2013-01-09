@@ -10,20 +10,20 @@
 					- @products.each do |product|
 						.span2.product
 							%article
-								-# variant = product.master_variant.first
-								-# imgpth = if variant.multimedia.empty?
-								- imgpth = 'http://placehold.it/100x100&text=No%20image'
-								-# else
-									-# variant.multimedia.first.file.url(:thumb)
+								- variant = product.master_variant
+								- imgpth = if variant.nil? || variant.multimedia.empty?
+									- 'http://placehold.it/100x100&text=No%20image'
+								- else
+									- variant.multimedia.first.file.url(:thumb)
+								%h6= link_to product.name, admin_product_path(product)
 								%div
 									%noscript
 										= image_tag imgpth
 									= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
-									= link_to product.name, admin_product_path(product)
-								%div
+								.actions
 									= link_to edit_admin_product_path(product) do
-										= image_tag 'glyphicons/edit.png'
+										= button_tag 'Edit', :class => [:btn, 'btn-mini']
 									= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
-										= image_tag 'glyphicons/remove.png'
+										= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']
 			%aside.span2
 				= link_to 'New Product', new_admin_product_path

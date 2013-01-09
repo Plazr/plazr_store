@@ -1,17 +1,18 @@
 //= require ../application
 //= require_self
 article {
-	text-align: center;
-
 	div.section {
 		padding: .5em 0;
 
-		div.field {
+		.field {
 			max-width: 500px;
 			min-width: 100px;
 			width: 100%;
-			margin: 0 auto;
+			margin-left: auto;
+			margin-right: auto;
+		}
 
+		div.field {
 			.full {
 				width: 100%;
 			}
@@ -20,10 +21,8 @@ article {
 				text-align: right;
 			}
 
-			.input-append {
-				input[type="text"] {
-					text-align: center;
-				}
+			.center {
+				text-align: center;
 			}
 		}
 	}
@@ -42,4 +41,30 @@ span img.icon {
 		margin: .5em;
 		text-align: center;
 	}
+}
+
+
+
+ul.checklistbox {
+	max-height: 7em;
+	margin: 0;
+	overflow-y: scroll;
+
+	li {
+		padding-left: .5em;
+		padding-right: .5em;
+		line-height: 2em;
+		list-style:none;
+
+		label {
+			// display: inline;
+		}
+	}
+	li.odd {
+		background-color: lightgrey;
+	}
+}
+
+div#buttons {
+	text-align: center;
 }

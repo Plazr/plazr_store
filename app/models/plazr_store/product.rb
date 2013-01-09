@@ -42,7 +42,8 @@ module PlazrStore
                     :variants_attributes, :product_variant_properties_attributes,
                     # :product_properties_attributes, :brand_attributes,
                     :brand_attributes,
-                    :product_product_categories_attributes
+                    :product_product_categories_attributes,
+                    :available_at_date_string, :available_at_time_string
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
