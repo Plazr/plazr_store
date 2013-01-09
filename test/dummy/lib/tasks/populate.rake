@@ -8,13 +8,16 @@ namespace :db do
     puts 'Deleting all records from all tables'
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.clean
-      PlazrAuth::User.destroy_all
+      PlazrAuth::User.with_deleted.all.each { |u| u.destroy! }
 
 
     # ActiveRecord::Base.send(:subclasses).each(&:delete_all)
     # ActiveRecord::Base.send(:subclasses).each do |s|
     #   puts s.name
     # end
+
+    puts 'Running db:seed'
+    Rake::Task["db:seed"].execute
 
     puts 'Generating test data. This might take a while...'
       puts 'Generating brands...'

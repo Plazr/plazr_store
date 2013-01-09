@@ -1,0 +1,105 @@
+<% page = 'plazr_store/mockup/admin/pages/products' %>
+<% row_length = 4 %>
+
+<%= content_for :head do %>
+	<%= stylesheet_link_tag page, :media => "all" %>
+<% end %>
+
+<div class="container">
+	<section class="row-fluid">
+		<div class="span9">
+			<h2>Products</h2>
+ 			<div class="row-fluid"><!-- this may be a form, to submit the selected products -->
+				<% 10.times do |i| %>
+					<% if i > 0 && i % row_length == 0 %>
+						</div>
+						<div class="row-fluid">
+					<% end %>
+					<article class="span3 product">
+						<% imgpth = image_path "plazr_store/#{rand(1..7)}" %>
+						<%= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}.png')" } %>
+						<div class="row-fluid">
+							<div class="span2">
+								<input type="checkbox" />
+							</div>
+							<div class="span6">
+								<strong><%= LoremIpsum.w(2) %></strong>
+							</div>
+							<div class="span2">
+								<%= image_tag 'glyphicons/edit.png' %>
+							</div>
+							<div class="span2">
+								<%= image_tag 'glyphicons/show.png' %>
+							</div>
+						</div>
+						<!--<p><%#= LoremIpsum.short %></p>
+						<p>
+							<span class="price"><%#= rand(1..100) %></span>
+							<span class="rating">
+								<%# _rating = rand(1..5) %>
+								<%# _rating.times do %>
+									<%#= image_tag 'glyphicons/star-full.png', :class => :rating %>
+								<%# end %>
+								<%# (5 - _rating).times do %>
+									<%#= image_tag 'glyphicons/star-empty.png', :class => :rating %>
+								<%# end %>
+							</span>
+						</p>-->
+					</article>
+				<% end %>
+			</div>
+		</div>
+		<aside class="span3">
+			<h5>Toolbox</h5>
+			<ul>
+				<li><%= link_to 'Add new product', '#' %></li>
+				<li><%= link_to 'Remove selected', '#' %></li>
+				<li><%= link_to 'Add to selected packs:', '#' %>
+					<ul>
+						<li><input type="radio" name="add_to_packs" /><span style="margin-left:1em">All</span></li>
+						<li><input type="radio" name="add_to_packs" /><span style="margin-left:1em">Selected</span></li>
+					</ul>
+				</li>
+			</ul>
+		</aside>
+	</section>
+
+	<section class="row-fluid">
+		<div class="span9">
+			<h2>Packs</h2>
+			<div class="row-fluid">
+				<% 5.times do |i| %>
+					<% if i > 0 && i % row_length == 0 %>
+						</div>
+						<div class="row-fluid">
+					<% end %>
+					<article class="span3 product">
+						<% imgpth = image_path "plazr_store/box.png" %>
+						<%= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" } %>
+						<div class="row-fluid">
+							<div class="span2">
+								<input type="checkbox" />
+							</div>
+							<div class="span6">
+								<strong>Another box</strong>
+							</div>
+							<div class="span2">
+								<%= image_tag 'glyphicons/edit.png' %>
+							</div>
+							<div class="span2">
+								<%= image_tag 'glyphicons/show.png' %>
+							</div>
+						</div>
+					</article>
+				<% end %>
+			</div>
+		</div>
+		<div class="span3">
+			<h5>Toolbox</h5>
+		</div>
+	</section>
+</div>
+
+<%= content_for :script do %>
+	<%= javascript_include_tag page %>
+<% end %>

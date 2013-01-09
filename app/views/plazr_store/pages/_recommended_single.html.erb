@@ -1,0 +1,14 @@
+<article class="span3">
+	<h5><%= recommended.name %></h5>
+	<p>
+		€ <%= recommended.master_price %>
+	</p>
+	<p>
+		<% 3.times do %>
+		<%= image_tag 'glyphicons/star-full.png', :class => 'rating' %>
+		<% end %>
+		<% 2.times do %>
+		<%= image_tag 'glyphicons/star-empty.png', :class => 'rating' %>
+		<% end %>
+	</p>
+</article>
