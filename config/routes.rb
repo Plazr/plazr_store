@@ -1,8 +1,13 @@
 PlazrStore::Engine.routes.draw do
 
-  mount RedactorRails::Engine => '/redactor_rails'
+  get 'index' => 'pages#index'
+	# root to: 'pages#index'
 
-  root :to => 'application#index'
+
+
+  root :to => 'pages#index'
+
+  mount RedactorRails::Engine => '/redactor_rails'
 
   namespace :admin do
     resources :brands
@@ -24,7 +29,9 @@ PlazrStore::Engine.routes.draw do
 
   resources :products, :only => [:index, :show]
 
+  #pages
   scope '/pages' do
+    match 'index' => 'pages#index', :via => :get
     match '/:slug' => 'pages#show', :as => :page, :via => :get, :controller => "pages"
   end
 

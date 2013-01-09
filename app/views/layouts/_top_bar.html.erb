@@ -1,0 +1,36 @@
+<div class="topbar-wrapper">
+	<div class="container">
+		<div class="topbar clearfix">
+			<nav>
+				<ul class="nav nav-pills pull-left">
+					<li><%= link_to 'Store', plazr_store.index_path %></li>
+					<% unless @pages.nil? %>
+						<% @pages.each do |page| %>
+							<li><%= link_to page.title, page %></li>
+						<% end %>
+					<% end %>
+				</ul>
+			</nav>
+
+			<%= form_tag plazr_store.search_path, :method => 'get', :class => "form-inline pull-right" do %>
+
+				<select>
+					<option value="default">--</option>
+					<option value="camisolas">Camisolas</option>
+					<option value="calcas">Calças</option>
+					<option value="sapatilhas">Sapatilhas</option>
+				</select>
+
+				<%= text_field_tag :search, params[:search], :placeholder => "search something", :class => "input-large" %>
+				<%= submit_tag "Search", :name => nil, :class=>"btn" %>
+
+				<%= render 'layouts/user' %>
+
+			<% end %>
+		</div>
+	</div>
+</div>
+
+
+
+

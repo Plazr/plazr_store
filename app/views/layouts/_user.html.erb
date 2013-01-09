@@ -1,0 +1,20 @@
+<div class="btn-group">
+	<a class="btn dropdown-toggle" href="#">
+		<%= current_user.to_s unless Rails.env.test? %>
+		<span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu pull-right" role="menu">
+		<% if user_signed_in? %>
+			<li><%= link_to t('plazr_auth.links.profile'),  plazr_auth.profile_path(current_user) %></li>
+			<li><%= link_to t('plazr_auth.links.edit'),     plazr_auth.edit_user_registration_path %></li>
+			<li><%= link_to t('plazr_auth.links.sign_out'), plazr_auth.destroy_user_session_path, :method => :delete %></li>
+			<% if current_user.role?('admin') %>
+				<li><%= link_to 'Admin', plazr_auth.admin_path %></li>
+			<% end %>
+		<% else %>
+			<li><%= link_to t('plazr_auth.links.log_in'),  plazr_auth.new_user_session_path %></li>
+			<li><%= link_to t('plazr_auth.links.sign_up'), plazr_auth.new_user_registration_path %></li>
+			<li><%= link_to t('plazr_auth.links.forgot'),  new_password_path(:user) %></li>
+		<% end %>
+	</ul>
+</div>

@@ -22,7 +22,7 @@ describe PZS::Property, :type => :model do
       FactoryGirl.create(:property).should have_many(:prototypes).through(:property_prototypes)
     end
   end
-  
+
   describe "#Validations" do
     it "requires the presence of a id_name" do
       FactoryGirl.create(:property).should validate_presence_of :id_name
@@ -30,6 +30,12 @@ describe PZS::Property, :type => :model do
     it "does not allow duplicate id_name" do
       FactoryGirl.create(:property_v2)
       FactoryGirl.build(:property_v2).should_not be_valid
+    end
+    context "display_name is blank and id_name isn't" do
+      it "becomes the same as id_name" do
+        p = FactoryGirl.create(:property, :display_name => nil)
+        p.display_name.should eq p.id_name
+      end
     end
     context "display_name is blank and id_name isn't" do
       it "becomes the same as id_name" do

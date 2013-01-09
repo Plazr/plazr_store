@@ -125,7 +125,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Product#{n}" }
     details "Details"
     sequence(:slug) { |n| "product-#{n}" }
-
+    association :brand
     factory :product_full do
       ignore do
         variants_count 2
