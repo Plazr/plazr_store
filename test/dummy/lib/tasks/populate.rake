@@ -10,6 +10,7 @@ namespace :db do
       DatabaseCleaner.clean
       PlazrAuth::User.destroy_all
 
+
     # ActiveRecord::Base.send(:subclasses).each(&:delete_all)
     # ActiveRecord::Base.send(:subclasses).each do |s|
     #   puts s.name
@@ -18,8 +19,6 @@ namespace :db do
     puts 'Generating test data. This might take a while...'
       puts 'Generating brands...'
       FactoryGirl.create_list :brand, 10
-      puts 'Generating discount_types...'
-      FactoryGirl.create_list :discount_type, 5
       puts 'Generating product_categories...'
       FactoryGirl.create_list :product_category, 5
       puts 'Generating shipment_conditions...'
@@ -33,6 +32,6 @@ namespace :db do
       puts 'Generating addresses'
       FactoryGirl.create_list :address, 5
       puts 'Generating admin user'
-      FactoryGirl.create :admin, email: "admin@gmail.com", password: "asdasd", password_confirmation: "asdasd"
+      FactoryGirl.create :admin, email: "admin@gmail.com", password: "admin1", password_confirmation: "admin1"
   end
 end

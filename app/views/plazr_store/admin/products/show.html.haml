@@ -33,3 +33,5 @@
 = link_to 'Product Properties', admin_product_product_properties_path(@product)
 |
 = link_to 'Images', admin_product_multimedia_path(@product)
+|
+= link_to 'Promotions', new_admin_promotion_path(:product => @product.id)

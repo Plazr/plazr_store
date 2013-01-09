@@ -14,6 +14,13 @@ describe PZS::Product, type: :model do
       FactoryGirl.create(:product).should have_many :feedback_products
     end
 
+    it "has many product_promotions" do
+      FactoryGirl.create(:product).should have_many(:product_promotions).dependent(:destroy)
+    end
+    it "has many promotions through product_promotions" do
+      FactoryGirl.create(:product).should have_many(:promotions).through(:product_promotions)
+    end
+
     it "has many product_properties" do
       FactoryGirl.create(:product).should have_many(:product_properties).dependent(:destroy)
     end
