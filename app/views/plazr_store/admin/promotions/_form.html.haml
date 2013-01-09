@@ -36,9 +36,9 @@
   %br
 
   %h4= "Products"
-  = f.fields_for :product_promotions, @promotion.initialized_products do |pp|
-    = pp.check_box :enabled, {:checked => pp.object.product_id.to_s == @prod || pp.object.persisted?}, '0', '1'
-    = pp.label :enabled, pp.object.product.name
+  = f.fields_for :product_promotions do |pp|
+    = pp.check_box :_destroy, {:checked => pp.object.product_id.to_s == @prod || @check_prods.include?(pp.object.product_id.to_s) || pp.object.persisted?}, '0', '1'
+    = pp.label :_destroy, pp.object.product.name
     = pp.hidden_field :product_id
   %br
 

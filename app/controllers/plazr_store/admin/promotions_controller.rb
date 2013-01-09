@@ -1,7 +1,6 @@
 module PlazrStore
   class Admin::PromotionsController < Admin::ApplicationController 
-    before_filter :process_categorizations_attrs, only: [:create, :update]
-
+    
     def show
       @promotion = Promotion.find(params[:id])
     end
@@ -13,6 +12,7 @@ module PlazrStore
     def new
       @promotion = Promotion.new
       @prod = params[:product]
+      @check_prods = []
       @discount_types = DiscountType.promotion_types
       instance_variable_loading
     end
@@ -24,6 +24,7 @@ module PlazrStore
         redirect_to admin_promotion_path(@promotion), :notice => 'Promotion was successfully created.' 
       else
         instance_variable_loading
+        process_product_attrs
         @discount_types = DiscountType.promotion_types
         render :new
       end
@@ -31,6 +32,7 @@ module PlazrStore
 
     def edit
       @promotion = Promotion.find(params[:id])
+      @check_prods = []
       @discount_types = DiscountType.promotion_types
       instance_variable_loading
     end
@@ -39,9 +41,10 @@ module PlazrStore
       @promotion = Promotion.find(params[:id])
 
       if @promotion.update_attributes(params[:promotion])
-        redirect_to admin_promotion_path(@product, @promotion), :notice => 'Promotion was successfully updated.' 
+        redirect_to admin_promotion_path(@promotion), :notice => 'Promotion was successfully updated.' 
       else
         instance_variable_loading
+        process_product_attrs
         @discount_types = DiscountType.promotion_types
         render :edit
       end
@@ -57,9 +60,11 @@ module PlazrStore
       def instance_variable_loading
         @promotion.get_unselected_products_and_order_by_name
       end
-      def process_categorizations_attrs
+      
+      def process_product_attrs
+        @check_prods = []
         params[:promotion][:product_promotions_attributes].values.each do |cat_attr|
-          cat_attr[:_destroy] = true if cat_attr[:enable] != '1'
+          @check_prods << cat_attr[:product_id] if cat_attr[:_destroy] == "0"
         end
       end
   end

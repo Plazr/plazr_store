@@ -52,9 +52,6 @@ describe PZS::Variant, type: :model do
     it "requires visible to be set" do
       FactoryGirl.create(:variant).should validate_presence_of :visible
     end
-    it "requires product to be set", focus: true do
-      FactoryGirl.create(:variant).should validate_presence_of :product
-    end
 
     describe "is_master field" do
       let(:variant) {FactoryGirl.create(:variant)}

@@ -216,6 +216,11 @@ FactoryGirl.define do
     association :variant_property
   end
 
+  factory :product_promotion, :class => PZS::ProductPromotion do
+    association :product_property
+    association :promotion
+  end
+
   factory :promotion, :class => PZS::Promotion do
     sequence(:name) { |n| "Name #{n}" }
     sequence(:description) { |n| "Description #{n}" }

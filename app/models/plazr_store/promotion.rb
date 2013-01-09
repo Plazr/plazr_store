@@ -33,18 +33,6 @@ module PlazrStore
 
     ## Public Methods ##
 
-  def initialized_products # this is the key method
-    [].tap do |o|
-      Product.all.each do |product|
-        if pp = product_promotions.find { |pp| pp.product_id == product.id }
-          o << pp.tap { |pp| pp.enable ||= true }
-        else
-          o << ProductPromotion.new(product: product)
-        end
-      end
-    end
-  end
-
     def get_unselected_products_and_order_by_name
       # creates an array for all product_promotions that the promotions does not currently have selected
       # and builds them in the promotion
