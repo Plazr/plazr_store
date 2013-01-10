@@ -8,6 +8,7 @@
 //= require bootstrap/bootstrap.min.js
 //= require_self
 //= require plazr_store/topbar
+//= require plazr_store/search/search
 
 $(document).ready(function() {
 	$('.dropdown-toggle').dropdown();
