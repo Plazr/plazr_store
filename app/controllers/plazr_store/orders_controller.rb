@@ -49,7 +49,7 @@ module PlazrStore
     
     def create
       @order = Order.new(params[:order])
-            
+
       # first time in checkout
       if @order.express_token.blank?
         if params[:order][:shipment_condition_id].nil?

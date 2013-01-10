@@ -73,7 +73,7 @@ FactoryGirl.define do
   end
 
   factory :order, :class => PZS::Order do 
-    sequence(:email) { |n| "someweirdunrepeatableemail#{n}@yourcousin.com" }
+    # sequence(:email) { |n| "someweirdunrepeatableemail#{n}@yourcousin.com" }
     total 0
     item_total 0
     adjustment_total 0
@@ -85,9 +85,9 @@ FactoryGirl.define do
     association :shipment_condition
     # promotional_code
 
-    after(:build) do |o| 
-      o.user_id = FactoryGirl.create(:specific_user).id
-    end
+    # after(:build) do |o| 
+    #   o.user_id = FactoryGirl.create(:specific_user).id
+    # end
 
     factory :order_with_addresses do
       after(:build) do |o| 
@@ -97,13 +97,17 @@ FactoryGirl.define do
       end
 
       factory :order_paypal do
-        # express_token order_address[:gateway_details][:token]
-        # payer_id order_address[:gateway_details][:payer_id]
+        express_token ""
+        payer_id ""
         # shipment_condition_id session[:shipment_condition]
         total 50
       end
 
       factory :order_full do
+        sequence(:email) { |n| "someweirdunrepeatableemail#{n}@yourcousin.com" }
+        after(:build) do |o| 
+          o.user_id = FactoryGirl.create(:specific_user).id
+        end
         association :cart
       end
     end

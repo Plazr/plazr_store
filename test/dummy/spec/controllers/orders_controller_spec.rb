@@ -11,33 +11,35 @@ describe PZS::OrdersController, :type => :controller do
   describe "POST #create" do
     it "assigns cart to @cart" do
       cart_id = current_user.cart.id
-      post :create, :order => FactoryGirl.create(:order_with_addresses)
+      post :create, :order => FactoryGirl.attributes_for(:order_paypal)
       assigns(:cart).id.should eq cart_id
     end
     it "assigns all shipment_conditions to @shipment_conditions" do
       v = FactoryGirl.create :shipment_condition
-      post :create, :order => build_attributes(:order_with_addresses)
+      post :create, :order => FactoryGirl.attributes_for(:order_paypal)
       assigns(:shipment_conditions).should eq(PlazrStore::ShipmentCondition.all)
     end
     xit "calls @order.load_user" do
       o = FactoryGirl.build(:order)
-      post :create, :order => build_attributes(:order_with_addresses)
+      post :create, :order => FactoryGirl.attributes_for(:order_paypal)
       o.should_receive(:load_user).with(current_user)
     end
     it "sets order's user and email" do
-      post :create, :order => build_attributes(:order_with_addresses)
+      post :create, :order => FactoryGirl.attributes_for(:order_paypal)
       assigns(:order).email.should eq current_user.email
     end
     xit "calls @order.add_cart_and_update_status" do
       o = FactoryGirl.build(:order)
-      post :create, :order => build_attributes(:order_with_addresses)
+      post :create, :order => FactoryGirl.attributes_for(:order_paypal)
       o.should_receive(:add_cart_and_update_status).with(assigns(:cart))
     end
     it "sets order's cart" do
       cart_id = current_user.cart.id
-      post :create, :order => build_attributes(:order_with_addresses)
+      puts "car_id:#{cart_id}"
+      post :create, :order => FactoryGirl.attributes_for(:order_paypal)
       assigns(:order).cart_id.should eq cart_id
     end
+
     context "with valid attributes for order and cart" do
       it "saves the new order in the database" do
         expect{
