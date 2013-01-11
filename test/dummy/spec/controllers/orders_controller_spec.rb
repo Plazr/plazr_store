@@ -43,19 +43,19 @@ describe PZS::OrdersController, :type => :controller do
     context "with valid attributes for order and cart" do
       it "saves the new order in the database" do
         expect{
-          post :create, :order => build_attributes(:order_with_addresses)
+          post :create, :order => FactoryGirl.attributes_for(:order_with_addresses)
         }.to change(PZS::Order, :count).by(1)
       end
       it "marks the cart as deleted" do
-        post :create, :order => build_attributes(:order_with_addresses)
+        post :create, :order => FactoryGirl.attributes_for(:order_with_addresses)
         lambda{ PZS::Cart.find(assigns(:order).cart.id)  }.should raise_error(ActiveRecord::RecordNotFound)
       end
       it "sets session variable :last_order" do
-        post :create, :order => build_attributes(:order_with_addresses)
+        post :create, :order => FactoryGirl.attributes_for(:order_with_addresses)
         session[:last_order].should eq assigns(:order).id
       end
       it "redirects to the order's receipt" do
-        post :create, :order => build_attributes(:order_with_addresses)
+        post :create, :order => FactoryGirl.attributes_for(:order_with_addresses)
         response.should redirect_to receipt_url
       end
     end
@@ -63,11 +63,11 @@ describe PZS::OrdersController, :type => :controller do
     context "with invalid attributes" do
       it "does not save the new order in the database" do
         expect{
-          post :create, :order => build_attributes(:order)
+          post :create, :order => FactoryGirl.attributes_for(:order)
         }.to_not change(PZS::Order, :count)
       end
       it "re-renders the :new template" do
-        post :create, :order => build_attributes(:order)
+        post :create, :order => FactoryGirl.attributes_for(:order)
         response.should render_template :new
       end
     end
@@ -117,12 +117,12 @@ describe PZS::OrdersController, :type => :controller do
     context "with session[:last_order] set" do
       it "assigns the requested order to @order" do
         # m = FactoryGirl.create order_with_addresses
-        post :create, :order => build_attributes(:order_with_addresses)
+        post :create, :order => FactoryGirl.attributes_for(:order_with_addresses)
         get :receipt
         assigns(:order).should eq(PZS::Order.find(session[:last_order]))
       end
       it "renders the :receipt template" do
-        post :create, :order => build_attributes(:order_with_addresses)
+        post :create, :order => FactoryGirl.attributes_for(:order_with_addresses)
         get :receipt
         response.should render_template :receipt
       end
