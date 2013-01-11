@@ -74,17 +74,11 @@ module PlazrStore
       end
     end
 
-    def update_state
-      # Updates the order state depending on cart's variants status
-      return if self.state == "cancelled"
-      
-      if self.to_be_cancelled
-        self.state = "cancelled"
-      elsif cart_variants.all? { |cv| cv.state == "shipped" }
-        self.state = "shipped"
-      elsif cart_variants.all? { |cv| cv.state == "processing" }
-        self.state = "processing"
-      end
+    def ship_product(order, cart_variant_id)
+      variant = order.cart.cart_variant.find(cart_variant_id)
+      variant.update_attributes(:state => shipped)
+      self.update_state
+
     end
 
     def user
@@ -121,6 +115,19 @@ module PlazrStore
     def set_promotional_code_and_validate_code
       # validates promotional code inserted in the form and sets it to this order
     end
- 
+
+    def update_state
+      # Updates the order state depending on cart's variants status
+      return if self.state == "cancelled"
+      
+      if self.to_be_cancelled
+        self.state = "cancelled"
+      elsif cart_variants.all? { |cv| cv.state == "shipped" }
+        self.state = "shipped"
+      elsif cart_variants.all? { |cv| cv.state == "processing" }
+        self.state = "processing"
+      end
+    end
+    
   end
 end

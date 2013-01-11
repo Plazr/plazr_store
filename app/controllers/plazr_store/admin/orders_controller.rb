@@ -1,5 +1,5 @@
 module PlazrStore
-  class OrdersController < ApplicationController
+  class Admin::OrdersController < Admin::ApplicationController
 
     def index
       @orders = Order.paginate(:per_page => 5, :page => params[:page])
