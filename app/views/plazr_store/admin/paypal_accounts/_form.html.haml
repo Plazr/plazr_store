@@ -1,0 +1,22 @@
+= form_for [:admin, @paypal_account] do |f|
+  - if @paypal_account.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@paypal_account.errors.count, "error")} prohibited this property from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @paypal_account.errors.full_messages.each do |msg|
+            %li= msg
+            
+  = f.hidden_field :id
+  = f.hidden_field :store_id
+
+  = f.label :api_username 
+  %br= f.text_field :api_username
+
+  = f.label :api_password 
+  %br= f.text_field :api_password
+
+  = f.label :signature 
+  %br= f.text_field :signature
+
+  %br= f.submit "Submit"

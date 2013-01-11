@@ -1,0 +1,44 @@
+%h1 Show Promotion
+%p#notice
+  = notice
+%table
+  %tr
+    %td
+      %b Name
+    %td
+      = @promotion.name
+  %tr
+    %td
+      %b Description
+    %td
+      = @promotion.description
+  %tr
+    %td
+      %b Value
+    %td
+      = @promotion.value
+  %tr
+    %td
+      %b Minimum Filter
+    %td
+      = @promotion.min_filter
+  %tr
+    %td
+      %b Start Date
+    %td
+      = @promotion.starts_at
+  %tr
+    %td
+      %b End Date
+    %td
+      = @promotion.expires_at
+  %tr
+    %td
+      %b Discount Type
+    %td
+      = @promotion.discount_type.name
+
+
+= link_to 'Edit', edit_admin_promotion_path
+|
+= link_to 'Back', admin_promotions_path

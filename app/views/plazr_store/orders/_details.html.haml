@@ -6,7 +6,9 @@
     %th= "Subtotal"
   - order.cart.cart_variants.each do |line_item|
     %tr
-      %td= line_item.info
+      %td
+        = line_item.info
+        = link_to 'Rate this', new_feedback_product_path(order, line_item.product)
       %td= number_to_currency line_item.unit_price
       %td= line_item.amount
       %td= number_to_currency line_item.price

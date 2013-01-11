@@ -1,0 +1,60 @@
+<article class="container-fuild">
+
+	<div class="row-fuild">
+		<div class="span12">
+			<header class="row-fuild">
+				<h1>Futebol</h1>
+			</header>
+
+			<div class="row-fuild">
+				<div class="span2">
+					<section>
+						<%= render "filter_opt" %>
+					</section>
+				</div>
+
+				<div class="span8">
+					<button type="submit">Comparar</button>
+
+					<section class="row-fuild">
+
+						<div class="span6">
+							<span>Filtrar por preço: </span>
+							<input type="text" man="min_price">
+							<span> € a </span>
+							<input type="text" man="max_price">
+							<span> €</span>
+							<button type="submit">ok</button>
+						</div>
+
+						<div class="span3">
+							<span>Filtrar por marca: </span>
+							<select>
+								<option>Adidas</option>
+								<option>Nike</option>
+							</select>
+						</div>
+
+						<div class="span3">
+							<span>Filtrar por preço: </span>
+							<select>
+								<option>Ascendente</option>
+								<option>Descendente</option>
+							</select>
+						</div>
+
+					</section>
+
+					<section>
+
+						<div>
+							<%= render "products_search" %>
+						</div>
+
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</article>

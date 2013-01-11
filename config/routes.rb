@@ -1,13 +1,22 @@
 PlazrStore::Engine.routes.draw do
 
+  get 'index' => 'pages#index'
+  # root to: 'pages#index'
+
+
+
+  root :to => 'pages#index'
+
   mount RedactorRails::Engine => '/redactor_rails'
 
-  root :to => 'application#index'
-
   namespace :admin do
+    root :to => 'application#index'
     resources :brands
     resources :discount_types
-    resources :orders, :only => [:index, :show, :update]
+    resources :orders, :only => [:index, :show] do
+      put 'pay', :on => :member
+      match 'ship/:cart_variant_id' => 'orders#ship', :as => :ship_product, :via => :put
+    end
     resources :pages
     resources :product_categories
     resources :products do
@@ -15,17 +24,21 @@ PlazrStore::Engine.routes.draw do
       resources :variants
       resources :multimedia
     end
+    resources :promotions
     resources :properties
     resources :prototypes
     resources :shipment_conditions
     resources :variant_properties do
       resources :variant_property_values
     end
+    resources :paypal_accounts
   end
 
   resources :products, :only => [:index, :show]
 
+  #pages
   scope '/pages' do
+    match 'index' => 'pages#index', :via => :get
     match '/:slug' => 'pages#show', :as => :page, :via => :get, :controller => "pages"
   end
 
@@ -50,11 +63,17 @@ PlazrStore::Engine.routes.draw do
   # orders controller
   match 'checkout' => 'orders#new', :as => :checkout, :via => :get
   match 'checkout' => 'orders#create', :as => :checkout, :via => :post
+  match 'express_checkout' => 'paypal_express#checkout', :as => :express_checkout
+  match 'paypal_express_purchase' => 'paypal_express#purchase', :as => :paypal_express_purchase
   match "receipt" => "orders#receipt", :as => :receipt
+  match 'review' => 'orders#review', :as => :review
   scope '/orders' do
     match "/" => "orders#history", :as => :orders_history
     match '/:id' => 'orders#show', :as => :order, :via => :get
+    match '/:id/feedbacks/:product_id' => 'feedback_products#new', :as => :new_feedback_product, :via => :get
+    match '/:id/feedbacks/:product_id' => 'feedback_products#create', :as => :feedback_product, :via => :post
   end
+
 
   mount PlazrAuth::Engine => '/'
 end

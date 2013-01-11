@@ -11,6 +11,9 @@ module PlazrStore
     # It also allows to create a product and a variant belonging to it at the same time, because of presence of product_id validation on variation
     has_many :variants, :dependent => :destroy, :inverse_of => :product
 
+    has_many :product_promotions, :dependent => :destroy
+    has_many :promotions, :through => :product_promotions
+
     has_many :product_properties, :dependent => :destroy
     has_many :properties, :through => :product_properties
 
@@ -25,7 +28,8 @@ module PlazrStore
                     :property_ids, :variant_property_ids, 
                     :variants_attributes, :product_variant_properties_attributes, 
                     :brand_attributes,
-                    :product_product_categories_attributes
+                    :product_product_categories_attributes,
+                    :available_at_date_string, :available_at_time_string
 
     # Nested Attributes
     accepts_nested_attributes_for :variants, :allow_destroy => true
@@ -37,9 +41,18 @@ module PlazrStore
     validates :name, presence: true, uniqueness_without_deleted: true
     validates :slug, presence: true, uniqueness_without_deleted: true
 
+    ## Callbacks ##
+    before_save :create_available_at
+    before_validation :create_slug
+
+
     ## Instance Methods ##
     def has_master?
       self.variants.count >= 1
+    end
+
+    def comments
+      self.feedback_products.all
     end
 
     def master_variant
@@ -47,8 +60,11 @@ module PlazrStore
     end
 
     def master_price
-      # self.variants.master_variant.first.price
       self.master_variant.price
+    end
+
+    def images
+      master_variant.multimedia
     end
 
     def variants_without_master
@@ -98,6 +114,7 @@ module PlazrStore
       end
     end
 
+
     def create_all_variant_properties_association(prototype_id)
       # replicate each variant_property related to the prototype to the product
       Prototype.find(prototype_id).variant_properties.each do |vp|
@@ -112,5 +129,51 @@ module PlazrStore
     def related(count = 5)
       #Product.
     end
+
+    ### Virtual attributes
+
+    # => Getter for date
+    # => This is required in order to use the datepicker to set the available_at field
+    def available_at_date_string
+      @available_at_date_string || (available_at || created_at || Time.now).to_date.to_s(:db)
+    end
+
+    # => Getter for time
+    # => This is required in order to use the timepicker to set the available_at field
+    def available_at_time_string
+      @available_at_time_string || (available_at || created_at || Time.now).to_s(:time)
+    end
+
+
+
+    # => Setter for date
+    # => This is required in order to use the datepicker to set the available_at field
+    def available_at_date_string=(date_str)
+      @available_at_date_string = date_str
+    end
+
+    # => Setter for time
+    # => This is required in order to use the timepicker to set the available_at field
+    def available_at_time_string=(time_str)
+      @available_at_time_string = time_str
+    end
+
+
+
+
+    protected
+
+    def create_available_at
+      self.available_at = if @available_at_date_string && @available_at_time_string
+        Time.parse("#{@available_at_date_string} #{@available_at_time_string}")
+      else
+        Time.current
+      end
+    end
+
+    def create_slug
+      self.slug = (self.name || '').parameterize
+    end
+
   end
 end

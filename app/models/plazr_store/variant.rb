@@ -2,7 +2,7 @@ module PlazrStore
   class Variant < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface
-    
+
     ## Relations ##
     belongs_to :product
 
@@ -10,9 +10,6 @@ module PlazrStore
     has_many :carts, :through => :cart_variants
 
     has_many :multimedia, :dependent => :destroy, :inverse_of => :variant
-
-    has_many :promotion_variants, :dependent => :destroy
-    has_many :promotions, :through => :promotion_variants
 
     #has_many :shipment_condition_variants, :dependent => :destroy
     #has_many :shipment_conditions, :through => :shipment_condition_variants
@@ -44,7 +41,6 @@ module PlazrStore
     validates :cost_price, numericality: {:greater_than_or_equal_to => 0}, :allow_nil => true
 
     ## Scopes ##
-    # scope :master_variant, where(:is_master => true)
     scope :without_master, where(:is_master => false)
 
     ## Callbacks ##
@@ -55,6 +51,20 @@ module PlazrStore
 
 
     ## Instance Methods ##
+
+    # Override method price to return the price of a variant with the active promotion applied
+    def price
+      promotion = self.product.promotions.active_promotions.first
+      if promotion.nil?
+        read_attribute(:price)
+      elsif promotion.discount_type.type_id == 1
+        read_attribute(:price) - (read_attribute(:price) * (promotion.value/100))
+      elsif promotion.discount_type.type_id == 3
+        promotion.value
+      else
+        read_attribute(:price)
+      end
+    end
 
     #creates an array for all the variant_properties that are associated to the product of this variant
     def get_variant_properties_from_product

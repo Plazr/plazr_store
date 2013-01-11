@@ -12,8 +12,10 @@ module PlazrStore
     ## Attributes ##
     attr_accessible :adjustment_total, :billing_address_id, :cart_id, :completed_at, :email, :item_total, 
       :payment_state, :shipping_address_id, :shipment_condition_id, :shipment_state, :promotional_code_id,
-      :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes
-    attr_accessor :to_be_cancelled, :promotional_code
+      :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes,
+      :express_token, :payer_id, :gateway
+      
+    attr_accessor :to_be_cancelled, :promotional_code, :payer_id, :express_token, :gateway
 
 
     ## Validations ##
@@ -72,6 +74,19 @@ module PlazrStore
       end
     end
 
+    def update_state
+      # Updates the order state depending on cart's variants status
+      return if self.state == "cancelled"
+      
+      if self.to_be_cancelled
+        self.state = "cancelled"
+      elsif cart_variants.all? { |cv| cv.state == "shipped" }
+        self.state = "shipped"
+      elsif cart_variants.all? { |cv| cv.state == "processing" }
+        self.state = "processing"
+      end
+    end
+
     def user
       # Get this order's owner
       PlazrAuth::User.find(self.user_id)
@@ -106,18 +121,6 @@ module PlazrStore
     def set_promotional_code_and_validate_code
       # validates promotional code inserted in the form and sets it to this order
     end
-
-    def update_state
-      # Updates the order state depending on cart's variants status
-      return if self.state == "cancelled"
-      
-      if self.to_be_cancelled
-        self.state = "cancelled"
-      elsif cart_variants.all? { |cv| cv.state == "shipped" }
-        self.state = "shipped"
-      elsif cart_variants.all? { |cv| cv.state == "processing" }
-        self.state = "processing"
-      end
-    end
+ 
   end
 end

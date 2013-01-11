@@ -17,21 +17,25 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.9"
+  s.add_dependency 'sass-rails'
+  s.add_dependency 'compass-rails'
+  s.add_dependency "jquery-rails"
   s.add_dependency "rb-readline"
   s.add_dependency "paranoia"
   s.add_dependency "paranoia_uniqueness_validator"
   s.add_dependency "haml"
   s.add_dependency 'paperclip'
   s.add_dependency 'cocaine', '0.3.2'
+  s.add_dependency 'turbolinks'
   s.add_dependency 'rails_engine_decorators'
   s.add_dependency 'will_paginate', '~> 3.0.0'
   s.add_dependency 'cancan'
   s.add_dependency 'redactor-rails'
   s.add_dependency 'carrierwave'
   s.add_dependency 'mini_magick'
-  # s.add_dependency 'fuzzy_match'
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "puma"
   s.add_development_dependency "cucumber-rails"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "database_cleaner"

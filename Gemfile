@@ -5,9 +5,8 @@ source "http://rubygems.org"
 # development dependencies will be added by default to the :development group.
 gemspec
 
-# jquery-rails is used by the dummy application
-gem "jquery-rails"
-
 gem 'pry-rails'
 
 gem 'plazr_auth', :git => 'https://github.com/Plazr/plazr_auth.git'
+
+gem 'activemerchant'

@@ -27,7 +27,7 @@ describe PZS::VariantProperty, :type => :model do
       FactoryGirl.create(:variant_property).should have_many(:variant_property_values).dependent(:destroy)
     end
   end
-  
+
   describe "#Validations" do
     it "requires the presence of a id_name" do
       FactoryGirl.create(:variant_property).should validate_presence_of :id_name

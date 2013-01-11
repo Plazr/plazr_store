@@ -5,6 +5,7 @@ class CreatePlazrStoreFeedbackProducts < ActiveRecord::Migration
       t.integer :rating, :null => false
       t.references :user, :null => false
       t.references :product, :null => false
+      t.references :order, :null => false
 
       t.timestamps
     end

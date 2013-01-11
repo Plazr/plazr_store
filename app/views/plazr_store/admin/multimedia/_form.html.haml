@@ -16,7 +16,7 @@
   %br
   -# VARIANT
   = f.label :variant
-  = f.collection_select :variant_id, @variants, :id, :variant_description, {:prompt => "Pick a variant"}
+  = f.collection_select :variant_id, @variants, :id, :sku, prompt: 'Pick a variant'
   %br
   = f.submit "Submit"
   = link_to 'Cancel', admin_product_multimedia_path

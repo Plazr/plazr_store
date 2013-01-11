@@ -14,6 +14,13 @@ describe PZS::Product, type: :model do
       FactoryGirl.create(:product).should have_many :feedback_products
     end
 
+    it "has many product_promotions" do
+      FactoryGirl.create(:product).should have_many(:product_promotions).dependent(:destroy)
+    end
+    it "has many promotions through product_promotions" do
+      FactoryGirl.create(:product).should have_many(:promotions).through(:product_promotions)
+    end
+
     it "has many product_properties" do
       FactoryGirl.create(:product).should have_many(:product_properties).dependent(:destroy)
     end
@@ -45,9 +52,10 @@ describe PZS::Product, type: :model do
     it "requires name to be set" do
       FactoryGirl.create(:product).should validate_presence_of :name
     end
-    it "requires slug to be set" do
-      FactoryGirl.create(:product).should validate_presence_of :slug
-    end
+    # deprecated. slug is now automatically set, so this test would fail
+    #it "requires slug to be set" do
+    #  FactoryGirl.create(:product).should validate_presence_of :slug
+    #end
     it "does not allow duplicate name" do
       FactoryGirl.create(:product_v2)
       FactoryGirl.build(:product_v2).should_not be_valid
