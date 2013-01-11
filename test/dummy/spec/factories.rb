@@ -40,9 +40,11 @@ FactoryGirl.define do
   factory :discount_type, :class => PZS::DiscountType do 
     sequence(:name) { |n| "Discount #{n}" }
     description "Discount Description"
+    scope {0}
 
     factory :discount_type_v2 do
       name "Black Friday"
+      scope {2}
     end
 
     factory :invalid_discount_type do
@@ -137,6 +139,7 @@ FactoryGirl.define do
     details "Details"
     sequence(:slug) { |n| "product-#{n}" }
     association :brand
+
     factory :product_full do
       ignore do
         variants_count 2
@@ -150,6 +153,7 @@ FactoryGirl.define do
         p.variant_properties << FactoryGirl.create(:variant_property_with_values)
         p.variants << FactoryGirl.create_list(:variant, evaluator.variants_count, product: p)
         p.variants.each do |v|
+          v.multimedia << FactoryGirl.create_list(:multimedium, 2, variant: v)
           p.variant_properties.each do |pvp|
             v.variant_property_values << pvp.variant_property_values.first
           end
@@ -221,6 +225,20 @@ FactoryGirl.define do
   factory :product_variant_property, :class => PZS::ProductVariantProperty do
     association :product
     association :variant_property
+  end
+
+  factory :product_promotion, :class => PZS::ProductPromotion do
+    association :product_property
+    association :promotion
+  end
+
+  factory :promotion, :class => PZS::Promotion do
+    sequence(:name) { |n| "Name #{n}" }
+    sequence(:description) { |n| "Description #{n}" }
+    starts_at "01-01-2013"
+    expires_at "31-02-2013"
+    value 25
+    association :discount_type
   end
 
   factory :property, :class => PZS::Property do

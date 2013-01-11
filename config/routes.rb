@@ -12,7 +12,6 @@ PlazrStore::Engine.routes.draw do
   namespace :admin do
     root :to => 'application#index'
     resources :brands
-    resources :discount_types
     resources :pages
     resources :product_categories
     resources :products do
@@ -20,6 +19,7 @@ PlazrStore::Engine.routes.draw do
       resources :variants
       resources :multimedia
     end
+    resources :promotions
     resources :properties
     resources :prototypes
     resources :shipment_conditions

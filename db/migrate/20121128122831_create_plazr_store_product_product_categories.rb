@@ -1,4 +1,4 @@
-class ProductProductCategories < ActiveRecord::Migration
+class CreatePlazrStoreProductProductCategories < ActiveRecord::Migration
   def change
     create_table :plazr_store_product_product_categories do |t|
     t.references :product, :null => false
