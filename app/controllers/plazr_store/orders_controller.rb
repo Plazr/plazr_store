@@ -58,13 +58,9 @@ module PlazrStore
         if params['payment_method']['name'] == "Paypal" 
           session[:shipment_condition] = params[:order][:shipment_condition_id]
           redirect_to :controller => 'paypal_express', :action => 'checkout' and return
-        #else 
-        #  raise @order.inspect
-        #  shipment_price = ShipmentCondition.find(params[:order][:shipment_condition_id]).price
         end
       else 
           @order.shipment_condition_id = session[:shipment_condition] if defined? session[:shipment_condition]
-        #shipment_price = ShipmentCondition.find(@order.shipment_condition_id).price
       end
       
       ActiveRecord::Base.transaction do # so that order's cart changes aren't presisted if an error occurs
