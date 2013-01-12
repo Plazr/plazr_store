@@ -37,7 +37,7 @@ module PlazrStore
     ## Callbacks ##
     after_initialize :load_defaults
     before_validation :set_promotional_code_and_validate_code
-    # before_save :update_state
+    before_save :update_state
     after_save :deliver_order_confirmation#, :if => Proc.new { |order| alguma_coisa_aqui != "admin" }
     # after_commit :mark_cart_as_deleted
 
