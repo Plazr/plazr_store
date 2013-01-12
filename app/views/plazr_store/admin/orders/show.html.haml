@@ -1,5 +1,5 @@
 %h2= "Order ##{@order.id}"
-= "TODO: por botao de mudar state para paid"
+= change_to_paid_form(@order.id)
 State: 
 = @order.state
 %br

@@ -119,6 +119,7 @@ module PlazrStore
     end
         
     def history
+      @orders = Order.find_all_by_user_id(current_user.id).paginate(:per_page => 5, :page => params[:page])
       redirect_to plazr_auth_url if current_user.nil?
     end
 
@@ -129,6 +130,10 @@ module PlazrStore
       else
         redirect_to plazr_auth_url 
       end
+    end
+
+    def show
+      @order = Order.find(params[:id])
     end
     
     def confirm

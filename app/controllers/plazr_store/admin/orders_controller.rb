@@ -8,8 +8,9 @@ module PlazrStore
     # PUT    /admin/orders/:id/pay(.:format)
     def pay
       order = Order.find(params[:id])
-      order.update_attributes(:state => 'paid')
+      if order.update_attributes!(:state => 'paid')
       redirect_to :back
+      end
     end
 
     # PUT    /admin/orders/:order_id/ship/:cart_variant_id(.:format)
