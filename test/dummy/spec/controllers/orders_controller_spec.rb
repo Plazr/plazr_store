@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PZS::OrdersController, :type => :controller do
+describe PZS::OrdersController, :type => :controller, skip: true do
   render_views
 
   let(:current_user) { FactoryGirl.create(:user_with_user_role) }
