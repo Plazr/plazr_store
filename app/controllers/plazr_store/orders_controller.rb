@@ -52,24 +52,25 @@ module PlazrStore
     def create
       @order = Order.new(params[:order])
 
-      authorize! :create, @order
-
-      # first time in checkout
-      if @order.express_token.blank?
-        if params[:order][:shipment_condition_id].nil?
-          render 'new', :alert => "You need to specify a Shipment Condition" and return
-        end
-        if params['payment_method']['name'] == "Paypal" 
-          session[:shipment_condition] = params[:order][:shipment_condition_id]
-          redirect_to :controller => 'paypal_express', :action => 'checkout' and return
-        end
-      else 
-        @order.shipment_condition_id = session[:shipment_condition] if defined? session[:shipment_condition]
-      end
-
       ActiveRecord::Base.transaction do # so that order's cart changes aren't presisted if an error occurs
+        
         @order.load_user(current_user)
         @order.add_cart_and_update_status(@cart)
+
+        authorize! :create, @order
+
+        # first time in checkout
+        if @order.express_token.blank?
+          if params[:order][:shipment_condition_id].nil?
+            render 'new', :alert => "You need to specify a Shipment Condition" and return
+          end
+          if params['payment_method']['name'] == "Paypal" 
+            session[:shipment_condition] = params[:order][:shipment_condition_id]
+            redirect_to :controller => 'paypal_express', :action => 'checkout' and return
+          end
+        else 
+          @order.shipment_condition_id = session[:shipment_condition] if defined? session[:shipment_condition]
+        end
 
         @order.total = current_user.cart.total_price + ShipmentCondition.find(@order.shipment_condition_id).price
 
@@ -80,6 +81,9 @@ module PlazrStore
         elsif @order.save
           # paypal method: executes purchase
           if params['payment_method']['name'] == "Paypal" 
+            # changes order's payment_state to "paid"
+            @order.update_attributes(:payment_state => "paid")
+
             # total: total to be paid
             # purchase_params: paypal account details
             total, purchase_params = get_purchase_params request, params
@@ -109,7 +113,7 @@ module PlazrStore
           end
         end
 
-        render receipt
+        # render receipt
       end
     end
 

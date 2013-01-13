@@ -11,7 +11,8 @@
       %td= number_to_currency line_item.unit_price
       %td= line_item.amount
       %td= number_to_currency line_item.price
-      %td= change_product_to_shipped_form(order.id, line_item.id)
+      - if !line_item.shipped? && order.paid?
+        %td= change_product_to_shipped_form(order.id, line_item.id)
   %tr
     %td{colspan: "2"}
     %td= "Subtotal"

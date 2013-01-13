@@ -1,5 +1,8 @@
 %h2= "Order ##{@order.id}"
-= change_to_paid_form(@order.id)
+= "Payment State: #{@order.payment_state}"
+%br
+- if !@order.paid?
+  = change_to_paid_form(@order.id)
 State: 
 = @order.state
 %br

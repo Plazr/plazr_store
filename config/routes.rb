@@ -13,7 +13,7 @@ PlazrStore::Engine.routes.draw do
     root :to => 'application#index'
     resources :brands
     resources :discount_types
-    resources :orders, :only => [:index, :show] do
+    resources :orders, :except => [:new, :create, :edit, :update, :destroy] do
       put 'pay', :on => :member
       match 'ship/:cart_variant_id' => 'orders#ship', :as => :ship_product, :via => :put
     end
