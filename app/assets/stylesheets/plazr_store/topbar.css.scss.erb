@@ -1,0 +1,43 @@
+.topbar-wrapper {
+	.container {
+		background-color: white;
+	}
+	width: 100%;
+	.topbar {
+		border-bottom: 1px solid #EEE;
+		padding: 0.6em 0 0.6em 0;
+		background-color: white;
+		form {
+			margin: 0;
+			select {
+				margin-bottom: 1px;
+			}
+		}
+	}
+
+	ul.dropdown-menu li a {
+		padding-left: 30px;
+		// margin-left: 20px;
+	}
+
+	.admin, .admin:hover {
+		background-image: url("<%= image_path('plazr_store/icons/admin.png') %>");
+		background-repeat: no-repeat;
+		background-position: .6em .4em;
+	}
+	.exit, .exit:hover {
+		background-image: url("<%= image_path('plazr_store/icons/out.png') %>");
+		background-repeat: no-repeat;
+		background-position: .6em .4em;
+	}
+}
+
+// used when the bar is fixed
+.topbar-wrapper.fixed {
+	position: fixed;
+	top: 0;
+	margin: 0 auto;
+}
+
+
+

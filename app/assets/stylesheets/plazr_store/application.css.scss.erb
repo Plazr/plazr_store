@@ -39,15 +39,24 @@
  	}
  }
 
+.container {
+ 		padding-left: 1em;
+ 		padding-right: 1em;
+}
 
  body {
  	#layout-container {
  		padding: 0 0 3em 0;
  	}
- 	background-color: white;
+ 	background-color: whiteSmoke;
+ 	> .container {
+ 		padding-left: 1em;
+ 		padding-right: 1em;
+ 		background-color: white;
+ 	}
  }
 
- body > footer .container {
+ body .container > footer {
  	border-top: 1px solid $border-color;
  	margin-bottom: 2em;
 

@@ -10,7 +10,6 @@
 	<%= yield :head %>
 </head>
 <body>
-
 	<div class="hero-wrap">
 		<header class="container">
 			<div class="row">
@@ -40,9 +39,8 @@
 	</nav>
 
 	<%= render 'layouts/top_bar' %>
-
-	<% unless flash.empty? %>
 	<div class="container">
+		<% unless flash.empty? %>
 		<div class="row-fluid">
 			<div class="span12 text-info">
 				<% flash.each do |name, msg| %>
@@ -54,15 +52,13 @@
 				<% end %>
 			</div>
 		</div>
-	</div>
-	<% end %>
+		<% end %>
 
-	<section id="layout-container">
-		<%= yield %>
-	</section>
+		<section id="layout-container">
+			<%= yield %>
+		</section>
 
-	<footer>
-		<div class="container">
+		<footer>
 			<div class="row-fluid">
 				<div class="span4">
 					<section class="border-right">
@@ -91,8 +87,8 @@
 					</section>
 				</div>
 			</div>
-		</div>
-	</footer>
+		</footer>
+	</div>
 	<%= yield :script %>
 </body>
 </html>

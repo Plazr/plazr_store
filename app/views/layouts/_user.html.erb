@@ -16,10 +16,10 @@
 			<li><%= link_to 'Editar Perfil',     plazr_auth.edit_user_registration_path %></li>
 			<% if current_user.role?('admin') %>
 				<li class="divider"></li>
-				<li><%= link_to 'Painel Administrador', plazr_auth.admin_path %></li>
+				<li><%= link_to 'Painel Administrador', plazr_auth.admin_path, class: 'admin' %></li>
 			<% end %>
 			<li class="divider"></li>
-			<li><%= link_to 'Sair', plazr_auth.destroy_user_session_path, :method => :delete %></li>
+			<li><%= link_to 'Sair', plazr_auth.destroy_user_session_path, :method => :delete, class: 'exit' %></li>
 		<% else %>
 			<li><%= link_to 'Iniciar Sessão',  plazr_auth.new_user_session_path %></li>
 			<li><%= link_to 'Registar', plazr_auth.new_user_registration_path %></li>
