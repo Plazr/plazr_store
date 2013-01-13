@@ -1,26 +1,10 @@
-<%= content_for :head do %>
-	<%= stylesheet_link_tag 'plazr_store/pages' %>
-<% end %>
-
-<div class="container">
-
-<!-- 	<header class="row-fluid">
-		<div class="span12">
-			<h1>Lorem ipsum</h1>
-		</div>
-	</header>
-
-	<section id="promotion" class="row-fluid">
-		<div class="span12">
-			<%= image_tag 'plazr_store/promotion-banner.jpg' %>
-		</div>
-	</section> -->
+<div class="container" id="index-page">
 
 	<div class="row-fluid">
-		<section id="featured" class="span7">
+		<section id="featured" class="span8">
 			<%= render 'featured' if @featured %>
 		</section>
-		<section class="span5">
+		<section class="span4 well-outter">
 			<%= render 'best' if @best %>
 		</section>
 	</div>

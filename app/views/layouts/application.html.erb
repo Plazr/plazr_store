@@ -24,6 +24,21 @@
 		</header>
 	</div>
 
+ 	<nav class="nav-wrapper">
+ 		<div class="container">
+ 			<div class="row-fluid">
+				<ul class="inline pull-right">
+					<li><%= link_to 'Store', plazr_store.index_path %></li>
+					<% unless @pages.nil? %>
+						<% @pages.each do |page| %>
+							<li><%= link_to page.title, page %></li>
+						<% end %>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
 	<%= render 'layouts/top_bar' %>
 
 	<% unless flash.empty? %>
