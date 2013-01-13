@@ -21,7 +21,6 @@ module PlazrStore
       if order.ship_product(params[:cart_variant_id])
         redirect_to :back
       else
-        raise
         redirect_to admin_order_path(order)
       end
     end
