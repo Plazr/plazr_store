@@ -24,15 +24,15 @@
 		</header>
 	</div>
 
- 	<nav class="nav-wrapper">
- 		<div class="container">
- 			<div class="row-fluid">
+	<nav class="nav-wrapper">
+		<div class="container">
+			<div class="row-fluid">
 				<ul class="inline pull-right">
 					<li><%= link_to 'Store', plazr_store.index_path %></li>
 					<% unless @pages.nil? %>
-						<% @pages.each do |page| %>
-							<li><%= link_to page.title, page %></li>
-						<% end %>
+					<% @pages.each do |page| %>
+					<li><%= link_to page.title, page %></li>
+					<% end %>
 					<% end %>
 				</ul>
 			</div>
@@ -46,11 +46,11 @@
 		<div class="row-fluid">
 			<div class="span12 text-info">
 				<% flash.each do |name, msg| %>
-					<% if msg.is_a?(String) %>
-					<span class="pull-right flash-messages">
-						<%= content_tag :div, msg, :id => "flash_#{name}" %>
-					</span>
-					<% end %>
+				<% if msg.is_a?(String) %>
+				<span class="pull-right flash-messages">
+					<%= content_tag :div, msg, :id => "flash_#{name}" %>
+				</span>
+				<% end %>
 				<% end %>
 			</div>
 		</div>
@@ -63,10 +63,34 @@
 
 	<footer>
 		<div class="container">
-			<ul id="share" class="pull-right">
-				<li><%= image_tag 'plazr_store/icons/facebook.png' %></li>
-				<li><%= image_tag 'plazr_store/icons/twitter.png' %></li>
-			</ul>
+			<div class="row-fluid">
+				<div class="span4">
+					<section class="border-right">
+						<h5>Pages</h5>
+						<ul class="unstyled">
+							<li><%= link_to 'Store', plazr_store.index_path %></li>
+							<% unless @pages.nil? %>
+							<% @pages.each do |page| %>
+							<li><%= link_to page.title, page %></li>
+							<% end %>
+							<% end %>
+						</ul>
+					</section>
+				</div>
+				<div class="span4">
+					<section class="border-right">
+						<h5>Categories</h5>
+					</section>
+				</div>
+				<div class="span4">
+					<section class="">
+						<ul id="share">
+							<li><%= image_tag 'plazr_store/icons/facebook.png' %></li>
+							<li><%= image_tag 'plazr_store/icons/twitter.png' %></li>
+						</ul>
+					</section>
+				</div>
+			</div>
 		</div>
 	</footer>
 	<%= yield :script %>
