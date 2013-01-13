@@ -4,8 +4,9 @@ class CreatePlazrStorePromotions < ActiveRecord::Migration
       t.string :name, :null => false
       t.text :description
       t.string :value, :null => false
-      t.datetime :starts_at, :null => false
-      t.datetime :expires_at
+      t.string :min_filter
+      t.date :starts_at, :null => false
+      t.date :expires_at
       t.references :discount_type, :null => false
 
       t.timestamps

@@ -1,4 +1,4 @@
-class ProductVariantProperties < ActiveRecord::Migration
+class CreatePlazrStoreProductVariantProperties < ActiveRecord::Migration
   def change
     create_table :plazr_store_product_variant_properties do |t|
     t.references :product, :null => false

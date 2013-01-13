@@ -22,13 +22,6 @@ describe PZS::Variant, type: :model do
       FactoryGirl.create(:variant).should have_many(:multimedia).dependent(:destroy)
     end
 
-    it "has many promotion_variants" do
-      FactoryGirl.create(:variant).should have_many(:promotion_variants).dependent(:destroy)
-    end
-    it "has many promotions through promotion_variants" do
-      FactoryGirl.create(:variant).should have_many(:promotions).through(:promotion_variants)
-    end
-
     #it "has many shipment_condition_variants" do
     #  FactoryGirl.create(:variant).should have_many(:shipment_condition_variants).dependent(:destroy)
     #end
@@ -58,9 +51,6 @@ describe PZS::Variant, type: :model do
     end
     it "requires visible to be set" do
       FactoryGirl.create(:variant).should validate_presence_of :visible
-    end
-    it "requires product to be set" do
-      FactoryGirl.create(:variant).should validate_presence_of :product
     end
 
     describe "is_master field" do
