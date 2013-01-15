@@ -1,20 +1,15 @@
 <div class="topbar-wrapper">
-	<div class="container">
-		<div class="topbar clearfix">
-			<%= form_tag plazr_store.search_path, :method => 'get', :class => "form-inline" do %>
-			<select>
-				<option value="default">--</option>
-				<option value="camisolas">Camisolas</option>
-				<option value="calcas">Calças</option>
-				<option value="sapatilhas">Sapatilhas</option>
-			</select>
-			<%= text_field_tag :search, params[:search], :placeholder => "Camisolas amarelas", :class => "input-xlarge" %>
-			<%= submit_tag "Pesquisar", :name => nil, :class=>"btn" %>
+  <div class="container">
+    <div class="topbar clearfix">
+      <%= form_tag plazr_store.search_path, :method => 'get', :class => "form-inline" do %>
+        <%= select_tag "category", options_from_collection_for_select(@categories, :id, :name), :prompt => "Selecione uma categoria" %>
+        <%= text_field_tag :search, params[:search], :placeholder => "Camisolas amarelas", :class => "input-xlarge" %>
+        <%= submit_tag "Pesquisar", :name => nil, :class=>"btn" %>
 
-			<div class="pull-right">
-				<%= render 'layouts/user' %>
-			</div>
-			<% end %>
-		</div>
-	</div>
+        <div class="pull-right">
+          <%= render 'layouts/user' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

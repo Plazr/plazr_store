@@ -169,6 +169,15 @@ module PlazrStore
       end
     end
 
+    # Finds products by category
+    def self.find_by_category(search)
+      if !search.blank?
+        joins(:product_categories).where('plazr_store_product_categories.id' => search) 
+      else
+        self.scoped
+      end
+    end
+
     # Finds products by name details using % wildcard
     def self.find_by_name_and_details_like(search)
       where('plazr_store_products.name LIKE ? OR plazr_store_products.details LIKE ?', "%#{search}%", "%#{search}%")

@@ -1,6 +1,7 @@
 module PlazrStore
   class SearchController < ApplicationController
     def search
+      # raise
       # params[:min_price]
       # params[:max_price]
       # params[:brand]

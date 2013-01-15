@@ -2,6 +2,7 @@ module PlazrStore
   class ApplicationController < ActionController::Base
 
   before_filter :get_pages
+  before_filter :get_categories
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to plazr_auth_url, :alert => exception.message
@@ -22,6 +23,10 @@ module PlazrStore
 
   def get_pages
     @pages = Page.all
+  end
+
+  def get_categories
+    @categories = ProductCategory.all
   end
 
   protected
