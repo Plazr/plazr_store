@@ -3,20 +3,20 @@
 		<h1><%= "Search Results for \"#{params[:search]}\"" %></h1>
 	</div>
 
-	<div class="row-fuild">
+	<div class="row-fuild" id="filters">
 
-		<div class="span3" id="filters">
+		<div class="span3">
 			<span>Preço: </span>
-			<input type="text" man="min_price">
+			<input type="number" value="0" name="min_price">
 			<span> € a </span>
-			<input type="text" man="max_price">
+			<input type="number" value="0" name="max_price">
 			<span> €</span>
 		</div>
 
 		<div class="span4">
 			<span>Marca: </span>
-			<select>
-				<option> </option>
+			<select id="brand">
+				<option>--</option>
 				<% @products.uniq.each do |product| %>
 					<option><%= product.brand.name %></option>
 				<% end %>
@@ -25,11 +25,12 @@
 
 		<div class="span4">
 			<span>Preço: </span>
-			<select>
-				<option></option>
+			<select id="price">
+				<option>--</option>
 				<option>Ascendente</option>
 				<option>Descendente</option>
 			</select>
+			<button>Filter</button>
 		</div>
 
 	</div>

@@ -89,7 +89,7 @@ module PlazrStore
 
     def image
       images = self.multimedia
-      if images.size > 1
+      if images.size > 0
         images.first
       else
         Multimedium::new(type: 'variant')
