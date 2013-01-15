@@ -12,14 +12,22 @@
 <body>
 	<div class="hero-wrap">
 		<header class="container">
-			<div class="row">
+			<div class="row-fluid">
 				<div class="span12">
 					<div class="hero-unit">
-						<h1>Plazr Store</h1>
-						<p class="lead">A simplificar o comércio online.</p>
+						<%= image_tag 'logo.png' %>
 					</div>
 				</div>
 			</div>
+			<% unless flash.empty? %>
+			<% flash.each do |name, msg| %>
+			<% if msg.is_a?(String) %>
+			<span class="text-info pull-right flash-messages">
+				<%= content_tag :div, msg, :id => "flash_#{name}" %>
+			</span>
+			<% end %>
+			<% end %>
+			<% end %>
 		</header>
 	</div>
 
@@ -38,56 +46,41 @@
 		</div>
 	</nav>
 
-	<div class="container">
-		<%= render 'layouts/top_bar' %>
-		<% unless flash.empty? %>
-		<div class="row-fluid">
-			<div class="span12 text-info">
-				<% flash.each do |name, msg| %>
-				<% if msg.is_a?(String) %>
-				<span class="pull-right flash-messages">
-					<%= content_tag :div, msg, :id => "flash_#{name}" %>
-				</span>
-				<% end %>
-				<% end %>
-			</div>
-		</div>
-		<% end %>
-
-		<section id="layout-container">
+	<div id="container-wrapper">
+		<div class="container">
+			<%= render 'layouts/top_bar' %>
 			<%= yield %>
-		</section>
-
-		<footer>
-			<div class="row-fluid">
-				<div class="span4">
-					<section class="border-right">
-						<h5>Pages</h5>
-						<ul class="unstyled">
-							<li><%= link_to 'Store', plazr_store.index_path %></li>
-							<% unless @pages.nil? %>
-							<% @pages.each do |page| %>
-							<li><%= link_to page.title, page %></li>
-							<% end %>
-							<% end %>
-						</ul>
-					</section>
+			<footer>
+				<div class="row-fluid">
+					<div class="span4">
+						<section class="border-right">
+							<h5>Pages</h5>
+							<ul class="unstyled">
+								<li><%= link_to 'Store', plazr_store.index_path %></li>
+								<% unless @pages.nil? %>
+								<% @pages.each do |page| %>
+								<li><%= link_to page.title, page %></li>
+								<% end %>
+								<% end %>
+							</ul>
+						</section>
+					</div>
+					<div class="span4">
+						<section class="border-right">
+							<h5>Categories</h5>
+						</section>
+					</div>
+					<div class="span4">
+						<section class="">
+							<ul id="share">
+								<li><%= image_tag 'plazr_store/icons/facebook.png' %></li>
+								<li><%= image_tag 'plazr_store/icons/twitter.png' %></li>
+							</ul>
+						</section>
+					</div>
 				</div>
-				<div class="span4">
-					<section class="border-right">
-						<h5>Categories</h5>
-					</section>
-				</div>
-				<div class="span4">
-					<section class="">
-						<ul id="share">
-							<li><%= image_tag 'plazr_store/icons/facebook.png' %></li>
-							<li><%= image_tag 'plazr_store/icons/twitter.png' %></li>
-						</ul>
-					</section>
-				</div>
-			</div>
-		</footer>
+			</footer>
+		</div>
 	</div>
 	<%= yield :script %>
 </body>

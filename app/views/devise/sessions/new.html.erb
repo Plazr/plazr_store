@@ -1,0 +1,32 @@
+<div class="row-fluid">
+	<div class="span8">
+		<%= form_for resource, as: resource_name, url: session_path(resource_name), class: 'form-horizontal' do |f| %>
+    		<div class="control-group"
+    			<div class="control-label">
+    				<%= f.label :email %>
+    			</div>
+    			<div class="controls">
+    			    <%= f.email_field :email %>
+    			</div>
+    		</div>
+    		<div class="control-group"
+    			<div class="control-label">
+    				<%= f.label :password %>
+    			</div>
+    			<div class="controls">
+    			    <%= f.email_field :email %>
+    			</div>
+    		</div>
+    		<% if devise_mapping.rememberable? %>
+    			<div class="control-group"
+    				<div class="control-label">
+    					<%= f.label :remember_me %>
+    				</div>
+    				<div class="controls">
+    				    <%= f.check_box :remember_me %>
+    				</div>
+    			</div>
+    		<% end %>
+    	<% end %>
+	</div>
+</div>

@@ -1,21 +1,19 @@
 <div id="index-page">
-
 	<div class="row-fluid">
-		<section id="featured" class="span8">
+		<section class="span8">
 			<%= render 'featured' if @featured %>
 		</section>
-		<section class="span4 well-outter">
+		<section class="span4">
 			<%= render 'best' if @best %>
 		</section>
 	</div>
-
 	<section id="recommended">
 		<header class="page-header">
-			<h2><span>Recommendations<span></h2>
+			<h2><span>Recomendados<span></h2>
 		</header>
 		<section class="row-fluid">
 			<% @recommended.each do |recommended| %>
-				<%= render 'recommended_single', :recommended => recommended %>
+			<%= render 'recommended_single', :recommended => recommended %>
 			<% end %>
 		</section>
 	</section>

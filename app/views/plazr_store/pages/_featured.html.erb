@@ -1,15 +1,18 @@
-<header class="row-fluid">
-	<h3><%= @featured.name %></h3>
-</header>
-<article class="row-fluid">
+<article id="featured" class="row-fluid">
 	<div class="span4">
 		<%= image_tag @featured.image.file.url %>
 	</div>
-	<div class="span8">
+	<div class="span6">
+		<section>
+		<header>
+			<h3><%= @featured.name %></h3>
+		</header>
 		<span class="rating">
-			<% 5.times do %>
-			<%= image_tag 'glyphicons/star-full.png'%>
+			<% 3.times do %>
+			<%= image_tag 'plazr_store/rate/star-full.png'%>
 			<% end %>
+			<%= image_tag 'plazr_store/rate/star-half.png'%>
+			<%= image_tag 'plazr_store/rate/star-empty.png'%>
 		</span>
 
 		<p><%= @featured.details %></p>
@@ -32,5 +35,6 @@
 				€ <%= @featured.master_price %>
 			</strong>
 		</p>
+	</section>
 	</div>
 </article>
