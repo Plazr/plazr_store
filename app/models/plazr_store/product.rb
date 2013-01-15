@@ -45,7 +45,7 @@ module PlazrStore
     before_save :create_available_at
     before_validation :create_slug
 
-
+    
     ## Instance Methods ##
     def has_master?
       self.variants.count >= 1
@@ -159,7 +159,42 @@ module PlazrStore
     end
 
 
+    ## Class Methods ##
+    # Finds products by brand
+    def self.find_by_brand(search)
+      if !search.blank?
+        joins(:brand).where('plazr_store_brands.name' => "#{search}") 
+      else
+        self.scoped
+      end
+    end
 
+    # Finds products by name details using % wildcard
+    def self.find_by_name_and_details_like(search)
+      where('plazr_store_products.name LIKE ? OR plazr_store_products.details LIKE ?', "%#{search}%", "%#{search}%")
+    end
+
+    # Find products by a price range
+    def self.find_by_price_between(min, max)
+      min = min.to_i
+      max = max.to_i
+      if max > 0 && (min <= max)
+        joins(:variants).where("is_master = ? AND price BETWEEN ? AND ?", true, min, max)
+      else
+        self.scoped
+      end
+    end
+
+    # Orders products by price
+    def self.order_by_price(direction)
+      if direction == "-1"
+        joins(:variants).where("is_master = ?", true).order("price DESC")
+      elsif direction == "1"
+        joins(:variants).where("is_master = ?", true).order("price ASC")
+      else
+        self.scoped
+      end
+    end
 
     protected
 

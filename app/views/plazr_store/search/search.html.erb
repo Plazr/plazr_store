@@ -16,9 +16,9 @@
 		<div class="span4">
 			<span>Marca: </span>
 			<select id="brand">
-				<option>--</option>
-				<% @products.uniq.each do |product| %>
-					<option><%= product.brand.name %></option>
+				<option value="">Selecione uma marca</option>
+				<% @brands.each do |brand| %>
+					<option><%= brand.name %></option>
 				<% end %>
 			</select>
 		</div>
@@ -26,9 +26,9 @@
 		<div class="span4">
 			<span>Preço: </span>
 			<select id="price">
-				<option>--</option>
-				<option>Ascendente</option>
-				<option>Descendente</option>
+				<option value="">Ordene por preço</option>
+				<option value="1">Ascendente</option>
+				<option value="-1">Descendente</option>
 			</select>
 			<button>Filter</button>
 		</div>

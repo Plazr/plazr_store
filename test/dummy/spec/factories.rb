@@ -295,7 +295,7 @@ FactoryGirl.define do
   factory :variant, :class => PZS::Variant do
     sequence(:sku) {|n| "SKU#{n}"}
     description "Description"
-    price {50.0}
+    price {rand(100.0)}
     visible true
     amount_available {rand(20)}
     is_master true
