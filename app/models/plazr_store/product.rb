@@ -126,8 +126,13 @@ module PlazrStore
       self.master_variant.image
     end
 
-    def related(count = 5)
-      #Product.
+    def related(count = 3)
+      categories = self.product_categories.count
+      if categories > 0
+        self.product_categories[rand(categories)].products.limit(count)
+      else
+        []
+      end
     end
 
     ### Virtual attributes
