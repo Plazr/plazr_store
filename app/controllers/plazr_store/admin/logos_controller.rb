@@ -7,7 +7,6 @@ module PlazrStore
 
     def create
       @logo = Multimedium.new params[:multimedium]
-      @logo.class_type = "logo"
 
       if @logo.save
         redirect_to root_path, :notice => 'Logo was successfully created.'

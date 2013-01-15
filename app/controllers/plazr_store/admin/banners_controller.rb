@@ -7,6 +7,7 @@ module PlazrStore
 
     def create
       @banner = Multimedium.new params[:multimedium]
+      
       if @banner.save
         redirect_to root_path, :notice => 'Banner was successfully created.'
       else
