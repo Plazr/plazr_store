@@ -27,29 +27,24 @@
           <div class="slider-wrap">
             <div id="main-photo-slider" class="csw">
               <div class="panelContainer">
-                <!--
-                <%# @product.images.each_with_index do |im, index| %>
-                  <div class="panel" title=("Panel" + index)>
+                
+                <% @product.images.each_with_index do |im, index| %>
+                  <div class="panel" title='Panel <%=index + 1%>'>
                     <div class="wrapper">
-                      <img src=<%#=im.file%> alt="temp" />
+                      <img src=<%=im.file%> alt="temp" />
                     </div>
                   </div>
-                <%# end %>
-                -->
+                <% end %>
               </div>
             </div>
+
             <div id="movers-row">
-              <!--
-              <%# @product.images.each do |im| %>
-                <div><a href="#5" class="cross-link"><img src=<%#=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
-              <%# end %>
-              -->
+              
+              <% @product.images.each_with_index do |im, index| %>
+                <div><a href="#<%=index + 1%>" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
+              <% end %>
+              
             </div>
-          </div>
-          <div id="movers-row">
-            <% @product.images.each do |im| %>
-            <div><a href="#5" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
-            <% end %>
           </div>
 
         </div>
