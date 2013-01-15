@@ -54,19 +54,28 @@ FactoryGirl.define do
 
   factory :multimedium, :class => PZS::Multimedium do
     sequence(:caption) { |n| "Caption #{n}" }
-    file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
 
     factory :multimedium_v2 do
       caption "Good Multimedium"
+      class_type 'variant'
+      file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
       association :variant
     end
 
     factory :multimedium_for_variant do
+      class_type 'variant'
+      file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
       association :variant
     end
 
-    factory :multimedium_for_page do
-      association :page
+    factory :multimedium_for_banner do
+      class_type 'banner'
+      file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
+    end
+
+    factory :multimedium_for_logo do
+      class_type 'logo'
+      file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
     end
 
     factory :invalid_multimedium do
@@ -142,7 +151,7 @@ FactoryGirl.define do
         p.variant_properties << FactoryGirl.create(:variant_property_with_values)
         p.variants << FactoryGirl.create_list(:variant, evaluator.variants_count, product: p)
         p.variants.each do |v|
-          v.multimedia << FactoryGirl.create_list(:multimedium, 2, variant: v)
+          v.multimedia << FactoryGirl.create_list(:multimedium_for_variant, 2, variant: v)
           p.variant_properties.each do |pvp|
             v.variant_property_values << pvp.variant_property_values.first
           end

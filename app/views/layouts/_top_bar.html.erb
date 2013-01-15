@@ -3,6 +3,16 @@
 		<div class="topbar clearfix">
 			<nav>
 				<ul class="nav nav-pills pull-left">
+					<% if @logo.nil?%>
+						<li><%= link_to 'New Logo', plazr_store.new_admin_logo_path %></li>
+					<% else %>
+						<li><%= link_to 'Update Logo', plazr_store.edit_admin_logo_path(@logo) %></li>
+					<% end %>
+					<% if @banner.nil? %>
+						<li><%= link_to 'New Banner', plazr_store.new_admin_banner_path %></li>
+					<% else %>
+						<li><%= link_to 'Update Banner', plazr_store.edit_admin_banner_path(@banner) %></li>
+					<% end %>
 					<li><%= link_to 'Store', plazr_store.index_path %></li>
 					<% unless @pages.nil? %>
 						<% @pages.each do |page| %>

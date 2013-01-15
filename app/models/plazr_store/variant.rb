@@ -92,7 +92,7 @@ module PlazrStore
       if images.size > 1
         images.first
       else
-        Multimedium::new(type: 'variant')
+        Multimedium::new(class_type: 'variant')
       end
     end
 

@@ -2,50 +2,75 @@ module PlazrStore
   class Multimedium < ActiveRecord::Base
     ## Relations ##
     belongs_to :variant
-    belongs_to :page
 
     ## Attributes ##
-    attr_accessible :file, :caption, :variant_id, :type
+    attr_accessible :file, :caption, :variant_id, :class_type
 
     ## Paperclip ##
-    has_attached_file :file, :styles => { :thumb => "300x300"},
+    has_attached_file :file,
+      :styles => Proc.new { |upload| upload.instance.set_styles },
       :url  => :set_url_base_on_parent!, 
       :path => :set_path_based_on_parent!,
       :default_url => :default_url_method
-    
-    # this model need to have a variant or a page association
-    validates :variant, :presence => true, :if => :page_nil?
-    validates :page, :presence => true, :if => :variant_nil?
+
     validates_attachment_presence :file
     validates_attachment_content_type :file, :content_type => ['image/jpeg', 'image/png', 
                   'image/gif', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/mp4']
-    
+
+    ## Callbacks ##
+    before_save :one_logo, :on => [:create]
+    before_save :one_banner, :on => [:create]
+
+    def one_logo
+      if Multimedium.find_all_by_class_type('logo').count > 0
+        self.errors.add(:base, "This store already has one logo")
+        false
+      end
+    end
+
+    def one_banner
+      if Multimedium.find_all_by_class_type('banner').count > 0
+        self.errors.add(:base, "This store already has one banner")
+        false
+      end
+    end
     
     ## Instance Methods ##
-    #method to check if page association is nil
-    def page_nil?
-      self.page.nil?
+    # returns the banner of the store
+    def self.banner
+      find_by_class_type('banner')
     end
 
-    #method to check if variant association is nil
-    def variant_nil?
-      self.variant.nil?
+    # returns the logo of the store
+    def self.logo
+      find_by_class_type('logo')
     end
 
-    #set the path where the files are going to be stored based on the model to which the file belongs
+    # set the style of the file accordingly to the class_type
+    def set_styles
+      if self.class_type == 'variant'
+        {:square => '100x75#'}
+      elsif self.class_type == 'banner'
+        {:banner => '100x75#'}
+      elsif self.class_type == 'logo'
+        {:logo => '100x75#'}
+      end
+    end
+
+    #set the path where the files are going to be stored based on the class_type
     def set_path_based_on_parent!
-      if !variant_nil?
+      if !self.variant.nil?
         ":rails_root/public/assets/upload/variants/:id/:style/:basename.:extension"
-      elsif !page_nil?
+      else#if !page_nil?
         ":rails_root/public/assets/upload/pages/:id/:style/:basename.:extension"
       end
     end
 
-    #set the url where the files are going to be accessed based on the model to which the file belongs
+    #set the url where the files are going to be accessed based on the class_type
     def set_url_base_on_parent!
-      if !variant_nil?
+      if !self.variant.nil?
         "/assets/upload/variants/:id/:style/:basename.:extension"
-      elsif !page_nil?
+      else#if !page_nil?
         "/assets/upload/pages/:id/:style/:basename.:extension"
       end
     end
@@ -57,8 +82,8 @@ module PlazrStore
     protected
 
       def default_url_method
-        if self.type == 'variant'
-          "/assets/no_image_avail/#{self.type}.png"
+        if self.class == 'variant'
+          "/assets/no_image_avail/#{self.class_type}.png"
         else
           "/assets/no_image/avail/generic.png"
         end

@@ -11,7 +11,9 @@ PlazrStore::Engine.routes.draw do
 
   namespace :admin do
     root :to => 'application#index'
+    resources :banners, :only => [:new, :create, :edit, :update]
     resources :brands
+    resources :logos, :only => [:new, :create, :edit, :update]
     resources :pages
     resources :product_categories
     resources :products do
