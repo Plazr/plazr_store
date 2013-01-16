@@ -1,0 +1,36 @@
+%h1 Listing Promotions
+%table
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Value
+      %th Minimum Filter
+      %th Start Date
+      %th Expire Date
+      %th Discount Type
+
+  %tbody
+    - @promotions.each do |promotion|
+      %tr
+        %td
+          = promotion.name
+        %td
+          = promotion.description
+        %td
+          = promotion.value
+        %td
+          = promotion.min_filter
+        %td
+          = promotion.starts_at
+        %td
+          = promotion.expires_at
+        %td
+          = promotion.discount_type.name
+        %td
+          = link_to 'Show', admin_promotion_path(promotion)
+        %td
+          = link_to 'Edit', edit_admin_promotion_path(promotion)
+        %td
+          = link_to 'Destroy', admin_promotion_path(promotion), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New Promotion', new_admin_promotion_path
