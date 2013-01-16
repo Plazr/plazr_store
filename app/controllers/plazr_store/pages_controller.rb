@@ -3,8 +3,8 @@ module PlazrStore
 
     def index
     	@featured = Product.last
-    	@best = Product.find(:all, :limit => 5, :order=> 'created_at desc')
-    	@recommended = Product.find(:all, :limit => 4, :order=> 'created_at desc')
+    	@best = Product.find(:all, :limit => 3, :order=> 'created_at desc')
+    	@recommended = Product.find(:all, :limit => 8, :order=> 'created_at desc')
     end
 
     def show

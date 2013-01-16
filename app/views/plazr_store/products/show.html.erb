@@ -1,30 +1,22 @@
+<article id="product-show">
 
-<article class="container" id="product-show">
-
-  <% if @product.product_categories.size > 0 %>
-    <div class="row-fluid">
-      <div class="span12">
-        <p> <%= @product.product_categories.first.name %></p>
-      </div>
-    </div>
-  <%end%>
-
-  <header class="row-fluid">
-    <div class="span8">
-      <h2><%= @product.name %></h2>
-      <p><%= @product.rating %></p>
+  <header class="page-header">
+      <h2><%=@product.name%></h2>
+      <p><%= @product.rating %>s</p>
     </div>
     <div class="span4">
       <h2><%= @product.master_price %> €</h2>
       <%= add_to_cart_form(@product.master_variant.id) %>
     </div>
   </header>
-
+  <div class="row-fluid">
+    € <%= @product.master_price %>
+  </div>
   <!--Teste imagens-->
 
   <!--teste-->
-  <div class="row">
-      <div  class="span8 offset1">
+  <div class="row-fluid">
+    <div  class="span8">
 
         <div id="page-wrap">
           <div class="slider-wrap">
@@ -49,11 +41,15 @@
               
             </div>
           </div>
-
         </div>
+        <div id="movers-row">
+          <% @product.images.each do |im| %>
+          <div><a href="#5" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
+          <% end %>
+        </div>
+
       </div>
     </div>
-
     <div class="span3">
       <div class="row">
         <div>
@@ -66,11 +62,12 @@
   </div>
 
 
+
+
   <!-- Images End -->
 
   <section>
-
-    <div class="row">
+    <div class="row-fluid">
       <div class="span11 offset1">
         <% if !@product.variants_without_master.empty? %>
         <p>Variantes:</p>
@@ -85,14 +82,14 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row-fluid">
       <div class="span11 offset1">
         <p>Quantidade:</p>
         <input type="number" value="Quantity" />
       </div>
     </div>
 
-    <div class="row">
+    <div class="row-fluid">
 
       <div class="span5 offset1">
         <dl>
@@ -102,7 +99,6 @@
           <dd><%= @product.master_variant.sku %></dd>
         </dl>
       </div>
-    </div>
     </section>
 
     <% if @product.related.size > 0 %>
@@ -144,14 +140,14 @@
 
     <% if !@product.comments.empty? %>
     <section>
-      <div class="row">
+      <div class="row-fluid">
         <div class="span11 offset1">
           <h1>Comentários</h1>
         </div>
       </div>
 
       <% @product.comments.each do |c| %>
-      <div class="row">
+      <div class="row-fluid">
         <div class="span4 offset1">
           <h3>Nome</h3>
           <p><%= PlazrAuth::User.find(@product.id).first_name %></p>
