@@ -1,15 +1,19 @@
 module PlazrStore
+  # Controller for the admin to interact with the multimedia model
   class Admin::MultimediaController < Admin::ApplicationController
     before_filter :get_product
 
+    # Get a multimedia with the given id
     def show
       @multimedium = Multimedium.find params[:id]
     end
 
+    # Get all the multimedia of all variants of a given product
     def index
       @multimedia = Multimedium.multimedia_from_all_variants_of_a_product(@product)
     end
 
+    # Create a multimedia with the given information and file
     def create
       @multimedium = Multimedium.new params[:multimedium]
 
@@ -21,16 +25,19 @@ module PlazrStore
       end
     end
 
+    # Create a new empty multimedia object
     def new
       @multimedium = Multimedium.new
       entity_collection
     end
 
+    # Get a multimedia with the given id to display on the edit page
     def edit
       @multimedium = Multimedium.find params[:id]
       entity_collection
     end
 
+    # Update the multimedia of a given id with the given information
     def update
       @multimedium = Multimedium.find params[:id]
 
@@ -42,6 +49,7 @@ module PlazrStore
       end
     end
 
+    # Delete a multimedia object with the given id
     def destroy
       @multimedium = Multimedium.find(params[:id])
       if @multimedium.destroy
@@ -51,11 +59,13 @@ module PlazrStore
     end
 
     protected
+
+      # Get a product with the given id
       def get_product
         @product = Product.find(params[:product_id])
       end
 
-      # collection used on the views for the belongs_to relation with a variant
+      # Get a collection used on the views for the relation between a variant and products
       def entity_collection
         @variants = @product.variants
       end

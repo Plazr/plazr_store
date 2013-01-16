@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a property product/variant relation
   class Property < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface
@@ -22,6 +23,7 @@ module PlazrStore
     ## Callbacks ##
     before_save :fill_fields
 
+    # Fill its name to be displayed
     def fill_fields
       self.display_name = self.id_name unless !self.display_name.blank?
     end

@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing the payment information, which can be associated with many orders
   class PaymentData < ActiveRecord::Base
     ## Relations ##
     # belongs_to :user TODO metodo que chama api

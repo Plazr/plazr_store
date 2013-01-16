@@ -1,13 +1,16 @@
 module PlazrStore
+  # Controller for the admin to manage the relation between the product and property models
   class Admin::ProductPropertiesController < Admin::ApplicationController
     before_filter :get_product
 
+    # Build the relation between a given product and a new property
     def index
       @property = Property.new
       @property.product_properties.build
       @product_properties = @product.product_properties
     end
 
+    # Create a new property with the given information
     def create
       @property = Property.new(params[:property])
       # updates all the product_properties already associated
@@ -38,6 +41,7 @@ module PlazrStore
       end
     end
 
+    # Delete the relation between a product and a property, given the relation id
     def destroy
       @product_property = ProductProperty.find(params[:id])
       @product_property.destroy
@@ -45,12 +49,13 @@ module PlazrStore
     end
 
     protected
+
+      # Get the product with the given id
       def get_product
         @product = Product.find(params[:product_id])
       end
 
-      # iterate through each element of the hash and updates attributes of the property and
-      # the product_property
+      # Update all the attributes of a given property and the relation between the product and property
       def update_all_product_properties
         params[:pps].each do |k,v|
           Property.find(v[:property_id]).update_attributes(

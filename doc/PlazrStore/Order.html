@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+  <title>Class: PlazrStore::Order</title>
+
+  <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+  <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body id="top" class="class">
+
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="../app/models/plazr_store/order_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="app/models/plazr_store/order.rb">app/models/plazr_store/order.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div id="class-metadata">
+      
+      <!-- Parent Class -->
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        
+        <p class="link">ActiveRecord::Base</p>
+        
+      </div>
+      
+
+      
+
+      
+
+      
+      <!-- Method Quickref -->
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-i-add_cart_and_update_status">#add_cart_and_update_status</a></li>
+          
+          <li><a href="#method-i-cart">#cart</a></li>
+          
+          <li><a href="#method-i-completed_at_and_state_match">#completed_at_and_state_match</a></li>
+          
+          <li><a href="#method-i-deliver_order_confirmation">#deliver_order_confirmation</a></li>
+          
+          <li><a href="#method-i-info">#info</a></li>
+          
+          <li><a href="#method-i-load_defaults">#load_defaults</a></li>
+          
+          <li><a href="#method-i-load_user">#load_user</a></li>
+          
+          <li><a href="#method-i-set_promotional_code_and_validate_code">#set_promotional_code_and_validate_code</a></li>
+          
+          <li><a href="#method-i-update_state">#update_state</a></li>
+          
+          <li><a href="#method-i-user">#user</a></li>
+          
+        </ul>
+      </div>
+      
+
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="../Gemfile.html">Gemfile</a></li>
+        
+          <li class="file"><a href="../MIT-LICENSE.html">MIT-LICENSE</a></li>
+        
+          <li class="file"><a href="../Rakefile.html">Rakefile</a></li>
+        
+          <li class="file"><a href="../test/dummy/Guardfile.html">Guardfile</a></li>
+        
+          <li class="file"><a href="../test/dummy/README_rdoc.html">README.rdoc</a></li>
+        
+          <li class="file"><a href="../test/dummy/Rakefile.html">Rakefile</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="../images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="../PlazrStore.html">PlazrStore</a></li>
+        
+          <li><a href="../PlazrStore.html">PlazrStore</a></li>
+        
+          <li><a href="../PlazrStore/Address.html">PlazrStore::Address</a></li>
+        
+          <li><a href="../PlazrStore/Admin.html">PlazrStore::Admin</a></li>
+        
+          <li><a href="../PlazrStore/Admin/ApplicationController.html">PlazrStore::Admin::ApplicationController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/BrandsController.html">PlazrStore::Admin::BrandsController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/MultimediaController.html">PlazrStore::Admin::MultimediaController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/PagesController.html">PlazrStore::Admin::PagesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/ProductCategoriesController.html">PlazrStore::Admin::ProductCategoriesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/ProductPropertiesController.html">PlazrStore::Admin::ProductPropertiesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/ProductsController.html">PlazrStore::Admin::ProductsController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/PromotionsController.html">PlazrStore::Admin::PromotionsController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/PropertiesController.html">PlazrStore::Admin::PropertiesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/PrototypesController.html">PlazrStore::Admin::PrototypesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/ShipmentConditionsController.html">PlazrStore::Admin::ShipmentConditionsController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/VariantPropertiesController.html">PlazrStore::Admin::VariantPropertiesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/VariantPropertyValuesController.html">PlazrStore::Admin::VariantPropertyValuesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/VariantsController.html">PlazrStore::Admin::VariantsController</a></li>
+        
+          <li><a href="../PlazrStore/ApplicationController.html">PlazrStore::ApplicationController</a></li>
+        
+          <li><a href="../PlazrStore/ApplicationHelper.html">PlazrStore::ApplicationHelper</a></li>
+        
+          <li><a href="../PlazrStore/Brand.html">PlazrStore::Brand</a></li>
+        
+          <li><a href="../PlazrStore/Cart.html">PlazrStore::Cart</a></li>
+        
+          <li><a href="../PlazrStore/CartController.html">PlazrStore::CartController</a></li>
+        
+          <li><a href="../PlazrStore/CartHelper.html">PlazrStore::CartHelper</a></li>
+        
+          <li><a href="../PlazrStore/CartVariant.html">PlazrStore::CartVariant</a></li>
+        
+          <li><a href="../PlazrStore/CategoryCondition.html">PlazrStore::CategoryCondition</a></li>
+        
+          <li><a href="../PlazrStore/Condition.html">PlazrStore::Condition</a></li>
+        
+          <li><a href="../PlazrStore/Coupon.html">PlazrStore::Coupon</a></li>
+        
+          <li><a href="../PlazrStore/DiscountType.html">PlazrStore::DiscountType</a></li>
+        
+          <li><a href="../PlazrStore/Engine.html">PlazrStore::Engine</a></li>
+        
+          <li><a href="../PlazrStore/FeedbackProduct.html">PlazrStore::FeedbackProduct</a></li>
+        
+          <li><a href="../PlazrStore/FeedbackProductsController.html">PlazrStore::FeedbackProductsController</a></li>
+        
+          <li><a href="../PlazrStore/FeedbackStore.html">PlazrStore::FeedbackStore</a></li>
+        
+          <li><a href="../PlazrStore/Mockup.html">PlazrStore::Mockup</a></li>
+        
+          <li><a href="../PlazrStore/Mockup/ApplicationController.html">PlazrStore::Mockup::ApplicationController</a></li>
+        
+          <li><a href="../PlazrStore/Mockup/PagesController.html">PlazrStore::Mockup::PagesController</a></li>
+        
+          <li><a href="../PlazrStore/Mockup/ProfilesController.html">PlazrStore::Mockup::ProfilesController</a></li>
+        
+          <li><a href="../PlazrStore/Multimedium.html">PlazrStore::Multimedium</a></li>
+        
+          <li><a href="../PlazrStore/Notifier.html">PlazrStore::Notifier</a></li>
+        
+          <li><a href="../PlazrStore/Order.html">PlazrStore::Order</a></li>
+        
+          <li><a href="../PlazrStore/OrdersController.html">PlazrStore::OrdersController</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore.html">PlazrStore::PZS</a></li>
+        
+          <li><a href="../PlazrStore/Page.html">PlazrStore::Page</a></li>
+        
+          <li><a href="../PlazrStore/PagesController.html">PlazrStore::PagesController</a></li>
+        
+          <li><a href="../PlazrStore/ParanoiaInterface.html">PlazrStore::ParanoiaInterface</a></li>
+        
+          <li><a href="../PlazrStore/PaymentData.html">PlazrStore::PaymentData</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore.html">PlazrStore::PlazrStore</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore/Mockup.html">PlazrStore::PlazrStore::Mockup</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore/Mockup/Admin.html">PlazrStore::PlazrStore::Mockup::Admin</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore/Mockup/Admin/ApplicationController.html">PlazrStore::PlazrStore::Mockup::Admin::ApplicationController</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore/Mockup/Admin/PagesController.html">PlazrStore::PlazrStore::Mockup::Admin::PagesController</a></li>
+        
+          <li><a href="../PlazrStore/Product.html">PlazrStore::Product</a></li>
+        
+          <li><a href="../PlazrStore/ProductCategory.html">PlazrStore::ProductCategory</a></li>
+        
+          <li><a href="../PlazrStore/ProductProductCategory.html">PlazrStore::ProductProductCategory</a></li>
+        
+          <li><a href="../PlazrStore/ProductPromotion.html">PlazrStore::ProductPromotion</a></li>
+        
+          <li><a href="../PlazrStore/ProductProperty.html">PlazrStore::ProductProperty</a></li>
+        
+          <li><a href="../PlazrStore/ProductVariantProperty.html">PlazrStore::ProductVariantProperty</a></li>
+        
+          <li><a href="../PlazrStore/ProductsController.html">PlazrStore::ProductsController</a></li>
+        
+          <li><a href="../PlazrStore/Promotion.html">PlazrStore::Promotion</a></li>
+        
+          <li><a href="../PlazrStore/PromotionalCode.html">PlazrStore::PromotionalCode</a></li>
+        
+          <li><a href="../PlazrStore/Property.html">PlazrStore::Property</a></li>
+        
+          <li><a href="../PlazrStore/PropertyPrototype.html">PlazrStore::PropertyPrototype</a></li>
+        
+          <li><a href="../PlazrStore/Prototype.html">PlazrStore::Prototype</a></li>
+        
+          <li><a href="../PlazrStore/PrototypeVariantProperty.html">PlazrStore::PrototypeVariantProperty</a></li>
+        
+          <li><a href="../PlazrStore/Search.html">PlazrStore::Search</a></li>
+        
+          <li><a href="../PlazrStore/SearchController.html">PlazrStore::SearchController</a></li>
+        
+          <li><a href="../PlazrStore/ShipmentCondition.html">PlazrStore::ShipmentCondition</a></li>
+        
+          <li><a href="../PlazrStore/StoreCategory.html">PlazrStore::StoreCategory</a></li>
+        
+          <li><a href="../PlazrStore/UserGroup.html">PlazrStore::UserGroup</a></li>
+        
+          <li><a href="../PlazrStore/Variant.html">PlazrStore::Variant</a></li>
+        
+          <li><a href="../PlazrStore/VariantProperty.html">PlazrStore::VariantProperty</a></li>
+        
+          <li><a href="../PlazrStore/VariantPropertyValue.html">PlazrStore::VariantPropertyValue</a></li>
+        
+          <li><a href="../PlazrStore/VariantVariantPropertyValue.html">PlazrStore::VariantVariantPropertyValue</a></li>
+        
+          <li><a href="../PlazrStore/VariantWishlist.html">PlazrStore::VariantWishlist</a></li>
+        
+          <li><a href="../PlazrStore/Wishlist.html">PlazrStore::Wishlist</a></li>
+        
+          <li><a href="../PlazrStore/WishlistController.html">PlazrStore::WishlistController</a></li>
+        
+          <li><a href="../PlazrStore/WishlistHelper.html">PlazrStore::WishlistHelper</a></li>
+        
+          <li><a href="../RedactorRails.html">RedactorRails</a></li>
+        
+          <li><a href="../RedactorRails/Asset.html">RedactorRails::Asset</a></li>
+        
+          <li><a href="../RedactorRails/Picture.html">RedactorRails::Picture</a></li>
+        
+          <li><a href="../Dummy.html">Dummy</a></li>
+        
+          <li><a href="../Dummy/Application.html">Dummy::Application</a></li>
+        
+          <li><a href="../Object.html">Object</a></li>
+        
+          <li><a href="../PlazrStore.html">Object::PZS</a></li>
+        
+          <li><a href="../Ability.html">Ability</a></li>
+        
+          <li><a href="../AddDeletedAtToAllTables.html">AddDeletedAtToAllTables</a></li>
+        
+          <li><a href="../AddForeignKeyAndLeafAttributeToProductCategory.html">AddForeignKeyAndLeafAttributeToProductCategory</a></li>
+        
+          <li><a href="../AddOmniauthToDevise.html">AddOmniauthToDevise</a></li>
+        
+          <li><a href="../AddRoleUserN2N.html">AddRoleUserN2N</a></li>
+        
+          <li><a href="../AddUserData.html">AddUserData</a></li>
+        
+          <li><a href="../ApplicationController.html">ApplicationController</a></li>
+        
+          <li><a href="../ApplicationHelper.html">ApplicationHelper</a></li>
+        
+          <li><a href="../ControllerMacros.html">ControllerMacros</a></li>
+        
+          <li><a href="../CreatePlazrAuthPaypalAccounts.html">CreatePlazrAuthPaypalAccounts</a></li>
+        
+          <li><a href="../CreatePlazrAuthRoles.html">CreatePlazrAuthRoles</a></li>
+        
+          <li><a href="../CreatePlazrStoreAddresses.html">CreatePlazrStoreAddresses</a></li>
+        
+          <li><a href="../CreatePlazrStoreBrands.html">CreatePlazrStoreBrands</a></li>
+        
+          <li><a href="../CreatePlazrStoreCartVariants.html">CreatePlazrStoreCartVariants</a></li>
+        
+          <li><a href="../CreatePlazrStoreCarts.html">CreatePlazrStoreCarts</a></li>
+        
+          <li><a href="../CreatePlazrStoreCategoryConditions.html">CreatePlazrStoreCategoryConditions</a></li>
+        
+          <li><a href="../CreatePlazrStoreConditions.html">CreatePlazrStoreConditions</a></li>
+        
+          <li><a href="../CreatePlazrStoreCoupons.html">CreatePlazrStoreCoupons</a></li>
+        
+          <li><a href="../CreatePlazrStoreDiscountTypes.html">CreatePlazrStoreDiscountTypes</a></li>
+        
+          <li><a href="../CreatePlazrStoreFeedbackProducts.html">CreatePlazrStoreFeedbackProducts</a></li>
+        
+          <li><a href="../CreatePlazrStoreFeedbackStores.html">CreatePlazrStoreFeedbackStores</a></li>
+        
+          <li><a href="../CreatePlazrStoreMultimedia.html">CreatePlazrStoreMultimedia</a></li>
+        
+          <li><a href="../CreatePlazrStoreOrders.html">CreatePlazrStoreOrders</a></li>
+        
+          <li><a href="../CreatePlazrStorePages.html">CreatePlazrStorePages</a></li>
+        
+          <li><a href="../CreatePlazrStorePaymentData.html">CreatePlazrStorePaymentData</a></li>
+        
+          <li><a href="../CreatePlazrStoreProductCategories.html">CreatePlazrStoreProductCategories</a></li>
+        
+          <li><a href="../CreatePlazrStoreProductProductCategories.html">CreatePlazrStoreProductProductCategories</a></li>
+        
+          <li><a href="../CreatePlazrStoreProductPromotions.html">CreatePlazrStoreProductPromotions</a></li>
+        
+          <li><a href="../CreatePlazrStoreProductProperties.html">CreatePlazrStoreProductProperties</a></li>
+        
+          <li><a href="../CreatePlazrStoreProductVariantProperties.html">CreatePlazrStoreProductVariantProperties</a></li>
+        
+          <li><a href="../CreatePlazrStoreProducts.html">CreatePlazrStoreProducts</a></li>
+        
+          <li><a href="../CreatePlazrStorePromotionalCodes.html">CreatePlazrStorePromotionalCodes</a></li>
+        
+          <li><a href="../CreatePlazrStorePromotions.html">CreatePlazrStorePromotions</a></li>
+        
+          <li><a href="../CreatePlazrStoreProperties.html">CreatePlazrStoreProperties</a></li>
+        
+          <li><a href="../CreatePlazrStorePropertyPrototypes.html">CreatePlazrStorePropertyPrototypes</a></li>
+        
+          <li><a href="../CreatePlazrStorePrototypeVariantProperties.html">CreatePlazrStorePrototypeVariantProperties</a></li>
+        
+          <li><a href="../CreatePlazrStorePrototypes.html">CreatePlazrStorePrototypes</a></li>
+        
+          <li><a href="../CreatePlazrStoreShipmentConditions.html">CreatePlazrStoreShipmentConditions</a></li>
+        
+          <li><a href="../CreatePlazrStoreStoreCategories.html">CreatePlazrStoreStoreCategories</a></li>
+        
+          <li><a href="../CreatePlazrStoreUserGroups.html">CreatePlazrStoreUserGroups</a></li>
+        
+          <li><a href="../CreatePlazrStoreVariantProperties.html">CreatePlazrStoreVariantProperties</a></li>
+        
+          <li><a href="../CreatePlazrStoreVariantPropertyValues.html">CreatePlazrStoreVariantPropertyValues</a></li>
+        
+          <li><a href="../CreatePlazrStoreVariantVariantPropertyValues.html">CreatePlazrStoreVariantVariantPropertyValues</a></li>
+        
+          <li><a href="../CreatePlazrStoreVariantWishlists.html">CreatePlazrStoreVariantWishlists</a></li>
+        
+          <li><a href="../CreatePlazrStoreVariants.html">CreatePlazrStoreVariants</a></li>
+        
+          <li><a href="../CreatePlazrStoreWishlists.html">CreatePlazrStoreWishlists</a></li>
+        
+          <li><a href="../CreateRedactorAssets.html">CreateRedactorAssets</a></li>
+        
+          <li><a href="../DeviseCreatePlazrAuthUsers.html">DeviseCreatePlazrAuthUsers</a></li>
+        
+          <li><a href="../NavigationTest.html">NavigationTest</a></li>
+        
+          <li><a href="../PlazrStoreTest.html">PlazrStoreTest</a></li>
+        
+          <li><a href="../RedactorRailsPictureUploader.html">RedactorRailsPictureUploader</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    <h1 class="class">PlazrStore::Order</h1>
+
+    <div id="description" class="description">
+      
+<p>Class representing an order made by a costumer on a store associated to a
+shopping cart Can have promotions associated and must a have billing and
+shipping address</p>
+
+    </div><!-- description -->
+
+    
+    
+    
+    <div id="5Buntitled-5D" class="documentation-section">
+      
+
+      
+
+      
+
+      
+      <!-- Attributes -->
+      <div id="attribute-method-details" class="method-section section">
+        <h3 class="section-header">Attributes</h3>
+
+        
+        <div id="promotional_code-attribute-method" class="method-detail">
+          <a name="promotional_code"></a>
+          
+          <a name="promotional_code="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">promotional_code</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
+
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
+        <div id="to_be_cancelled-attribute-method" class="method-detail">
+          <a name="to_be_cancelled"></a>
+          
+          <a name="to_be_cancelled="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">to_be_cancelled</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
+
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
+      </div><!-- attribute-method-details -->
+      
+
+      <!-- Methods -->
+      
+      <div id="public-instance-method-details" class="method-section section">
+        <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="add_cart_and_update_status-method" class="method-detail ">
+          <a name="method-i-add_cart_and_update_status"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">add_cart_and_update_status</span><span
+              class="method-args">(cart)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Associates the shopping cart of the current user to the order and updates
+cart’s products state to ‘processing’</p>
+            
+
+            
+            <div class="method-source-code" id="add_cart_and_update_status-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/order.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_cart_and_update_status</span>(<span class="ruby-identifier">cart</span>)
+  <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">cart_variants</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">state</span> = <span class="ruby-string">&quot;processing&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cart</span> = <span class="ruby-identifier">cart</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- add_cart_and_update_status-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- add_cart_and_update_status-method -->
+
+      
+        <div id="cart-method" class="method-detail ">
+          <a name="method-i-cart"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">cart</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Gets the shopping cart of the user even if it is marked as deleted</p>
+            
+
+            
+            <div class="method-source-code" id="cart-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/order.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cart</span>
+  <span class="ruby-constant">PZS</span><span class="ruby-operator">::</span><span class="ruby-constant">Cart</span>.<span class="ruby-identifier">with_deleted</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">cart_id</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- cart-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- cart-method -->
+
+      
+        <div id="info-method" class="method-detail ">
+          <a name="method-i-info"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">info</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Summarize an order’s information</p>
+            
+
+            
+            <div class="method-source-code" id="info-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/order.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">info</span>
+  <span class="ruby-identifier">info</span> = <span class="ruby-node">&quot;Order ##{self.id}&quot;</span>
+  <span class="ruby-identifier">info</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;; State: #{self.state}&quot;</span>
+  <span class="ruby-identifier">info</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;; Creation Date: #{self.created_at.strftime(&quot;%m-%d-%Y&quot;)}&quot;</span>
+  <span class="ruby-identifier">info</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- info-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- info-method -->
+
+      
+        <div id="load_user-method" class="method-detail ">
+          <a name="method-i-load_user"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">load_user</span><span
+              class="method-args">(user)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Associates the current user information to the order</p>
+            
+
+            
+            <div class="method-source-code" id="load_user-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/order.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">load_user</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span> 
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- load_user-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- load_user-method -->
+
+      
+        <div id="user-method" class="method-detail ">
+          <a name="method-i-user"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">user</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Get the current order owner</p>
+            
+
+            
+            <div class="method-source-code" id="user-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/order.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">user</span>
+  <span class="ruby-constant">PlazrAuth</span><span class="ruby-operator">::</span><span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- user-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- user-method -->
+
+      
+      </div><!-- public-instance-method-details -->
+    
+      <div id="protected-instance-method-details" class="method-section section">
+        <h3 class="section-header">Protected Instance Methods</h3>
+
+      
+        <div id="completed_at_and_state_match-method" class="method-detail ">
+          <a name="method-i-completed_at_and_state_match"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">completed_at_and_state_match</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Check if the state of the order is ‘shipped’ and it is defined the date
+completed</p>
+            
+
+            
+            <div class="method-source-code" id="completed_at_and_state_match-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/order.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">completed_at_and_state_match</span>
+  <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:base</span>, <span class="ruby-string">&quot;'shipped' state doesn't match completed_at&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">completed_at</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">state</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;shipped&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- completed_at_and_state_match-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- completed_at_and_state_match-method -->
+
+      
+        <div id="deliver_order_confirmation-method" class="method-detail ">
+          <a name="method-i-deliver_order_confirmation"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">deliver_order_confirmation</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Send a confirmation to the order’s owner</p>
+            
+
+            
+            <div class="method-source-code" id="deliver_order_confirmation-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/order.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">deliver_order_confirmation</span>
+  <span class="ruby-constant">Notifier</span>.<span class="ruby-identifier">order_notification</span>(<span class="ruby-keyword">self</span>).<span class="ruby-identifier">deliver</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- deliver_order_confirmation-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- deliver_order_confirmation-method -->
+
+      
+        <div id="load_defaults-method" class="method-detail ">
+          <a name="method-i-load_defaults"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">load_defaults</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Load the default information to this order</p>
+            
+
+            
+            <div class="method-source-code" id="load_defaults-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/order.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">load_defaults</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">billing_address</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Address</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">shipping_address</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Address</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">payment_state</span> = <span class="ruby-string">&quot;processing&quot;</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">shipment_state</span> = <span class="ruby-string">&quot;processing&quot;</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">state</span> = <span class="ruby-string">&quot;processing&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- load_defaults-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- load_defaults-method -->
+
+      
+        <div id="set_promotional_code_and_validate_code-method" class="method-detail ">
+          <a name="method-i-set_promotional_code_and_validate_code"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">set_promotional_code_and_validate_code</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Validates and associates a given promotional code to the order</p>
+            
+
+            
+            <div class="method-source-code" id="set_promotional_code_and_validate_code-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/order.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_promotional_code_and_validate_code</span>
+  <span class="ruby-comment"># </span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- set_promotional_code_and_validate_code-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- set_promotional_code_and_validate_code-method -->
+
+      
+        <div id="update_state-method" class="method-detail ">
+          <a name="method-i-update_state"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">update_state</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Updates the order state depending on the shopping cart’s variants status</p>
+            
+
+            
+            <div class="method-source-code" id="update_state-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/order.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_state</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">state</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;cancelled&quot;</span>
+  
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_be_cancelled</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">state</span> = <span class="ruby-string">&quot;cancelled&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">cart_variants</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cv</span>.<span class="ruby-identifier">state</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;shipped&quot;</span> }
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">state</span> = <span class="ruby-string">&quot;shipped&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">cart_variants</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cv</span>.<span class="ruby-identifier">state</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;processing&quot;</span> }
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">state</span> = <span class="ruby-string">&quot;processing&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- update_state-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- update_state-method -->
+
+      
+      </div><!-- protected-instance-method-details -->
+    
+    </div><!-- 5Buntitled-5D -->
+  
+
+  </div><!-- documentation -->
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+
+</body>
+</html>
+

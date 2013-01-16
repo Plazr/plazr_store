@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+  <title>Class: PlazrStore::Multimedium</title>
+
+  <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+  <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body id="top" class="class">
+
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="../app/models/plazr_store/multimedium_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="app/models/plazr_store/multimedium.rb">app/models/plazr_store/multimedium.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div id="class-metadata">
+      
+      <!-- Parent Class -->
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        
+        <p class="link">ActiveRecord::Base</p>
+        
+      </div>
+      
+
+      
+
+      
+
+      
+      <!-- Method Quickref -->
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-c-multimedia_from_all_variants_of_a_product">::multimedia_from_all_variants_of_a_product</a></li>
+          
+          <li><a href="#method-i-default_url_method">#default_url_method</a></li>
+          
+          <li><a href="#method-i-page_nil-3F">#page_nil?</a></li>
+          
+          <li><a href="#method-i-set_path_based_on_parent-21">#set_path_based_on_parent!</a></li>
+          
+          <li><a href="#method-i-set_url_base_on_parent-21">#set_url_base_on_parent!</a></li>
+          
+          <li><a href="#method-i-variant_nil-3F">#variant_nil?</a></li>
+          
+        </ul>
+      </div>
+      
+
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="../Gemfile.html">Gemfile</a></li>
+        
+          <li class="file"><a href="../MIT-LICENSE.html">MIT-LICENSE</a></li>
+        
+          <li class="file"><a href="../Rakefile.html">Rakefile</a></li>
+        
+          <li class="file"><a href="../test/dummy/Guardfile.html">Guardfile</a></li>
+        
+          <li class="file"><a href="../test/dummy/README_rdoc.html">README.rdoc</a></li>
+        
+          <li class="file"><a href="../test/dummy/Rakefile.html">Rakefile</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="../images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="../PlazrStore.html">PlazrStore</a></li>
+        
+          <li><a href="../PlazrStore.html">PlazrStore</a></li>
+        
+          <li><a href="../PlazrStore/Address.html">PlazrStore::Address</a></li>
+        
+          <li><a href="../PlazrStore/Admin.html">PlazrStore::Admin</a></li>
+        
+          <li><a href="../PlazrStore/Admin/ApplicationController.html">PlazrStore::Admin::ApplicationController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/BrandsController.html">PlazrStore::Admin::BrandsController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/MultimediaController.html">PlazrStore::Admin::MultimediaController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/PagesController.html">PlazrStore::Admin::PagesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/ProductCategoriesController.html">PlazrStore::Admin::ProductCategoriesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/ProductPropertiesController.html">PlazrStore::Admin::ProductPropertiesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/ProductsController.html">PlazrStore::Admin::ProductsController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/PromotionsController.html">PlazrStore::Admin::PromotionsController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/PropertiesController.html">PlazrStore::Admin::PropertiesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/PrototypesController.html">PlazrStore::Admin::PrototypesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/ShipmentConditionsController.html">PlazrStore::Admin::ShipmentConditionsController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/VariantPropertiesController.html">PlazrStore::Admin::VariantPropertiesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/VariantPropertyValuesController.html">PlazrStore::Admin::VariantPropertyValuesController</a></li>
+        
+          <li><a href="../PlazrStore/Admin/VariantsController.html">PlazrStore::Admin::VariantsController</a></li>
+        
+          <li><a href="../PlazrStore/ApplicationController.html">PlazrStore::ApplicationController</a></li>
+        
+          <li><a href="../PlazrStore/ApplicationHelper.html">PlazrStore::ApplicationHelper</a></li>
+        
+          <li><a href="../PlazrStore/Brand.html">PlazrStore::Brand</a></li>
+        
+          <li><a href="../PlazrStore/Cart.html">PlazrStore::Cart</a></li>
+        
+          <li><a href="../PlazrStore/CartController.html">PlazrStore::CartController</a></li>
+        
+          <li><a href="../PlazrStore/CartHelper.html">PlazrStore::CartHelper</a></li>
+        
+          <li><a href="../PlazrStore/CartVariant.html">PlazrStore::CartVariant</a></li>
+        
+          <li><a href="../PlazrStore/CategoryCondition.html">PlazrStore::CategoryCondition</a></li>
+        
+          <li><a href="../PlazrStore/Condition.html">PlazrStore::Condition</a></li>
+        
+          <li><a href="../PlazrStore/Coupon.html">PlazrStore::Coupon</a></li>
+        
+          <li><a href="../PlazrStore/DiscountType.html">PlazrStore::DiscountType</a></li>
+        
+          <li><a href="../PlazrStore/Engine.html">PlazrStore::Engine</a></li>
+        
+          <li><a href="../PlazrStore/FeedbackProduct.html">PlazrStore::FeedbackProduct</a></li>
+        
+          <li><a href="../PlazrStore/FeedbackProductsController.html">PlazrStore::FeedbackProductsController</a></li>
+        
+          <li><a href="../PlazrStore/FeedbackStore.html">PlazrStore::FeedbackStore</a></li>
+        
+          <li><a href="../PlazrStore/Mockup.html">PlazrStore::Mockup</a></li>
+        
+          <li><a href="../PlazrStore/Mockup/ApplicationController.html">PlazrStore::Mockup::ApplicationController</a></li>
+        
+          <li><a href="../PlazrStore/Mockup/PagesController.html">PlazrStore::Mockup::PagesController</a></li>
+        
+          <li><a href="../PlazrStore/Mockup/ProfilesController.html">PlazrStore::Mockup::ProfilesController</a></li>
+        
+          <li><a href="../PlazrStore/Multimedium.html">PlazrStore::Multimedium</a></li>
+        
+          <li><a href="../PlazrStore/Notifier.html">PlazrStore::Notifier</a></li>
+        
+          <li><a href="../PlazrStore/Order.html">PlazrStore::Order</a></li>
+        
+          <li><a href="../PlazrStore/OrdersController.html">PlazrStore::OrdersController</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore.html">PlazrStore::PZS</a></li>
+        
+          <li><a href="../PlazrStore/Page.html">PlazrStore::Page</a></li>
+        
+          <li><a href="../PlazrStore/PagesController.html">PlazrStore::PagesController</a></li>
+        
+          <li><a href="../PlazrStore/ParanoiaInterface.html">PlazrStore::ParanoiaInterface</a></li>
+        
+          <li><a href="../PlazrStore/PaymentData.html">PlazrStore::PaymentData</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore.html">PlazrStore::PlazrStore</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore/Mockup.html">PlazrStore::PlazrStore::Mockup</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore/Mockup/Admin.html">PlazrStore::PlazrStore::Mockup::Admin</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore/Mockup/Admin/ApplicationController.html">PlazrStore::PlazrStore::Mockup::Admin::ApplicationController</a></li>
+        
+          <li><a href="../PlazrStore/PlazrStore/Mockup/Admin/PagesController.html">PlazrStore::PlazrStore::Mockup::Admin::PagesController</a></li>
+        
+          <li><a href="../PlazrStore/Product.html">PlazrStore::Product</a></li>
+        
+          <li><a href="../PlazrStore/ProductCategory.html">PlazrStore::ProductCategory</a></li>
+        
+          <li><a href="../PlazrStore/ProductProductCategory.html">PlazrStore::ProductProductCategory</a></li>
+        
+          <li><a href="../PlazrStore/ProductPromotion.html">PlazrStore::ProductPromotion</a></li>
+        
+          <li><a href="../PlazrStore/ProductProperty.html">PlazrStore::ProductProperty</a></li>
+        
+          <li><a href="../PlazrStore/ProductVariantProperty.html">PlazrStore::ProductVariantProperty</a></li>
+        
+          <li><a href="../PlazrStore/ProductsController.html">PlazrStore::ProductsController</a></li>
+        
+          <li><a href="../PlazrStore/Promotion.html">PlazrStore::Promotion</a></li>
+        
+          <li><a href="../PlazrStore/PromotionalCode.html">PlazrStore::PromotionalCode</a></li>
+        
+          <li><a href="../PlazrStore/Property.html">PlazrStore::Property</a></li>
+        
+          <li><a href="../PlazrStore/PropertyPrototype.html">PlazrStore::PropertyPrototype</a></li>
+        
+          <li><a href="../PlazrStore/Prototype.html">PlazrStore::Prototype</a></li>
+        
+          <li><a href="../PlazrStore/PrototypeVariantProperty.html">PlazrStore::PrototypeVariantProperty</a></li>
+        
+          <li><a href="../PlazrStore/Search.html">PlazrStore::Search</a></li>
+        
+          <li><a href="../PlazrStore/SearchController.html">PlazrStore::SearchController</a></li>
+        
+          <li><a href="../PlazrStore/ShipmentCondition.html">PlazrStore::ShipmentCondition</a></li>
+        
+          <li><a href="../PlazrStore/StoreCategory.html">PlazrStore::StoreCategory</a></li>
+        
+          <li><a href="../PlazrStore/UserGroup.html">PlazrStore::UserGroup</a></li>
+        
+          <li><a href="../PlazrStore/Variant.html">PlazrStore::Variant</a></li>
+        
+          <li><a href="../PlazrStore/VariantProperty.html">PlazrStore::VariantProperty</a></li>
+        
+          <li><a href="../PlazrStore/VariantPropertyValue.html">PlazrStore::VariantPropertyValue</a></li>
+        
+          <li><a href="../PlazrStore/VariantVariantPropertyValue.html">PlazrStore::VariantVariantPropertyValue</a></li>
+        
+          <li><a href="../PlazrStore/VariantWishlist.html">PlazrStore::VariantWishlist</a></li>
+        
+          <li><a href="../PlazrStore/Wishlist.html">PlazrStore::Wishlist</a></li>
+        
+          <li><a href="../PlazrStore/WishlistController.html">PlazrStore::WishlistController</a></li>
+        
+          <li><a href="../PlazrStore/WishlistHelper.html">PlazrStore::WishlistHelper</a></li>
+        
+          <li><a href="../RedactorRails.html">RedactorRails</a></li>
+        
+          <li><a href="../RedactorRails/Asset.html">RedactorRails::Asset</a></li>
+        
+          <li><a href="../RedactorRails/Picture.html">RedactorRails::Picture</a></li>
+        
+          <li><a href="../Dummy.html">Dummy</a></li>
+        
+          <li><a href="../Dummy/Application.html">Dummy::Application</a></li>
+        
+          <li><a href="../Object.html">Object</a></li>
+        
+          <li><a href="../PlazrStore.html">Object::PZS</a></li>
+        
+          <li><a href="../Ability.html">Ability</a></li>
+        
+          <li><a href="../AddDeletedAtToAllTables.html">AddDeletedAtToAllTables</a></li>
+        
+          <li><a href="../AddForeignKeyAndLeafAttributeToProductCategory.html">AddForeignKeyAndLeafAttributeToProductCategory</a></li>
+        
+          <li><a href="../AddOmniauthToDevise.html">AddOmniauthToDevise</a></li>
+        
+          <li><a href="../AddRoleUserN2N.html">AddRoleUserN2N</a></li>
+        
+          <li><a href="../AddUserData.html">AddUserData</a></li>
+        
+          <li><a href="../ApplicationController.html">ApplicationController</a></li>
+        
+          <li><a href="../ApplicationHelper.html">ApplicationHelper</a></li>
+        
+          <li><a href="../ControllerMacros.html">ControllerMacros</a></li>
+        
+          <li><a href="../CreatePlazrAuthPaypalAccounts.html">CreatePlazrAuthPaypalAccounts</a></li>
+        
+          <li><a href="../CreatePlazrAuthRoles.html">CreatePlazrAuthRoles</a></li>
+        
+          <li><a href="../CreatePlazrStoreAddresses.html">CreatePlazrStoreAddresses</a></li>
+        
+          <li><a href="../CreatePlazrStoreBrands.html">CreatePlazrStoreBrands</a></li>
+        
+          <li><a href="../CreatePlazrStoreCartVariants.html">CreatePlazrStoreCartVariants</a></li>
+        
+          <li><a href="../CreatePlazrStoreCarts.html">CreatePlazrStoreCarts</a></li>
+        
+          <li><a href="../CreatePlazrStoreCategoryConditions.html">CreatePlazrStoreCategoryConditions</a></li>
+        
+          <li><a href="../CreatePlazrStoreConditions.html">CreatePlazrStoreConditions</a></li>
+        
+          <li><a href="../CreatePlazrStoreCoupons.html">CreatePlazrStoreCoupons</a></li>
+        
+          <li><a href="../CreatePlazrStoreDiscountTypes.html">CreatePlazrStoreDiscountTypes</a></li>
+        
+          <li><a href="../CreatePlazrStoreFeedbackProducts.html">CreatePlazrStoreFeedbackProducts</a></li>
+        
+          <li><a href="../CreatePlazrStoreFeedbackStores.html">CreatePlazrStoreFeedbackStores</a></li>
+        
+          <li><a href="../CreatePlazrStoreMultimedia.html">CreatePlazrStoreMultimedia</a></li>
+        
+          <li><a href="../CreatePlazrStoreOrders.html">CreatePlazrStoreOrders</a></li>
+        
+          <li><a href="../CreatePlazrStorePages.html">CreatePlazrStorePages</a></li>
+        
+          <li><a href="../CreatePlazrStorePaymentData.html">CreatePlazrStorePaymentData</a></li>
+        
+          <li><a href="../CreatePlazrStoreProductCategories.html">CreatePlazrStoreProductCategories</a></li>
+        
+          <li><a href="../CreatePlazrStoreProductProductCategories.html">CreatePlazrStoreProductProductCategories</a></li>
+        
+          <li><a href="../CreatePlazrStoreProductPromotions.html">CreatePlazrStoreProductPromotions</a></li>
+        
+          <li><a href="../CreatePlazrStoreProductProperties.html">CreatePlazrStoreProductProperties</a></li>
+        
+          <li><a href="../CreatePlazrStoreProductVariantProperties.html">CreatePlazrStoreProductVariantProperties</a></li>
+        
+          <li><a href="../CreatePlazrStoreProducts.html">CreatePlazrStoreProducts</a></li>
+        
+          <li><a href="../CreatePlazrStorePromotionalCodes.html">CreatePlazrStorePromotionalCodes</a></li>
+        
+          <li><a href="../CreatePlazrStorePromotions.html">CreatePlazrStorePromotions</a></li>
+        
+          <li><a href="../CreatePlazrStoreProperties.html">CreatePlazrStoreProperties</a></li>
+        
+          <li><a href="../CreatePlazrStorePropertyPrototypes.html">CreatePlazrStorePropertyPrototypes</a></li>
+        
+          <li><a href="../CreatePlazrStorePrototypeVariantProperties.html">CreatePlazrStorePrototypeVariantProperties</a></li>
+        
+          <li><a href="../CreatePlazrStorePrototypes.html">CreatePlazrStorePrototypes</a></li>
+        
+          <li><a href="../CreatePlazrStoreShipmentConditions.html">CreatePlazrStoreShipmentConditions</a></li>
+        
+          <li><a href="../CreatePlazrStoreStoreCategories.html">CreatePlazrStoreStoreCategories</a></li>
+        
+          <li><a href="../CreatePlazrStoreUserGroups.html">CreatePlazrStoreUserGroups</a></li>
+        
+          <li><a href="../CreatePlazrStoreVariantProperties.html">CreatePlazrStoreVariantProperties</a></li>
+        
+          <li><a href="../CreatePlazrStoreVariantPropertyValues.html">CreatePlazrStoreVariantPropertyValues</a></li>
+        
+          <li><a href="../CreatePlazrStoreVariantVariantPropertyValues.html">CreatePlazrStoreVariantVariantPropertyValues</a></li>
+        
+          <li><a href="../CreatePlazrStoreVariantWishlists.html">CreatePlazrStoreVariantWishlists</a></li>
+        
+          <li><a href="../CreatePlazrStoreVariants.html">CreatePlazrStoreVariants</a></li>
+        
+          <li><a href="../CreatePlazrStoreWishlists.html">CreatePlazrStoreWishlists</a></li>
+        
+          <li><a href="../CreateRedactorAssets.html">CreateRedactorAssets</a></li>
+        
+          <li><a href="../DeviseCreatePlazrAuthUsers.html">DeviseCreatePlazrAuthUsers</a></li>
+        
+          <li><a href="../NavigationTest.html">NavigationTest</a></li>
+        
+          <li><a href="../PlazrStoreTest.html">PlazrStoreTest</a></li>
+        
+          <li><a href="../RedactorRailsPictureUploader.html">RedactorRailsPictureUploader</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    <h1 class="class">PlazrStore::Multimedium</h1>
+
+    <div id="description" class="description">
+      
+<p>Class representing a media file, such as an image, for a product or page</p>
+
+    </div><!-- description -->
+
+    
+    
+    
+    <div id="5Buntitled-5D" class="documentation-section">
+      
+
+      
+
+      
+
+      
+
+      <!-- Methods -->
+      
+      <div id="public-class-method-details" class="method-section section">
+        <h3 class="section-header">Public Class Methods</h3>
+
+      
+        <div id="multimedia_from_all_variants_of_a_product-method" class="method-detail ">
+          <a name="method-c-multimedia_from_all_variants_of_a_product"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">multimedia_from_all_variants_of_a_product</span><span
+              class="method-args">(product)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Get all the multimedia associated to all variants of a given product</p>
+            
+
+            
+            <div class="method-source-code" id="multimedia_from_all_variants_of_a_product-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/multimedium.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">multimedia_from_all_variants_of_a_product</span>(<span class="ruby-identifier">product</span>)
+  <span class="ruby-identifier">where</span>(<span class="ruby-value">:variant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Variant</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">product</span>).<span class="ruby-identifier">map</span>(&amp;<span class="ruby-value">:id</span>))
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- multimedia_from_all_variants_of_a_product-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- multimedia_from_all_variants_of_a_product-method -->
+
+      
+      </div><!-- public-class-method-details -->
+    
+      <div id="public-instance-method-details" class="method-section section">
+        <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="page_nil-3F-method" class="method-detail ">
+          <a name="method-i-page_nil-3F"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">page_nil?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Check if it is associated to a page</p>
+            
+
+            
+            <div class="method-source-code" id="page_nil-3F-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/multimedium.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">page_nil?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">page</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- page_nil-3F-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- page_nil-3F-method -->
+
+      
+        <div id="set_path_based_on_parent-21-method" class="method-detail ">
+          <a name="method-i-set_path_based_on_parent-21"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">set_path_based_on_parent!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Set the path where the files are going to be stored based on the model to
+which the file belongs</p>
+            
+
+            
+            <div class="method-source-code" id="set_path_based_on_parent-21-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/multimedium.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_path_based_on_parent!</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">variant_nil?</span>
+    <span class="ruby-string">&quot;:rails_root/public/assets/upload/variants/:id/:style/:basename.:extension&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">page_nil?</span>
+    <span class="ruby-string">&quot;:rails_root/public/assets/upload/pages/:id/:style/:basename.:extension&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- set_path_based_on_parent-21-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- set_path_based_on_parent-21-method -->
+
+      
+        <div id="set_url_base_on_parent-21-method" class="method-detail ">
+          <a name="method-i-set_url_base_on_parent-21"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">set_url_base_on_parent!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Set the url where the files are going to be accessed based on the model to
+which the file belongs</p>
+            
+
+            
+            <div class="method-source-code" id="set_url_base_on_parent-21-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/multimedium.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_url_base_on_parent!</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">variant_nil?</span>
+    <span class="ruby-string">&quot;/assets/upload/variants/:id/:style/:basename.:extension&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">page_nil?</span>
+    <span class="ruby-string">&quot;/assets/upload/pages/:id/:style/:basename.:extension&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- set_url_base_on_parent-21-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- set_url_base_on_parent-21-method -->
+
+      
+        <div id="variant_nil-3F-method" class="method-detail ">
+          <a name="method-i-variant_nil-3F"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">variant_nil?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Check if it is associated to a variant (product)</p>
+            
+
+            
+            <div class="method-source-code" id="variant_nil-3F-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/multimedium.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">variant_nil?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">variant</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- variant_nil-3F-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- variant_nil-3F-method -->
+
+      
+      </div><!-- public-instance-method-details -->
+    
+      <div id="protected-instance-method-details" class="method-section section">
+        <h3 class="section-header">Protected Instance Methods</h3>
+
+      
+        <div id="default_url_method-method" class="method-detail ">
+          <a name="method-i-default_url_method"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">default_url_method</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Set the default URL for the multimedia</p>
+            
+
+            
+            <div class="method-source-code" id="default_url_method-source">
+<pre>
+<span class="ruby-comment"># File app/models/plazr_store/multimedium.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">default_url_method</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'variant'</span>
+    <span class="ruby-node">&quot;/assets/no_image_avail/#{self.type}.png&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-string">&quot;/assets/no_image/avail/generic.png&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- default_url_method-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- default_url_method-method -->
+
+      
+      </div><!-- protected-instance-method-details -->
+    
+    </div><!-- 5Buntitled-5D -->
+  
+
+  </div><!-- documentation -->
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+
+</body>
+</html>
+

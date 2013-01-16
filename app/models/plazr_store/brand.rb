@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class that represents a brand of products
   class Brand < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface

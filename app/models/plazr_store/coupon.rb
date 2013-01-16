@@ -1,4 +1,6 @@
 module PlazrStore
+  # Class representing a coupon with a promotional code and a single user associated
+  # It is designed for a one time use
   class Coupon < ActiveRecord::Base
     ## Relations ##
     belongs_to :promotional_code

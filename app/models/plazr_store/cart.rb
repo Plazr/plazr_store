@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a shopping cart for a registred user in a given store
   class Cart < ActiveRecord::Base
     include PZS::ParanoiaInterface
 
@@ -17,17 +18,20 @@ module PlazrStore
 
 
     ## Instance Methods ##
+    
+    # Add an item to the shopping cart
     def add(variant, amount = 1)
       cart_variant = self.cart_variants.find_or_initialize_by_variant_id(variant.id)
       cart_variant.add(amount)
     end
 
+    # Remove a given item from the shopping cart
     def remove(variant)
       self.cart_variants.find_by_variant_id(variant.id).remove
     end
 
+    # Returns the user associated with this shopping cart
     def user
-      # Get this cart's owner
       PlazrAuth::User.find(self.user_id)
     end
 
@@ -36,6 +40,7 @@ module PlazrStore
     #   self.user_id = PlazrAuth::User.find(user.id)
     # end
 
+    # Updates the current amount and total price of the shopping cart
     def update_amount_and_price
       self.update_attributes(
         item_amount: self.cart_variants.map(&:amount).sum,

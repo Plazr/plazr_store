@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a variant, which is an instance of a product
   class Variant < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface
@@ -66,14 +67,14 @@ module PlazrStore
       end
     end
 
-    #creates an array for all the variant_properties that are associated to the product of this variant
+    # Get an array for all the variant properties that are associated to the product of this variant
     def get_variant_properties_from_product
       self.product.variant_properties.each do |vp|
         self.variant_variant_property_values.build(:variant_property_value => vp.variant_property_values.first) unless self.variant_property_values.map(&:variant_property_id).include?(vp.id)
       end
     end
 
-    #method to display descriptive information about a individual variant
+    # Display descriptive information about an individual variant
     def variant_description
       #if it is the master_variant, then the image is aplicable to all variants
       if self.is_master?
@@ -87,6 +88,8 @@ module PlazrStore
       end
     end
 
+    # Get an image associated with this variant
+    # If it does not exists it creates a new default image
     def image
       images = self.multimedia
       if images.size > 0
@@ -96,8 +99,8 @@ module PlazrStore
       end
     end
 
+    # Summarizes a variant's information (name and variant properties)
     def info
-      # summarizes a variant's information (name and variant properties)
       info = self.name
       variant_property_values.each do |vpv|
         info << "; #{vpv.presentation}"
@@ -106,8 +109,8 @@ module PlazrStore
     end
 
     protected
-      # if this variant is being created after the creation of a product then is_master is set to true
-      # if not (meaning a master variant already exists), is_master is set to false
+      # If this variant is being created after the creation of a product then is_master is set to true
+      # If not (meaning a master variant already exists), is_master is set to false
       def set_is_master
         if self.product.has_master?
           self.is_master = false

@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class characterizing a discount type, which can belong to a promotion or an one time promotional code
   class DiscountType < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface

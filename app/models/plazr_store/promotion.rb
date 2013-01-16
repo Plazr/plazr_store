@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a promotion
   class Promotion < ActiveRecord::Base
     ## Relations ##
     belongs_to :discount_type
@@ -23,6 +24,7 @@ module PlazrStore
     validates :starts_at, :presence => true
     validate :start_before_expire
 
+    # Check if the start date is before the expire date
     def start_before_expire
       return unless starts_at and expires_at
       errors.add(:starts_at, "needs to be minor or equal to the expire date") unless starts_at < expires_at
@@ -33,9 +35,8 @@ module PlazrStore
 
     ## Public Methods ##
 
+    # Get an array of all product_promotions that the promotions are not currently active and builds them in the promotion
     def get_unselected_products_and_order_by_name
-      # creates an array for all product_promotions that the promotions does not currently have selected
-      # and builds them in the promotion
       (Product.all - self.products).each do |p|
         self.product_promotions.build(:product => p) unless self.product_promotions.map(&:product_id).include?(p.id)
       end

@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class for associating multiple variants with properties and values
   class VariantVariantPropertyValue < ActiveRecord::Base
     
     ## Relations ##

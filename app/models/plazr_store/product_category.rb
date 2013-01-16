@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a product category
   class ProductCategory < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface
@@ -24,6 +25,7 @@ module PlazrStore
     ## Callback ##
     before_validation :set_leaf
 
+    # Set if this category is leaf (subcategory) or not
     def set_leaf
       if self.parent_product_category_id.blank?
         self.is_leaf = false
@@ -33,6 +35,7 @@ module PlazrStore
       true
     end
   
+    # Check if this category is a subcategory
     def is_child?
       self.is_leaf?
     end

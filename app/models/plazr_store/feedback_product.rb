@@ -1,4 +1,6 @@
 module PlazrStore
+  # Class representing the feedback given by an user to a given product
+  # User can only give one feedback per product and only upon an order
   class FeedbackProduct < ActiveRecord::Base
     ## Relations ##
     # belongs_to :user TODO metodo que chama api

@@ -1,4 +1,5 @@
 module PlazrStore
+  # Controller for intaracting with the general functionality of the application
   class ApplicationController < ActionController::Base
 
   before_filter :get_pages
@@ -15,11 +16,12 @@ module PlazrStore
   def index
   end
 
-
+  # Get the permissions of the current user
   def current_ability
     @current_ability ||= Ability.new(current_user, namespace)
   end
 
+  # Get all the pages of the store (Products, Contacts, etc)
   def get_pages
     @pages = Page.all
   end

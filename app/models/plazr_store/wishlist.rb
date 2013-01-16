@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a wishlist for an user on a store
   class Wishlist < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface
@@ -14,15 +15,18 @@ module PlazrStore
     validates :user_id, presence: true
 
     ## Instance Methods ##
+    
+    # Add an item (product variant) to the wishlist
     def add(variant)
       wishlist_variant = self.variant_wishlists.find_or_create_by_variant_id(variant.id)
     end
 
+    # Remove an item (product variant) to the wishlist
     def remove(variant)
       self.variant_wishlists.find_by_variant_id(variant.id).destroy
     end
 
-    # belongs_to :user
+    # Get the user associated with this wishlist
     def user
       PlazrAuth::User.find(user_id)
     end

@@ -1,12 +1,15 @@
 module PlazrStore
+  # Controller for interacting with the product feedback model
   class FeedbackProductsController < ApplicationController
 
     before_filter :load_params, only: [:new, :create]
 
+    # Create a new empty product feedback with the order associated to product
     def new
       @feedback_product = FeedbackProduct.new(order: @order, product: @product)
     end
 
+    # Create a new product feedback with the order associated to product and with the required information 
     def create
       @feedback_product = FeedbackProduct.new(params[:feedback_product])
       @feedback_product.user_id = current_user.id
@@ -23,6 +26,7 @@ module PlazrStore
 
     protected
 
+      # Get the order and product information for the feedback
       def load_params
         @order   = Order.find(params[:id])
         @product = Product.find(params[:product_id])

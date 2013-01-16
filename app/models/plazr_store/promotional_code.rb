@@ -1,4 +1,6 @@
 module PlazrStore
+  # Class representing a promotional code
+  # It has a description, start and expire date and other constraints to its use
   class PromotionalCode < ActiveRecord::Base
     ## Relations ##
     has_many :orders

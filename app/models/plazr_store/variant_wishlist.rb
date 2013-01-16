@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing the relation between several variants and a wishlist
   class VariantWishlist < ActiveRecord::Base
     ## Relations ##
     belongs_to :variant

@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a property associated to a prototype
   class PropertyPrototype < ActiveRecord::Base
     ## Relations ##
     belongs_to :property

@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a product, which can have many variants
   class Product < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface
@@ -47,37 +48,44 @@ module PlazrStore
 
 
     ## Instance Methods ##
+
+    # Checks if the product is master (has variants)
     def has_master?
       self.variants.count >= 1
     end
 
+    # Get the feedback for this product
     def comments
       self.feedback_products.all
     end
 
+    # Get the product that this product inherits from
     def master_variant
       variants.where(:is_master => true).first
     end
 
+    # Get the price from its parent product
     def master_price
       self.master_variant.price
     end
 
+    # Get the multimedia associated with its parent product
     def images
       master_variant.multimedia
     end
 
+    # Get the variants of this product that has no master
     def variants_without_master
       self.variants.without_master
     end
 
+    # Check if this product has any variants
     def has_variants?
       self.variants_without_master.count >= 1
     end
 
+    # Get an array for all product's categories not associated with the current product and builds them in the product
     def get_unselected_product_categories_and_order_by_name
-      # creates an array for all product_categories that the product does not currently have selected
-      # and builds them in the product
       #(VariantCategory.all - self.variant_categories).each do |vc|
       #  self.variant_variant_categories.build(:variant_category => vc) unless self.variant_variant_categories.map(&:variant_category_id).include?(vc.id)
       #end
@@ -97,9 +105,8 @@ module PlazrStore
       end
     end
 
+    # Get an array for all product variant properties not associated with the current product and builds them in the product
     def get_unselected_variant_properties_and_order_by_name
-      # creates an array for all variant_properties that the product does not currently have selected
-      # and builds them in the product
       (VariantProperty.all - self.variant_properties).each do |var_prop|
         self.product_variant_properties.build(:variant_property => var_prop) unless self.product_variant_properties.map(&:variant_property_id).include?(var_prop.id)
       end
@@ -107,21 +114,22 @@ module PlazrStore
       self.product_variant_properties.sort_by! {|x| x.variant_property.display_name }
     end
 
+    # Replicate each property related to the product prototype on itself
     def create_all_properties_association(prototype_id)
-      # replicate each property related to the prototype to the product
       Prototype.find(prototype_id).properties.each do |prop|
         self.product_properties.create :property => prop, :value => 0
       end
     end
 
 
+    # Replicate each variant_property related to the prototype to the product
     def create_all_variant_properties_association(prototype_id)
-      # replicate each variant_property related to the prototype to the product
       Prototype.find(prototype_id).variant_properties.each do |vp|
         self.product_variant_properties.create :variant_property => vp
       end
     end
 
+    # Get the master product images
     def image
       self.master_variant.image
     end
@@ -132,28 +140,28 @@ module PlazrStore
 
     ### Virtual attributes
 
-    # => Getter for date
-    # => This is required in order to use the datepicker to set the available_at field
+    # Getter for date
+    # This is required in order to use the datepicker to set the available_at field
     def available_at_date_string
       @available_at_date_string || (available_at || created_at || Time.now).to_date.to_s(:db)
     end
 
-    # => Getter for time
-    # => This is required in order to use the timepicker to set the available_at field
+    # Getter for time
+    # This is required in order to use the timepicker to set the available_at field
     def available_at_time_string
       @available_at_time_string || (available_at || created_at || Time.now).to_s(:time)
     end
 
 
 
-    # => Setter for date
-    # => This is required in order to use the datepicker to set the available_at field
+    # Setter for date
+    # This is required in order to use the datepicker to set the available_at field
     def available_at_date_string=(date_str)
       @available_at_date_string = date_str
     end
 
-    # => Setter for time
-    # => This is required in order to use the timepicker to set the available_at field
+    # Setter for time
+    # This is required in order to use the timepicker to set the available_at field
     def available_at_time_string=(time_str)
       @available_at_time_string = time_str
     end
@@ -163,6 +171,7 @@ module PlazrStore
 
     protected
 
+    # Define the available at date of the product
     def create_available_at
       self.available_at = if @available_at_date_string && @available_at_time_string
         Time.parse("#{@available_at_date_string} #{@available_at_time_string}")
@@ -171,6 +180,7 @@ module PlazrStore
       end
     end
 
+    # Define a slug associated to the product
     def create_slug
       self.slug = (self.name || '').parameterize
     end

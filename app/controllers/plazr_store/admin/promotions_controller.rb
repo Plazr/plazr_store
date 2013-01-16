@@ -1,14 +1,18 @@
 module PlazrStore
+  # Controller for the admin to interact with the promotion class
   class Admin::PromotionsController < Admin::ApplicationController 
     
+    # Get a promotion with the given id
     def show
       @promotion = Promotion.find(params[:id])
     end
 
+    # Get all the promotions available 
     def index
       @promotions = Promotion.order("starts_at DESC, expires_at ASC")
     end
 
+    # Create a new empty promotion
     def new
       @promotion = Promotion.new
       @prod = params[:product]
@@ -17,6 +21,7 @@ module PlazrStore
       instance_variable_loading
     end
 
+    # Create a empty promotion with the given information
     def create
       @promotion = Promotion.new params[:promotion]
 
@@ -30,6 +35,7 @@ module PlazrStore
       end
     end
 
+    # Get a promotion with the given id to display in the edit page
     def edit
       @promotion = Promotion.find(params[:id])
       @check_prods = []
@@ -37,6 +43,7 @@ module PlazrStore
       instance_variable_loading
     end
 
+    # Update a promotion given its id with the given information
     def update
       @promotion = Promotion.find(params[:id])
 
@@ -50,6 +57,7 @@ module PlazrStore
       end
     end
 
+    # Delete a promotion with the given id
     def destroy
       @promotion = Promotion.find(params[:id])
       @promotion.destroy
@@ -57,10 +65,13 @@ module PlazrStore
     end
 
     protected
+
+      # Get the list of products that are not in this promotion scope
       def instance_variable_loading
         @promotion.get_unselected_products_and_order_by_name
       end
       
+      # Get the attributes of a given promotion
       def process_product_attrs
         @check_prods = []
         params[:promotion][:product_promotions_attributes].values.each do |cat_attr|

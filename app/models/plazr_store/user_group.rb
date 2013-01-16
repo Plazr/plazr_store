@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a group of users
   class UserGroup < ActiveRecord::Base
     ## Relations ##
     # has_and_belongs_to_many :users TODO metodo que chama api

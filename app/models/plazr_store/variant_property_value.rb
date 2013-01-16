@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a value for a variant property
   class VariantPropertyValue < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface
@@ -20,6 +21,7 @@ module PlazrStore
     ## Callbacks ##
     before_save :fill_fields
 
+    # Fill the presentation name with the value name
     def fill_fields
       self.presentation = self.name unless !self.presentation.blank?
     end

@@ -1,4 +1,6 @@
 module PlazrStore
+  # Class for representing an address
+  # Can be used for billing and shipping
   class Address < ActiveRecord::Base
     ## Relations ##
     has_one :order_billing, :foreign_key=>:billing_address_id, :class_name=>"Order"
@@ -11,6 +13,8 @@ module PlazrStore
     validates :address1, :city, :first_name, :last_name, :phone, :zipcode, presence: true
 
     ## Instance Methods ##
+    
+    # Displays the address with html tags
     def display
       address = "#{self.first_name} #{self.last_name}<br />"
       address += "#{self.address1}<br />"

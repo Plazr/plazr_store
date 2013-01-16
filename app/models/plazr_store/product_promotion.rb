@@ -1,4 +1,5 @@
 module PlazrStore
+  # Class representing a promotion on a given product
   class ProductPromotion < ActiveRecord::Base
     ## Relations ##
     belongs_to :product
@@ -10,6 +11,7 @@ module PlazrStore
     ## Callbacks ##
     before_save :one_active_promotion
 
+    # Check if the product already has an active promotion
     def one_active_promotion
       if self.product.promotions.where("(? BETWEEN starts_at AND expires_at) OR (? BETWEEN starts_at AND expires_at) OR (? >= starts_at AND expires_at IS NULL)", self.promotion.starts_at, self.promotion.expires_at, self.promotion.starts_at).count > 0
         self.promotion.errors.add(:base, "#{self.product.name} already has a promotion in this period of time. Promotion not created")

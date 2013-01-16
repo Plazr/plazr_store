@@ -1,4 +1,6 @@
 module PlazrStore
+  # Class representing a shipment condition
+  # It applies several constraints relative to shipment to any orders, such as shipment price
   class ShipmentCondition < ActiveRecord::Base
     # Overrides some basic methods for the current model so that calling #destroy sets a 'deleted_at' field to the current timestamp
     include PZS::ParanoiaInterface
@@ -20,7 +22,8 @@ module PlazrStore
     validates :service_details, presence: true
 
     ## Instance Methods ##
-    # summarizes a shipment condition's information (service_name and price)
+    
+    # Summarizes a shipment condition's information (service name and price)
     def info
       info = "#{self.service_name} - #{self.price}"
       info

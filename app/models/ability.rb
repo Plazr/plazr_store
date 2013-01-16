@@ -1,5 +1,8 @@
+# Class defining the permissions that each user role has
 class Ability
   include CanCan::Ability
+
+  # Initialize the roles for an existing or new user
   def initialize(user, namespace = nil)
     @user = user || PlazrAuth::User.new
     unregistered
@@ -13,6 +16,7 @@ class Ability
     #end
   end
 
+  # Set the permissions for this user role
   # unregistered users
   # (all users have these permissions)
   def unregistered
@@ -21,6 +25,7 @@ class Ability
   end
 
 
+  # Set the permissions for this user role
   def user
     unregistered
     # can manage his own wishlist
@@ -38,17 +43,20 @@ class Ability
   end
 
 
+  # Set the permissions for the Staff (store worker) role
   def staff
     user
     can :manage, :store
   end
 
 
+  # Set the permissions for the Admin (store owner) role
   def admin
     staff
     can :admin, :store
   end
 
+  # Set the permissions for the Root (Plazr admin) role
   # in plazr_store, a root can do the same as an admin
   def root
     admin
