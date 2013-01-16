@@ -2,7 +2,6 @@
   <div class="container">
     <div class="topbar clearfix">
       <%= form_tag plazr_store.search_path, :method => 'get', :class => "form-inline" do %>
-        <%= select_tag "category", options_from_collection_for_select(@categories, :id, :name), :prompt => "Selecione uma categoria" %>
         <%= text_field_tag :search, params[:search], :placeholder => "Camisolas amarelas", :class => "input-xlarge" %>
         <%= submit_tag "Pesquisar", :name => nil, :class=>"btn" %>
 
