@@ -6,11 +6,8 @@ $border-color: #EEE;
 		section {
 			text-align: center;
 		}
-		> section article {
-			padding: 0.5em;
-			&:hover {
-				background-color: whiteSmoke;
-			}
+		> section a article {
+
 		}
 	}
 

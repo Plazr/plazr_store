@@ -8,8 +8,6 @@ $(document).ready(function() {
 			return $(window).scrollTop() < this.elemViewTop;
 		}
 		this.update = function() {
-			console.log(this.elemViewTop);
-			console.log(this.isNavbarVisible());
 			if(this.isNavbarVisible() && this.fixed) {
 				$(elem).removeClass("fixed");
 				this.fixed = 0;

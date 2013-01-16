@@ -9,12 +9,8 @@
 //= require jquery.masonry.min.js
 //= require_self
 //= require plazr_store/topbar
+//= require plazr_store/thumb-item
 
 $(document).ready(function() {
 	$('.dropdown-toggle').dropdown();
- 	// $('#recommended').masonry({
-  //   	// options
-  //   	itemSelector : '.span3',
-  //   	columnWidth : 240
-  // 	});
 });
