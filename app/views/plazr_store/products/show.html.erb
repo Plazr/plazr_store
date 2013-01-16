@@ -1,16 +1,18 @@
 
 <article class="container" id="product-show">
 
-  <div class="row-fluid">
-    <div class="span12">
-      <p>Claças</p>
+  <% if @product.product_categories.size > 0 %>
+    <div class="row-fluid">
+      <div class="span12">
+        <p> <%= @product.product_categories.first.name %></p>
+      </div>
     </div>
-  </div>
+  <%end%>
 
   <header class="row-fluid">
     <div class="span8">
-      <h2><%=@product.name%></h2>
-      <p>Classificação</p>
+      <h2><%= @product.name %></h2>
+      <p><%= @product.rating %></p>
     </div>
     <div class="span4">
       <h2><%= @product.master_price %> €</h2>
@@ -29,7 +31,7 @@
               <div class="panelContainer">
                 
                 <% @product.images.each_with_index do |im, index| %>
-                  <div class="panel" title='Panel <%=index + 1%>'>
+                  <div class="panel" title='Panel <%=index + 1 %>'>
                     <div class="wrapper">
                       <img src=<%=im.file%> alt="temp" />
                     </div>
@@ -41,7 +43,7 @@
             <div id="movers-row">
               
               <% @product.images.each_with_index do |im, index| %>
-                <div><a href="#<%=index + 1%>" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
+                <div><a href="#<%=index + 1 %>" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
               <% end %>
               
             </div>
@@ -94,9 +96,9 @@
       <div class="span5 offset1">
         <dl>
           <dt>Descrição</dt>
-          <dd><%= @product.details%></dd>
+          <dd><%= @product.details %></dd>
           <dt>Referência<dt>
-          <dd><%= @product.master_variant.sku%></dd>
+          <dd><%= @product.master_variant.sku %></dd>
         </dl>
       </div>
     </div>
