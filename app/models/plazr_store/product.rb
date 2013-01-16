@@ -166,18 +166,24 @@ module PlazrStore
 
     ## Class Methods ##
     # Finds products by brand
-    def self.find_by_brand(search)
-      if !search.blank?
-        joins(:brand).where('plazr_store_brands.name' => "#{search}") 
+    def self.find_by_brand(name)
+      if !name.blank?
+        joins(:brand).where('plazr_store_brands.name' => "#{name}") 
       else
         self.scoped
       end
     end
 
     # Finds products by category
-    def self.find_by_category(search)
-      if !search.blank?
-        joins(:product_categories).where('plazr_store_product_categories.id' => search) 
+    def self.find_by_category(category_id)
+      if !category_id.blank?
+        cat = ProductCategory.find(category_id)
+        if cat.is_child?
+          joins(:product_categories).where('plazr_store_product_categories.id' => category_id) 
+        else
+          # if the category selected is a parent then it will search through all children categories
+          joins(:product_categories).where('plazr_store_product_categories.id IN (?)', cat.children.map(&:id)) 
+        end
       else
         self.scoped
       end
