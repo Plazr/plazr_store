@@ -26,6 +26,7 @@ PlazrStore::Engine.routes.draw do
       resources :variants
       resources :multimedia
     end
+    resources :promotional_codes
     resources :promotions
     resources :properties
     resources :prototypes

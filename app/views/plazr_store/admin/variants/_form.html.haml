@@ -28,6 +28,8 @@
 
   = f.fields_for :multimedia do |m|
     - if m.object.new_record?
+      // this line is necessary before the file_field (small fix to use paperclip)
+      = m.hidden_field :class_type, :value => 'variant'
       = m.label :file, "Image File"
       = m.file_field :file
       %br
