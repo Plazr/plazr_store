@@ -6,6 +6,9 @@
 	<%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
 	<%= csrf_meta_tags %>
 	<%= javascript_include_tag "plazr_store/application" %>
+	<% if user_signed_in? && current_user.role?('admin') %>
+		<%= stylesheet_link_tag    "plazr_store/admin/application", :media => "all" %>
+	<% end %>
 	<%= yield :head %>
 </head>
 <body>

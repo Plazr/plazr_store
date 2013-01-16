@@ -3,14 +3,14 @@
 		<div class="field control-group">
 			<%= variant.label :sku, 'SKU', :class => 'control-label' %>
 			<div class="controls">
-				<%= variant.text_field :sku, :class => :full, placeholder: 'SKU' %>
+				<%= variant.text_field :sku, :class => :wide, placeholder: 'SKU' %>
 			</div>
 		</div>
 		<div class="field control-group">
 			<%= variant.label :price, :class => 'control-label' %>
 			<div class="controls">
 				<div class="input-append">
-					<%= variant.text_field :price, :class => :number, placeholder: 'price' %>
+					<%= variant.text_field :price, :class => [:number, 'input-small'], placeholder: 'price' %>
 					<span class="add-on">
 						<%= image_tag 'glyphicons/euro.png', :class => :icon %>
 					</span>
@@ -24,9 +24,9 @@
   				<%= multimedium.hidden_field :class_type, :value => 'variant' %>
 					<%= multimedium.label :file, 'Image file', :class => 'control-label' %>
 					<div class="controls">
-						<%= multimedium.file_field :file %>
+						<%= multimedium.file_field :file, :class => :wide %>
 						<%#= multimedium.label :caption %>
-						<%= multimedium.text_field :caption, :class => :full, placeholder: 'Caption', style: 'display:block' %>
+						<%= multimedium.text_field :caption, :class => :wide, placeholder: 'Caption', style: 'display:block' %>
 					</div>
 				<% end %>
 			<% end %>

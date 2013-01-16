@@ -1,0 +1,20 @@
+%ul.nav.nav-pills
+	- if view == :new
+		%li.active= link_to 'New', '#'
+	- elsif view == :index
+		%li= link_to 'New', new_admin_product_path
+	- if [:edit, :show].include? view
+		%li{ :class => view == :show ? :active : nil }
+			= link_to 'Details', view == :show ? '#' : admin_product_path(@product)
+		%li{ :class => view == :edit ? :active : nil }
+			- if view == :edit
+				= link_to 'Editing', '#'
+			- else
+				= link_to 'Edit', edit_admin_product_path(@product)
+		%li= link_to 'Properties', admin_product_product_properties_path(@product)
+		%li= link_to 'Variants', admin_product_variants_path(@product)
+		%li= link_to 'Multimedia', admin_product_multimedia_path(@product)
+- if view == :show
+	.pull-right
+		= link_to admin_product_path(@product), :method => :delete, data: { confirm: 'Are you sure?' } do
+			= button_tag 'Delete', :class => [:btn, 'btn-danger']
