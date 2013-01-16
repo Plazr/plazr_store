@@ -35,8 +35,8 @@ describe PZS::Multimedium, type: :model do
       it "returns all the multimedia associated with the variants of a given product" do
         p = FactoryGirl.create :product
         v = FactoryGirl.create_list(:variant, 2, :product_id => p.id)
-        m1 = FactoryGirl.create_list(:multimedium, 5, :variant_id => v[0].id)
-        m2 = FactoryGirl.create_list(:multimedium, 5, :variant_id => v[1].id)
+        m1 = FactoryGirl.create_list(:multimedium_for_variant, 5, :variant_id => v[0].id)
+        m2 = FactoryGirl.create_list(:multimedium_for_variant, 5, :variant_id => v[1].id)
         PZS::Multimedium.multimedia_from_all_variants_of_a_product(p).should eq(m1 + m2)
       end
     end
