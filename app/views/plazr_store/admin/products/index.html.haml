@@ -1,5 +1,5 @@
-.admin
-	= render 'plazr_store/admin/nav', :active => :products, :view => :index
+#admin
+	= render 'plazr_store/admin/nav', :tab => :products, :view => :index
 	.row-fluid.grid
 		- @products.each do |product|
 			.span2.cell
