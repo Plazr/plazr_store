@@ -6,9 +6,11 @@
 //= require imageSlider/jquery-easing-compatibility.1.2.pack
 //= require imageSlider/coda-slider.1.1.1.pack
 //= require bootstrap/bootstrap.min.js
+//= require jquery.masonry.min.js
 //= require_self
 //= require plazr_store/topbar
 //= require plazr_store/search/search
+//= require plazr_store/thumb-item
 
 $(document).ready(function() {
 	$('.dropdown-toggle').dropdown();
