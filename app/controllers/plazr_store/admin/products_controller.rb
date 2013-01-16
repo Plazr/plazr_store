@@ -37,7 +37,7 @@ module PlazrStore
       
       @variant = @product.variants.build(:visible => true, :is_master => true)
       @variant.multimedia.build
-
+      
       entities_collections
       build_relations_for_fields_for
     end
