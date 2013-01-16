@@ -11,12 +11,14 @@ PlazrStore::Engine.routes.draw do
 
   namespace :admin do
     root :to => 'application#index'
+    resources :banners, :only => [:new, :create, :edit, :update]
     resources :brands
     resources :discount_types
     resources :orders, :except => [:new, :create, :edit, :update, :destroy] do
       put 'pay', :on => :member
       match 'ship/:cart_variant_id' => 'orders#ship', :as => :ship_product, :via => :put
     end
+    resources :logos, :only => [:new, :create, :edit, :update]
     resources :pages
     resources :product_categories
     resources :products do
