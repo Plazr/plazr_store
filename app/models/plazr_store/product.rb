@@ -123,7 +123,7 @@ module PlazrStore
     end
 
     def image
-      self.master_variant.image
+      self.master_variant.image if self.master_variant
     end
 
     def related(count = 4)
@@ -137,28 +137,28 @@ module PlazrStore
 
     ### Virtual attributes
 
-    # => Getter for date
-    # => This is required in order to use the datepicker to set the available_at field
+    # Getter for date
+    # This is required in order to use the datepicker to set the available_at field
     def available_at_date_string
       @available_at_date_string || (available_at || created_at || Time.now).to_date.to_s(:db)
     end
 
-    # => Getter for time
-    # => This is required in order to use the timepicker to set the available_at field
+    # Getter for time
+    # This is required in order to use the timepicker to set the available_at field
     def available_at_time_string
       @available_at_time_string || (available_at || created_at || Time.now).to_s(:time)
     end
 
 
 
-    # => Setter for date
-    # => This is required in order to use the datepicker to set the available_at field
+    # Setter for date
+    # This is required in order to use the datepicker to set the available_at field
     def available_at_date_string=(date_str)
       @available_at_date_string = date_str
     end
 
-    # => Setter for time
-    # => This is required in order to use the timepicker to set the available_at field
+    # Setter for time
+    # This is required in order to use the timepicker to set the available_at field
     def available_at_time_string=(time_str)
       @available_at_time_string = time_str
     end

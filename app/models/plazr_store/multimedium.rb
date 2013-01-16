@@ -51,6 +51,7 @@ module PlazrStore
 
     # set the style of the file accordingly to the class_type
     def set_styles
+      #binding.pry
       if self.class_type == 'variant'
         {:thumb => '300x300!'}
       elsif self.class_type == 'banner'

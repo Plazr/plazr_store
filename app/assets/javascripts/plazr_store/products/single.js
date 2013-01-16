@@ -13,7 +13,9 @@ $(function(){
 		$(".stripNav ul li a").eq(curclicked).trigger('click');
 	};
 
-	$("#main-photo-slider").codaSlider();
+	$("#main-photo-slider").each(function(){
+		$(this).codaSlider();
+	});
 
 	$navthumb = $(".nav-thumb");
 	$crosslink = $(".cross-link");

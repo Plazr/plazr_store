@@ -7,6 +7,8 @@
           - @multimedium.errors.full_messages.each do |msg|
             %li= msg
 
+  // this line is necessary before the file_field (small fix to use paperclip)
+  = f.hidden_field :class_type, :value => 'variant'
   = f.label :file
   = f.file_field :file
   %br
