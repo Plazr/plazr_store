@@ -1,5 +1,5 @@
 module PlazrStore
-  class ApplicationController < ActionController::Base
+  class ApplicationController < ::ApplicationController
 
   before_filter :get_categories
   before_filter :get_pages

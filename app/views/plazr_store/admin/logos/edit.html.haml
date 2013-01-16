@@ -10,6 +10,7 @@
             %li= msg
 
   = image_tag @logo.file.url(:logo)
+  // this line is necessary before the file_field (small fix to use paperclip)
   = f.hidden_field :class_type, :value => 'logo'
   = f.label :file
   = f.file_field :file
