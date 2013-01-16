@@ -11,16 +11,6 @@ $border-color: #EEE;
 		}
 	}
 
-	#featured {
-		> .span6 {
-			background: #F6F6F6;
-			border-bottom: 1px solid $border-color;
-			> section {
-				padding: 1em;
-			}
-		}
-	}
-
 	#well-outter {
 		h4 {
 			border-bottom: 1px solid $border-color;
