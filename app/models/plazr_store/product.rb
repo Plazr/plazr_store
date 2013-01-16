@@ -126,7 +126,7 @@ module PlazrStore
       self.master_variant.image if self.master_variant
     end
 
-    def related(count = 3)
+    def related(count = 4)
       categories = self.product_categories.count
       if categories > 0
         self.product_categories[rand(categories)].products.limit(count)
