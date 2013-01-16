@@ -4,7 +4,7 @@ describe PZS::Search do
   describe ".search" do
     before {FactoryGirl.create_list(:product_full, 5)}
     context "input is not blank" do
-      let(:input) {"T-shirt"}
+      let(:input) { {search: "T-shirt"} }
       it "returns products where only name is similar to the input" do
         FactoryGirl.create(:product_full, :name => "T-shirt")
         PZS::Search.search(input).should have(1).item
@@ -23,7 +23,8 @@ describe PZS::Search do
     end
     context "input is blank" do
       it "returns all products" do
-        PZS::Search.search(nil).should have(5).item
+        input = {search: ""}
+        PZS::Search.search(input).should have(5).item
       end
     end
   end
