@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>PlazrStore</title>
+<%= stylesheet_link_tag 'plazr_store/admin/application', :media => 'all' %>
+<%= javascript_include_tag 'plazr_store/admin/application' %>
+<%= csrf_meta_tags %>
+<%= yield :head %>
+</head>
+<body>
+<h1>Plazr Store</h1>
+<% if @logo.nil?%>
+<li><%= link_to 'New Logo', plazr_store.new_admin_logo_path %></li>
+<% else %>
+<li><%= link_to 'Update Logo', plazr_store.edit_admin_logo_path(@logo) %></li>
+<% end %>
+<% if @banner.nil? %>
+<li><%= link_to 'New Banner', plazr_store.new_admin_banner_path %></li>
+<% else %>
+<li><%= link_to 'Update Banner', plazr_store.edit_admin_banner_path(@banner) %></li>
+<% end %>
+<%= yield %>
+</body>
+</html>

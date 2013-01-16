@@ -37,7 +37,7 @@
 
 	<div class="row">
 		<% @products.each do |product| %>
-			<%= render 'product', product: product %>
+			<%= render 'plazr_store/shared/thumb-item', recommended: product %>
 		<% end %>
 	</div>
 

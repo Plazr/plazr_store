@@ -1,5 +1,5 @@
 module PlazrStore
-  class ApplicationController < ::ApplicationController
+  class ApplicationController < ActionController::Base
 
   before_filter :get_categories
   before_filter :get_pages
@@ -13,7 +13,7 @@ module PlazrStore
   layout 'application'
 
   #def resource
-  #  @resource ||= 
+  #  @resource ||=
 
   def index
   end
