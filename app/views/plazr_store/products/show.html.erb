@@ -1,22 +1,19 @@
 <article id="product-show">
 
-  <header class="page-header">
+  <header class="row-fluid">
+    <div class="span8">
       <h2><%=@product.name%></h2>
       <p><%= @product.rating %>s</p>
     </div>
     <div class="span4">
       <h2><%= @product.master_price %> €</h2>
-      <%= add_to_cart_form(@product.master_variant.id) %>
     </div>
   </header>
-  <div class="row-fluid">
-    € <%= @product.master_price %>
-  </div>
   <!--Teste imagens-->
 
   <!--teste-->
   <div class="row-fluid">
-    <div  class="span8">
+    <div class="span8">
 
         <div id="page-wrap">
           <div class="slider-wrap">
@@ -42,28 +39,20 @@
             </div>
           </div>
         </div>
-        <div id="movers-row">
-          <% @product.images.each do |im| %>
-          <div><a href="#5" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
-          <% end %>
-        </div>
-
       </div>
-    </div>
-    <div class="span3">
-      <div class="row">
-        <div>
-          <button>x</button><br>
-          <button>x</button><br>
-          <button>x</button><br>
+      <div class="span3">
+        <div class="row">
+          <div>
+            <button>x</button><br>
+            <button>x</button><br>
+            <button>x</button><br>
+          </div>
         </div>
       </div>
+
     </div>
-  </div>
 
-
-
-
+  
   <!-- Images End -->
 
   <section>
@@ -99,7 +88,8 @@
           <dd><%= @product.master_variant.sku %></dd>
         </dl>
       </div>
-    </section>
+    </div>
+  </section>
 
     <% if @product.related.size > 0 %>
       <section>
