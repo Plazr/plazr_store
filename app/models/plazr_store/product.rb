@@ -166,9 +166,9 @@ module PlazrStore
 
     ## Class Methods ##
     # Finds products by brand
-    def self.find_by_brand(name)
-      if !name.blank?
-        joins(:brand).where('plazr_store_brands.name' => "#{name}") 
+    def self.find_by_brand(brand_id)
+      if !brand_id.blank?
+        joins(:brand).where('plazr_store_brands.id' => "#{brand_id}") 
       else
         self.scoped
       end

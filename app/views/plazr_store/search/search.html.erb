@@ -18,12 +18,7 @@
     </div>
 
     <div class="span3">
-      <select id="brand">
-        <option value>Selecione uma marca</option>
-        <% @brands.each do |brand| %>
-          <option><%= brand.name %></option>
-        <% end %>
-      </select>
+      <%= select_tag "brand", options_from_collection_for_select(@brands, :id, :name), :prompt => "Selecione uma marca" %>
     </div>
 
     <div class="span3">
