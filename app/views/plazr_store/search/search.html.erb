@@ -1,50 +1,50 @@
 <div class="container">
-	<div class="page-header">
-		<h1><%= "Search Results for \"#{params[:search]}\"" %></h1>
-	</div>
+  <div class="page-header">
+    <h1><%= "Search Results for \"#{params[:search]}\"" %></h1>
+  </div>
 
-	<div class="row-fuild" id="filters">
+  <div class="row-fuild" id="filters">
 
-		<div class="span3">
-			<span>Preço: </span>
-			<input type="number" value="0" name="min_price">
-			<span> € a </span>
-			<input type="number" value="0" name="max_price">
-			<span> €</span>
-		</div>
+    <div class="span3">
+      <span>Preço: </span>
+      <input type="number" value="0" name="min_price">
+      <span> € a </span>
+      <input type="number" value="0" name="max_price">
+      <span> €</span>
+    </div>
 
-		<div class="span3">
-			<%= select_tag "category", options_from_collection_for_select(@categories, :id, :name), :prompt => "Selecione uma categoria" %>
-		</div>
+    <div class="span3">
+      <%= select_tag "category", options_from_collection_for_select(@categories, :id, :name), :prompt => "Selecione uma categoria" %>
+    </div>
 
-		<div class="span3">
-			<select id="brand">
-				<option>Marca</option>
-				<% @products.uniq.each do |product| %>
-					<option><%= product.brand.name %></option>
-				<% end %>
-			</select>
-		</div>
+    <div class="span3">
+      <select id="brand">
+        <option value>Selecione uma marca</option>
+        <% @brands.each do |brand| %>
+          <option><%= brand.name %></option>
+        <% end %>
+      </select>
+    </div>
 
-		<div class="span3">
-			<select id="price">
-				<option>Preço</option>
-				<option>Ascendente</option>
-				<option>Descendente</option>
-			</select>
-		</div>
+    <div class="span3">
+      <select id="price">
+        <option value>Ordene por preço</option>
+        <option value="1">Ascendente</option>
+        <option value="-1">Descendente</option>
+      </select>
+    </div>
 
-		<div class="span1">
-			<button>Filter</button>
-		</div>
+    <div class="span1">
+      <button>Filter</button>
+    </div>
 
-	</div>
+  </div>
 
-	<div class="row">
-		<% @products.each do |product| %>
-			<%= render 'plazr_store/shared/thumb-item', recommended: product %>
-		<% end %>
-	</div>
+  <div class="row">
+    <% @products.each do |product| %>
+      <%= render 'plazr_store/shared/thumb-item', recommended: product %>
+    <% end %>
+  </div>
 
-	<%= will_paginate @products %>
+  <%= will_paginate @products %>
 </div>
