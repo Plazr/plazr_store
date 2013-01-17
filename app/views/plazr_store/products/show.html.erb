@@ -5,7 +5,7 @@
       <h2><%= @product.name %></h2>
       <p><%= @product.rating %></p>
     </div>
-    <div class="span4">
+    <div class="span5">
       <h2><%= @product.master_price %> €</h2>
     </div>
   </header>
@@ -40,6 +40,26 @@
         </div>
       </div>
       <div class="span3">
+        <% if !@product.variants_without_master.empty? %>
+        <p>Variantes:</p>
+        <select>
+          <% @product.variants_without_master.each do |v| %>
+          <% v.variant_property_values.each_with_index do |vpv, index| %>
+          <option><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
+          <% end %>
+          <% end %>
+        </select>
+        <% end %>
+        <p>Quantidade:</p>
+        <input type="number" value="Quantity" />
+        <dl>
+          <dt>Descrição</dt>
+          <dd><%= @product.details %></dd>
+          <dt>Referência<dt>
+          <dd><%= @product.master_variant.sku %></dd>
+        </dl>
+      </div>
+      <div class="span3">
           <ul>
             <a href="#" class="btn btn-large btn-primary disabled">Add Cart</a>
             <a href="#" class="btn btn-large btn-primary disabled">Add Wishlist</a>
@@ -53,42 +73,6 @@
       </div>
 
     </div>
-
-  <section>
-    <div class="row-fluid">
-      <div class="span11">
-        <% if !@product.variants_without_master.empty? %>
-        <p>Variantes:</p>
-        <select>
-          <% @product.variants_without_master.each do |v| %>
-          <% v.variant_property_values.each_with_index do |vpv, index| %>
-          <option><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
-          <% end %>
-          <% end %>
-        </select>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="row-fluid">
-      <div class="span11">
-        <p>Quantidade:</p>
-        <input type="number" value="Quantity" />
-      </div>
-    </div>
-
-    <div class="row-fluid">
-
-      <div class="span5">
-        <dl>
-          <dt>Descrição</dt>
-          <dd><%= @product.details %></dd>
-          <dt>Referência<dt>
-          <dd><%= @product.master_variant.sku %></dd>
-        </dl>
-      </div>
-    </div>
-  </section>
 
     <% if @product.related.size > 0 %>
       <section>
