@@ -13,29 +13,34 @@
 			<span> €</span>
 		</div>
 
-		<div class="span3">
-			<%= select_tag "category", options_from_collection_for_select(@categories, :id, :name), :prompt => "Selecione uma categoria" %>
+		<div class="span2">
+			<select id="cat">
+				<option value="-">Categoria</option>
+				<% @categories.each do |cat| %>
+					<option><%= cat.name %></option>
+				<% end %>
+			</select>
 		</div>
 
-		<div class="span3">
+		<div class="span2">
 			<select id="brand">
-				<option>Marca</option>
+				<option value="-">Marca</option>
 				<% @products.uniq.each do |product| %>
 					<option><%= product.brand.name %></option>
 				<% end %>
 			</select>
 		</div>
 
-		<div class="span3">
+		<div class="span2">
 			<select id="price">
-				<option>Preço</option>
+				<option value="-">Preço</option>
 				<option>Ascendente</option>
 				<option>Descendente</option>
 			</select>
 		</div>
 
 		<div class="span1">
-			<button>Filter</button>
+			<a class="btn btn-primary">Filter</a>
 		</div>
 
 	</div>
