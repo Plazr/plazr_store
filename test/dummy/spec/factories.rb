@@ -4,8 +4,10 @@ FactoryGirl.define do
     sequence(:city) { |n| "City#{n}" }
     sequence(:first_name) { |n| "FirstName#{n}" }
     sequence(:last_name) { |n| "LastName#{n}" }
-    sequence(:phone) { |n| "Phone_#{n}" }
-    sequence(:zipcode) { |n| "Zipcode_#{n}" }
+    #sequence(:phone) { |n| "Phone_#{n}" }
+    phone "+351 911551111"
+    #sequence(:zipcode) { |n| "Zipcode_#{n}" }
+    zipcode "4750-621"
   end
 
   factory :brand, :class => PZS::Brand do

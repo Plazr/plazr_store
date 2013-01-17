@@ -25,6 +25,9 @@ module PlazrStore
     validates_inclusion_of :state, :in => %w( processing cancelled completed )
     validates_inclusion_of :payment_state, :in => %w( processing paid )
     validates_inclusion_of :shipment_state, :in => %w( processing shipped )
+    
+    
+
 
 
     ## Nested Attributes ##

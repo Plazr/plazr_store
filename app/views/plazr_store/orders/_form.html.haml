@@ -1,4 +1,12 @@
-= form_for order, :url => { :controller => "orders", :action => "new" } do |f|
+= form_for order, :url => { :controller => "orders", :action => "new" } do |f|    
+  - if defined? @pre_order
+    - if @pre_order.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(order.errors.count, "error")} prohibited this order from being saved:"
+        %div{:class=>["alert","alert-error"]}
+          %ul
+            - @pre_order.errors.full_messages.each do |msg|
+              %li= msg
   - if order.errors.any?
     #error_explanation
       %h2= "#{pluralize(order.errors.count, "error")} prohibited this order from being saved:"
@@ -7,7 +15,6 @@
           - order.errors.full_messages.each do |msg|
             %li= msg
 
-  
   %h2 Address Details
   = render :partial => 'billing_address', :locals => { f: f, address: address}
   = render :partial => 'shipping_address', :locals => { f: f, address: address}
