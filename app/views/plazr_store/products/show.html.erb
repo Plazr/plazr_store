@@ -2,9 +2,6 @@
   <div class="row-fluid">
 
     <div class="span6">
-      <header>
-        <p><%= @product.rating %></p>
-      </header>
       <div id="page-wrap">
         <div class="slider-wrap">
           <div id="main-photo-slider" class="csw">
@@ -30,12 +27,12 @@
     <div class="span6">
 
       <div class="row-fluid">
-        <div class="page-header">
-          <h3><%= @product.name %><span><%= render 'plazr_store/shared/stars', count: 2 %></span></h3>
-        </div>
+        <header class="page-header product-name">
+          <%= @product.name %><div><%= render 'plazr_store/shared/stars', count: 2 %></div>
+        </header>
       </div>
 
-      <p><%= @product.master_price %> €</p>
+      <p>Preço: <span class="price"><%= @product.master_price %> €</span></p>
       <ul>
         <li><a href="#" class="btn btn-large btn-primary disabled">Add Cart</a></li>
         <li><a href="#" class="btn btn-large btn-primary disabled">Add Wishlist</a></li>

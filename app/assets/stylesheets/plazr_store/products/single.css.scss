@@ -1,7 +1,23 @@
+$border-color: #EEE;
+$price-color: #900;
+
 article#product-show {
-	h3 {
-		span {
+	.price {
+		color: $price-color;
+		font-size: 18px;
+	}
+	.product-name {
+		font-size: 23px;
+		font-weight: bold;
+		clear: right;
+		padding-top: 1em;
+		padding-bottom: 4px;
+		div {
+			display: inline-block;
 			padding-left: 10px;
+			img {
+				padding-bottom: 4px;
+			}
 		}
 	}
 }
@@ -50,7 +66,7 @@ article#product-show {
 	}
 
 	.nav-thumb {
-		border: 1px solid black;
+		border: 1px solid $border-color;
 		margin-right: 5px;
 		max-width: 70px;
 		max-height: 70px;
