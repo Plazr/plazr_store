@@ -25,8 +25,8 @@ module PlazrStore
 
     ## Attributes ##
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
-                    :property_ids, :variant_property_ids, 
-                    :variants_attributes, :product_variant_properties_attributes, 
+                    :property_ids, :variant_property_ids,
+                    :variants_attributes, :product_variant_properties_attributes,
                     :brand_attributes,
                     :product_product_categories_attributes,
                     :available_at_date_string, :available_at_time_string
@@ -45,7 +45,7 @@ module PlazrStore
     before_save :create_available_at
     before_validation :create_slug
 
-    
+
     ## Instance Methods ##
     def has_master?
       self.variants.count >= 1
@@ -168,7 +168,7 @@ module PlazrStore
     # Finds products by brand
     def self.find_by_brand(brand_id)
       if !brand_id.blank?
-        joins(:brand).where('plazr_store_brands.id' => "#{brand_id}") 
+        joins(:brand).where('plazr_store_brands.id' => "#{brand_id}")
       else
         self.scoped
       end
@@ -179,10 +179,10 @@ module PlazrStore
       if !category_id.blank?
         cat = ProductCategory.find(category_id)
         if cat.is_child?
-          joins(:product_categories).where('plazr_store_product_categories.id' => category_id) 
+          joins(:product_categories).where('plazr_store_product_categories.id' => category_id)
         else
           # if the category selected is a parent then it will search through all children categories
-          joins(:product_categories).where('plazr_store_product_categories.id IN (?)', cat.children.map(&:id)) 
+          joins(:product_categories).where('plazr_store_product_categories.id IN (?)', cat.children.map(&:id))
         end
       else
         self.scoped

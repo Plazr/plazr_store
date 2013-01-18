@@ -1,11 +1,10 @@
-<div class="container">
-  <div class="page-header">
+<!--   <div class="page-header">
     <h1><%= "Search Results for \"#{params[:search]}\"" %></h1>
   </div>
-
+ -->
   <div class="row-fuild" id="filters">
 
-    <div class="span3">
+    <div class="span2">
       <span>Preço: </span>
       <input type="number" value="0" name="min_price">
       <span> € a </span>
@@ -21,7 +20,7 @@
       <%= select_tag "brand", options_from_collection_for_select(@brands, :id, :name), :prompt => "Selecione uma marca" %>
     </div>
 
-    <div class="span3">
+    <div class="span2">
       <select id="price">
         <option value>Ordene por preço</option>
         <option value="1">Ascendente</option>
@@ -35,11 +34,10 @@
 
   </div>
 
-  <div class="row">
+  <div class="row-fluid">
     <% @products.each do |product| %>
       <%= render 'plazr_store/shared/thumb-item', recommended: product %>
     <% end %>
   </div>
 
   <%= will_paginate @products %>
-</div>

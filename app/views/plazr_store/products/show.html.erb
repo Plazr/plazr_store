@@ -1,62 +1,58 @@
 <article id="product-show">
-
-  <header class="row-fluid">
-    <div class="span7">
-      <h2><%= @product.name %></h2>
-      <p><%= @product.rating %></p>
-    </div>
-    <div class="span4">
-      <h2><%= @product.master_price %> €</h2>
-    </div>
-  </header>
-
-
   <div class="row-fluid">
+
     <div class="span6">
-
-        <div id="page-wrap">
-          <div class="slider-wrap">
-            <div id="main-photo-slider" class="csw">
-              <div class="panelContainer">
-                
-                <% @product.images.each_with_index do |im, index| %>
-                  <div class="panel" title='Panel <%=index + 1 %>'>
-                    <div class="wrapper">
-                      <img src=<%=im.file%> alt="temp" />
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-
-            <div id="movers-row">
-              
+      <header>
+        <p><%= @product.rating %></p>
+      </header>
+      <div id="page-wrap">
+        <div class="slider-wrap">
+          <div id="main-photo-slider" class="csw">
+            <div class="panelContainer">
               <% @product.images.each_with_index do |im, index| %>
-                <div><a href="#<%=index + 1 %>" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
+              <div class="panel" title='Panel <%=index + 1 %>'>
+                <div class="wrapper">
+                  <img src=<%=im.file%> alt="temp" />
+                </div>
+              </div>
               <% end %>
-              
             </div>
+          </div>
+          <div id="movers-row">
+            <% @product.images.each_with_index do |im, index| %>
+            <div><a href="#<%=index + 1 %>" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
+            <% end %>
           </div>
         </div>
       </div>
-      <div class="span3">
-          <ul>
-            <a href="#" class="btn btn-large btn-primary disabled">Add Cart</a>
-            <a href="#" class="btn btn-large btn-primary disabled">Add Wishlist</a>
-            <a href="#" class="btn btn-large btn-primary disabled">Add comment</a>
-          </ul>
-          <ul>
-            <a href="#" class="btn btn-large btn-primary disabled">Share facebook</a>
-            <a href="#" class="btn btn-large btn-primary disabled">Share twiter</a>
-            <a href="#" class="btn btn-large btn-primary disabled">Share google</a>
-          </ul>
+    </div>
+
+    <div class="span6">
+
+      <div class="row-fluid">
+        <div class="page-header">
+          <h3><%= @product.name %><span><%= render 'plazr_store/shared/stars', count: 2 %></span></h3>
+        </div>
       </div>
 
+      <p><%= @product.master_price %> €</p>
+      <ul>
+        <li><a href="#" class="btn btn-large btn-primary disabled">Add Cart</a></li>
+        <li><a href="#" class="btn btn-large btn-primary disabled">Add Wishlist</a></li>
+        <li><a href="#" class="btn btn-large btn-primary disabled">Add comment</a></li>
+      </ul>
+      <ul>
+        <li><a href="#" class="btn btn-large btn-primary disabled">Share facebook</a></li>
+        <li><a href="#" class="btn btn-large btn-primary disabled">Share twiter</a></li>
+        <li><a href="#" class="btn btn-large btn-primary disabled">Share google</a></li>
+      </ul>
     </div>
+
+  </div>
 
   <section>
     <div class="row-fluid">
-      <div class="span11">
+      <div class="span12">
         <% if !@product.variants_without_master.empty? %>
         <p>Variantes:</p>
         <select>
@@ -71,7 +67,7 @@
     </div>
 
     <div class="row-fluid">
-      <div class="span11">
+      <div class="span12">
         <p>Quantidade:</p>
         <input type="number" value="Quantity" />
       </div>
@@ -84,31 +80,27 @@
           <dt>Descrição</dt>
           <dd><%= @product.details %></dd>
           <dt>Referência<dt>
-          <dd><%= @product.master_variant.sku %></dd>
-        </dl>
+            <dd><%= @product.master_variant.sku %></dd>
+          </dl>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <% if @product.related.size > 0 %>
-      <section>
-
-        <div>
-          <div class="row">
-            <div class="span9" align="center">
-              <h3>Artigos relacionados</h3>
-            </div>
-          </div>
-
-          <!--Não consigo validar porque a base de dados nao esta povoada-->
-            <div class="row">
-              <% @products.related.each do |product| %>
-                <%= render 'plazr_store/shared/thumb-item', recommended: product %>
-              <% end %>
-            </div>
-
+    <section>
+      <div class="row-fluid">
+        <div class="page-header">
+          <h3>Artigos relacionados</h3>
         </div>
-      </section>
+      </div>
+
+      <!--Não consigo validar porque a base de dados nao esta povoada-->
+      <div class="row-fluid">
+        <% @product.related.each do |product| %>
+        <%= render 'plazr_store/shared/thumb-item', recommended: product %>
+        <% end %>
+      </div>
+    </section>
     <%end%>
 
     <% if !@product.comments.empty? %>
