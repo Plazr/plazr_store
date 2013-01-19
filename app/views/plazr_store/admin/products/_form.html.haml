@@ -27,10 +27,10 @@
 								= image_tag 'glyphicons/clock.png', :class => :icon
 			#brand.section
 				.field.control-group
+					= frm.label :brand_id, :class => 'control-label'
 					- if @brands.empty?
-						%p.text-warning No brands known.
+						%p.text-info No brands known.
 					- else
-						= frm.label :brand_id, :class => 'control-label'
 						.controls
 							= frm.collection_select :brand_id, @brands, :id, :name, { prompt: 'Pick a brand' }, { :class => :wide }
 		.span6
@@ -65,17 +65,16 @@
 									.checkbox
 										= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
 										= ff.object.variant_property.display_name
-										=# ff.label :_destroy, ff.object.variant_property.display_name
 									= ff.hidden_field :variant_property_id
 								- odd = !odd;
 	.row-fluid
 		.span6
 			#prototypes.section
 				.field.control-group
+					= frm.label 'Prototypes', :class => 'control-label'
 					- if @prototypes.empty?
-						%p.text-warning No prototypes to associate.
+						%p.text-info No prototypes to associate.
 					- else
-						= frm.label 'Prototypes', :class => 'control-label'
 						.controls
 							%ul.checklistbox
 								- odd = true

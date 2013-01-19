@@ -20,12 +20,12 @@
 		}
 	}
 
-	.grid .cell {
+	ul.thumbnails li {
 		margin: 0 1.19% !important;
 		min-width: 150px;
 		padding-bottom: 1em;
 
-		article {
+		div.thumbnail {
 			margin: .5em;
 			text-align: center;
 
@@ -37,9 +37,10 @@
 				}
 			}
 
-			h6 {
-				font-size: larger;
-				font-weight: normal;
+			strong.title {
+				overflow: no-display;
+				white-space: nowrap;
+				width: 100%;
 			}
 		}
 	}
@@ -98,6 +99,10 @@
 					border-radius: 8px;
 					border: 2px solid white;
 					background-color: rgba(0, 0, 0, .5);
+				}
+
+				p.text-info {
+					text-align: center;
 				}
 			}
 		}

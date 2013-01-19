@@ -1,17 +1,22 @@
 #admin
 	= render 'plazr_store/admin/nav', :tab => :products, :view => :index
-	.row-fluid.grid
+	%ul.thumbnails
 		- @products.each do |product|
-			.span2.cell
-				%article
-					%h6= link_to product.name, admin_product_path(product)
+			%li.span2
+				.thumbnail
+					- maxlen = 10
+					- name = if product.name.length > maxlen
+						- "#{product.name[0...maxlen]}..."
+					- else
+						- product.name
+					%strong.title= link_to name, admin_product_path(product)
 					%div
 						- imgpth = product.image.file.url(:thumb)
 						%noscript
 							= image_tag imgpth
 						= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
-					.actions
-						= link_to edit_admin_product_path(product) do
-							= button_tag 'Edit', :class => [:btn, 'btn-mini']
-						= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
-							= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']
+						.actions
+							= link_to edit_admin_product_path(product) do
+								= button_tag 'Edit', :class => [:btn, 'btn-mini']
+							= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
+								= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']
