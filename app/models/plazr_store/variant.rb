@@ -66,6 +66,10 @@ module PlazrStore
       end
     end
 
+    def formatted_price
+      price.to_s 
+    end
+
     #creates an array for all the variant_properties that are associated to the product of this variant
     def get_variant_properties_from_product
       self.product.variant_properties.each do |vp|

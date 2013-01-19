@@ -63,6 +63,10 @@ module PlazrStore
       self.master_variant.price
     end
 
+    def formatted_master_price
+      self.master_variant.formatted_price
+    end
+
     def images
       master_variant.multimedia
     end
