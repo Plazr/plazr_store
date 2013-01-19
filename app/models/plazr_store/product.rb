@@ -163,6 +163,19 @@ module PlazrStore
       @available_at_time_string = time_str
     end
 
+    def rating_count
+      self.feedback_products.where('rating IS NOT NULL').count
+    end
+
+    def ratings?
+      rating_count > 0
+    end
+
+    def update_rating
+      avg = self.feedback_products.where('rating IS NOT NULL').average(:rating)
+      self.update_attribute :rating, avg
+    end
+
 
     ## Class Methods ##
     # Finds products by brand
