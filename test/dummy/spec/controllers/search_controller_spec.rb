@@ -3,7 +3,7 @@ require 'spec_helper'
 describe PZS::SearchController, :type => :controller do
   render_views
 
-  describe "GET #search", focus: true do
+  describe "GET #search" do
     let(:input) { {search: "t-shirt"} }
     it "assigns products" do
       FactoryGirl.create_list :product_full, 5
