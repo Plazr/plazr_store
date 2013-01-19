@@ -1,37 +1,40 @@
+#admin
+.listing
+	= render 'plazr_store/admin/nav', :tab => :products, :section => :variants, :view => :index
 %h1 Listing Variants
 %table
-  %thead
-    %tr
-      %th SKU
-      %th Description
-      %th Price
-      %th Cost Price
-      %th Amount Available
-      %th Visible
-      %th Product
-  %tbody
-    - @variants.each do |variant|
-      %tr
-        %td
-          = variant.sku
-        %td
-          = variant.description
-        %td
-          #{variant.price} €
-        %td
-          #{variant.cost_price} €
-        %td
-          = variant.amount_available
-        %td
-          = variant.visible
-        %td
-          = variant.restock_date
-        %td
-          = variant.product.name
-        %td
-          = link_to 'Show', admin_product_variant_path(@product, variant)
-        %td
-          = link_to 'Edit', edit_admin_product_variant_path(@product, variant)
-        %td
-          = link_to 'Destroy', admin_product_variant_path(@product, variant), :method => :delete, :data => { :confirm => 'Are you sure?' }
+	%thead
+		%tr
+			%th SKU
+			%th Description
+			%th Price
+			%th Cost Price
+			%th Amount Available
+			%th Visible
+			%th Product
+	%tbody
+		- @variants.each do |variant|
+			%tr
+				%td
+					= variant.sku
+				%td
+					= variant.description
+				%td
+					#{variant.price} €
+				%td
+					#{variant.cost_price} €
+				%td
+					= variant.amount_available
+				%td
+					= variant.visible
+				%td
+					= variant.restock_date
+				%td
+					= variant.product.name
+				%td
+					= link_to 'Show', admin_product_variant_path(@product, variant)
+				%td
+					= link_to 'Edit', edit_admin_product_variant_path(@product, variant)
+				%td
+					= link_to 'Destroy', admin_product_variant_path(@product, variant), :method => :delete, :data => { :confirm => 'Are you sure?' }
 = link_to 'New Variant', new_admin_product_variant_path

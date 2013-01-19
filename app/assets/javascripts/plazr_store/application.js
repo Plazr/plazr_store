@@ -26,7 +26,7 @@
 
 $(function() {
 	// this line is breaking everything else and preventing the datepickers and timepickers from showing up
-	$('topbar-wrapper .dropdown-toggle').dropdown();
+	$('.topbar-wrapper .dropdown-toggle').dropdown();
 
 	/** Activate datepicker dropdowns
 	 *

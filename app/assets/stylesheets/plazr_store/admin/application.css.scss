@@ -1,5 +1,5 @@
 //= require_self
-.admin {
+#admin {
 	padding-top: 1em;
 	border-bottom: 1px solid #DDD;
 
@@ -183,5 +183,49 @@
 		}
 	}
 
+
+
+	.listing {
+		table.table {
+			td ,
+			th {
+				padding-left: 1em;
+				padding-right: 1em;
+				text-align: center;
+				vertical-align: middle;
+
+				input {
+					margin: 0 auto;
+				}
+
+				input[type="text"] {
+					width: 100%;
+				}
+			}
+
+			tr.new {
+				td {
+					padding-bottom: 1em;
+					padding-top: 2em;
+				}
+			}
+		}
+	}
+
+
+
+	#properties {
+		.id {
+			width: 15%;
+		}
+
+		.name {
+			width: 30%;
+		}
+
+		.button {
+			width: 10%
+		}
+	}
 
 }

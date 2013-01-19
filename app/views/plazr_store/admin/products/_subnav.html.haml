@@ -1,20 +1,40 @@
 %ul.nav.nav-pills
-	- if view == :new
-		%li.active= link_to 'New', '#'
-	- elsif view == :index
-		%li= link_to 'New', new_admin_product_path
-	- if [:edit, :show].include? view
-		%li{ :class => view == :show ? :active : nil }
-			= link_to 'Details', view == :show ? '#' : admin_product_path(@product)
-		%li{ :class => view == :edit ? :active : nil }
-			- if view == :edit
-				= link_to 'Editing', '#'
+	- if section == :none
+		- if [:index,:new].include? view
+			- if view == :new
+				%li.active= link_to 'New', '#'
 			- else
-				= link_to 'Edit', edit_admin_product_path(@product)
-		%li= link_to 'Properties', admin_product_product_properties_path(@product)
-		%li= link_to 'Variants', admin_product_variants_path(@product)
-		%li= link_to 'Multimedia', admin_product_multimedia_path(@product)
+				%li= link_to 'New', new_admin_product_path
+	- if ([:properties, :variants].include? section) || ([:edit, :show].include? view)
+		- if view == :show
+			%li.active= link_to 'Details', '#'
+		- else
+			%li= link_to 'Details', admin_product_path(@product)
+
+		- if view == :edit
+			%li.active= link_to 'Editing', '#'
+		- else
+			%li= link_to 'Edit', edit_admin_product_path(@product)
+
+		- if section == :properties
+			%li.active= link_to 'Properties', '#'
+		- else
+			%li= link_to 'Properties', admin_product_product_properties_path(@product)
+
+		- if section == :variants
+			%li.active= link_to 'Variants', '#'
+		- else
+			%li= link_to 'Variants', admin_product_variants_path(@product)
+
+		- if section == :multimedia
+			%li.active= link_to 'Multimedia', '#'
+		- else
+			%li= link_to 'Multimedia', admin_product_multimedia_path(@product)
 - if view == :show
-	.pull-right
-		= link_to admin_product_path(@product), :method => :delete, data: { confirm: 'Are you sure?' } do
-			= button_tag 'Delete', :class => [:btn, 'btn-danger']
+	- path = '#'
+/	- case section
+/ 		- when 
+/ 		- else
+/ 			- path = admin_product_path(@product)
+/ 	= link_to path, :method => :delete, data: { confirm: 'Are you sure?' } do
+/ 		= button_tag 'Delete', :class => [:btn, 'btn-danger', 'pull-right']

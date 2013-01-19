@@ -1,4 +1,6 @@
+- section ||= :none
+- view ||= :index
 %ul.nav.nav-tabs
-	%li{ :class => active == :products ? :active : nil }
+	%li{ :class => tab == :products ? :active : nil }
 		= link_to 'Products', admin_products_path
-= render "plazr_store/admin/#{active}/subnav", :view => view
+= render "plazr_store/admin/#{tab}/subnav", :section => section, :view => view

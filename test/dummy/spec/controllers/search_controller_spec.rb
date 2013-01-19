@@ -12,5 +12,9 @@ describe PZS::SearchController, :type => :controller do
       get :search, input
       assigns(:products).should eq([m])
     end
+
+    it "assigns brands" do
+      pending "ainda nao tive tempo"
+    end
   end
 end

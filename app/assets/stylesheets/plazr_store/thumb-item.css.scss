@@ -63,12 +63,21 @@ a.thumb-item {
 		section.box {
 			background: #0388A6;
 			color: white;
-		}
-	}
-	section.box {
-		padding: 5px 0 1px 0;
-		margin-bottom: 3em;
-		background: #F6F6F6;
-		border-bottom: 1px solid #DDD;
-	}
-}
+			    /* Firefox */
+			    -moz-transition: all 0.2s ease-in;
+    			/* WebKit */
+    			-webkit-transition: all 0.2s ease-in;
+    			/* Opera */
+    			-o-transition: all 0.2s ease-in;
+    			/* Standard */
+    			transition: all 0.2s ease-in;
+    		}
+    	}
+    	section.box {
+    		text-align: center;
+    		padding: 5px 0 1px 0;
+    		margin-bottom: 3em;
+    		background: #F6F6F6;
+    		border-bottom: 1px solid #DDD;
+    	}
+    }
