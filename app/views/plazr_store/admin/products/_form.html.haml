@@ -6,15 +6,15 @@
 	.row-fluid
 		.span6
 			#basic-info.section
-				.field.control-group
+				.control-group
 					= frm.label :name, :class => 'control-label'
 					.controls
 						= frm.text_field :name, :class => :wide, placeholder: 'Product name', autofocus: true
-				.field.control-group
+				.control-group
 					= frm.label :details, :class => 'control-label'
 					.controls
 						= frm.text_area :details, :class => :wide, placeholder: 'Product description', rows: '5'
-				.field.control-group
+				.control-group
 					= frm.label :available_at, 'Available since/after', :class => 'control-label'
 					.controls
 						.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
@@ -26,7 +26,7 @@
 							%span.add-on
 								= image_tag 'glyphicons/clock.png', :class => :icon
 			#brand.section
-				.field.control-group
+				.control-group
 					= frm.label :brand_id, :class => 'control-label'
 					- if @brands.empty?
 						%p.text-info No brands known.
@@ -39,7 +39,7 @@
 	.row-fluid
 		.span6
 			#categories.section
-				.field.control-group
+				.control-group
 					= frm.label :product_categories, 'Categories', :class => 'control-label'
 					.controls
 						%ul.checklistbox
@@ -54,7 +54,7 @@
 								- odd = !odd;
 		.span6
 			.section
-				.field.control-group
+				.control-group
 					= frm.label :product_variant_properties, 'Variant properties', :class => 'control-label'
 					.controls
 						%ul.checklistbox
@@ -70,7 +70,7 @@
 	.row-fluid
 		.span6
 			#prototypes.section
-				.field.control-group
+				.control-group
 					= frm.label 'Prototypes', :class => 'control-label'
 					- if @prototypes.empty?
 						%p.text-info No prototypes to associate.
@@ -89,7 +89,7 @@
 	.row-fluid
 		.span12
 			.section
-				.field.actions
+				.actions
 					= frm.submit 'Save', :class => [:btn, 'btn-primary']
 					= link_to admin_products_path, :method => :get do
 						%button.btn.btn-mini Cancel

@@ -15,19 +15,18 @@
 		border-bottom: 1px solid #DDD;
 		padding-bottom: .5em;
 
-		li {
+		> li {
 			margin-left: 1.5em;
 		}
 	}
 
 	ul.thumbnails li {
-		margin: 0 1.19% !important;
 		min-width: 150px;
 		padding-bottom: 1em;
+		text-align: center;
 
 		div.thumbnail {
 			margin: .5em;
-			text-align: center;
 
 			div.actions {
 				padding: .5em;
@@ -52,6 +51,7 @@
 		.row-fluid {
 			margin-top: 1.5em;
 
+			.control-group ,
 			.field {
 				margin-left: auto;
 				margin-right: auto;
@@ -100,15 +100,31 @@
 					border: 2px solid white;
 					background-color: rgba(0, 0, 0, .5);
 				}
+			}
 
-				p.text-info {
-					text-align: center;
-				}
+			.field {
+				border: 1px solid #CCC;
+				border-radius: 4px;
+				padding: 1em;
+				text-align: center;
 			}
 		}
 
 		.actions {
 			text-align: center;
+		}
+	}
+
+	.form-horizontal {
+		table#properties {
+
+			td, th {
+				width: 50%;
+			}
+
+			td.key .control-label {
+				text-align: left;
+			}
 		}
 	}
 
@@ -214,6 +230,13 @@
 					padding-top: 2em;
 				}
 			}
+		}
+	}
+
+	p.text-info {
+		text-align: center;
+		a {
+			text-decoration: underline;
 		}
 	}
 

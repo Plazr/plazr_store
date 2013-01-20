@@ -15,8 +15,8 @@
 						%noscript
 							= image_tag imgpth
 						= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
-						.actions
-							= link_to edit_admin_product_path(product) do
-								= button_tag 'Edit', :class => [:btn, 'btn-mini']
-							= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
-								= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']
+				.actions
+					= link_to edit_admin_product_path(product) do
+						= button_tag 'Edit', :class => [:btn, 'btn-mini']
+					= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
+						= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']
