@@ -16,7 +16,7 @@
   = render :partial => 'review_shipment_condition', :locals => { f: f, shipment_conditions: shipment_conditions, order: @order}
 
   %h2 Payment
-  = render :partial => 'payment', :locals => { f: f }
+  = render :partial => 'review_payment', :locals => { f: f}
   = f.hidden_field :express_token
   = f.hidden_field :payer_id
 

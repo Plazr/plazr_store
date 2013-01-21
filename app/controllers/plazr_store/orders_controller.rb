@@ -17,6 +17,9 @@ module PlazrStore
       @order = Order.new
       @order.load_user(current_user)        
       
+      pre_order = PreOrder.find_by_cart_id(current_user.cart.id) 
+      pre_order.destroy unless pre_order.nil?
+      
       authorize! :create, @order
     end
 
@@ -35,16 +38,15 @@ module PlazrStore
     
       order_address = get_order_info gateway_response
       @address = Address.new(order_address[:address])
-      preorder = PreOrder.find_by_cart_id(current_user.cart.id)
-      total = ShipmentCondition.find(preorder.shipment_condition_id).price + @cart.total_price
 
       @order = Order.new(
-        :shipment_condition_id => preorder.shipment_condition_id,
-        :total => total,
         :express_token => params['token'], 
         :payer_id => params['PayerID']
       )
+      
       @order.load_user(current_user)
+      #set shipment condition and calculate total
+      @order.load_pre_order_info(current_user)
     end
 
     def create
@@ -76,15 +78,10 @@ module PlazrStore
             @order.shipment_condition_id = @pre_order.shipment_condition_id
           end
         end
-
-        if @order.valid?
-          @order.total = current_user.cart.total_price + ShipmentCondition.find(@order.shipment_condition_id).price
-        else 
-          render 'new' and return
-        end
         
           # paypal is ok
         if @order.save
+          @order.update_attributes(:total => current_user.cart.total_price + ShipmentCondition.find(@order.shipment_condition_id).price)
           # paypal method: executes purchase
           if params['payment_method']['name'] == "Paypal" 
             # changes order's payment_state to "paid"
@@ -108,7 +105,6 @@ module PlazrStore
           PZS::Cart.find(@order.cart.id).delete
           # indicates which is the last order when the receipt action is called
           session[:last_order] = @order.id
-          session[:shipment_condition] = nil
           # redirects to last_order receipt
           redirect_to receipt_url and return
         else

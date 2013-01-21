@@ -8,14 +8,13 @@ module PlazrStore
 
     has_one :payment
 
-
     ## Attributes ##
     attr_accessible :adjustment_total, :billing_address_id, :cart_id, :completed_at, :email, :item_total, 
       :payment_state, :shipping_address_id, :shipment_condition_id, :shipment_state, :promotional_code_id,
       :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes,
-      :express_token, :payer_id, :gateway
+      :express_token, :payer_id, :gateway, :payment_method
 
-    attr_accessor :to_be_cancelled, :promotional_code, :payer_id, :express_token, :gateway
+    attr_accessor :to_be_cancelled, :promotional_code, :payer_id, :express_token, :gateway, :payment_method
 
 
     ## Validations ##
@@ -25,10 +24,6 @@ module PlazrStore
     validates_inclusion_of :state, :in => %w( processing cancelled completed )
     validates_inclusion_of :payment_state, :in => %w( processing paid )
     validates_inclusion_of :shipment_state, :in => %w( processing shipped )
-    
-    
-
-
 
     ## Nested Attributes ##
     accepts_nested_attributes_for :billing_address, :allow_destroy => true
@@ -95,6 +90,12 @@ module PlazrStore
       # Get this order's owner
       PlazrAuth::User.find(self.user_id)
     end
+    
+    def load_pre_order_info(current_user)
+      preorder = PreOrder.find_by_cart_id(current_user.cart.id)
+      self.shipment_condition_id = preorder.shipment_condition_id
+      self.total = ShipmentCondition.find(self.shipment_condition_id).price + current_user.cart.total_price
+    end
 
     protected
     def complete_order
@@ -126,6 +127,10 @@ module PlazrStore
     #   # marks this order's cart as deleted 
     #   PZS::Cart.find(this.cart.id).delete
     # end
+        
+    def update_total
+      self.total = ShipmentCondition.find(self.shipment_condition_id).price + cart.total_price
+    end
 
     def set_promotional_code_and_validate_code
       # validates promotional code inserted in the form and sets it to this order
