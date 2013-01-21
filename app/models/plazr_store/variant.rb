@@ -30,7 +30,8 @@ module PlazrStore
     attr_accessible :amount_available, :visible, :cost_price, :description, 
                     :is_master, :price, :restock_date, :sku, :product_id, 
                     :variant_variant_property_values_attributes,
-                    :multimedia_attributes
+                    :multimedia_attributes,
+                    :restock_date_date_string, :restock_date_time_string
 
     ## Validations ##
     validates_presence_of :sku, :visible, :product
@@ -44,6 +45,7 @@ module PlazrStore
     scope :without_master, where(:is_master => false)
 
     ## Callbacks ##
+    before_save :create_restock_date
     before_validation :set_is_master, :on => :create
 
     # Delegations
@@ -64,6 +66,10 @@ module PlazrStore
       else
         read_attribute(:price)
       end
+    end
+
+    def formatted_price
+      price.to_s 
     end
 
     #creates an array for all the variant_properties that are associated to the product of this variant
@@ -105,6 +111,22 @@ module PlazrStore
       info
     end
 
+    def restock_date_date_string
+      @restock_date_date_string || (restock_date || Time.now).to_date.to_s(:db)
+    end
+
+    def restock_date_date_string=(date_str)
+      @restock_date_date_string = date_str
+    end
+
+    def restock_date_time_string
+      @restock_date_time_string || (restock_date || Time.now).to_s(:time)
+    end
+
+    def restock_date_time_string=(time_str)
+      @restock_date_time_string = time_str
+    end
+
     protected
       # if this variant is being created after the creation of a product then is_master is set to true
       # if not (meaning a master variant already exists), is_master is set to false
@@ -115,6 +137,14 @@ module PlazrStore
           self.is_master = true
         end
         true
+      end
+
+      def create_restock_date
+        self.restock_date = if @restock_date_date_string && @restock_date_time_string
+          Time.parse("#{@restock_date_date_string} #{@restock_date_time_string}")
+        else
+          Time.current
+        end
       end
   end
 end

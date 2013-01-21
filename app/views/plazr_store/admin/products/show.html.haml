@@ -43,15 +43,17 @@
 		.row-fluid
 			#variants.span6
 				%h2 Variants
-				.row-fluid.grid
+				%ul.thumbnails
 					- variants = @product.variants_without_master
-					- unless variants.empty?
+					- if variants.empty?
+						%li
+							%p.text-info This product has no variants
+					- else
 						- variants.each do |variant|
-							.span4.cell
-								%article
+							%li.span4
+								.thumbnail
 									%div
-										%strong
-											= link_to variant.sku, admin_product_variant_path(@product, variant)
+										%strong.title= link_to variant.sku, admin_product_variant_path(@product, variant)
 										- imgpth = if variant.multimedia.empty?
 											- 'http://placehold.it/100x100&text=No%20image'
 										- else
@@ -59,20 +61,23 @@
 										%noscript
 											= image_tag imgpth, :class => :photo
 										= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
-									.actions
-										= link_to edit_admin_product_variant_path(@product, variant) do
-											= button_tag 'Edit', :class => [:btn, 'btn-mini']
-										= link_to admin_product_variant_path(@product, variant), :method => :delete, data: { confirm: 'Are you sure?' } do
-											= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']
+								.actions
+									= link_to edit_admin_product_variant_path(@product, variant) do
+										= button_tag 'Edit', :class => [:btn, 'btn-mini']
+									= link_to admin_product_variant_path(@product, variant), :method => :delete, data: { confirm: 'Are you sure?' } do
+										= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']
 			#properties.span6
 				%h2 Properties
-				%ul.listbox
-					- @product.variant_properties.each do |vp|
-						%li.well.well-small.clearfix
-							= link_to admin_variant_property_path(vp.id) do
-								%strong= vp.display_name
-							%ul.values
-								- vp.variant_property_values.each do |vpv|
-									%li
-										= link_to admin_variant_property_variant_property_value_path(vp.id, vpv.id) do
-											%span.label.label-inverse= vpv.presentation
+				- if @product.variant_properties.empty?
+					%p.text-info This product has no properties
+				- else
+					%ul.listbox
+						- @product.variant_properties.each do |vp|
+							%li.well.well-small.clearfix
+								= link_to admin_variant_property_path(vp.id) do
+									%strong= vp.display_name
+								%ul.values
+									- vp.variant_property_values.each do |vpv|
+										%li
+											= link_to admin_variant_property_variant_property_value_path(vp.id, vpv.id) do
+												%span.label.label-inverse= vpv.presentation

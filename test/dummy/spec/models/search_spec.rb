@@ -29,7 +29,7 @@ describe PZS::Search do
         let(:cat_parent) {FactoryGirl.create(:product_category, name: "Clothes")}
         let(:cat_child) {FactoryGirl.create(:product_category, name: "Casual", is_leaf: true, parent_product_category_id: cat_parent.id)}
 
-        context "category selected is a parent category", focus: true do
+        context "category selected is a parent category" do
           xit "returns products when a child category of the one selected is associated" do
             p = FactoryGirl.create(:product_with_master_variant)
             p.product_categories << cat_child

@@ -63,6 +63,10 @@ module PlazrStore
       self.master_variant.price
     end
 
+    def formatted_master_price
+      self.master_variant.formatted_price
+    end
+
     def images
       master_variant.multimedia
     end
@@ -161,6 +165,19 @@ module PlazrStore
     # This is required in order to use the timepicker to set the available_at field
     def available_at_time_string=(time_str)
       @available_at_time_string = time_str
+    end
+
+    def rating_count
+      self.feedback_products.where('rating IS NOT NULL').count
+    end
+
+    def ratings?
+      rating_count > 0
+    end
+
+    def update_rating
+      avg = self.feedback_products.where('rating IS NOT NULL').average(:rating)
+      self.update_attribute :rating, avg
     end
 
 
