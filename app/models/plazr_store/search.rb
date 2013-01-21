@@ -9,9 +9,9 @@ module PlazrStore
 
         products = Product.find_by_name_and_details_like(params[:search])
         products = products.find_by_category(params[:category])
-        # products = products.find_by_brand(params[:brand])
-        # products = products.find_by_price_between(params[:min_price], params[:max_price])
-        # products = products.order_by_price(params[:price])
+        products = products.find_by_brand(params[:brand])
+        products = products.find_by_price_between(params[:min_price], params[:max_price])
+        products = products.order_by_price(params[:price])
         products
       else
         # returns Product.all in a scope so it can be queriable
