@@ -4,7 +4,7 @@ require 'paranoia'
 require 'paranoia_uniqueness_validator'
 require 'paperclip'
 require 'turbolinks'
-require 'better_errors'
+require 'better_errors' if Rails.env.development?
 require 'redactor-rails'
 require 'carrierwave'
 require 'mini_magick'
