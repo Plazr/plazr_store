@@ -1,6 +1,10 @@
 $border-color: #EEE;
 $price-color: #900;
 
+li {
+	list-style: none;
+	}
+
 article#product-show {
 	.price {
 		color: $price-color;

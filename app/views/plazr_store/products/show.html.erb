@@ -74,7 +74,9 @@
           <%= add_to_wishlist_form(v.id) %>
 
         <% else %>
-
+          <dl>
+            <dt>Quantidade:</dt>
+          </dl>
           <%= add_to_cart_form(@product.master_variant.id) %>
           <%= add_to_wishlist_form(@product.master_variant.id) %>
 
