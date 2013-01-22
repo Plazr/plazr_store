@@ -2,9 +2,8 @@ module PlazrStore
   module CartHelper
 
     def add_to_cart_form(variant_id)
-      form_tag cart_add_path(variant_id), method: :post do
-        select_tag('amount', options_for_select((1..10).to_a)) +
-        submit_tag('Add to Cart')
+      form_tag cart_add_path(variant_id), :id => "add_cart_f", method: :post  do
+        number_field_tag('amount')
       end
     end
 
