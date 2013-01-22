@@ -1,24 +1,72 @@
+$border-color: #EEE;
+$price-color: #900;
+
 article#product-show {
-	
+	.price {
+		color: $price-color;
+		font-size: 18px;
+	}
+	.product-name {
+		font-size: 23px;
+		font-weight: bold;
+		clear: right;
+		padding-top: 1em;
+		padding-bottom: 4px;
+		div {
+			display: inline-block;
+			padding-left: 10px;
+			img {
+				padding-bottom: 4px;
+			}
+		}
+	}
+}
+
+article#product-show {
+
 	/*
 	PAGE STRUCTURE
 	*/
-	#page-wrap 									{ width: 420px; position: relative; min-height: 420px;
-		background: top center; }
+	#page-wrap {
+		width: 420px;
+		position: relative;
+		min-height: 420px;
+		background: top center;
+	}
 
 	/*
 	SLIDER
 	*/
-	.slider-wrap								{ width: 419px; position: absolute;}
-	.stripViewer .panelContainer
-	.panel ul									{ text-align: left; margin: 0 15px 0 30px; }
-	.stripViewer								{ position: relative; overflow: hidden; width: 419px; height: 285px; margin-bottom: 50px;}
-	.stripViewer .panelContainer				{ position: relative; left: 0; top: 0; }
-	.stripViewer .panelContainer .panel			{ float: left; height: 285px; position: relative; width: 419px; }
-	.stripNavL, .stripNavR, .stripNav			{ display: none; }
+	.slider-wrap {
+		width: 419px;
+		position: absolute;
+	}
+	.stripViewer .panelContainer .panel ul {
+		text-align: left;
+		margin: 0 15px 0 30px;
+	}
+	.stripViewer {
+		position: relative;
+		overflow: hidden;
+		width: 419px;
+		height: 285px;
+		margin-bottom: 50px;}
+	.stripViewer .panelContainer {
+		position: relative;
+		left: 0; top: 0;
+	}
+	.stripViewer .panelContainer .panel	{
+		float: left;
+		height: 285px;
+		position: relative;
+		width: 419px;
+	}
+	.stripNavL, .stripNavR, .stripNav {
+		display: none;
+	}
 
-	.nav-thumb 									{
-		border: 1px solid black;
+	.nav-thumb {
+		border: 1px solid $border-color;
 		margin-right: 5px;
 		max-width: 70px;
 		max-height: 70px;
@@ -29,10 +77,28 @@ article#product-show {
 	.wrapper{
 		text-align: center;
 	}
-	#movers-row									{ margin: -43px 0 0 0px; }
-	#movers-row div								{ width: 20%; float: left; }
-	#movers-row div a.cross-link 				{ float: left; z-index: 0;}
-	.cross-link									{ display: block; width: 62px; margin-top: -14px;
-			position: relative; padding-top: 15px; z-index: 9999; }
-			.active-thumb 								{ background: transparent top center no-repeat; }
+
+	#movers-row	{
+		margin: -43px 0 0 0px;
+	}
+	#movers-row div	{
+		width: 20%;
+		float: left;
+	}
+	#movers-row div a.cross-link {
+		float: left;
+		z-index: 0;
+	}
+	.cross-link	{
+		display: block;
+		width: 62px;
+		margin-top: -14px;
+		position: relative;
+		padding-top: 15px;
+		z-index: 9999;
+	}
+	.active-thumb {
+		background: transparent top center no-repeat;
+	}
+
 }

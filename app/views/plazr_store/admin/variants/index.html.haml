@@ -1,6 +1,31 @@
 #admin
-.listing
 	= render 'plazr_store/admin/nav', :tab => :products, :section => :variants, :view => :index
+	.row-fluid
+		%ul.span10.thumbnails
+			- if @variants.empty?
+				%li
+					%p.text-info= raw("This product has no variants. Create a #{link_to 'new', new_admin_product_variant_path} one?")
+			- else
+				- @variants.each do |v|
+					%li.span2
+						.thumbnail
+							- maxlen = 10
+							- title = if v.sku.length > maxlen
+								- "#{v.sku[0...maxlen]}..."
+							- else
+								- v.sku
+							%strong.title= link_to title, admin_product_variant_path(@product, v)
+							%div
+								- imgpth = v.image.file.url(:thumb)
+								%noscript
+									= image_tag imgpth
+								= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
+								.actions
+									= link_to edit_admin_product_variant_path(@product, v) do
+										= button_tag 'Edit', :class => [:btn, 'btn-mini']
+									= link_to admin_product_variant_path(@product, v), :method => :delete, data: { confirm: 'Are you sure?' } do
+										= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']
+		.span2= render 'nav'
 %h1 Listing Variants
 %table
 	%thead

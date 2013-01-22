@@ -33,7 +33,15 @@ describe PZS::Search do
           xit "returns products when a child category of the one selected is associated" do
             p = FactoryGirl.create(:product_with_master_variant)
             p.product_categories << cat_child
-            input.merge(:category => "#{cat_parent.id}")
+            input[:category] = cat_parent.id
+            input[:min_price] = 0
+            input[:max_price] = 0
+            input[:brand] = ""
+            input[:price] = ""
+            # input.reload
+            # puts PZS::ProductCategory.all.inspect
+            # puts input.inspect
+            # puts PZS::Search.search(input)
             PZS::Search.search(input).should have(1).item
           end
         end
