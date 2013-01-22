@@ -10,7 +10,7 @@ module PlazrStore
     end
 
     def new
-      @promotional_code = PromotionalCode.new
+      @promotional_code = PromotionalCode.new(:code => SecureRandom.hex(8).upcase)
       @discount_types = DiscountType.promotional_code_types
     end
 

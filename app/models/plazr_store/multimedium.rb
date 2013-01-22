@@ -88,13 +88,13 @@ module PlazrStore
 
     protected
       def default_url_method
-        if self.class == 'variant'
-          "/assets/no_image_avail/#{self.class_type}.png"
-        elsif self.class == 'banner'
-          "/assets/upload/banner/:style/:basename.:extension"
-        elsif self.class == 'logo'
-          "/assets/upload/logo/:style/:basename.:extension"
-        end
+        #if self.class == 'variant'
+        "/assets/no_image_avail/#{self.class_type}.png"
+        #elsif self.class == 'banner'
+        #  "/assets/upload/banner/:style/:basename.:extension"
+        #elsif self.class == 'logo'
+        #  "/assets/upload/logo/:style/:basename.:extension"
+        #end
       end
 
   end
