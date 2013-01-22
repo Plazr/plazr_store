@@ -1,36 +1,42 @@
-%h1 Listing Promotions
+%h1 Listing Promotional Codes
 %table
   %thead
     %tr
-      %th Name
+      %th Code
       %th Description
       %th Value
-      %th Minimum Filter
+      %th Minimum Cart
+      %th Uses Allowed
+      %th Times Used
       %th Start Date
       %th Expire Date
       %th Discount Type
 
   %tbody
-    - @promotions.each do |promotion|
+    - @promotional_codes.each do |promotional_code|
       %tr
         %td
-          = promotion.name
+          = promotional_code.code
         %td
-          = promotion.description
+          = promotional_code.description
         %td
-          = promotion.value
+          = promotional_code.value
         %td
-          = promotion.min_filter
+          = promotional_code.minimum_cart
         %td
-          = promotion.starts_at
+          = promotional_code.uses_allowed
         %td
-          = promotion.expires_at
+          = promotional_code.times_used
         %td
-          = promotion.discount_type.name
+          = promotional_code.starts_at
         %td
-          = link_to 'Show', admin_promotion_path(promotion)
+          = promotional_code.expires_at
         %td
-          = link_to 'Edit', edit_admin_promotion_path(promotion)
+          = promotional_code.discount_type.name
         %td
-          = link_to 'Destroy', admin_promotion_path(promotion), :method => :delete, :data => { :confirm => 'Are you sure?' }
-= link_to 'New Promotion', new_admin_promotion_path
+          = link_to 'Show', admin_promotional_code_path(promotional_code)
+        %td
+          = link_to 'Edit', edit_admin_promotional_code_path(promotional_code)
+        %td
+          = link_to 'Destroy', admin_promotional_code_path(promotional_code), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New Promotional Code', new_admin_promotional_code_path

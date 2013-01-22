@@ -11,7 +11,7 @@ module PlazrStore
     validates :value, :presence => true
 
     ## Callback ##
-    before_validation :unique_product_property
+    before_validation :unique_product_property, :on => :create
 
     def unique_product_property
       ProductProperty.find_by_product_id_and_property_id(self.product_id, self.property_id).nil?
