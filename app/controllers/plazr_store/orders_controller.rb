@@ -1,51 +1,134 @@
 module PlazrStore
   class OrdersController < ApplicationController
+    include PaypalExpressHelper
 
-    before_filter :check_authorization
-    before_filter :get_cart, only: [:new, :create]
-    before_filter :get_auxiliar_data, only: [:new, :create]
+    before_filter :get_cart, only: [:new, :create, :review]
+    before_filter :get_auxiliar_data, only: [:new, :create, :review]
+    before_filter :assigns_gateway, only: [:create, :review]
 
     # def cancel
     #   @order = Order.find(params[:id])
     #   # TODO apenas o admin pode fazer isto (talvez staff)
     #   @order.to_be_cancelled = true
-
     #   # flash[:notice] = "Order #{@order.id} set to be cancelled"
     #   # redirect_to admin_edit_order_path(@order.id)
     # end
 
+    def new
+      @order = Order.new
+      @order.load_user(current_user)        
+
+      authorize! :create, @order
+    end
+
+    def review
+      if params[:token].nil?
+        redirect_to cart_path, :notice => 'Woops! Something went wrong!' 
+        return
+      end
+
+
+
+      gateway_response = @gateway.details_for(params[:token])
+
+      unless gateway_response.success?
+        redirect_to cart_url, 
+          :notice => "Sorry! Something went wrong with the Paypal purchase. Here's what Paypal said: #{gateway_response.message}" and return
+      end
+
+      order_address = get_order_info gateway_response
+      @address = Address.new(order_address[:address])
+      total = ShipmentCondition.find(session[:shipment_condition]).price + @cart.total_price
+
+      @order = Order.new(
+        :express_token => order_address[:gateway_details][:token], 
+        :payer_id => order_address[:gateway_details][:payer_id],
+        :shipment_condition_id => session[:shipment_condition],
+        :total => total
+      )
+      @order.load_user(current_user)
+    end
+
     def create
+      @order = Order.new(params[:order])
+
       ActiveRecord::Base.transaction do # so that order's cart changes aren't presisted if an error occurs
-        @order = Order.new(params[:order])
+        
         @order.load_user(current_user)
         @order.add_cart_and_update_status(@cart)
-        #TODO atualizar totais das orders
 
         authorize! :create, @order
 
-        if @order.save
+        # first time in checkout
+        if @order.express_token.blank?
+          if params[:order][:shipment_condition_id].nil?
+            render 'new', :alert => "You need to specify a Shipment Condition" and return
+          end
+          if params['payment_method']['name'] == "Paypal" 
+            session[:shipment_condition] = params[:order][:shipment_condition_id]
+            redirect_to :controller => 'paypal_express', :action => 'checkout' and return
+          end
+        else 
+          @order.shipment_condition_id = session[:shipment_condition] if defined? session[:shipment_condition]
+        end
+
+        @order.total = current_user.cart.total_price + ShipmentCondition.find(@order.shipment_condition_id).price
+
+        # paypal is not ok
+        if @order.express_token.nil?
+          redirect_to cart_url, :notice => "Sorry! Something went wrong with the Paypal purchase. Please try again later." and return
+          # paypal is ok
+        elsif @order.save
+          # paypal method: executes purchase
+          if params['payment_method']['name'] == "Paypal" 
+            # changes order's payment_state to "paid"
+            @order.update_attributes(:payment_state => "paid")
+
+            # total: total to be paid
+            # purchase_params: paypal account details
+            total, purchase_params = get_purchase_params request, params
+            # paypal purchase
+            purchase = @gateway.purchase total, purchase_params
+
+            if purchase.success?
+              notice = "Thanks! Your purchase is now complete!"
+            else
+              @order.destroy
+              redirect_to cart_url :notice => "Woops. Something went wrong while we were trying to complete the purchase with Paypal. Btw, here's what Paypal said: #{purchase.message}" and return
+            end
+          end
+
           # marks the cart as deleted 
           PZS::Cart.find(@order.cart.id).delete
           # indicates which is the last order when the receipt action is called
           session[:last_order] = @order.id
+          session[:shipment_condition] = nil
           # redirects to last_order receipt
-          redirect_to receipt_url
+          redirect_to receipt_url and return
         else
-          render :new
+          if params['payment_method']['name'] == "Paypal"   
+            render 'review' and return
+          else 
+            render 'new' and return
+          end
         end
+
+        # render receipt
       end
+    end
+
+    def get_purchase_params(request, params)
+      return to_cents(@order.total), {
+        :ip => request.remote_ip,
+        :token => params[:order][:express_token],
+        :payer_id => params[:order][:payer_id],
+        :currency => 'EUR'
+      }
     end
 
     def history
       authorize! :index, Order
       @orders = current_user.orders.paginate(:per_page => 5, :page => params[:page])
-    end
-
-    def new
-      @order = Order.new
-      @order.load_user(current_user)
-
-      authorize! :create, @order
     end
 
     def receipt
@@ -65,6 +148,23 @@ module PlazrStore
       rescue CanCan::AccessDenied => exception
         redirect_to orders_history_url, :alert => exception.message
       end
+    end
+
+    def confirm
+      #if params[:token].nil?
+      #  redirect_to cart_path, :notice => 'Woops! Something went wrong!' 
+      #  return
+      #end
+
+      #gateway_response = @gateway.details_for(params[:token])
+
+      #unless gateway_response.success?
+      #  redirect_to cart_url, :notice => "Sorry! Something went wrong with the Paypal purchase. Here's what Paypal said: #{gateway_response.message}" 
+      #  return
+      #end
+
+      #order_address = get_order_info gateway_response
+      #@address = Address.new(order_address[:address])
     end
 
     protected

@@ -21,5 +21,7 @@
   %tr
     %td{colspan: "2"}
     %td= "Total"
-    %td= "TODO: Talvez o valor possa ser calculado com javascript"
-
+    - if defined? order
+      %td= order.total
+    - else 
+      %td

@@ -1,29 +1,22 @@
-- page = 'plazr_store/admin/products/index'
-- content_for :head do
-	= stylesheet_link_tag page, :media => 'all'
-%div.container-fluid
-	%section
-		%h1 Products
-		.row-fluid
-			.span10
-				.row-fluid
-					- @products.each do |product|
-						.span2.product
-							%article
-								- variant = product.master_variant
-								- imgpth = if variant.nil? || variant.multimedia.empty?
-									- 'http://placehold.it/100x100&text=No%20image'
-								- else
-									- variant.multimedia.first.file.url(:thumb)
-								%h6= link_to product.name, admin_product_path(product)
-								%div
-									%noscript
-										= image_tag imgpth
-									= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
-								.actions
-									= link_to edit_admin_product_path(product) do
-										= button_tag 'Edit', :class => [:btn, 'btn-mini']
-									= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
-										= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']
-			%aside.span2
-				= link_to 'New Product', new_admin_product_path
+#admin
+	= render 'plazr_store/admin/nav', :tab => :products, :view => :index
+	%ul.thumbnails
+		- @products.each do |product|
+			%li.span2
+				.thumbnail
+					- maxlen = 10
+					- name = if product.name.length > maxlen
+						- "#{product.name[0...maxlen]}..."
+					- else
+						- product.name
+					%strong.title= link_to name, admin_product_path(product)
+					%div
+						- imgpth = product.image.file.url(:thumb)
+						%noscript
+							= image_tag imgpth
+						= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
+				.actions
+					= link_to edit_admin_product_path(product) do
+						= button_tag 'Edit', :class => [:btn, 'btn-mini']
+					= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
+						= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']

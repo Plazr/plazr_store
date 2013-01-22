@@ -1,0 +1,18 @@
+<div id="well-outter">
+	<section class="row-fluid well-list">
+		<div>
+			<h4>Mais Vendidos</h4>
+		</div>
+		<% @best.each_with_index do |best, index| %>
+		<article class="well-entry row-fluid">
+			<div class="span2">
+				<%= image_tag best.image.file.url %>
+			</div>
+			<div class="span10">
+				<%= best.name %>
+			</div>
+
+		</article>
+		<% end %>
+	</section>
+</div>

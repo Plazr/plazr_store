@@ -1,75 +1,31 @@
-%h1 Show Variant
-%p#notice
-  = notice
-%table
-  %tr
-    %td
-      %b SKU
-    %td
-      = @variant.sku
-  %tr
-    %td
-      %b Description
-    %td
-      = @variant.description
-  %tr
-    %td
-      %b Price
-    %td
-      = @variant.price
-  %tr
-    %td
-      %b Cost Price
-    %td
-      = @variant.cost_price
-  %tr
-    %td
-      %b Amount Available
-    %td
-      = @variant.amount_available
-  %tr
-    %td
-      %b Visible
-    %td
-      = @variant.visible
-  %tr
-    %td
-      %b Restock Date
-    %td
-      = @variant.restock_date
-  %tr
-    %td
-      %b Product
-    %td
-      = @variant.product.name
-  %tr
-    %td
-      %b Master
-    %td
-      = @variant.is_master
-  %tr
-    %td
-      %b Image
-    %td
-      - if !@variant.multimedia.empty?
-        = image_tag @variant.multimedia.first.file.url(:thumb)
--# %table
--#   %thead
--#     %tr
--#       %th Properties
--#     %tbody
--#       - @variant.properties.each do |p|
--#         %tr
--#           %td= p.display_name
--# %table
--#   %thead
--#     %tr
--#       %th Variant Properties
--#     %tbody
--#       - @variant.variant_properties.each do |p|
--#         %tr
--#           %td= p.display_name
-
-= link_to 'Edit', edit_admin_product_variant_path(@product, @variant)
-|
-= link_to 'Back', admin_product_path(@product)
+#admin
+	= render 'plazr_store/admin/nav', :tab => :products, :section => :variants, :view => :show
+	.show
+		.row-fluid
+			.span4
+				- imgpth = @variant.image.file.url(:thumb)
+				%noscript= image_tag imgpth, :class => :photo
+				.photo{ style: "background-image:url('#{imgpth}')" }
+			.span8
+				%h1= @variant.product.name
+				%h2= @variant.sku
+				%p= @variant.description
+				.row-fluid
+					.offset1.span3
+						%table.table.table-bordered
+							%tbody
+								%tr
+									%th Price
+									%td= number_to_currency( @variant.price, unit: '€' )
+								%tr
+									%th Cost
+									%td= number_to_currency( @variant.cost_price, unit: '€' )
+					.offset1.span6
+						%table.table.table-bordered
+							%tbody
+								%tr
+									%th Available
+									%td= @variant.amount_available
+								%tr
+									%th Restock
+									%td= @variant.restock_date.to_time.to_s(:long)

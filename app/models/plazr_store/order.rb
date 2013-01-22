@@ -12,15 +12,19 @@ module PlazrStore
     ## Attributes ##
     attr_accessible :adjustment_total, :billing_address_id, :cart_id, :completed_at, :email, :item_total, 
       :payment_state, :shipping_address_id, :shipment_condition_id, :shipment_state, :promotional_code_id,
-      :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes
-    attr_accessor :to_be_cancelled, :promotional_code
+      :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes,
+      :express_token, :payer_id, :gateway
+
+    attr_accessor :to_be_cancelled, :promotional_code, :payer_id, :express_token, :gateway
 
 
     ## Validations ##
     validates :email, :item_total, :adjustment_total, :total, :payment_state, :shipment_state, :state,
-              :shipment_condition_id, :cart_id, :user_id, presence: true
+      :shipment_condition_id, :cart_id, :user_id, presence: true
     validate :completed_at_and_state_match, :on => :update
-    validates_inclusion_of :state, :in => %w( processing shipped cancelled paid )
+    validates_inclusion_of :state, :in => %w( processing cancelled completed )
+    validates_inclusion_of :payment_state, :in => %w( processing paid )
+    validates_inclusion_of :shipment_state, :in => %w( processing shipped )
 
 
     ## Nested Attributes ##
@@ -34,7 +38,7 @@ module PlazrStore
 
     ## Callbacks ##
     after_initialize :load_defaults
-    before_validation :set_promotional_code_and_validate_code
+    # before_validation :set_promotional_code_and_validate_code
     before_save :update_state
     after_save :deliver_order_confirmation#, :if => Proc.new { |order| alguma_coisa_aqui != "admin" }
     # after_commit :mark_cart_as_deleted
@@ -72,15 +76,32 @@ module PlazrStore
       end
     end
 
+    def paid?
+      self.payment_state == "paid"
+    end
+
+    def ship_product(cart_variant_id)
+      # marks this order's variant as shipped
+      cart_variant = self.cart.cart_variants.find(cart_variant_id)
+      if cart_variant.update_attributes(:state => "shipped")
+        self.save
+      end
+    end
+
     def user
       # Get this order's owner
       PlazrAuth::User.find(self.user_id)
     end
 
     protected
+    def complete_order
+      self.state = "completed"
+      self.completed_at = DateTime.current
+    end
+
     def completed_at_and_state_match
       # valid if completd_at is defined and state is 'shipped' 
-      errors.add(:base, "'shipped' state doesn't match completed_at") if completed_at && state != "shipped"
+      errors.add(:base, "'shipped' state doesn't match completed_at") if completed_at && state != "completed"
     end
 
     def deliver_order_confirmation
@@ -93,9 +114,9 @@ module PlazrStore
       self.billing_address ||= Address.new
       self.shipping_address ||= Address.new
 
-      self.payment_state = "processing"
-      self.shipment_state = "processing"
-      self.state = "processing"
+      self.payment_state ||= "processing"
+      self.shipment_state ||= "processing"
+      self.state ||= "processing"
     end
 
     # def mark_cart_as_deleted
@@ -110,14 +131,16 @@ module PlazrStore
     def update_state
       # Updates the order state depending on cart's variants status
       return if self.state == "cancelled"
-      
+
       if self.to_be_cancelled
         self.state = "cancelled"
-      elsif cart_variants.all? { |cv| cv.state == "shipped" }
-        self.state = "shipped"
-      elsif cart_variants.all? { |cv| cv.state == "processing" }
-        self.state = "processing"
+      elsif payment_state == 'paid' && cart_variants.all? { |cv| cv.state == "shipped" }
+        self.shipment_state = "shipped"
+        self.complete_order
+        # elsif cart_variants.all? { |cv| cv.state == "processing" }
+        #   self.state = "processing"
       end
     end
+
   end
 end

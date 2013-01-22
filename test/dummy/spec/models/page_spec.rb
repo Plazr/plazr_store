@@ -7,9 +7,6 @@ describe PZS::Page, :type => :model do
   end
 
   describe "#Relations" do
-    it "has many multimedia" do
-      FactoryGirl.create(:page).should have_many :multimedia 
-    end
   end
 
   describe "#Validations" do

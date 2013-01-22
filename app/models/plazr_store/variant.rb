@@ -11,9 +11,6 @@ module PlazrStore
 
     has_many :multimedia, :dependent => :destroy, :inverse_of => :variant
 
-    has_many :promotion_variants, :dependent => :destroy
-    has_many :promotions, :through => :promotion_variants
-
     #has_many :shipment_condition_variants, :dependent => :destroy
     #has_many :shipment_conditions, :through => :shipment_condition_variants
 
@@ -33,7 +30,8 @@ module PlazrStore
     attr_accessible :amount_available, :visible, :cost_price, :description, 
                     :is_master, :price, :restock_date, :sku, :product_id, 
                     :variant_variant_property_values_attributes,
-                    :multimedia_attributes
+                    :multimedia_attributes,
+                    :restock_date_date_string, :restock_date_time_string
 
     ## Validations ##
     validates_presence_of :sku, :visible, :product
@@ -44,10 +42,10 @@ module PlazrStore
     validates :cost_price, numericality: {:greater_than_or_equal_to => 0}, :allow_nil => true
 
     ## Scopes ##
-    # scope :master_variant, where(:is_master => true)
     scope :without_master, where(:is_master => false)
 
     ## Callbacks ##
+    before_save :create_restock_date
     before_validation :set_is_master, :on => :create
 
     # Delegations
@@ -55,6 +53,24 @@ module PlazrStore
 
 
     ## Instance Methods ##
+
+    # Override method price to return the price of a variant with the active promotion applied
+    def price
+      promotion = self.product.promotions.active_promotions.first
+      if promotion.nil?
+        read_attribute(:price)
+      elsif promotion.discount_type.type_id == 1
+        read_attribute(:price) - (read_attribute(:price) * (promotion.value/100))
+      elsif promotion.discount_type.type_id == 3
+        promotion.value
+      else
+        read_attribute(:price)
+      end
+    end
+
+    def formatted_price
+      price.to_s 
+    end
 
     #creates an array for all the variant_properties that are associated to the product of this variant
     def get_variant_properties_from_product
@@ -79,10 +95,10 @@ module PlazrStore
 
     def image
       images = self.multimedia
-      if images.size > 1
+      if images.size > 0
         images.first
       else
-        Multimedium::new(type: 'variant')
+        Multimedium::new(class_type: 'variant')
       end
     end
 
@@ -95,6 +111,22 @@ module PlazrStore
       info
     end
 
+    def restock_date_date_string
+      @restock_date_date_string || (restock_date || Time.now).to_date.to_s(:db)
+    end
+
+    def restock_date_date_string=(date_str)
+      @restock_date_date_string = date_str
+    end
+
+    def restock_date_time_string
+      @restock_date_time_string || (restock_date || Time.now).to_s(:time)
+    end
+
+    def restock_date_time_string=(time_str)
+      @restock_date_time_string = time_str
+    end
+
     protected
       # if this variant is being created after the creation of a product then is_master is set to true
       # if not (meaning a master variant already exists), is_master is set to false
@@ -105,6 +137,14 @@ module PlazrStore
           self.is_master = true
         end
         true
+      end
+
+      def create_restock_date
+        self.restock_date = if @restock_date_date_string && @restock_date_time_string
+          Time.parse("#{@restock_date_date_string} #{@restock_date_time_string}")
+        else
+          Time.current
+        end
       end
   end
 end

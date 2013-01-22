@@ -24,6 +24,17 @@ module PlazrStore
     ## Callback ##
     before_validation :set_leaf
 
+    
+    ## Instance Methods ##
+    # Gets all categories that are children of a category
+    def children
+      ProductCategory.where("is_leaf = ? AND parent_product_category_id = ?", true, self.id)
+    end
+
+    def is_child?
+      self.is_leaf?
+    end
+
     def set_leaf
       if self.parent_product_category_id.blank?
         self.is_leaf = false
@@ -33,10 +44,8 @@ module PlazrStore
       true
     end
   
-    def is_child?
-      self.is_leaf?
-    end
 
+    ## Class Methods ##
     def self.parent_categories_without(id)
       where("is_leaf = ? AND id != ?", false, id)
     end

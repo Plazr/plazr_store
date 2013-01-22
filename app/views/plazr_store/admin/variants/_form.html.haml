@@ -1,46 +1,77 @@
-= form_for [:admin, @product, @variant] do |f|
-  - if @variant.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@variant.errors.count, "error")} prohibited this variant from being saved:"
-      %div{:class=>["alert","alert-error"]}
-        %ul
-          - @variant.errors.full_messages.each do |msg|
-            %li= msg
+= form_for [:admin, @product, @variant], :html => { :class => [:form, 'form-horizontal'] } do |f|
+	- if @variant.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@variant.errors.count, "error")} prohibited this variant from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- @variant.errors.full_messages.each do |msg|
+						%li= msg
 
-  = f.label :sku
-  = f.text_field :sku
-  %br
-  = f.label :description
-  = f.text_area :description
-  %br
-  = f.label :price
-  = f.text_field :price, :class => 'variant'
-  %br
-  = f.label :cost_price
-  = f.text_field :cost_price, :class => 'variant'
-  %br
-  = f.label :amount_available
-  = f.number_field :amount_available
-  %br
-  = f.label :restock_date
-  = f.date_select :restock_date
-  %br
+	.row-fluid
+		.span6
+			.control-group
+				= f.label :sku, :class => 'control-label'
+				.controls
+					= f.text_field :sku, :class => :wide, placeholder: 'SKU', autofocus: true
 
-  = f.fields_for :multimedia do |m|
-    - if m.object.new_record?
-      = m.label :file, "Image File"
-      = m.file_field :file
-      %br
-      = m.label :caption
-      = m.text_field :caption
-    %br    
+			.control-group
+				= f.label :description, :class => 'control-label'
+				.controls
+					= f.text_area :description, :class => :wide, placeholder: 'Product description', rows: 5
+			
+			.control-group
+				= f.label :price, :class => 'control-label'
+				.controls
+					.input-append
+						= f.text_field :price, :class => [:number, 'input-small'], placeholder: 'price'
+						%span.add-on= image_tag 'glyphicons/euro.png', :class => :icon
+			
+			.control-group
+				= f.label :cost_price, :class => 'control-label'
+				.controls
+					.input-append
+						= f.text_field :cost_price, :class => [:number, 'input-small'], placeholder: 'cost'
+						%span.add-on= image_tag 'glyphicons/euro.png', :class => :icon
+			
+			.control-group
+				= f.label :amount_available, :class => 'control-label'
+				.controls
+					= f.number_field :amount_available, :class => 'input-small'
+			
+			.control-group
+				= f.label :restock_date, :class => 'control-label'
+				.controls
+					.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
+						= f.text_field :restock_date_date_string, :class => [:center, 'input-small'], readonly: true
+						%span.add-on
+							= image_tag 'glyphicons/calendar.png', :class => :icon
+					.input-append.bootstrap-timepicker-component
+						= f.text_field :restock_date_time_string, :class => ['input-small', :timepicker, :center], readonly: true
+						%span.add-on
+							= image_tag 'glyphicons/clock.png', :class => :icon
+		.span6
+			- if f.object.new_record?
+				%h2 Image
+				.field
+					= f.fields_for :multimedia do |m|
+						- if m.object.new_record?
+							// this line is necessary before the file_field (small fix to use paperclip)
+							= m.hidden_field :class_type
+							= m.file_field :file, :class => :wide
+							= m.text_field :caption, :class => :wide, placeholder: 'Caption'
 
-  %h4= "Variant Properties"
-  = f.fields_for :variant_variant_property_values do |vvpv|
-    = vvpv.label :display_name, vvpv.object.variant_property_value.variant_property.display_name
-    = vvpv.collection_select :variant_property_value_id, vvpv.object.variant_property_value.variant_property.variant_property_values, :id, :presentation
-    %br
-  %br
-
-  = f.submit "Submit"
-  = link_to 'Cancel', admin_product_variants_path
+			%h2 Properties
+			%table#properties.table.table-striped.table-bordered.table-hover.table-condensed
+				%thead
+					%tr
+						%th Name
+						%th Value
+				%tbody
+					= f.fields_for :variant_variant_property_values do |vvpv|
+						%tr
+							%td.key= vvpv.label :display_name, vvpv.object.variant_property_value.variant_property.display_name, :class => 'control-label'
+							%td.value= vvpv.collection_select :variant_property_value_id, vvpv.object.variant_property_value.variant_property.variant_property_values, :id, :presentation, {}
+	.actions
+		= f.submit "Submit", :class => [:btn, 'btn-primary']
+		= link_to admin_product_variants_path, :method => :get do
+			%button.btn.btn-mini Cancel

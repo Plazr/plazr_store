@@ -11,6 +11,9 @@ module PlazrStore
     # It also allows to create a product and a variant belonging to it at the same time, because of presence of product_id validation on variation
     has_many :variants, :dependent => :destroy, :inverse_of => :product
 
+    has_many :product_promotions, :dependent => :destroy
+    has_many :promotions, :through => :product_promotions
+
     has_many :product_properties, :dependent => :destroy
     has_many :properties, :through => :product_properties
 
@@ -22,8 +25,8 @@ module PlazrStore
 
     ## Attributes ##
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
-                    :property_ids, :variant_property_ids, 
-                    :variants_attributes, :product_variant_properties_attributes, 
+                    :property_ids, :variant_property_ids,
+                    :variants_attributes, :product_variant_properties_attributes,
                     :brand_attributes,
                     :product_product_categories_attributes,
                     :available_at_date_string, :available_at_time_string
@@ -58,6 +61,10 @@ module PlazrStore
 
     def master_price
       self.master_variant.price
+    end
+
+    def formatted_master_price
+      self.master_variant.formatted_price
     end
 
     def images
@@ -120,43 +127,111 @@ module PlazrStore
     end
 
     def image
-      self.master_variant.image
+      self.master_variant.image if self.master_variant
     end
 
-    def related(count = 5)
-      #Product.
+    def related(count = 4)
+      categories = self.product_categories.count
+      if categories > 0
+        self.product_categories[rand(categories)].products.limit(count)
+      else
+        []
+      end
     end
 
     ### Virtual attributes
 
-    # => Getter for date
-    # => This is required in order to use the datepicker to set the available_at field
+    # Getter for date
+    # This is required in order to use the datepicker to set the available_at field
     def available_at_date_string
       @available_at_date_string || (available_at || created_at || Time.now).to_date.to_s(:db)
     end
 
-    # => Getter for time
-    # => This is required in order to use the timepicker to set the available_at field
+    # Getter for time
+    # This is required in order to use the timepicker to set the available_at field
     def available_at_time_string
       @available_at_time_string || (available_at || created_at || Time.now).to_s(:time)
     end
 
 
 
-    # => Setter for date
-    # => This is required in order to use the datepicker to set the available_at field
+    # Setter for date
+    # This is required in order to use the datepicker to set the available_at field
     def available_at_date_string=(date_str)
       @available_at_date_string = date_str
     end
 
-    # => Setter for time
-    # => This is required in order to use the timepicker to set the available_at field
+    # Setter for time
+    # This is required in order to use the timepicker to set the available_at field
     def available_at_time_string=(time_str)
       @available_at_time_string = time_str
     end
 
+    def rating_count
+      self.feedback_products.where('rating IS NOT NULL').count
+    end
+
+    def ratings?
+      rating_count > 0
+    end
+
+    def update_rating
+      avg = self.feedback_products.where('rating IS NOT NULL').average(:rating)
+      self.update_attribute :rating, avg
+    end
 
 
+    ## Class Methods ##
+    # Finds products by brand
+    def self.find_by_brand(brand_id)
+      if !brand_id.blank?
+        joins(:brand).where('plazr_store_brands.id' => "#{brand_id}")
+      else
+        self.scoped
+      end
+    end
+
+    # Finds products by category
+    def self.find_by_category(category_id)
+      if !category_id.blank?
+        cat = ProductCategory.find(category_id)
+        if cat.is_child?
+          joins(:product_categories).where('plazr_store_product_categories.id' => category_id)
+        else
+          # if the category selected is a parent then it will search through all children categories
+          joins(:product_categories).where('plazr_store_product_categories.id IN (?)', cat.children.map(&:id))
+        end
+      else
+        self.scoped
+      end
+    end
+
+    # Finds products by name details using % wildcard
+    def self.find_by_name_and_details_like(search)
+      where('plazr_store_products.name LIKE ? OR plazr_store_products.details LIKE ?', "%#{search}%", "%#{search}%")
+    end
+
+    # Find products by a price range
+    def self.find_by_price_between(min, max)
+      min = min.to_i
+      max = max.to_i
+      if max > 0 && (min <= max)
+        joins(:variants).where("is_master = ? AND price BETWEEN ? AND ?", true, min, max)
+      else
+        self.scoped
+      end
+    end
+
+    # Orders products by price
+    def self.order_by_price(direction)
+      if direction == "-1"
+        joins(:variants).where("is_master = ?", true).order("price DESC")
+      elsif direction == "1"
+        joins(:variants).where("is_master = ?", true).order("price ASC")
+      else
+        self.scoped
+      end
+    end
 
     protected
 

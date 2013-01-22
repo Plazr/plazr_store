@@ -1,0 +1,52 @@
+@mixin dropbutton-icon($image-url) {
+	background-image: url($image-url);
+	background-repeat: no-repeat;
+	background-position: .6em .4em;
+}
+
+.topbar-wrapper {
+	width: 100%;
+	// remove container margin and padding because it goes inside another container
+	.container {
+		margin: 0;
+		padding: 0;
+	}
+	.topbar {
+		border-bottom: 1px solid #EEE;
+		padding: 0.6em 0 0.6em 0;
+		background-color: white;
+		form {
+			margin: 0;
+			select {
+				margin-bottom: 1px;
+			}
+		}
+	}
+	ul.dropdown-menu li a {
+		padding-left: 30px;
+		// margin-left: 20px;
+	}
+	.admin, .admin:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/admin.png') %>");
+	}
+	.exit, .exit:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/out.png') %>");
+	}
+	.edit, .edit:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/edit.png') %>");
+	}
+	.profile, .profile:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/user.png') %>");
+	}
+}
+
+// used when the bar is fixed
+.topbar-wrapper.fixed {
+	z-index: 2;
+	position: fixed;
+	top: 0;
+	margin: 0 auto;
+}
+
+
+

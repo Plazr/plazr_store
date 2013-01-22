@@ -1,34 +1,22 @@
-<%= content_for :head do %>
-	<%= stylesheet_link_tag 'plazr_store/pages' %>
-<% end %>
-
-<div class="container">
-
-<!-- 	<header class="row-fluid">
-		<div class="span12">
-			<h1>Lorem ipsum</h1>
-		</div>
-	</header>
-
-	<section id="promotion" class="row-fluid">
-		<div class="span12">
-			<%= image_tag 'plazr_store/promotion-banner.jpg' %>
-		</div>
-	</section> -->
-
-	<section id="featured">
-
-		<%= render 'featured' if @featured %>
-	</section>
-
+<div id="index-page">
+	<div class="row-fluid">
+		<section class="span8">
+			<%= render 'featured' if @featured %>
+		</section>
+		<section class="span4">
+			<%= render 'best' if @best %>
+		</section>
+	</div>
 	<section id="recommended">
 		<header class="page-header">
-			<h2>Recommended</h2>
+			<h2><span>Recomendados<span></h2>
 		</header>
-		<section class="row-fluid">
-			<% @recommended.each do |recommended| %>
-				<%= render 'recommended_single', :recommended => recommended %>
-			<% end %>
-		</section>
+		<% @recommended.each_slice(4) do |r| %>
+			<section class="row-fluid">
+				<% r.each do |recommended| %>
+				<%= render 'plazr_store/shared/thumb-item', :recommended => recommended %>
+				<% end %>
+			</section>
+		<% end %>
 	</section>
 </div>

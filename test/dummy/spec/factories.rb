@@ -12,16 +12,16 @@ FactoryGirl.define do
     sequence(:name) { |n| "Brand #{n}" }
 
     factory :brand_v2 do
-      name "Adidas" 
+      name "Adidas"
     end
 
     factory :invalid_brand do
-      name nil 
+      name nil
     end
   end
 
   factory :cart, :class => PZS::Cart do
-    after(:build) do |c| 
+    after(:build) do |c|
       c.user_id = FactoryGirl.create(:specific_user).id
     end
     after(:create) do |c|
@@ -37,12 +37,14 @@ FactoryGirl.define do
     state "pending"
   end
 
-  factory :discount_type, :class => PZS::DiscountType do 
+  factory :discount_type, :class => PZS::DiscountType do
     sequence(:name) { |n| "Discount #{n}" }
     description "Discount Description"
+    scope {0}
 
     factory :discount_type_v2 do
       name "Black Friday"
+      scope {2}
     end
 
     factory :invalid_discount_type do
@@ -52,19 +54,28 @@ FactoryGirl.define do
 
   factory :multimedium, :class => PZS::Multimedium do
     sequence(:caption) { |n| "Caption #{n}" }
-    file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
 
     factory :multimedium_v2 do
       caption "Good Multimedium"
+      class_type 'variant'
+      file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
       association :variant
     end
 
     factory :multimedium_for_variant do
+      class_type 'variant'
+      file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
       association :variant
     end
 
-    factory :multimedium_for_page do
-      association :page
+    factory :multimedium_for_banner do
+      class_type 'banner'
+      file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
+    end
+
+    factory :multimedium_for_logo do
+      class_type 'logo'
+      file Rack::Test::UploadedFile.new(File.dirname(__FILE__) + "/sample_photo.jpeg", 'image/jpeg')
     end
 
     factory :invalid_multimedium do
@@ -72,8 +83,8 @@ FactoryGirl.define do
     end
   end
 
-  factory :order, :class => PZS::Order do 
-    sequence(:email) { |n| "someweirdunrepeatableemail#{n}@yourcousin.com" }
+  factory :order, :class => PZS::Order do
+    # sequence(:email) { |n| "someweirdunrepeatableemail#{n}@yourcousin.com" }
     total 0
     item_total 0
     adjustment_total 0
@@ -85,18 +96,29 @@ FactoryGirl.define do
     association :shipment_condition
     # promotional_code
 
-    after(:build) do |o| 
-      o.user_id = FactoryGirl.create(:specific_user).id
-    end
+    # after(:build) do |o|
+    #   o.user_id = FactoryGirl.create(:specific_user).id
+    # end
 
     factory :order_with_addresses do
-      after(:build) do |o| 
+      after(:build) do |o|
         a = FactoryGirl.create(:address)
         o.billing_address_id = a.id
         o.shipping_address_id = a.id
       end
 
+      factory :order_paypal do
+        express_token ""
+        payer_id ""
+        # shipment_condition_id session[:shipment_condition]
+        total 50
+      end
+
       factory :order_full do
+        sequence(:email) { |n| "someweirdunrepeatableemail#{n}@yourcousin.com" }
+        after(:build) do |o|
+          o.user_id = FactoryGirl.create(:specific_user).id
+        end
         association :cart
       end
     end
@@ -114,7 +136,7 @@ FactoryGirl.define do
     association :shipment_condition
     association :cart
 
-    after(:build) do |o| 
+    after(:build) do |o|
       a = FactoryGirl.create(:address)
       o.billing_address_id = a.id
       o.shipping_address_id = a.id
@@ -126,19 +148,22 @@ FactoryGirl.define do
     details "Details"
     sequence(:slug) { |n| "product-#{n}" }
     association :brand
+
     factory :product_full do
       ignore do
         variants_count 2
       end
 
-      after(:build) do |p| 
+      after(:build) do |p|
         p.variants << FactoryGirl.create(:variant, product: p)
       end
-      after(:create) do |p, evaluator| 
+      after(:create) do |p, evaluator|
+        p.product_categories << FactoryGirl.create(:product_category_leaf)
         p.product_properties << FactoryGirl.create(:product_property, :product_id => p.id)
         p.variant_properties << FactoryGirl.create(:variant_property_with_values)
         p.variants << FactoryGirl.create_list(:variant, evaluator.variants_count, product: p)
         p.variants.each do |v|
+          v.multimedia << FactoryGirl.create_list(:multimedium_for_variant, 3, variant: v)
           p.variant_properties.each do |pvp|
             v.variant_property_values << pvp.variant_property_values.first
           end
@@ -147,27 +172,27 @@ FactoryGirl.define do
     end
 
     factory :product_v2 do
-      name "Pro Evolution Soccer 2012" 
+      name "Pro Evolution Soccer 2012"
       details "A video game which is the eleventh edition in the Pro Evolution Soccer series developed and published by Konami with production assistance from the Blue Sky Team"
       slug "pes-2012"
     end
 
     factory :product_with_master_variant do
-      after(:build) do |p| 
+      after(:build) do |p|
         p.variants << FactoryGirl.create(:variant, product: p)
       end
-      after(:create) do |p| 
+      after(:create) do |p|
         p.product_properties << FactoryGirl.create(:product_property, :product_id => p.id)
         p.variant_properties << FactoryGirl.create(:variant_property_with_values)
       end
     end
 
     factory :invalid_product do
-      name nil 
+      name nil
     end
 
     factory :product_with_properties_and_variant_properties do
-      after(:create) do |p| 
+      after(:create) do |p|
         p.product_properties << FactoryGirl.create(:product_property, :product_id => p.id)
         p.variant_properties << FactoryGirl.create(:variant_property_with_values)
       end
@@ -182,7 +207,7 @@ FactoryGirl.define do
 
     factory :product_category_leaf do
       is_leaf true
-      after(:build) do |vc| 
+      after(:build) do |vc|
         vc.parent_product_category_id = FactoryGirl.create(:product_category).id
       end
     end
@@ -212,6 +237,20 @@ FactoryGirl.define do
     association :variant_property
   end
 
+  factory :product_promotion, :class => PZS::ProductPromotion do
+    association :product_property
+    association :promotion
+  end
+
+  factory :promotion, :class => PZS::Promotion do
+    sequence(:name) { |n| "Name #{n}" }
+    sequence(:description) { |n| "Description #{n}" }
+    starts_at "01-01-2013"
+    expires_at "31-02-2013"
+    value 25
+    association :discount_type
+  end
+
   factory :property, :class => PZS::Property do
     sequence(:id_name) { |n| "Property #{n}" }
     sequence(:display_name) { |n| "Property #{n}" }
@@ -230,15 +269,15 @@ FactoryGirl.define do
     sequence(:name) { |n| "Prototype #{n}" }
 
     factory :prototype_v2 do
-      name "Clothes" 
+      name "Clothes"
     end
 
     factory :invalid_prototype do
-      name nil 
+      name nil
     end
 
     factory :prototype_with_properties_and_variant_properties do
-      after(:create) do |prot| 
+      after(:create) do |prot|
         prot.properties << FactoryGirl.create(:property)
         prot.variant_properties << FactoryGirl.create(:variant_property)
       end
@@ -266,7 +305,7 @@ FactoryGirl.define do
   factory :variant, :class => PZS::Variant do
     sequence(:sku) {|n| "SKU#{n}"}
     description "Description"
-    price {50.0}
+    price {rand(100.0)}
     visible true
     amount_available {rand(20)}
     is_master true
@@ -282,7 +321,7 @@ FactoryGirl.define do
     end
 
     factory :invalid_variant do
-      sku nil 
+      sku nil
       price nil
       visible nil
       amount_available nil
@@ -312,7 +351,7 @@ FactoryGirl.define do
     end
 
     factory :variant_property_with_values do
-      after(:create) do |vp| 
+      after(:create) do |vp|
         vp.variant_property_values << FactoryGirl.create_list(:variant_property_value, 3, variant_property: vp)
       end
     end

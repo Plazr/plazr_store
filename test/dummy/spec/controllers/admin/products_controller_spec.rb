@@ -5,7 +5,16 @@ describe PZS::Admin::ProductsController, :type => :controller do
   login_admin
 
   describe "GET #index" do
-    it_behaves_like 'default admin index method', :product
+    it "assigns products" do
+      m = FactoryGirl.create :product_full
+      get :index
+      assigns(:products).should eq([m])
+    end
+
+    it "renders the :index template" do
+      get :index
+      response.should render_template :index
+    end
   end
 
   describe "GET #show" do
