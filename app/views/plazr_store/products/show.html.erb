@@ -40,36 +40,60 @@
         </div>
       </div>
       <div class="span3">
-        <% if !@product.variants_without_master.empty? %>
-        <p>Variantes:</p>
-        <select>
-          <% @product.variants_without_master.each do |v| %>
-          <% v.variant_property_values.each_with_index do |vpv, index| %>
-          <option><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
-          <% end %>
-          <% end %>
-        </select>
-        <% end %>
-        <p>Quantidade:</p>
-        <input type="number" value="Quantity" />
         <dl>
           <dt>Descrição</dt>
           <dd><%= @product.details %></dd>
           <dt>Referência<dt>
           <dd><%= @product.master_variant.sku %></dd>
         </dl>
+
+        <% if !@product.product_properties.empty? %>
+
+          <% @product.product_properties.each do |p| %>
+          
+            <p><%= p.property.display_name %></p>
+            <p><%= p.value %></p>
+            <!--verificar se existe-->
+            <p><%= @product.brand %></p>
+
+          <% end %>
+
+        <%end%>
+
+        <% if !@product.variants_without_master.empty? %>
+          <p>Variantes:</p>
+          <select>
+            <% @product.variants_without_master.each do |v| %>
+              <% v.variant_property_values.each_with_index do |vpv, index| %>
+                <option><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
+              <% end %>
+            <% end %>
+          </select>
+
+          <%= add_to_cart_form(v.id) %>
+          <%= add_to_wishlist_form(v.id) %>
+
+        <% else %>
+
+          <%= add_to_cart_form(@product.master_variant.id) %>
+          <%= add_to_wishlist_form(@product.master_variant.id) %>
+
+        <% end %>
       </div>
+
       <div class="span3">
-          <ul>
-            <a href="#" class="btn btn-large btn-primary disabled">Add Cart</a>
-            <a href="#" class="btn btn-large btn-primary disabled">Add Wishlist</a>
-            <a href="#" class="btn btn-large btn-primary disabled">Add comment</a>
-          </ul>
+            <ul>
+              <li><a id="add_cart_bt" href="#" class="btn btn-large btn-primary disabled">Add Cart</a></li>
+              <li><a id="add_wishlist_bt"href="#" class="btn btn-large btn-primary disabled">Add Wishlist</a></li>
+              <li><a href="#" class="btn btn-large btn-primary disabled">Add comment</a></li>
+            </ul>
+          <!--
           <ul>
             <a href="#" class="btn btn-large btn-primary disabled">Share facebook</a>
             <a href="#" class="btn btn-large btn-primary disabled">Share twiter</a>
             <a href="#" class="btn btn-large btn-primary disabled">Share google</a>
           </ul>
+        -->
       </div>
 
     </div>
@@ -119,3 +143,17 @@
     </section>
     <% end %>
   </article>
+
+<script>
+$(document).ready(function() {
+
+  $("#add_cart_bt").click(function(){
+    $("#add_cart_f").submit();
+  });
+
+  $("#add_wishlist_bt").click(function(){
+    $("#add_wishlist_f").submit();
+  });
+
+});
+</script>
