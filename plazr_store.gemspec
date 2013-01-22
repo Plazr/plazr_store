@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'redactor-rails'
   s.add_dependency 'carrierwave'
   s.add_dependency 'mini_magick'
+  s.add_dependency "better_errors"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "puma"
@@ -47,7 +48,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'thin'
   s.add_development_dependency 'faker'
-  s.add_development_dependency "better_errors"
   s.add_development_dependency "binding_of_caller"
 
   # Mac specific gems
