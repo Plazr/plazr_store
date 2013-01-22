@@ -10,4 +10,5 @@ test/dummy/public/assets/
 test/dummy/public/system/
 Gemfile.lock
 coverage
+doc/*
 .DS_Store

@@ -25,8 +25,8 @@ module PlazrStore
 
     ## Attributes ##
     attr_accessible :available_at, :details, :name, :slug, :rating, :brand_id,
-                    :property_ids, :variant_property_ids, 
-                    :variants_attributes, :product_variant_properties_attributes, 
+                    :property_ids, :variant_property_ids,
+                    :variants_attributes, :product_variant_properties_attributes,
                     :brand_attributes,
                     :product_product_categories_attributes,
                     :available_at_date_string, :available_at_time_string
@@ -45,7 +45,7 @@ module PlazrStore
     before_save :create_available_at
     before_validation :create_slug
 
-    
+
     ## Instance Methods ##
     def has_master?
       self.variants.count >= 1
@@ -61,6 +61,10 @@ module PlazrStore
 
     def master_price
       self.master_variant.price
+    end
+
+    def formatted_master_price
+      self.master_variant.formatted_price
     end
 
     def images
@@ -123,10 +127,10 @@ module PlazrStore
     end
 
     def image
-      self.master_variant.image
+      self.master_variant.image if self.master_variant
     end
 
-    def related(count = 3)
+    def related(count = 4)
       categories = self.product_categories.count
       if categories > 0
         self.product_categories[rand(categories)].products.limit(count)
@@ -137,47 +141,66 @@ module PlazrStore
 
     ### Virtual attributes
 
-    # => Getter for date
-    # => This is required in order to use the datepicker to set the available_at field
+    # Getter for date
+    # This is required in order to use the datepicker to set the available_at field
     def available_at_date_string
       @available_at_date_string || (available_at || created_at || Time.now).to_date.to_s(:db)
     end
 
-    # => Getter for time
-    # => This is required in order to use the timepicker to set the available_at field
+    # Getter for time
+    # This is required in order to use the timepicker to set the available_at field
     def available_at_time_string
       @available_at_time_string || (available_at || created_at || Time.now).to_s(:time)
     end
 
 
 
-    # => Setter for date
-    # => This is required in order to use the datepicker to set the available_at field
+    # Setter for date
+    # This is required in order to use the datepicker to set the available_at field
     def available_at_date_string=(date_str)
       @available_at_date_string = date_str
     end
 
-    # => Setter for time
-    # => This is required in order to use the timepicker to set the available_at field
+    # Setter for time
+    # This is required in order to use the timepicker to set the available_at field
     def available_at_time_string=(time_str)
       @available_at_time_string = time_str
+    end
+
+    def rating_count
+      self.feedback_products.where('rating IS NOT NULL').count
+    end
+
+    def ratings?
+      rating_count > 0
+    end
+
+    def update_rating
+      avg = self.feedback_products.where('rating IS NOT NULL').average(:rating)
+      self.update_attribute :rating, avg
     end
 
 
     ## Class Methods ##
     # Finds products by brand
-    def self.find_by_brand(search)
-      if !search.blank?
-        joins(:brand).where('plazr_store_brands.name' => "#{search}") 
+    def self.find_by_brand(brand_id)
+      if !brand_id.blank?
+        joins(:brand).where('plazr_store_brands.id' => "#{brand_id}")
       else
         self.scoped
       end
     end
 
     # Finds products by category
-    def self.find_by_category(search)
-      if !search.blank?
-        joins(:product_categories).where('plazr_store_product_categories.id' => search) 
+    def self.find_by_category(category_id)
+      if !category_id.blank?
+        cat = ProductCategory.find(category_id)
+        if cat.is_child?
+          joins(:product_categories).where('plazr_store_product_categories.id' => category_id)
+        else
+          # if the category selected is a parent then it will search through all children categories
+          joins(:product_categories).where('plazr_store_product_categories.id IN (?)', cat.children.map(&:id))
+        end
       else
         self.scoped
       end

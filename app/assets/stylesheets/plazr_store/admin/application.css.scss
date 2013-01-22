@@ -1,7 +1,259 @@
-/*
- *= require bootstrap/bootstrap.css
- *= require bootstrap/bootstrap-responsive.css
- *= require bootstrap/datepicker.css
- *= require bootstrap/timepicker.css
- *= require_self
- */
+//= require_self
+#admin {
+	padding-top: 1em;
+	border-bottom: 1px solid #DDD;
+
+	h2 {
+		font-size: large;
+	}
+
+	.nav-tabs {
+		margin-bottom: 1em;
+	}
+
+	.nav-pills {
+		border-bottom: 1px solid #DDD;
+		padding-bottom: .5em;
+
+		> li {
+			margin-left: 1.5em;
+		}
+	}
+
+	ul.thumbnails li {
+		min-width: 150px;
+		padding-bottom: 1em;
+		text-align: center;
+
+		div.thumbnail {
+			margin: .5em;
+
+			div.actions {
+				padding: .5em;
+
+				a:hover {
+					text-decoration: none;
+				}
+			}
+
+			strong.title {
+				overflow: no-display;
+				white-space: nowrap;
+				width: 100%;
+			}
+		}
+	}
+
+
+
+
+	.form {
+		.row-fluid {
+			margin-top: 1.5em;
+
+			.control-group ,
+			.field {
+				margin-left: auto;
+				margin-right: auto;
+
+				.wide {
+					width: 90%;
+				}
+
+				.number {
+					text-align: right;
+				}
+
+				.center {
+					text-align: center;
+				}
+
+				ul.checklistbox {
+					border: 1px solid #CCC;
+					border-radius: 4px;
+					list-style: none;
+					max-height: 7em;
+					margin: 0;
+					overflow-y: scroll;
+					overflow: -moz-scrollbars-vertical;
+					overflow: -webkit-scrollbars-vertical;
+
+					li {
+						padding-left: .5em;
+						padding-right: .5em;
+						line-height: 2em;
+					}
+
+					li.odd {
+						background-color: lightgrey;
+					}
+				}
+
+				ul.checklistbox::-webkit-scrollbar {
+					-webkit-appearance: none;
+					width: 11px;
+					height: 11px;
+				}
+
+				ul.checklistbox::-webkit-scrollbar-thumb {
+					border-radius: 8px;
+					border: 2px solid white;
+					background-color: rgba(0, 0, 0, .5);
+				}
+			}
+
+			.field {
+				border: 1px solid #CCC;
+				border-radius: 4px;
+				padding: 1em;
+				text-align: center;
+			}
+		}
+
+		.actions {
+			text-align: center;
+		}
+	}
+
+	.form-horizontal {
+		table#properties {
+
+			td, th {
+				width: 50%;
+			}
+
+			td.key .control-label {
+				text-align: left;
+			}
+		}
+	}
+
+
+
+	ul.listbox {
+		border: 1px solid #CCC;
+		border-radius: 4px;
+		list-style: none;
+		margin: 0;
+		overflow-y: scroll;
+		overflow: -moz-scrollbars-vertical;
+		overflow: -webkit-scrollbars-vertical;
+
+		li {
+			padding-left: .5em;
+			padding-right: .5em;
+			line-height: 2em;
+
+			strong {
+				float: left;
+				padding: 0 .5em;
+			}
+
+			ul.values {
+				list-style: none;
+				margin: 0;
+
+				li {
+					margin: 0;
+					padding: 0;
+					display: inline;
+				}
+			}
+		}
+
+		li.odd {
+			background-color: lightgrey;
+		}
+	}
+
+
+
+	span img.icon {
+		height: 1em;
+	}
+
+
+
+
+
+	.show {
+		#categories {
+			ul {
+				list-style: none;
+
+				li {
+					display: inline;
+
+					span {
+						padding: .5em 1em;
+					}
+				}
+			}
+		}
+
+
+		#properties {
+			ul.listbox {
+				border: none;
+
+				li.well {
+					background: inherit;
+					margin: 0;
+				}
+			}
+		}
+	}
+
+
+
+	.listing {
+		table.table {
+			td ,
+			th {
+				padding-left: 1em;
+				padding-right: 1em;
+				text-align: center;
+				vertical-align: middle;
+
+				input {
+					margin: 0 auto;
+				}
+
+				input[type="text"] {
+					width: 100%;
+				}
+			}
+
+			tr.new {
+				td {
+					padding-bottom: 1em;
+					padding-top: 2em;
+				}
+			}
+		}
+	}
+
+	p.text-info {
+		text-align: center;
+		a {
+			text-decoration: underline;
+		}
+	}
+
+
+
+	#properties {
+		.id {
+			width: 15%;
+		}
+
+		.name {
+			width: 30%;
+		}
+
+		.button {
+			width: 10%
+		}
+	}
+
+}

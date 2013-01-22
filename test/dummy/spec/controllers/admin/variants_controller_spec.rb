@@ -108,8 +108,8 @@ describe PZS::Admin::VariantsController, :type => :controller do
       v = build_attributes(:variant)
       post :create, product_id: v[:product_id], :variant => v
 
-      variant_assigned = trim_hash_attributes(assigns(:variant).attributes)
-      variant_assigned.should eq(v)
+      variant_assigned = trim_hash_attributes(assigns(:variant).attributes).except(:restock_date)
+      variant_assigned.should eq(v.except(:restock_date))
     end
 
     context "with valid attributes" do

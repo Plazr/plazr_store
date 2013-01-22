@@ -1,71 +1,95 @@
-= form_for [:admin, @product], :html => { :class => 'form-horizontal' } do |frm|
+= form_for [:admin, @product], :html => { :class => [:form, 'form-horizontal'] } do |frm|
 	- if @product.errors.any?
 		%ul.alert.alert-error
 			- @product.errors.full_messages.each do |msg|
 				%li= msg
-	#basic-info.section
-		.field.control-group
-			= frm.label :name, :class => 'control-label'
-			.controls
-				= frm.text_field :name, :class => :full, placeholder: 'Product name', autofocus: true
-		.field.control-group
-			= frm.label :details, :class => 'control-label'
-			.controls
-				= frm.text_area :details, :class => :full, placeholder: 'Product description', rows: '5'
-		.field.control-group
-			= frm.label :available_at, 'Available since/after', :class => 'control-label'
-			.controls
-				.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
-					= frm.text_field :available_at_date_string, :class => [:center, 'input-small'], readonly: true
-					%span.add-on
-						= image_tag 'glyphicons/calendar.png', :class => :icon
-				.input-append.bootstrap-timepicker-component
-					= frm.text_field :available_at_time_string, :class => ['input-small', :timepicker, :center], readonly: true
-					%span.add-on
-						= image_tag 'glyphicons/clock.png', :class => :icon
-	#brand.section
-		.field.control-group
-			- if @brands.empty?
-				%p.text-warning No brands known.
-			- else
-				= frm.label :brand_id, :class => 'control-label'
-				.controls
-					= frm.collection_select :brand_id, @brands, :id, :name, { prompt: 'Pick a brand' }, { :class => :full }
-	#variants.section
-		= render 'subform_variants', form: frm
-	#prototypes.section
-		.field.control-group
-			- if @prototypes.empty?
-				%p.text-warning No prototypes to associate.
-			- else
-				= frm.label 'Prototypes', :class => 'control-label'
-				.controls
-					%ul.checklistbox
-						- odd = true
-						- @prototypes.each do |prototype|
-							- rowclass = odd ? :odd : :even
-							%li{ :class => rowclass }
-								.checkbox
-									= check_box_tag 'prototypes[]', prototype.id
-									= prototype.name
-								=# label_tag prototype.name, nil
-							- odd = !odd;
-	#properties.section
-		.field.control-group
-			= frm.label :product_variant_properties, 'Variant properties', :class => 'control-label'
-			.controls
-				%ul.checklistbox
-					- odd = true
-					= frm.fields_for :product_variant_properties do |ff|
-						- rowclass = odd ? :odd : :even
-						%li{ :class => rowclass }
-							.checkbox
-								= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
-								= ff.object.variant_property.display_name
-								=# ff.label :_destroy, ff.object.variant_property.display_name
-							= ff.hidden_field :variant_property_id
-						- odd = !odd;
-	.section
-		.field.form-actions
-			= frm.submit 'Save'
-			= link_to 'Cancel', admin_products_path
+	.row-fluid
+		.span6
+			#basic-info.section
+				.control-group
+					= frm.label :name, :class => 'control-label'
+					.controls
+						= frm.text_field :name, :class => :wide, placeholder: 'Product name', autofocus: true
+				.control-group
+					= frm.label :details, :class => 'control-label'
+					.controls
+						= frm.text_area :details, :class => :wide, placeholder: 'Product description', rows: '5'
+				.control-group
+					= frm.label :available_at, 'Available since/after', :class => 'control-label'
+					.controls
+						.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
+							= frm.text_field :available_at_date_string, :class => [:center, 'input-small'], readonly: true
+							%span.add-on
+								= image_tag 'glyphicons/calendar.png', :class => :icon
+						.input-append.bootstrap-timepicker-component
+							= frm.text_field :available_at_time_string, :class => ['input-small', :timepicker, :center], readonly: true
+							%span.add-on
+								= image_tag 'glyphicons/clock.png', :class => :icon
+			#brand.section
+				.control-group
+					= frm.label :brand_id, :class => 'control-label'
+					- if @brands.empty?
+						%p.text-info No brands known.
+					- else
+						.controls
+							= frm.collection_select :brand_id, @brands, :id, :name, { prompt: 'Pick a brand' }, { :class => :wide }
+		.span6
+			#variants.section
+				= render 'subform_variants', form: frm
+	.row-fluid
+		.span6
+			#categories.section
+				.control-group
+					= frm.label :product_categories, 'Categories', :class => 'control-label'
+					.controls
+						%ul.checklistbox
+							- odd = true
+							= frm.fields_for :product_product_categories do |pcf|
+								- rowclass = odd ? :odd : :even
+								%li{ :class => rowclass }
+									.checkbox
+										= pcf.check_box :_destroy, {:checked => pcf.object.persisted?}, '0', '1'
+										= pcf.object.product_category.name
+									= pcf.hidden_field :product_category_id
+								- odd = !odd;
+		.span6
+			.section
+				.control-group
+					= frm.label :product_variant_properties, 'Variant properties', :class => 'control-label'
+					.controls
+						%ul.checklistbox
+							- odd = true
+							= frm.fields_for :product_variant_properties do |ff|
+								- rowclass = odd ? :odd : :even
+								%li{ :class => rowclass }
+									.checkbox
+										= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
+										= ff.object.variant_property.display_name
+									= ff.hidden_field :variant_property_id
+								- odd = !odd;
+	.row-fluid
+		.span6
+			#prototypes.section
+				.control-group
+					= frm.label 'Prototypes', :class => 'control-label'
+					- if @prototypes.empty?
+						%p.text-info No prototypes to associate.
+					- else
+						.controls
+							%ul.checklistbox
+								- odd = true
+								- @prototypes.each do |prototype|
+									- rowclass = odd ? :odd : :even
+									%li{ :class => rowclass }
+										.checkbox
+											= check_box_tag 'prototypes[]', prototype.id
+											= prototype.name
+										=# label_tag prototype.name, nil
+									- odd = !odd;
+	.row-fluid
+		.span12
+			.section
+				.actions
+					= frm.submit 'Save', :class => [:btn, 'btn-primary']
+					= link_to admin_products_path, :method => :get do
+						%button.btn.btn-mini Cancel

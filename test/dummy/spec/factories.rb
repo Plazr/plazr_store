@@ -158,6 +158,7 @@ FactoryGirl.define do
         p.variants << FactoryGirl.create(:variant, product: p)
       end
       after(:create) do |p, evaluator|
+        p.product_categories << FactoryGirl.create(:product_category_leaf)
         p.product_properties << FactoryGirl.create(:product_property, :product_id => p.id)
         p.variant_properties << FactoryGirl.create(:variant_property_with_values)
         p.variants << FactoryGirl.create_list(:variant, evaluator.variants_count, product: p)

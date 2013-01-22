@@ -1,35 +1,40 @@
 <%= form.fields_for :variants do |variant| %>
 	<% if variant.object.is_master? %>
-		<div class="field control-group">
+		<div class="control-group">
 			<%= variant.label :sku, 'SKU', :class => 'control-label' %>
 			<div class="controls">
-				<%= variant.text_field :sku, :class => :full, placeholder: 'SKU' %>
+				<%= variant.text_field :sku, :class => :wide, placeholder: 'SKU' %>
 			</div>
 		</div>
-		<div class="field control-group">
+		<div class="control-group">
 			<%= variant.label :price, :class => 'control-label' %>
 			<div class="controls">
 				<div class="input-append">
-					<%= variant.text_field :price, :class => :number, placeholder: 'price' %>
+					<%= variant.text_field :price, :class => [:number, 'input-small'], placeholder: 'price' %>
 					<span class="add-on">
 						<%= image_tag 'glyphicons/euro.png', :class => :icon %>
 					</span>
 				</div>
 			</div>
 		</div>
-		<div class="field control-group">
-			<%= variant.fields_for :multimedia do |multimedium| %>
-				<% if multimedium.object.new_record? %>
-					<%# this line is necessary before the file_field (small fix to use paperclip) %>
-  				<%= multimedium.hidden_field :class_type, :value => 'variant' %>
-					<%= multimedium.label :file, 'Image file', :class => 'control-label' %>
-					<div class="controls">
-						<%= multimedium.file_field :file %>
-						<%#= multimedium.label :caption %>
-						<%= multimedium.text_field :caption, :class => :full, placeholder: 'Caption', style: 'display:block' %>
-					</div>
-				<% end %>
-			<% end %>
-		</div>
+		<% if variant.object.new_record? %>
+			<div>
+				<h2>Image</h2>
+				<div class="field">
+					<%= variant.fields_for :multimedia do |multimedium| %>
+						<% if multimedium.object.new_record? %>
+							<%# this line is necessary before the file_field (small fix to use paperclip) %>
+		  				<%= multimedium.hidden_field :class_type, :value => 'variant' %>
+							<%= multimedium.label :file, 'Image file', :class => 'control-label' %>
+							<div class="controls">
+								<%= multimedium.file_field :file, :class => :wide %>
+								<%#= multimedium.label :caption %>
+								<%= multimedium.text_field :caption, :class => :wide, placeholder: 'Caption', style: 'display:block' %>
+							</div>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
 	<% end %>
 <% end %>
