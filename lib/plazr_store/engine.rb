@@ -9,6 +9,7 @@ require 'redactor-rails'
 require 'carrierwave'
 require 'mini_magick'
 require 'activemerchant'
+require 'will_paginate'
 
 module PlazrStore
   class Engine < ::Rails::Engine
