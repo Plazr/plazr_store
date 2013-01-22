@@ -86,7 +86,7 @@
 
           <!--Não consigo validar porque a base de dados nao esta povoada-->
             <div class="row">
-              <% @products.related.each do |product| %>
+              <% @product.related.each do |product| %>
                 <%= render 'plazr_store/shared/thumb-item', recommended: product %>
               <% end %>
             </div>
