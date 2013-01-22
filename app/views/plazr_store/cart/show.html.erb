@@ -1,3 +1,53 @@
-<h2>Cart</h2>
+<article id="cart-show">
 
-<%= render 'cart' %>
+	<header class="row-fluid">
+		<div class="span3">
+			<h2>Carrinho</h2>
+		</div>
+	</header>
+
+	<div class="row-fluid">
+		<div class="span5">
+			<h5>Produto</h5>
+		</div>
+		<div class="span3">
+			<h5>Preço</h5>
+		</div>
+		<div class="span2">
+			<h5>Quantidade</h5>
+		</div>
+	</div>
+
+	<section>
+		<% @cart.cart_variants.each do |cart_variant| %>
+			<hr>
+			<div class="row-fluid">
+				<div class="span2">
+					 <img src=<%=cart_variant.variant.image.file%>/>
+				</div>
+				<div class="span3">
+					<p><%= link_to cart_variant.info, product_path(cart_variant.product) %></p>
+				</div>
+				<div class="span3">
+					<p><%=cart_variant.variant.price%> €</p>
+				</div>
+				<div class="span2">
+					<p><%=cart_variant.amount%></p>
+				</div>
+				<div class="span2">
+					<%= link_to 'Apagar', cart_remove_path(cart_variant.variant), method: :delete %>
+				</div>
+			</div>
+		<% end %>
+	</section>
+
+	<section>
+		<div class="row-fluid">
+			<hr>
+			<div class="span3 offset9">
+				<h4>Preço Total: <%= @cart.total_price %> €</h4>
+			</div>
+		</div>
+	</section>
+
+</article>
