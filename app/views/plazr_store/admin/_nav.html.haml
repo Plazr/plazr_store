@@ -1,6 +1,13 @@
-- section ||= :none
-- view ||= :index
+%p.text-warning= "Tab: #{@tab.inspect}"
+%p.text-warning= "Section: #{@section.inspect}"
+%p.text-warning= "View: #{@view.inspect}"
 %ul.nav.nav-tabs
-	%li{ :class => tab == :products ? :active : nil }
-		= link_to 'Products', admin_products_path
-= render "plazr_store/admin/#{tab}/subnav", :section => section, :view => view
+	%li{ :class => @tab == :pages ? :active : nil }
+		= link_to 'Loja', admin_pages_path
+	%li{ :class => @tab == :products ? :active : nil }
+		= link_to 'Produtos', admin_products_path
+	%li{ :class => @tab == :promotions ? :active : nil }
+		= link_to 'Promoções', admin_promotions_path
+	%li{ :class => @tab == :orders ? :active : nil }
+		= link_to 'Encomendas', admin_orders_path
+= render "plazr_store/admin/#{@tab}/nav"

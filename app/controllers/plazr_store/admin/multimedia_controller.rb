@@ -48,6 +48,11 @@ module PlazrStore
       redirect_to admin_product_multimedia_path(@product)
     end
 
+    def get_location
+      super
+      @tab = :products
+    end
+
     protected
       def get_product
         @product = Product.find(params[:product_id])
