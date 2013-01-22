@@ -1,0 +1,14 @@
+- if @page
+	%p Lol
+- else
+	%ul.nav.nav-pills
+		%li{ :class => @section == 'pages' ? :active : nil }
+			= link_to 'Páginas', @section == 'pages' ? '#' : admin_pages_path
+		/ %li{ :class => @section == '' ? :active : nil }
+		/ 	= link_to 'Banners', @section == '' ? '#' : admin_banners_path
+		/ %li{ :class => @section == '' ? :active : nil }
+		/ 	= link_to 'Logótipo', @section == '' ? '#' : admin_logos_path
+		%li{ :class => @section == 'shipment_conditions' ? :active : nil }
+			= link_to 'Meios de envio', @section == 'shipment_conditions' ? '#' : admin_shipment_conditions_path
+		%li{ :class => @section == 'paypal_accounts' ? :active : nil }
+			= link_to 'Contas Paypal', @section == 'paypal_accounts' ? '#' : admin_paypal_accounts_path

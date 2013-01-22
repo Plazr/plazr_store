@@ -22,7 +22,7 @@
 - else
 	%ul.nav.nav-pills
 		%li{ :class => @section == 'products' ? :active : nil }
-			= link_to 'Lista', @section == 'products' ? '#' : admin_products_path
+			= link_to 'Produtos', @section == 'products' ? '#' : admin_products_path
 		%li{ :class => @section == 'product_categories' ? :active : nil }
 			= link_to 'Categorias', @section == 'product_categories' ? '#' : admin_product_categories_path
 		%li{ :class => @section == 'brands' ? :active : nil }
