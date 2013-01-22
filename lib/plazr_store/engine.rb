@@ -8,6 +8,7 @@ require 'better_errors'
 require 'redactor-rails'
 require 'carrierwave'
 require 'mini_magick'
+require 'activemerchant'
 
 module PlazrStore
   class Engine < ::Rails::Engine
