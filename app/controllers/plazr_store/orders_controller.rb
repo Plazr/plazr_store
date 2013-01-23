@@ -87,7 +87,7 @@ module PlazrStore
           # paypal method: executes purchase
           if params['payment_method']['name'] == "Paypal" 
             # changes order's payment_state to "paid"
-            @order.update_attributes(:payment_state => "paid")
+            # @order.update_attributes(:payment_state => "paid")
             # total: total to be paid
             # purchase_params: paypal account details
             total, purchase_params = get_purchase_params request, params
