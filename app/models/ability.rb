@@ -4,7 +4,9 @@ class Ability
     @user = user || PlazrAuth::User.new
     unregistered
 
-    @user.roles.each { |role| send role.name.downcase }
+    @user.roles.each do |role|
+    	send role.name.downcase
+	end
     #case namespace
     #  when 'Admin'
     #    can :admin, :all if user.is_admin?
@@ -52,6 +54,12 @@ class Ability
   # in plazr_store, a root can do the same as an admin
   def root
     admin
+  end
+
+  def method_missing(method, *args, &block)
+  	if method =~ /admin\_([0-9]+)/ && $1 == STORE["store_id"].to_s
+  		admin
+	end
   end
 
 end
