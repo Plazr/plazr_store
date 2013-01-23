@@ -6,6 +6,6 @@ module PlazrStore
       	
       end
     end
-
+    
   end
 end
