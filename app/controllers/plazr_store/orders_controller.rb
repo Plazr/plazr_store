@@ -16,16 +16,13 @@ module PlazrStore
     def new
       @order = Order.new
       @order.load_user(current_user)        
-      
-      pre_order = PreOrder.find_by_cart_id(current_user.cart.id) 
-      pre_order.destroy unless pre_order.nil?
-      
+
       authorize! :create, @order
     end
 
     def review
-      if params[:token].nil?
-        redirect_to cart_path, :notice => 'Woops! Something went wrong!' 
+      if params[:token].nil? | session[:shipment_condition_id].nil?
+        redirect_to cart_path, :notice => 'Woops! You\'ve accessed an invalid page!' 
         return
       end
 
@@ -46,12 +43,16 @@ module PlazrStore
       
       @order.load_user(current_user)
       #set shipment condition and calculate total
-      @order.load_pre_order_info(current_user)
+      @order.load_pre_order_info(current_user, session[:shipment_condition_id])
     end
 
     def create
       @order = Order.new(params[:order])
-
+      #user has accessed the review page without getting the paypall authorization 
+      unless @order.paypal.nil?
+        redirect_to cart_url and return if session[:shipment_condition_id].nil?
+      end
+      
       ActiveRecord::Base.transaction do # so that order's cart changes aren't presisted if an error occurs
         
         @order.load_user(current_user)
@@ -59,23 +60,24 @@ module PlazrStore
 
         authorize! :create, @order
 
-        if params['payment_method']['name'] == "Paypal"
-          @pre_order = PreOrder.find_by_cart_id(current_user.cart.id) 
-          
-          if @pre_order.nil?
-            @pre_order = PreOrder.new(:shipment_condition_id => params[:order][:shipment_condition_id], :cart_id => current_user.cart.id)
-            if @pre_order.save 
-              #session[:shipment_condition] = params[:order][:shipment_condition_id]
-              redirect_to :controller => 'paypal_express', :action => 'checkout' and return
-            else 
-              #flash[:error] = "You need to specify a Shipment Condition"
-              render 'new' and return
-            end
-          else 
+        if params['payment_method']['name'] == "Paypal" 
+          #when we are redirected from paypal we should have the shipment condition in the session hash
+          #@order.paypal is a hiden field to test if the purshase was completed. If it was interrupted we need to create restart the session variables
+          unless (session[:shipment_condition_id].nil? | @order.paypal.nil?)
+            #validating that a token was returned from paypal
             if @order.express_token.blank?
               redirect_to cart_url, :notice => "Sorry! Something went wrong with the Paypal purchase. Please try again later." and return
             end
-            @order.shipment_condition_id = @pre_order.shipment_condition_id
+            @order.shipment_condition_id = session[:shipment_condition_id]
+          else  
+            @pre_order = PreOrder.new(:shipment_condition_id => params[:order][:shipment_condition_id])
+            #validating the existance of the shipment_condition before redirect to paypal
+            if @pre_order.valid?
+              session[:shipment_condition_id] = params[:order][:shipment_condition_id]
+              redirect_to :controller => 'paypal_express', :action => 'checkout' and return
+            else 
+              render 'new' and return
+            end
           end
         end
         
@@ -86,7 +88,6 @@ module PlazrStore
           if params['payment_method']['name'] == "Paypal" 
             # changes order's payment_state to "paid"
             @order.update_attributes(:payment_state => "paid")
-            @pre_order.destroy
             # total: total to be paid
             # purchase_params: paypal account details
             total, purchase_params = get_purchase_params request, params
@@ -95,6 +96,7 @@ module PlazrStore
 
             if purchase.success?
               notice = "Thanks! Your purchase is now complete!"
+              session[:shipment_condition_id] = nil
             else
               @order.destroy
               redirect_to cart_url :notice => "Woops. Something went wrong while we were trying to complete the purchase with Paypal. Btw, here's what Paypal said: #{purchase.message}" and return

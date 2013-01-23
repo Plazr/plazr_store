@@ -12,9 +12,9 @@ module PlazrStore
     attr_accessible :adjustment_total, :billing_address_id, :cart_id, :completed_at, :email, :item_total, 
       :payment_state, :shipping_address_id, :shipment_condition_id, :shipment_state, :promotional_code_id,
       :state, :total, :user_id, :billing_address_attributes, :shipping_address_attributes,
-      :express_token, :payer_id, :gateway, :payment_method
+      :express_token, :payer_id, :gateway, :paypal
 
-    attr_accessor :to_be_cancelled, :promotional_code, :payer_id, :express_token, :gateway, :payment_method
+    attr_accessor :to_be_cancelled, :promotional_code, :payer_id, :express_token, :gateway, :paypal
 
 
     ## Validations ##
@@ -91,9 +91,9 @@ module PlazrStore
       PlazrAuth::User.find(self.user_id)
     end
     
-    def load_pre_order_info(current_user)
-      preorder = PreOrder.find_by_cart_id(current_user.cart.id)
-      self.shipment_condition_id = preorder.shipment_condition_id
+    def load_pre_order_info(current_user, shipment_condition_id)
+      #preorder = PreOrder.find_by_cart_id(current_user.cart.id)
+      self.shipment_condition_id = shipment_condition_id
       self.total = ShipmentCondition.find(self.shipment_condition_id).price + current_user.cart.total_price
     end
 
