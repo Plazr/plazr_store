@@ -1,4 +1,8 @@
 #admin
+	.pull-right
+		.btn-group
+			= link_to 'Editar', edit_admin_product_path(@product), :class => :btn
+			= link_to 'Eliminar', admin_product_path(@product), :method => :delete, data: { confirm: 'Are you sure?' }, :class => [:btn, 'btn-danger']
 	.show
 		.row-fluid
 			.span4
@@ -49,7 +53,7 @@
 							%p.text-info This product has no variants
 					- else
 						- variants.each do |variant|
-							%li.span4
+							%li.span4.smaller
 								.thumbnail
 									%div
 										%strong.title= link_to variant.sku, admin_product_variant_path(@product, variant)

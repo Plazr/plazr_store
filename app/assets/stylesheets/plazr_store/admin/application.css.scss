@@ -20,27 +20,35 @@
 		}
 	}
 
-	ul.thumbnails li {
-		min-width: 150px;
-		padding-bottom: 1em;
-		text-align: center;
+	ul.thumbnails {
+		li {
+			min-width: 150px;
+			padding-bottom: 1em;
+			text-align: center;
 
-		div.thumbnail {
-			margin: .5em;
+			div.thumbnail {
+				margin: .5em;
 
-			strong.title {
-				overflow: no-display;
-				white-space: nowrap;
-				width: 100%;
+				strong.title {
+					overflow: no-display;
+					white-space: nowrap;
+					width: 100%;
+				}
+			}
+
+			div.actions {
+				padding: .5em;
+
+				a:hover {
+					text-decoration: none;
+				}
 			}
 		}
 
-		div.actions {
-			padding: .5em;
+		li.first-in-row { margin-left: 0; }
 
-			a:hover {
-				text-decoration: none;
-			}
+		li.smaller {
+			min-width: 90px;
 		}
 	}
 
@@ -257,3 +265,4 @@
 	}
 
 }
+
