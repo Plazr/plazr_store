@@ -1,6 +1,6 @@
 %h1 New Logo
 
-= form_for @logo, :url => url_for(:controller => 'logos', :action => 'create'), :html => { :multipart => true } do |f|
+= form_for @logo, :url => url_for(:controller => 'logos', :action => 'create'), :method => 'post', :html => { :multipart => true } do |f|
   - if @logo.errors.any?
     #error_explanation
       %h2= "#{pluralize(@logo.errors.count, "error")} prohibited this logo from being saved:"
@@ -14,5 +14,9 @@
   = f.label :file
   = f.file_field :file
   %br
+  = f.label :caption
+  = f.text_field :caption
+  %br
+
   = f.submit "Submit"
   = link_to 'Cancel', root_path

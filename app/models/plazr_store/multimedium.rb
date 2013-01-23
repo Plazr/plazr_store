@@ -51,13 +51,12 @@ module PlazrStore
 
     # set the style of the file accordingly to the class_type
     def set_styles
-      #binding.pry
       if self.class_type == 'variant'
         {:thumb => '300x300!'}
       elsif self.class_type == 'banner'
         {:banner => '100x75!'}
       elsif self.class_type == 'logo'
-        {:logo => '100x75!'}
+        {:logo => 'x70!'}
       end
     end
 
@@ -66,9 +65,9 @@ module PlazrStore
       if self.class_type == 'variant'
         ":rails_root/public/assets/upload/variants/:id/:style/:basename.:extension"
       elsif self.class_type == 'banner'
-        ":rails_root/public/assets/upload/banner/:id/:style/:basename.:extension"
+        ":rails_root/public/assets/upload/banner/:style/:basename.:extension"
       elsif self.class_type == 'logo'
-        ":rails_root/public/assets/upload/logo/:id/:style/:basename.:extension"
+        ":rails_root/public/assets/upload/logo/:style/:basename.:extension"
       end
     end
 
@@ -77,9 +76,9 @@ module PlazrStore
       if self.class_type == 'variant'
         "/assets/upload/variants/:id/:style/:basename.:extension"
       elsif self.class_type == 'banner'
-        "/assets/upload/banner/:id/:style/:basename.:extension"
+        "/assets/upload/banner/:style/:basename.:extension"
       elsif self.class_type == 'logo'
-        "/assets/upload/logo/:id/:style/:basename.:extension"
+        "/assets/upload/logo/:style/:basename.:extension"
       end
     end
 
@@ -89,11 +88,13 @@ module PlazrStore
 
     protected
       def default_url_method
-        if self.class == 'variant'
-          "/assets/no_image_avail/#{self.class_type}.png"
-        else
-          "/assets/no_image/avail/generic.png"
-        end
+        #if self.class == 'variant'
+        "/assets/no_image_avail/#{self.class_type}.png"
+        #elsif self.class == 'banner'
+        #  "/assets/upload/banner/:style/:basename.:extension"
+        #elsif self.class == 'logo'
+        #  "/assets/upload/logo/:style/:basename.:extension"
+        #end
       end
 
   end

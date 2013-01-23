@@ -9,12 +9,14 @@
           - @banner.errors.full_messages.each do |msg|
             %li= msg
 
-
   = image_tag @banner.file.url(:banner)
   // this line is necessary before the file_field (small fix to use paperclip)
   = f.hidden_field :class_type, :value => 'banner'
   = f.label :file
   = f.file_field :file
+  %br
+  = f.label :caption
+  = f.text_field :caption
   %br
 
   = f.submit "Submit"

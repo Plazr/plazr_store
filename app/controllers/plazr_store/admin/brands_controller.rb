@@ -41,5 +41,10 @@ module PlazrStore
       @brand.destroy
       redirect_to admin_brands_path
     end
+
+    def get_location
+      super
+      @tab = :products
+    end
   end
 end
