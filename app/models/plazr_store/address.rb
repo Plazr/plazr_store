@@ -9,6 +9,9 @@ module PlazrStore
 
     ## Validators ##
     validates :address1, :city, :first_name, :last_name, :phone, :zipcode, presence: true
+    validates_format_of :phone, :with => /((\+351|00351|351)?)(2\d{1}|(9(3|6|2|1)))\d{7}/, :on => :create    
+    validates_format_of :alternative_phone, :with => /((\+351|00351|351)?)(2\d{1}|(9(3|6|2|1)))\d{7}/, :on => :create, :allow_blank => true    
+    validates_format_of :zipcode, :with => /[0-9]{4,4}(-[0-9]{3,3})?/, :on => :create 
 
     ## Instance Methods ##
     def display

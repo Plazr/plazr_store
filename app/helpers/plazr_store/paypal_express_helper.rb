@@ -62,7 +62,7 @@ module PlazrStore
     
     def get_totals
       subtotal = current_user.cart.total_price
-      shipping = ShipmentCondition.find(session['shipment_condition']).price
+      shipping = ShipmentCondition.find(session[:shipment_condition_id]).price
       total = subtotal + shipping
       return subtotal, shipping, total
     end
