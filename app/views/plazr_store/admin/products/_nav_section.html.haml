@@ -1,0 +1,16 @@
+- if @product && !@product.new_record?
+	- in_show = @section == 'products' && @view == 'show'
+	- in_properties = @section == 'product_properties'
+	- in_variants = @section == 'variants' && @view == 'index'
+	- in_multimedia = @section == 'multimedia' && @view == 'index'
+	.well.well-small
+		%ul.nav.nav-list
+			%li.nav-header= @product.name
+			%li{ :class => in_show ? :active : nil }
+				= link_to 'Detalhes', in_show ? '#' : admin_product_path(@product)
+			%li{ :class => in_properties ? :active : nil }
+				= link_to 'Propriedades', in_properties ? '#' : admin_product_product_properties_path(@product)
+			%li{ :class => in_variants ? :active : nil }
+				= link_to 'Variantes', in_variants ? '#' : admin_product_variants_path(@product)
+			%li{ :class => in_multimedia ? :active : nil }
+				= link_to 'Multimédia', in_multimedia ? '#' : admin_product_multimedia_path(@product)

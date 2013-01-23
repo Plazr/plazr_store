@@ -1,0 +1,7 @@
+- in_pages = @section == 'pages' && @view == 'index'
+.well.well-small
+	%ul.nav.nav-list
+		%li.nav-header Administrar
+		%li{ :class => in_pages ? :active : nil }
+			= link_to 'Páginas', in_pages ? '#' : admin_pages_path
+= render "plazr_store/admin/#{@section}/nav_section"

@@ -1,6 +1,6 @@
-/ %p.text-warning= "Tab: #{@tab.inspect}"
-/ %p.text-warning= "Section: #{@section.inspect}"
-/ %p.text-warning= "View: #{@view.inspect}"
+%p.text-warning= "Tab: #{@tab.inspect}"
+%p.text-warning= "Section: #{@section.inspect}"
+%p.text-warning= "View: #{@view.inspect}"
 %ul.nav.nav-tabs
 	%li{ :class => @tab == :pages ? :active : nil }
 		= link_to 'Loja', admin_pages_path
@@ -10,4 +10,6 @@
 		= link_to 'Promoções', admin_promotions_path
 	%li{ :class => @tab == :orders ? :active : nil }
 		= link_to 'Encomendas', admin_orders_path
-= render "plazr_store/admin/#{@tab}/nav"
+.row-fluid
+	.span2= render "plazr_store/admin/#{@tab}/nav_tab"
+	.span10= yield
