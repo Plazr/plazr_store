@@ -13,7 +13,7 @@ namespace :db do
       DatabaseCleaner.clean
       PlazrAuth::User.with_deleted.all.each { |u| u.destroy! }
 
-    puts 'Generating user'
+    puts '>> Generating user'
       FactoryGirl.create :user_with_user_role, email: "user@gmail.com", password: "asdasd", password_confirmation: "asdasd"
       FactoryGirl.create :admin, email: "admin@gmail.com", password: "asdasd", password_confirmation: "asdasd"
 
@@ -261,6 +261,79 @@ namespace :db do
     add_product "Cotoveleira", "", "Proteção Desportiva", 15.98
     add_product "Pulso", "", "Proteção Desportiva", 14.20
     add_product "Suporte Cotovelo TÉN", "", "Proteção Desportiva", 14.20
+
+
+    ########### Brands ###########
+    puts '>> Brands'
+    def find_brand(name)
+      pc = PlazrStore::Brand.find_by_name(name)
+    end
+
+    def add_brand(name)
+      return if find_brand(name)
+      
+      PlazrStore::Brand.create  name: name
+    end
+
+    add_brand "Plazr"
+    add_brand "NIKE"
+    add_brand "Adidas"
+    add_brand "Umbro"
+    add_brand "Speedo"
+    add_brand "Reebook"
+    add_brand "Deeply"
+    add_brand "Berg"
+    add_brand "Mikasa"
+    add_brand "Pulma"
+    add_brand "BMX"
+
+    puts '>> Product.Brands'
+    def product_define_brand(productname, brandname)
+        p = PlazrStore::Product.find_by_name(productname)
+        b = PlazrStore::Brand.find_by_name(brandname)
+        p.brand = b
+        p.save
+    end
+
+    # product_define_brand "Braçadeira", ""
+    # product_define_brand "Cartões", ""
+    product_define_brand "Apíto", "Adidas"
+    # product_define_brand "Caneleira", "Sport Zone"
+    # product_define_brand "Ginga", "Sport Zone"
+    # product_define_brand "SPZ EURO12", "Sport Zone"
+    # product_define_brand "Portugal Supporer's", ""
+    product_define_brand "League PRO", ""
+    # product_define_brand "Futsal Academy", ""
+    product_define_brand "FL450-YGR", "Mikasa"
+    # product_define_brand "HY-5006 MS", ""
+    # product_define_brand "AGILE-FG JR", ""
+    # product_define_brand "AGILE-IC", ""
+    product_define_brand "F5 IN J", "Adidas"
+    product_define_brand "Calções Guarda-Redes", "Plazr"
+    product_define_brand "NIKE GK Classic", "NIKE"
+    product_define_brand "Response YP", "Adidas"
+    product_define_brand "Response Graphic", "Adidas"
+    product_define_brand "V6.11", "Pulma"
+    # product_define_brand "Meias Futebol", ""
+    # product_define_brand "T-SHIRT", ""
+    # product_define_brand "Saco Mochila", ""
+    product_define_brand "BLAST 120 GREEN 2011", "Plazr"
+    product_define_brand "BLAST 140", "Plazr"
+    product_define_brand "CHARM 160", "Plazr"
+    product_define_brand "CHARM 203 2012", "Plazr"
+    product_define_brand "BLAST 203 2012", "Plazr"
+    product_define_brand "EASY 2,1", "Plazr"
+    # product_define_brand "TRAILROCK 1.7 X 2011", ""
+    product_define_brand "CROSSTOWN 5.0 2011", "Berg"
+    product_define_brand "CROSSTOWN 6,0 2012", "Berg"
+    product_define_brand "QUADRO VERTEX 9.0 CA", "Berg"
+    product_define_brand "TRAIL 4.9 2012", "Berg"
+    product_define_brand "FUEGO 8.5", "Berg"
+    product_define_brand "BMX", "BMX"
+    product_define_brand "Bola medicinal 2 KGS", "Reebook"
+    # product_define_brand "Meias ciclismo", ""
+    # product_define_brand "Mini Fireman", ""
+    # product_define_brand "W15 Animals", ""
 
   end
 end

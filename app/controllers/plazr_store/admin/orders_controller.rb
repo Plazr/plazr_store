@@ -28,6 +28,11 @@ module PlazrStore
     def show
       @order = Order.find(params[:id])
     end
+
+    def get_location
+      super
+      @tab = :orders
+    end
   end
 end
 
