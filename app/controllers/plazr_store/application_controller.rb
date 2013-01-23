@@ -5,6 +5,7 @@ module PlazrStore
   before_filter :get_pages
   before_filter :get_banner
   before_filter :get_logo
+  before_filter :get_namespace
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to plazr_auth_url, :alert => exception.message
@@ -37,6 +38,10 @@ module PlazrStore
 
   def get_logo
     @logo = Multimedium.logo
+  end
+
+  def get_namespace
+    @namespace = namespace
   end
 
   protected

@@ -43,5 +43,9 @@ module PlazrStore
       redirect_to admin_variant_properties_path
     end
 
+    def get_location
+      super
+      @tab = :products
+    end
   end
 end
