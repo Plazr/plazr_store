@@ -50,7 +50,11 @@
 
 	<div id="container-wrapper">
 		<div class="container">
-			<%= render 'layouts/top_bar' %>
+			<% if user_signed_in? && current_user.role?(:admin) %>
+				<%= render 'plazr_store/admin/nav' %>
+			<% else %>
+				<%= render 'layouts/top_bar' %>
+			<% end %>
 			<%= yield %>
 			<footer>
 				<div class="row-fluid">

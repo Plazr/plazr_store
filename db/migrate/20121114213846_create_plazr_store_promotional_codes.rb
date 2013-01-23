@@ -7,8 +7,8 @@ class CreatePlazrStorePromotionalCodes < ActiveRecord::Migration
       t.integer :minimum_cart
       t.datetime :starts_at, :null => false
       t.datetime :expires_at
-      t.integer :uses_allowed, :default => 1
-      t.integer :times_used, :default => 0
+      t.integer :uses_allowed, :default => -1
+      t.integer :times_used, :default => 0, :null => false
       t.references :discount_type, :null => false
 
       t.timestamps

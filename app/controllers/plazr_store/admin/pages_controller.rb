@@ -41,5 +41,10 @@ module PlazrStore
       @page.destroy
       redirect_to admin_pages_path
     end
+
+    def get_location
+      super
+      @tab = :pages
+    end
   end
 end

@@ -1,5 +1,5 @@
 module PlazrStore
-  class Admin::ProductCategoriesController < ApplicationController
+  class Admin::ProductCategoriesController < Admin::ApplicationController
 
     def show
       @product_category = ProductCategory.find(params[:id])
@@ -57,6 +57,11 @@ module PlazrStore
       @product_category = ProductCategory.find(params[:id])
       @product_category.destroy
       redirect_to admin_product_categories_path
+    end
+
+    def get_location
+      super
+      @tab = :products
     end
   end
 end

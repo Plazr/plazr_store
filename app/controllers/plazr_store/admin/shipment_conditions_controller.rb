@@ -42,5 +42,10 @@ module PlazrStore
       @shipment_condition.destroy
       redirect_to admin_shipment_conditions_path
     end
+
+    def get_location
+      super
+      @tab = :pages
+    end
   end
 end

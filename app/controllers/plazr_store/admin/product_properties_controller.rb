@@ -44,6 +44,11 @@ module PlazrStore
       redirect_to admin_product_product_properties_path(@product)
     end
 
+    def get_location
+      super
+      @tab = :products
+    end
+
     protected
       def get_product
         @product = Product.find(params[:product_id])
@@ -53,8 +58,7 @@ module PlazrStore
       # the product_property
       def update_all_product_properties
         params[:pps].each do |k,v|
-          Property.find(v[:property_id]).update_attributes(
-            :id_name => v[:id_name], :display_name => v[:display_name])
+          Property.find(v[:property_id]).update_attributes(:id_name => v[:id_name], :display_name => v[:display_name])
           ProductProperty.find(k).update_attributes(:value => v[:value])
         end
       end
