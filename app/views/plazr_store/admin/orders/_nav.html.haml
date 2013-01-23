@@ -1,0 +1,5 @@
+- if @order
+- else
+	%ul.nav.nav-pills
+		%li{ :class => @section == 'orders' ? :active : nil }
+			= link_to 'Encomendas', @section == 'orders' ? '#' : admin_orders_path
