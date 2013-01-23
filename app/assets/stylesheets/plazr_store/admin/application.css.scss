@@ -20,13 +20,21 @@
 		}
 	}
 
-	ul.thumbnails li {
-		min-width: 150px;
-		padding-bottom: 1em;
-		text-align: center;
+	ul.thumbnails {
+		li {
+			min-width: 150px;
+			padding-bottom: 1em;
+			text-align: center;
 
-		div.thumbnail {
-			margin: .5em;
+			div.thumbnail {
+				margin: .5em;
+
+				strong.title {
+					overflow: no-display;
+					white-space: nowrap;
+					width: 100%;
+				}
+			}
 
 			div.actions {
 				padding: .5em;
@@ -35,12 +43,12 @@
 					text-decoration: none;
 				}
 			}
+		}
 
-			strong.title {
-				overflow: no-display;
-				white-space: nowrap;
-				width: 100%;
-			}
+		li.first-in-row { margin-left: 0; }
+
+		li.smaller {
+			min-width: 90px;
 		}
 	}
 
@@ -257,3 +265,4 @@
 	}
 
 }
+

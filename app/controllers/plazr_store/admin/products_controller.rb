@@ -86,5 +86,10 @@ module PlazrStore
         @product.get_unselected_variant_properties_and_order_by_name
         @product.get_unselected_product_categories_and_order_by_name
       end
+
+      def get_location
+        super
+        @tab = 'products'
+      end
   end
 end

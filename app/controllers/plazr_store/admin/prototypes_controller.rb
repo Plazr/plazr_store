@@ -47,6 +47,11 @@ module PlazrStore
       redirect_to admin_prototypes_path
     end
 
+    def get_location
+      super
+      @tab = :products
+    end
+
     protected
       def instance_variable_loading
         @prototype.get_unselected_properties_and_order_by_name

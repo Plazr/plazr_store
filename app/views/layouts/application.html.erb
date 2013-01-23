@@ -50,8 +50,12 @@
 
 	<div id="container-wrapper">
 		<div class="container">
-			<%= render 'layouts/top_bar' %>
-			<%= yield %>
+			<% if @namespace == 'PlazrStore::Admin' %>
+				<%= render 'plazr_store/admin/nav' %>
+			<% else %>
+				<%= render 'layouts/top_bar' %>
+				<%= yield %>
+			<% end %>
 			<footer>
 				<div class="row-fluid">
 					<div class="span4">

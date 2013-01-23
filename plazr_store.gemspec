@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Summary of PlazrStore."
   s.description = "Description of PlazrStore."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.9"
@@ -33,6 +33,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'redactor-rails'
   s.add_dependency 'carrierwave'
   s.add_dependency 'mini_magick'
+  s.add_dependency "better_errors"
+  s.add_dependency 'activemerchant'
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "puma"
@@ -47,7 +49,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'thin'
   s.add_development_dependency 'faker'
-  s.add_development_dependency "better_errors"
   s.add_development_dependency "binding_of_caller"
 
   # Mac specific gems

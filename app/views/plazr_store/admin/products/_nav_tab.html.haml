@@ -1,0 +1,25 @@
+- in_products   = @section == 'products'           && @view == 'index'
+- in_categories = @section == 'product_categories' && @view == 'index'
+- in_brands     = @section == 'brands'             && @view == 'index'
+- in_prod_props = @section == 'product_properties' && @view == 'index'
+- in_var_props  = @section == 'variant_properties' && @view == 'index'
+- in_prototypes = @section == 'prototypes'         && @view == 'index'
+.well.well-small
+	%ul.nav.nav-list
+		%li.nav-header Gerir produtos
+		%li{ :class => in_products ? :active : nil }
+			= link_to 'Produtos', in_products ? '#' : admin_products_path
+		%li{ :class => in_categories ? :active : nil }
+			= link_to 'Categorias', in_categories ? '#' : admin_product_categories_path
+		%li{ :class => in_brands ? :active : nil }
+			= link_to 'Marcas', in_brands ? '#' : admin_brands_path
+		%li{ :class => in_prototypes ? :active : nil }
+			= link_to 'Protótipos', in_prototypes ? '#' : admin_prototypes_path
+		%li.nav-header
+			Propriedades
+			%ul.nav.nav-list
+				%li{ :class => in_prod_props ? :active : nil }
+					= link_to 'Produtos', in_prod_props ? '#' : admin_properties_path
+				%li{ :class => in_var_props ? :active : nil }
+					= link_to 'Variantes', in_var_props ? '#' : admin_variant_properties_path
+= render "plazr_store/admin/#{@section}/nav_section"
