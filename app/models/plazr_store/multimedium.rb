@@ -49,6 +49,24 @@ module PlazrStore
       find_by_class_type('logo')
     end
 
+    # return the banner or the default banner if doesn't exist one specific banner
+    def get_banner
+      if Multimedium.banner.nil?
+        Multimedium::new(class_type: 'banner')
+      else
+        Multimedium.banner
+      end
+    end
+
+    # return the logo or the default logo if doesn't exist one specific logo
+    def get_logo
+      if Multimedium.logo.nil?
+        Multimedium::new(class_type: 'logo')
+      else
+        Multimedium.banner
+      end
+    end
+
     # set the style of the file accordingly to the class_type
     def set_styles
       if self.class_type == 'variant'
