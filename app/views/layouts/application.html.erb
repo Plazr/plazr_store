@@ -50,7 +50,7 @@
 
 	<div id="container-wrapper">
 		<div class="container">
-			<% if user_signed_in? && current_user.role?(:admin) %>
+			<% if @namespace == 'PlazrStore::Admin' %>
 				<%= render 'plazr_store/admin/nav' %>
 			<% else %>
 				<%= render 'layouts/top_bar' %>
