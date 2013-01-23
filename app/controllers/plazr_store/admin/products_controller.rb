@@ -73,6 +73,12 @@ module PlazrStore
       redirect_to admin_products_path
     end
 
+    def get_location
+      super
+      @tab = :products
+    end
+
+
     protected
       # collections used on the views for the belongs_to relations
       def entities_collections

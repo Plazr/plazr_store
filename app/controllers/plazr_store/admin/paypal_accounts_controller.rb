@@ -3,7 +3,7 @@ module PlazrStore
   #path = File.expand_path '../../../../..',__FILE__
 	#APP_CONFIG = YAML.load_file(path + '/config/config.yml')
   
-  class Admin::PaypalAccountsController < ApplicationController
+  class Admin::PaypalAccountsController < Admin::ApplicationController
     
     def show
       @paypal_account = PlazrAuth::PaypalAccount.find params[:id]
@@ -35,6 +35,11 @@ module PlazrStore
       @paypal_account = PlazrAuth::PaypalAccount.find params[:id]
       @paypal_account.update_attributes(params[:paypal_account])
       redirect_to admin_paypal_accounts_path
+    end
+
+    def get_location
+      super
+      @tab = :pages
     end
   end
 end

@@ -28,18 +28,18 @@
 		div.thumbnail {
 			margin: .5em;
 
-			div.actions {
-				padding: .5em;
-
-				a:hover {
-					text-decoration: none;
-				}
-			}
-
 			strong.title {
 				overflow: no-display;
 				white-space: nowrap;
 				width: 100%;
+			}
+		}
+
+		div.actions {
+			padding: .5em;
+
+			a:hover {
+				text-decoration: none;
 			}
 		}
 	}

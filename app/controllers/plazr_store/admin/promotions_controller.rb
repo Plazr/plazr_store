@@ -56,6 +56,11 @@ module PlazrStore
       redirect_to admin_promotions_path
     end
 
+    def get_location
+      super
+      @tab = :promotions
+    end
+
     protected
       def instance_variable_loading
         @promotion.get_unselected_products_and_order_by_name

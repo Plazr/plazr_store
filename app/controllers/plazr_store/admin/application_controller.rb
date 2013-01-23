@@ -2,8 +2,14 @@ module PlazrStore
   class Admin::ApplicationController < ApplicationController
 
     before_filter :check_admin
+    before_filter :get_location
 
     def index
+    end
+
+    def get_location
+      @section = params[:controller].split('/').last
+      @view = params[:action]
     end
 
     protected
