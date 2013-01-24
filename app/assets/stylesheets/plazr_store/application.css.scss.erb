@@ -41,15 +41,35 @@
 
 $border-color: #EEE;
 
+$color1: #167497;
+$color2: #25647D;
+$color3: #0B5672;
+$color4: #5BB6D9;
+$color5: #8AC3D9;
+
+$background-color: $color4;
+$background-color2: white;
+
+
+$header-color: rgba( 255, 255, 255, 0.9 );
+
 .hero-wrap {
 	z-index: -1;
-	background-color: white;
 	position: relative;
 	.hero-unit {
 		height: 70px;
-		padding: 40px 0 25px 0;
+		padding: 40px 0 10px 0;
 		margin-bottom: 5px;
 		background: transparent;
+		background: url("<%= image_path 'logo.png' %>") left center no-repeat;
+		padding-left: 65px;
+		a {
+			line-height: 45px;
+			vertical-align: middle;
+			font-size: 70px;
+			color: $header-color;
+			font-weight: bold;
+		}
 	}
 }
 
@@ -74,46 +94,89 @@ nav.nav-wrapper {
 }
 
 body {
-	background-color: #0388a6;
-}
+	background-color: $background-color;
+	background: #666666; /* Old browsers */
+	background: -moz-radial-gradient(50% 40%, circle cover,  #666666 0%, #2d2d2d 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#666666), color-stop(100%,#2d2d2d)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(50% 40%, circle cover,  #666666 0%,#2d2d2d 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(50% 40%, circle cover,  #666666 0%,#2d2d2d 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(50% 40%, circle cover,  #666666 0%,#2d2d2d 100%); /* IE10+ */
+	background: radial-gradient(circle at 50% 40%,  #666666 0%,#2d2d2d 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#666666', endColorstr='#2d2d2d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
-#container-wrapper {
-	background: url(<%= image_path('bg.png') %>) repeat-x;
-
-
-}
-
-body #container-wrapper > .container {
-	background-color: white;
-	-webkit-box-shadow:  0px 0px 3px 3px rgba(0, 0, 0, 0.1);
-	box-shadow:  0px 0px 3px 3px rgba(0, 0, 0, 0.1);
-	margin-bottom: 2em;
-	padding-left: 1em;
-	padding-right: 1em;
-	background-color: white;
-}
-
-body #container-wrapper > .container > footer {
-	border-top: 1px solid $border-color;
-	margin-bottom: 2em;
-
-	section {
-		margin-left: 1em !important;
-		padding: 0.5em 0 1em 0;
+	> #container-wrapper {
+		position: relative;
+		.background-color {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 50px;
+			z-index: -1;
+		}
 	}
 
-	.border-right {
-		border-right: 1px solid $border-color;
+	> #container-wrapper > .container {
+		box-shadow: 0 1px 0 rgba( 0, 0, 0, 0.4 ), 0 0 2px rgba( 0, 0, 0, 0.4 ), 0 0 8px rgba( 0, 0, 0, 0.1 );
+		-moz-box-shadow: 0 1px 0 rgba( 0, 0, 0, 0.4 ), 0 0 2px rgba( 0, 0, 0, 0.4 ), 0 0 8px rgba( 0, 0, 0, 0.1 );
+		background-color: white;
+		margin-bottom: 2em;
+		padding-left: 1em;
+		padding-right: 1em;
+		background-color: white;
 	}
 
-	ul#share {
-		list-style:none;
-		li {
-			display: inline;
-			list-style-type: none;
+	> #container-wrapper > .container > footer {
+		border-top: 1px solid $border-color;
+		margin-bottom: 2em;
+
+		section {
+			margin-left: 1em !important;
+			padding: 0.5em 0 1em 0;
+		}
+
+		.border-right {
+			border-right: 1px solid $border-color;
+		}
+
+		ul#share {
+			list-style:none;
+			li {
+				display: inline;
+				list-style-type: none;
+			}
+		}
+	}
+
+	> footer {
+		padding: 2em 0 2em 0;
+		color: white;
+		background-color: black;
+		ul#share {
+			padding:0;
+			margin:0;
+			list-style:none;
+			margin:0 auto;
+			li {
+				display: inline;
+				list-style-type: none;
+				padding-left: 20px;
+			}
 		}
 	}
 }
+
+body {
+	#layout-container {
+		padding: 0 0 3em 0;
+	}
+}
+
+
+.content {
+	padding: 10px 0 20px 30px;
+	background-color: #DDD;
+}
+
 
 .product-border {
 	border: 1px solid;
@@ -141,41 +204,10 @@ table td {
 	padding-bottom: 0
 }
 
-.hero-unit {
-	color: white;
-	background-image: url("<%= image_path('banner3.jpg') %>");
-	margin-bottom: 10px;
-}
+
 
 .flash-messages {
 	padding: 1em;
-}
-
-
-body{
-	#layout-container {
-		padding: 0 0 3em 0;
-	}
-}
-
-body > footer {
-	padding: 2em 0 2em 0;
-	color: white;
-	background-color: black;
-}
-
-footer {
-	ul#share {
-		padding:0;
-		margin:0;
-		list-style:none;
-		margin:0 auto;
-		li {
-			display: inline;
-			list-style-type: none;
-			padding-left: 20px;
-		}
-	}
 }
 
 .product-border {
@@ -193,11 +225,6 @@ table td {
 	vertical-align: top;
 }
 
-
-.content {
-	padding: 10px 0 20px 30px;
-	background-color: #DDD;
-}
 
 
 

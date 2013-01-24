@@ -1,25 +1,41 @@
 $border-color: #EEE;
 
-@mixin thumb-image {
-	width: 100%;
-	-moz-background-size:cover;
-	-webkit-background-size:cover;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center bottom;
+$color1: #167497;
+$color2: #25647D;
+$color3: #0B5672;
+$color4: #5BB6D9;
+$color5: #8AC3D9;
 
-	-webkit-transition: opacity 0.2s ease-in-out;
-	-moz-transition: opacity 0.2s ease-in-out;
-	-o-transition: opacity 0.2s ease-in-out;
-	transition: opacity 0.2s ease-in-out;
-}
+$over-color: $color1;
+$bg-color: #F6F6F6;
+
 
 a.thumb-item {
 	color: #333;
 	text-decoration: none;
+
 	.thumb-item-image {
-		@include thumb-image;
+		width: 100%;
+		-moz-background-size:cover;
+		-webkit-background-size:cover;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center bottom;
+
+		-webkit-transition: opacity 0.2s ease-in-out;
+		-moz-transition: opacity 0.2s ease-in-out;
+		-o-transition: opacity 0.2s ease-in-out;
+		transition: opacity 0.2s ease-in-out;
 	}
+
+    section.box {
+    	text-align: center;
+    	padding: 5px 0 1px 0;
+    	margin-bottom: 3em;
+    	background: $bg-color;
+    	border-bottom: 1px solid $border-color;
+    }
+
 	&:hover {
 		.thumb-item-image {
 			opacity:0.4;
@@ -27,7 +43,7 @@ a.thumb-item {
 		}
 		text-decoration: none;
 		section.box {
-			background: #0388A6;
+			background: $over-color;
 			color: white;
 			    /* Firefox */
 			    -moz-transition: all 0.2s ease-in;
@@ -37,13 +53,6 @@ a.thumb-item {
     			-o-transition: all 0.2s ease-in;
     			/* Standard */
     			transition: all 0.2s ease-in;
-    		}
-    	}
-    	section.box {
-    		text-align: center;
-    		padding: 5px 0 1px 0;
-    		margin-bottom: 3em;
-    		background: #F6F6F6;
-    		border-bottom: 1px solid #DDD;
     	}
     }
+}

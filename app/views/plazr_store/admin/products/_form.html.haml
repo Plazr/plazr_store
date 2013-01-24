@@ -7,15 +7,15 @@
 		.span6
 			#basic-info.section
 				.control-group
-					= frm.label :name, :class => 'control-label'
+					= frm.label :name, 'Nome', :class => 'control-label'
 					.controls
 						= frm.text_field :name, :class => :wide, placeholder: 'Product name', autofocus: true
 				.control-group
-					= frm.label :details, :class => 'control-label'
+					= frm.label :details, 'Descrição', :class => 'control-label'
 					.controls
 						= frm.text_area :details, :class => :wide, placeholder: 'Product description', rows: '5'
 				.control-group
-					= frm.label :available_at, 'Available since/after', :class => 'control-label'
+					= frm.label :available_at, 'Data de disponibilidade', :class => 'control-label'
 					.controls
 						.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
 							= frm.text_field :available_at_date_string, :class => [:center, 'input-small'], readonly: true
@@ -27,7 +27,7 @@
 								= image_tag 'glyphicons/clock.png', :class => :icon
 			#brand.section
 				.control-group
-					= frm.label :brand_id, :class => 'control-label'
+					= frm.label :brand_id, 'Marca', :class => 'control-label'
 					- if @brands.empty?
 						%p.text-info No brands known.
 					- else
@@ -40,7 +40,7 @@
 		.span6
 			#categories.section
 				.control-group
-					= frm.label :product_categories, 'Categories', :class => 'control-label'
+					= frm.label :product_categories, 'Categorias', :class => 'control-label'
 					.controls
 						%ul.checklistbox
 							- odd = true
@@ -55,7 +55,7 @@
 		.span6
 			.section
 				.control-group
-					= frm.label :product_variant_properties, 'Variant properties', :class => 'control-label'
+					= frm.label :product_variant_properties, 'Propriedades dos variantes', :class => 'control-label'
 					.controls
 						%ul.checklistbox
 							- odd = true
@@ -71,7 +71,7 @@
 		.span6
 			#prototypes.section
 				.control-group
-					= frm.label 'Prototypes', :class => 'control-label'
+					= frm.label 'Protótipos', :class => 'control-label'
 					- if @prototypes.empty?
 						%p.text-info No prototypes to associate.
 					- else

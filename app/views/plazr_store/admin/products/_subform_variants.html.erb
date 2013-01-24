@@ -19,17 +19,17 @@
 		</div>
 		<% if variant.object.new_record? %>
 			<div>
-				<h2>Image</h2>
+				<h2>Imagem</h2>
 				<div class="field">
 					<%= variant.fields_for :multimedia do |multimedium| %>
 						<% if multimedium.object.new_record? %>
 							<%# this line is necessary before the file_field (small fix to use paperclip) %>
 		  				<%= multimedium.hidden_field :class_type, :value => 'variant' %>
-							<%= multimedium.label :file, 'Image file', :class => 'control-label' %>
+							<%= multimedium.label :file, 'Ficheiro', :class => 'control-label' %>
 							<div class="controls">
 								<%= multimedium.file_field :file, :class => :wide %>
 								<%#= multimedium.label :caption %>
-								<%= multimedium.text_field :caption, :class => :wide, placeholder: 'Caption', style: 'display:block' %>
+								<%= multimedium.text_field :caption, :class => :wide, placeholder: 'Legenda', style: 'display:block' %>
 							</div>
 						<% end %>
 					<% end %>
