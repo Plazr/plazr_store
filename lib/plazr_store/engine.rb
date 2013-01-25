@@ -1,5 +1,7 @@
 require 'jquery-rails'
 require 'haml'
+require 'compass-rails'
+require 'sass-rails'
 require 'paranoia'
 require 'paranoia_uniqueness_validator'
 require 'paperclip'
