@@ -1,19 +1,22 @@
 $border-color: #EEE;
 
-$color1: #167497;
-$color2: #25647D;
-$color3: #0B5672;
-$color4: #5BB6D9;
-$color5: #8AC3D9;
+$color1: #E4E6E7;
+$color2: #24718A;
+$color3: #0D607C;
+$color4: #48ADCE;
+$color5: #63B4CE;
 
-$over-color: $color1;
+$over-color: $color3;
 $bg-color: #F6F6F6;
 
 
 a.thumb-item {
+    margin-bottom: 3em;
 	color: #333;
 	text-decoration: none;
-
+	article {
+		border: 1px solid $border-color;
+	}
 	.thumb-item-image {
 		width: 100%;
 		-moz-background-size:cover;
@@ -22,37 +25,35 @@ a.thumb-item {
 		background-repeat: no-repeat;
 		background-position: center bottom;
 
-		-webkit-transition: opacity 0.2s ease-in-out;
-		-moz-transition: opacity 0.2s ease-in-out;
-		-o-transition: opacity 0.2s ease-in-out;
-		transition: opacity 0.2s ease-in-out;
+		-webkit-transition: opacity 0.1s ease-in-out;
+		-moz-transition: opacity 0.1s ease-in-out;
+		-o-transition: opacity 0.1s ease-in-out;
+		transition: opacity 0.1s ease-in-out;
 	}
 
     section.box {
     	text-align: center;
     	padding: 5px 0 1px 0;
-    	margin-bottom: 3em;
     	background: $bg-color;
-    	border-bottom: 1px solid $border-color;
+    	// border-bottom: 1px solid $border-color;
     }
 
 	&:hover {
-		.thumb-item-image {
-			opacity:0.4;
-			filter:alpha(opacity=40); /* For IE8 and earlier */
-		}
 		text-decoration: none;
+		article {
+			border: 1px solid $over-color;
+		}
+		.thumb-item-image {
+			opacity:0.6;
+			filter:alpha(opacity=60); /* For IE8 and earlier */
+		}
 		section.box {
 			background: $over-color;
 			color: white;
-			    /* Firefox */
-			    -moz-transition: all 0.2s ease-in;
-    			/* WebKit */
-    			-webkit-transition: all 0.2s ease-in;
-    			/* Opera */
-    			-o-transition: all 0.2s ease-in;
-    			/* Standard */
-    			transition: all 0.2s ease-in;
+			-moz-transition: all 0.1s ease-in;
+    		-webkit-transition: all 0.1s ease-in;
+    		-o-transition: all 0.1s ease-in;
+    		transition: all 0.1s ease-in;
     	}
     }
 }
