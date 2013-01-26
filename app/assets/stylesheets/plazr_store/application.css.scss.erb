@@ -39,8 +39,8 @@
 *				There is a partial for this.
 */
 
-
 @import 'plazr_store/partials/colors';
+@import 'plazr_store/partials/functions';
 
 .hero-wrap {
 	z-index: -1;
@@ -93,6 +93,9 @@ body {
 	background: -ms-radial-gradient(80% 35%, circle cover,  $background-color 0%,$background-color2 100%); /* IE10+ */
 	background: radial-gradient(circle at 80% 35%,  $background-color 0%,$background-color2 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$background-color', endColorstr='$background-color2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+	@include background-noise($background-color);
+
 	> #container-wrapper {
 		position: relative;
 		.background-color {

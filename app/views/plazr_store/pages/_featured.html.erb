@@ -1,41 +1,33 @@
 <article id="featured" class="row-fluid">
 	<a href="<%= url_for @featured %>">
-	<div class="span12">
-		<div class="featured-image" style="background-image:url(<%= image_path @featured.image.file.url %>)"></div>
-		<section class="featured-box">
-			<div>
-				<header>
-					<h3><%= @featured.name %></h3>
-				</header>
+		<div class="span12">
+			<div class="featured-image" style="background-image:url(<%= image_path @featured.image.file.url %>)"></div>
+			<section class="featured-box">
+				<div>
+					<header>
+						<h3><%= @featured.name %></h3>
+					</header>
 
-<!-- 				<span class="rating">
-					<% 3.times do %>
-					<%= image_tag 'plazr_store/rate/star-full.png'%>
+					<p><%= @featured.details %></p>
+
+					<% unless @featured.variants_without_master.empty? %>
+					<h3>Variants</h3>
+					<% @featured.variants_without_master.each do |variant|  %>
+					<ul>
+						<li>
+							<% variant.variant_property_values.each do |vpv| %>
+							<b><%= vpv.variant_property.display_name %>:</b> <%= vpv.presentation %>
+							<% end %>
+						</li>
+					</ul>
 					<% end %>
-					<%= image_tag 'plazr_store/rate/star-half.png'%>
-					<%= image_tag 'plazr_store/rate/star-empty.png'%>
-				</span> -->
+					<% end %>
 
-				<p><%= @featured.details %></p>
-
-				<% unless @featured.variants_without_master.empty? %>
-				<h3>Variants</h3>
-				<% @featured.variants_without_master.each do |variant|  %>
-				<ul>
-					<li>
-						<% variant.variant_property_values.each do |vpv| %>
-						<b><%= vpv.variant_property.display_name %>:</b> <%= vpv.presentation %>
-						<% end %>
-					</li>
-				</ul>
-				<% end %>
-				<% end %>
-
-				<p class="price">
-					€ <%= @featured.master_price %>
-				</p>
-			</div>
-		</section>
-	</div>
-</a>
+					<p class="price">
+						€ <%= @featured.master_price %>
+					</p>
+				</div>
+			</section>
+		</div>
+	</a>
 </article>

@@ -1,0 +1,12 @@
+@mixin background-noise($color) {
+	background: $color image-url("noise.png");
+	box-sizing: border-box;
+}
+
+@mixin background-cover-image {
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center top;
+}

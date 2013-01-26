@@ -1,21 +1,16 @@
 @import 'plazr_store/partials/colors';
+@import 'plazr_store/partials/functions';
 
 a.thumb-item {
     margin-bottom: 3em;
 	color: #333;
 	text-decoration: none;
 	article {
-		// border-radius: 10px;
 		border: 1px solid white;
 	}
 	.thumb-item-image {
+		@include background-cover-image;
 		width: 100%;
-		-moz-background-size:cover;
-		-webkit-background-size:cover;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center bottom;
-
 		-webkit-transition: opacity 0.1s ease-in-out;
 		-moz-transition: opacity 0.1s ease-in-out;
 		-o-transition: opacity 0.1s ease-in-out;
@@ -23,8 +18,6 @@ a.thumb-item {
 	}
 
     section.box {
-    	// border-bottom-left-radius: 20px;
-    	// border-bottom-right-radius: 20px;
     	text-align: center;
     	padding: 5px 0 1px 0;
     	background: $thumb-bg;
