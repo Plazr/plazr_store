@@ -5,7 +5,8 @@ a.thumb-item {
 	color: #333;
 	text-decoration: none;
 	article {
-		border: 1px solid $border-color;
+		// border-radius: 10px;
+		border: 1px solid white;
 	}
 	.thumb-item-image {
 		width: 100%;
@@ -22,10 +23,12 @@ a.thumb-item {
 	}
 
     section.box {
+    	// border-bottom-left-radius: 20px;
+    	// border-bottom-right-radius: 20px;
     	text-align: center;
     	padding: 5px 0 1px 0;
     	background: $thumb-bg;
-    	// border-bottom: 1px solid $border-color;
+    	border-bottom: 1px solid $thumb-hover;
     }
 
 	&:hover {
