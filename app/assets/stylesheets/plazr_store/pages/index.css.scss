@@ -1,13 +1,6 @@
 @import 'plazr_store/partials/colors';
 
 
-$color1: #E4E6E7;
-$color2: #24718A;
-$color3: #0D607C;
-$color4: #48ADCE;
-$color5: #63B4CE;
-
-$bg-color: #F6F6F6;
 
 #index-page {
 	padding-top: 1em;
@@ -30,7 +23,7 @@ $bg-color: #F6F6F6;
     }
 
     #featured {
-        background-color: $bg-color;
+        background-color: $thumb-bg;
         position: relative;
         font-size: 25px;
         // border: 1px solid white;
@@ -41,8 +34,8 @@ $bg-color: #F6F6F6;
                 opacity:0.6;
                 filter:alpha(opacity=60); /* For IE8 and earlier */
             }
-            background-color: $color3;
-            border: 1px solid $color3;
+            background-color: $thumb-hover;
+            border: 1px solid $thumb-hover;
 			-moz-transition: all 0.2s ease-in;
     		-webkit-transition: all 0.2s ease-in;
     		-o-transition: all 0.2s ease-in;

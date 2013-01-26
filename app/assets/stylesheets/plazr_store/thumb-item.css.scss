@@ -1,14 +1,4 @@
-$border-color: #EEE;
-
-$color1: #E4E6E7;
-$color2: #24718A;
-$color3: #0D607C;
-$color4: #48ADCE;
-$color5: #63B4CE;
-
-$over-color: $color3;
-$bg-color: #F6F6F6;
-
+@import 'plazr_store/partials/colors';
 
 a.thumb-item {
     margin-bottom: 3em;
@@ -34,21 +24,21 @@ a.thumb-item {
     section.box {
     	text-align: center;
     	padding: 5px 0 1px 0;
-    	background: $bg-color;
+    	background: $thumb-bg;
     	// border-bottom: 1px solid $border-color;
     }
 
 	&:hover {
 		text-decoration: none;
 		article {
-			border: 1px solid $over-color;
+			border: 1px solid $thumb-hover;
 		}
 		.thumb-item-image {
 			opacity:0.6;
 			filter:alpha(opacity=60); /* For IE8 and earlier */
 		}
 		section.box {
-			background: $over-color;
+			background: $thumb-hover;
 			color: white;
 			-moz-transition: all 0.1s ease-in;
     		-webkit-transition: all 0.1s ease-in;
