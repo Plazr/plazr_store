@@ -1,7 +1,11 @@
 //= require_self
 #admin {
 	padding-top: 1em;
-	border-bottom: 1px solid #DDD;
+	// border-bottom: 1px solid #DDD;
+
+	h1 {
+		text-align: center;
+	}
 
 	h2 {
 		font-size: large;
@@ -216,6 +220,71 @@
 
 	.listing {
 		table.table {
+			tr {
+				td {
+					form {
+						div {
+							display: inline-block;
+						}
+					}
+				}
+
+				td.btn-mini ,
+				div.btn-mini {
+					text-align: center;
+					width: 10%;
+				}
+			}
+
+			tr.success {
+				td {
+					text-align: center;
+				}
+			}
+		}
+
+		table.table-bordered {
+			th:first-child ,
+			td:first-child {
+				border-left: 1px solid #CCC;
+			}
+
+			th ,
+			td {
+				border-left: none;
+			}
+		}
+	}
+
+	.listing-linked {
+		table.table {
+			tr {
+				td {
+					margin: 0;
+					padding: 0;
+
+					a {
+						color: inherit;
+						display: block;
+						padding: 8px;
+					}
+
+					a:hover {
+						text-decoration: none;
+					}
+				}
+			}
+
+			tr:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+
+
+	#properties {
+		table.table {
 			td ,
 			th {
 				padding-left: 1em;
@@ -236,6 +305,21 @@
 				td {
 					padding-bottom: 1em;
 					padding-top: 2em;
+				}
+			}
+		}
+	}
+
+	#categories.listing {
+		table.table {
+			tr {
+				td.name ,
+				td.prnt {
+					width: 20%;
+				}
+
+				td.desc {
+					width: 40%;
 				}
 			}
 		}

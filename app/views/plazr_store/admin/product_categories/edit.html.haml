@@ -1,3 +1,5 @@
-%h1 Edit ProductCategory
-
-= render :partial => 'form'
+#admin
+	%h1= "Editar \"#{@product_category.name}\""
+	.btn-group
+		= link_to 'Voltar', admin_product_categories_path, :class => [:btn, 'btn-small']
+	= render 'form'

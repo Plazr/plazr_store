@@ -1,6 +1,9 @@
 #admin
-	.pull-right
+	%h1= @product.name
+	.btn-toolbar
 		.btn-group
+			= link_to 'Voltar', admin_products_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
 			= link_to 'Editar', edit_admin_product_path(@product), :class => :btn
 			= link_to 'Eliminar', admin_product_path(@product), :method => :delete, data: { confirm: 'Are you sure?' }, :class => [:btn, 'btn-danger']
 	.show
@@ -15,7 +18,6 @@
 					= image_tag imgpth, :class => :photo
 				= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
 			.span8
-				%h1= @product.name
 				- if @product.brand
 					%p= "by #{@product.brand.name}"
 				- Time::DATE_FORMATS[:long_at] = '%B %d, %Y at %H:%M'

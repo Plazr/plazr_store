@@ -1,4 +1,5 @@
 #admin
+	%h1= "Propriedades de \"#{@product.name}\""
 	#properties.listing
 		- if @property.errors.any?
 			.alert.alert-danger

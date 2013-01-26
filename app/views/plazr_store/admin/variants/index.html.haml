@@ -6,7 +6,7 @@
 					%p.text-info= raw("This product has no variants. Create a #{link_to 'new', new_admin_product_variant_path} one?")
 			- else
 				%li.span2
-					= link_to new_admin_product_path do
+					= link_to new_admin_product_variant_path do
 						.thumbnail
 							%strong.title Adicionar
 							%div
