@@ -10,19 +10,6 @@
 
 					<p><%= @featured.details %></p>
 
-					<% unless @featured.variants_without_master.empty? %>
-					<h3>Variants</h3>
-					<% @featured.variants_without_master.each do |variant|  %>
-					<ul>
-						<li>
-							<% variant.variant_property_values.each do |vpv| %>
-							<b><%= vpv.variant_property.display_name %>:</b> <%= vpv.presentation %>
-							<% end %>
-						</li>
-					</ul>
-					<% end %>
-					<% end %>
-
 					<p class="price">
 						€ <%= @featured.master_price %>
 					</p>

@@ -85,15 +85,6 @@ nav.nav-wrapper {
 
 body {
 	background-color: $background-color;
-	background: $background-color; /* Old browsers */
-	background: -moz-radial-gradient(80% 35%, circle cover,  $background-color 0%, $background-color2 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,$background-color), color-stop(100%,$background-color2)); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(80% 35%, circle cover,  $background-color 0%,$background-color2 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(80% 35%, circle cover,  $background-color 0%,$background-color2 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(80% 35%, circle cover,  $background-color 0%,$background-color2 100%); /* IE10+ */
-	background: radial-gradient(circle at 80% 35%,  $background-color 0%,$background-color2 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$background-color', endColorstr='$background-color2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
 	@include background-noise($background-color);
 
 	> #container-wrapper {
@@ -109,8 +100,6 @@ body {
 	}
 
 	> #container-wrapper > .container {
-		// -webkit-box-shadow:  0px 0px 3px 2px $shadow-color;
-  //       box-shadow:  0px 0px 3px 2px $shadow-color;
 		background-color: white;
 		margin-bottom: 2em;
 		padding-left: 2em;
