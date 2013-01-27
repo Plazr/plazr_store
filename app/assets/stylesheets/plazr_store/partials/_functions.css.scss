@@ -10,3 +10,8 @@
 	background-repeat: no-repeat;
 	background-position: center top;
 }
+
+@mixin container-border-padding {
+	padding-left: 2em;
+	padding-right: 2em;
+}
