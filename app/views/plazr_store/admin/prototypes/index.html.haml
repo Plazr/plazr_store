@@ -6,6 +6,9 @@
 				%tr
 					%th.name Name
 			%tbody
+				%tr.success
+					%td{ :colspan => 3 }
+						= link_to 'Adicionar protótipo', new_admin_prototype_path
 				- @prototypes.each do |prototype|
 					%tr
 						%td.name= link_to prototype.name, admin_prototype_path(prototype)
@@ -13,6 +16,3 @@
 							= link_to 'Edit', edit_admin_prototype_path(prototype), :class => [:btn, 'btn-mini']
 						%td.btn-mini
 							= link_to 'Destroy', admin_prototype_path(prototype), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger', 'btn-mini']
-				%tr.success
-					%td{ :colspan => 3 }
-						= link_to 'Adicionar protótipo', new_admin_prototype_path

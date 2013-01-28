@@ -259,17 +259,19 @@
 		table.table {
 			tr {
 				td {
-					form {
-						div {
-							display: inline-block;
-						}
-					}
+					vertical-align: middle;
 				}
 
 				td.btn-mini ,
 				div.btn-mini {
 					text-align: center;
 					width: 10%;
+				}
+
+				td.btn-small ,
+				div.btn-small {
+					text-align: center;
+					width: 12%;
 				}
 			}
 

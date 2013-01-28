@@ -48,5 +48,10 @@ module PlazrStore
       def get_variant_property
         @variant_property = VariantProperty.find(params[:variant_property_id])
       end
+
+      def get_location
+        super
+        @tab = 'products'
+      end
   end
 end

@@ -10,6 +10,9 @@
 					%th &nbsp;
 					%th &nbsp;
 			%tbody
+				%tr.success
+					%td{ :colspan => 5 }
+						= link_to 'Adicionar categoria', new_admin_product_category_path
 				- @product_categories.each do |pc|
 					%tr
 						%td.name= pc.name
@@ -18,6 +21,3 @@
 						%td.btn-mini
 							= link_to 'Edit', edit_admin_product_category_path(pc), :class => [:btn, 'btn-mini']
 						%td.btn-mini= link_to 'Destroy', admin_product_category_path(pc), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger', 'btn-mini']
-				%tr.success
-					%td{ :colspan => 5 }
-						= link_to 'Adicionar categoria', new_admin_product_category_path

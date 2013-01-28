@@ -6,6 +6,9 @@
 				%tr
 					%th.name Name
 			%tbody
+				%tr.success
+					%td{ :colspan => 3 }
+						= link_to 'Adicionar marca', new_admin_brand_path
 				- @brands.each do |b|
 					%tr
 						%td.name= b.name
@@ -13,6 +16,3 @@
 							= link_to 'Edit', edit_admin_brand_path(b), :class => [:btn, 'btn-mini']
 						%td.btn-mini
 							= link_to 'Destroy', admin_brand_path(b), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
-				%tr.success
-					%td{ :colspan => 3 }
-						= link_to 'Adicionar marca', new_admin_brand_path
