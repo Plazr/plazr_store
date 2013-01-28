@@ -180,6 +180,43 @@
 
 
 
+	ul.checklistbox {
+	 	border: 1px solid #CCC;
+	 	border-radius: 4px;
+		list-style: none;
+		max-height: 7em;
+		margin: 0;
+		overflow-y: scroll;
+		overflow: -moz-scrollbars-vertical;
+		overflow: -webkit-scrollbars-vertical;
+		width: 543px;
+
+		li {
+			padding-left: .5em;
+			padding-right: .5em;
+			line-height: 2em;
+		}
+
+		li:nth-child(odd) {
+			background-color: lightgrey;
+		}
+
+	 }
+
+	 ul.checklistbox::-webkit-scrollbar {
+		-webkit-appearance: none;
+		width: 11px;
+		height: 11px;
+	}
+
+	ul.checklistbox::-webkit-scrollbar-thumb {
+		border-radius: 8px;
+		border: 2px solid white;
+		background-color: rgba(0, 0, 0, .5);
+	}
+
+
+
 	span img.icon {
 		height: 1em;
 	}
@@ -262,8 +299,9 @@
 				td {
 					margin: 0;
 					padding: 0;
+					vertical-align: middle;
 
-					a {
+					a:not(.btn) {
 						color: inherit;
 						display: block;
 						padding: 8px;

@@ -1,17 +1,18 @@
-%h1 Listing Prototypes
-%table
-  %thead
-    %tr
-      %th Name
-  %tbody
-    - @prototypes.each do |prototype|
-      %tr
-        %td
-          = prototype.name
-        %td
-          = link_to 'Show', admin_prototype_path(prototype)
-        %td
-          = link_to 'Edit', edit_admin_prototype_path(prototype)
-        %td
-          = link_to 'Destroy', admin_prototype_path(prototype), :method => :delete, :data => { :confirm => 'Are you sure?' }
-= link_to 'New Prototype', new_admin_prototype_path
+#admin
+	%h1 Lista de Protótipos
+	#prototypes.listing.listing-linked
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th.name Name
+			%tbody
+				- @prototypes.each do |prototype|
+					%tr
+						%td.name= link_to prototype.name, admin_prototype_path(prototype)
+						%td.btn-mini
+							= link_to 'Edit', edit_admin_prototype_path(prototype), :class => [:btn, 'btn-mini']
+						%td.btn-mini
+							= link_to 'Destroy', admin_prototype_path(prototype), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger', 'btn-mini']
+				%tr.success
+					%td{ :colspan => 3 }
+						= link_to 'Adicionar protótipo', new_admin_prototype_path
