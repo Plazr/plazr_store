@@ -19,5 +19,5 @@
 						%td.desc= pc.description
 						%td.prnt= pc.parent_product_category.name if pc.parent_product_category
 						%td.btn-mini
-							= link_to 'Edit', edit_admin_product_category_path(pc), :class => [:btn, 'btn-mini']
-						%td.btn-mini= link_to 'Destroy', admin_product_category_path(pc), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger', 'btn-mini']
+							= link_to 'Editar', edit_admin_product_category_path(pc), :class => [:btn, 'btn-mini']
+						%td.btn-mini= link_to 'Eliminar', admin_product_category_path(pc), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger', 'btn-mini']

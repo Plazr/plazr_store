@@ -258,19 +258,23 @@
 	.listing {
 		table.table {
 			tr {
+				th ,
 				td {
 					vertical-align: middle;
+					text-align: center;
+				}
+
+				td.text {
+					text-align: justify;
 				}
 
 				td.btn-mini ,
 				div.btn-mini {
-					text-align: center;
 					width: 10%;
 				}
 
 				td.btn-small ,
 				div.btn-small {
-					text-align: center;
 					width: 12%;
 				}
 			}
@@ -297,26 +301,28 @@
 
 	.listing-linked {
 		table.table {
-			tr {
-				td {
-					margin: 0;
-					padding: 0;
-					vertical-align: middle;
+			tbody {
+				tr {
+					td {
+						margin: 0;
+						padding: 0;
+						vertical-align: middle;
 
-					a:not(.btn) {
-						color: inherit;
-						display: block;
-						padding: 8px;
-					}
+						a:not(.btn) {
+							color: inherit;
+							display: block;
+							padding: 8px;
+						}
 
-					a:hover {
-						text-decoration: none;
+						a:hover {
+							text-decoration: none;
+						}
 					}
 				}
-			}
 
-			tr:hover {
-				text-decoration: underline;
+				tr:hover {
+					text-decoration: underline;
+				}
 			}
 		}
 	}
@@ -386,6 +392,20 @@
 		.button {
 			width: 10%
 		}
+	}
+
+	#promotions {
+		.name ,
+		.enum {
+			width: 10%;
+		}
+		.val {
+			width: 5%;
+		}
+	}
+
+	.center {
+		text-align: center
 	}
 
 }

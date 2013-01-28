@@ -13,6 +13,6 @@
 					%tr
 						%td.name= b.name
 						%td.btn-mini
-							= link_to 'Edit', edit_admin_brand_path(b), :class => [:btn, 'btn-mini']
+							= link_to 'Editar', edit_admin_brand_path(b), :class => [:btn, 'btn-mini']
 						%td.btn-mini
-							= link_to 'Destroy', admin_brand_path(b), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
+							= link_to 'Eliminar', admin_brand_path(b), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
