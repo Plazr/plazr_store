@@ -1,3 +1,5 @@
-%h1 Edit Property
-
-= render :partial => 'form'
+#admin
+	%h1= "Editar \"#{@property.display_name}\""
+	.btn-group
+		= link_to 'Voltar', admin_properties_path, :class => [:btn, 'btn-small']
+	= render 'form'

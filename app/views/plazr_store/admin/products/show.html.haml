@@ -1,6 +1,9 @@
 #admin
-	.pull-right
+	%h1= @product.name
+	.btn-toolbar
 		.btn-group
+			= link_to 'Voltar', admin_products_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
 			= link_to 'Editar', edit_admin_product_path(@product), :class => :btn
 			= link_to 'Eliminar', admin_product_path(@product), :method => :delete, data: { confirm: 'Are you sure?' }, :class => [:btn, 'btn-danger']
 	.show
@@ -15,15 +18,16 @@
 					= image_tag imgpth, :class => :photo
 				= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
 			.span8
-				%h1= @product.name
 				- if @product.brand
-					%p= "by #{@product.brand.name}"
+					%p
+						%strong Marca: 
+						= @product.brand.name
 				- Time::DATE_FORMATS[:long_at] = '%B %d, %Y at %H:%M'
 				- available_at = Time.parse("#{@product.available_at_date_string} #{@product.available_at_time_string}")
 				- if available_at.past?
-					%p= "Available since #{available_at.to_s(:long_at)}"
+					%p= "Disponível desde #{available_at.to_s(:long_at)}"
 				- else
-					%p= "Will be available after #{available_at.to_s(:long_at)}"
+					%p= "Disponível a partir de #{available_at.to_s(:long_at)}"
 				%h6= @product.slug
 				%p
 					%strong SKU:
@@ -34,10 +38,10 @@
 						- if @product.rating
 							= @product.rating.times
 						- else
-							%em (no rating)
+							%em (sem avaliação)
 				%p= @product.details
 		#categories
-			%h2 Categories
+			%h2 Categorias
 			%ul
 				- @product.product_categories.each do |pc|
 					%li
@@ -45,7 +49,7 @@
 							%span.label= pc.name
 		.row-fluid
 			#variants.span6
-				%h2 Variants
+				%h2= link_to 'Variantes', admin_product_variants_path(@product)
 				%ul.thumbnails
 					- variants = @product.variants_without_master
 					- if variants.empty?
@@ -66,11 +70,11 @@
 										= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
 								.actions
 									= link_to edit_admin_product_variant_path(@product, variant) do
-										= button_tag 'Edit', :class => [:btn, 'btn-mini']
+										= button_tag 'Editar', :class => [:btn, 'btn-mini']
 									= link_to admin_product_variant_path(@product, variant), :method => :delete, data: { confirm: 'Are you sure?' } do
-										= button_tag 'Delete', :class => [:btn, 'btn-mini', 'btn-inverse']
+										= button_tag 'Eliminar', :class => [:btn, 'btn-mini', 'btn-danger']
 			#properties.span6
-				%h2 Properties
+				%h2 Propriedades
 				- if @product.variant_properties.empty?
 					%p.text-info This product has no properties
 				- else

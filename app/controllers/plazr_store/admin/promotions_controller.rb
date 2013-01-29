@@ -58,7 +58,7 @@ module PlazrStore
 
     def get_location
       super
-      @tab = :promotions
+      @tab = 'promotions'
     end
 
     protected
