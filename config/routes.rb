@@ -37,7 +37,11 @@ PlazrStore::Engine.routes.draw do
     resources :paypal_accounts
   end
 
-  resources :products, :only => [:index, :show]
+  scope '/products' do#:products, :only => [:index, :show] do
+    match '/' => 'products#index', :as => :products, :via => :get, :controller => "products"
+    match '/:product_id' => 'products#show', :as => :product, :via => :get, :controller => "products"
+    match '/:product_id/variants/:variant_id' => 'products#show', :as => :product_variant, :via => :get, :controller => "products"
+  end
 
   #pages
   scope '/pages' do

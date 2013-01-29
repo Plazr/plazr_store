@@ -6,7 +6,7 @@
       <p><%= @product.rating %></p>
     </div>
     <div class="span5">
-      <h2><%= @product.master_price %> €</h2>
+      <h2><%= @variant.price %> €</h2>
     </div>
   </header>
 
@@ -14,6 +14,7 @@
   <div class="row-fluid">
     <div class="span6">
 
+<!--Imagens-->
         <div id="page-wrap">
           <div class="slider-wrap">
             <div id="main-photo-slider" class="csw">
@@ -39,48 +40,42 @@
           </div>
         </div>
       </div>
+      <!--Descrição do variante e do product-->
       <div class="span3">
         <dl>
-          <dt>Descrição</dt>
+          <dt>Detalhes</dt>
           <dd><%= @product.details %></dd>
+          <dt>Marca</dt>
+          <dd><%= @product.brand.name %></dd>
           <dt>Referência<dt>
-          <dd><%= @product.master_variant.sku %></dd>
+          <dd><%= @variant.sku %></dd>
+          <% if @variant.description %>
+            <dt>Descrição<dt>
+            <dd><%= @variant.description %></dd>
+          <% end %>
         </dl>
 
-        <% if !@product.product_properties.empty? %>
-
-          <% @product.product_properties.each do |p| %>
-          
-            <p><%= p.property.display_name %></p>
-            <p><%= p.value %></p>
-            <!--verificar se existe-->
-            <p><%= @product.brand %></p>
-
-          <% end %>
-
-        <%end%>
-
-        <% if !@product.variants_without_master.empty? %>
-          <p>Variantes:</p>
+        
+      <!--Tem de se por o master variante e os variantes tb-->
+        <% if !@product.variants.empty? %>
+          <dl>
+            <dt>Variantes:</dt>
+          </dl>
           <select>
-            <% @product.variants_without_master.each do |v| %>
-              <% v.variant_property_values.each_with_index do |vpv, index| %>
-                <option><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
+            <!--Pq é isto?-->
+            <% @product.variants.each_with_index do |v, index| %>
+              <% v.variant_property_values.each_with_index do |vpv, index1| %>
+                <option value=<%= v.id %> ><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
               <% end %>
             <% end %>
           </select>
-
-          <%= add_to_cart_form(v.id) %>
-          <%= add_to_wishlist_form(v.id) %>
-
-        <% else %>
-          <dl>
-            <dt>Quantidade:</dt>
-          </dl>
-          <%= add_to_cart_form(@product.master_variant.id) %>
-          <%= add_to_wishlist_form(@product.master_variant.id) %>
-
         <% end %>
+
+        <dl>
+          <dt>Quantidade:</dt>
+        </dl>
+        <%= add_to_cart_form(@variant.id) %>
+        <%= add_to_wishlist_form(@variant.id) %>
       </div>
 
       <div class="span3">
@@ -148,6 +143,13 @@
 
 <script>
 $(document).ready(function() {
+  $('#product-show select').change(function(){
+    var id = $(this).val();
+    //$("#add_cart_f").attr("action","/cart/add/" + id);
+    //$("#add_wishlist_f").attr("action","/wishlist/add/" + id);
+    //window.location.href = "<%= @product.id %>/variants/" + id;
+    window.location.href = "/products/<%= @product.id %>/variants/" + id; 
+  });
 
   $("#add_cart_bt").click(function(){
     if(parseInt($("#add_cart_f #amount").val())>0) $("#add_cart_f").submit();
