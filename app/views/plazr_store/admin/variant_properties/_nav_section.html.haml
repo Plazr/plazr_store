@@ -1,0 +1,7 @@
+- if @variant_property && !@variant_property.new_record?
+	- in_values = @section == 'variant_property_values' && @view == 'index'
+	.well.well-small
+		%ul.nav.nav-list
+			%li.nav-header= @variant_property.display_name
+			%li{ :class => in_values ? :active : nil }
+				= link_to 'Valores', in_values ? '#' : admin_variant_property_variant_property_values_path

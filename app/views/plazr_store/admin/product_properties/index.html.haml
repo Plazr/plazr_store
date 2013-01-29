@@ -1,4 +1,5 @@
 #admin
+	%h1= "Propriedades de \"#{@product.name}\""
 	#properties.listing
 		- if @property.errors.any?
 			.alert.alert-danger
@@ -27,8 +28,7 @@
 							%td.value
 								= text_field_tag 'pps['<<product_property.id.to_s<<'][value]', product_property.value
 							%td.button
-								= link_to admin_product_product_property_path(@product, product_property), :method => :delete, :data => { :confirm => 'Are you sure?' } do
-									%button.btn.btn-inverse.btn-mini Delete
+								= link_to 'Eliminar', admin_product_product_property_path(@product, product_property), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
 					%tr.new
 						%td
 							= f.text_field :id_name, autofocus: true, placeholder: 'New ID'

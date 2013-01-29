@@ -1,3 +1,9 @@
+#admin {
+	padding-top: 1em;
+	h1 {
+		text-align: center;
+	}
+}
 
 #admin {
 	// padding-top: 1em;
@@ -173,6 +179,43 @@
 
 
 
+	ul.checklistbox {
+	 	border: 1px solid #CCC;
+	 	border-radius: 4px;
+		list-style: none;
+		max-height: 7em;
+		margin: 0;
+		overflow-y: scroll;
+		overflow: -moz-scrollbars-vertical;
+		overflow: -webkit-scrollbars-vertical;
+		width: 543px;
+
+		li {
+			padding-left: .5em;
+			padding-right: .5em;
+			line-height: 2em;
+		}
+
+		li:nth-child(odd) {
+			background-color: lightgrey;
+		}
+
+	 }
+
+	 ul.checklistbox::-webkit-scrollbar {
+		-webkit-appearance: none;
+		width: 11px;
+		height: 11px;
+	}
+
+	ul.checklistbox::-webkit-scrollbar-thumb {
+		border-radius: 8px;
+		border: 2px solid white;
+		background-color: rgba(0, 0, 0, .5);
+	}
+
+
+
 	span img.icon {
 		height: 1em;
 	}
@@ -213,6 +256,80 @@
 
 	.listing {
 		table.table {
+			tr {
+				th ,
+				td {
+					vertical-align: middle;
+					text-align: center;
+				}
+
+				td.text {
+					text-align: justify;
+				}
+
+				td.btn-mini ,
+				div.btn-mini {
+					width: 10%;
+				}
+
+				td.btn-small ,
+				div.btn-small {
+					width: 12%;
+				}
+			}
+
+			tr.success {
+				td {
+					text-align: center;
+				}
+			}
+		}
+
+		table.table-bordered {
+			th:first-child ,
+			td:first-child {
+				border-left: 1px solid #CCC;
+			}
+
+			th ,
+			td {
+				border-left: none;
+			}
+		}
+	}
+
+	.listing-linked {
+		table.table {
+			tbody {
+				tr {
+					td {
+						margin: 0;
+						padding: 0;
+						vertical-align: middle;
+
+						a:not(.btn) {
+							color: inherit;
+							display: block;
+							padding: 8px;
+						}
+
+						a:hover {
+							text-decoration: none;
+						}
+					}
+				}
+
+				tr:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+
+
+	#properties {
+		table.table {
 			td ,
 			th {
 				padding-left: 1em;
@@ -233,6 +350,21 @@
 				td {
 					padding-bottom: 1em;
 					padding-top: 2em;
+				}
+			}
+		}
+	}
+
+	#categories.listing {
+		table.table {
+			tr {
+				td.name ,
+				td.prnt {
+					width: 20%;
+				}
+
+				td.desc {
+					width: 40%;
 				}
 			}
 		}
@@ -259,6 +391,20 @@
 		.button {
 			width: 10%
 		}
+	}
+
+	#promotions {
+		.name ,
+		.enum {
+			width: 10%;
+		}
+		.val {
+			width: 5%;
+		}
+	}
+
+	.center {
+		text-align: center
 	}
 
 }

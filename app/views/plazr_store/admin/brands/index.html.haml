@@ -1,17 +1,18 @@
-%h1 Listing Brands
-%table
-  %thead
-    %tr
-      %th Name
-  %tbody
-    - @brands.each do |brand|
-      %tr
-        %td
-          = brand.name
-        %td
-          = link_to 'Show', admin_brand_path(brand)
-        %td
-          = link_to 'Edit', edit_admin_brand_path(brand)
-        %td
-          = link_to 'Destroy', admin_brand_path(brand), :method => :delete, :data => { :confirm => 'Are you sure?' }
-= link_to 'New Brand', new_admin_brand_path
+#admin
+	%h1 Lista de Marcas
+	#brands.listing
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th.name Name
+			%tbody
+				%tr.success
+					%td{ :colspan => 3 }
+						= link_to 'Adicionar marca', new_admin_brand_path
+				- @brands.each do |b|
+					%tr
+						%td.name= b.name
+						%td.btn-mini
+							= link_to 'Editar', edit_admin_brand_path(b), :class => [:btn, 'btn-mini']
+						%td.btn-mini
+							= link_to 'Eliminar', admin_brand_path(b), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
