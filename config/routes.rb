@@ -31,6 +31,7 @@ PlazrStore::Engine.routes.draw do
     resources :properties
     resources :prototypes
     resources :shipment_conditions
+    resources :template_customizations
     resources :variant_properties do
       resources :variant_property_values
     end

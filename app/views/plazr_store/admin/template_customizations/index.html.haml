@@ -1,0 +1,24 @@
+%h1 Listing Template Customizations
+%table
+  %thead
+    %tr
+      %th Id Name
+      %th Display Name
+      %th Value
+
+  %tbody
+    - @template_customizations.each do |template_customization|
+      %tr
+        %td
+          = template_customization.id_name
+        %td
+          = template_customization.display_name
+        %td
+          = template_customization.value
+        %td
+          = link_to 'Show', admin_template_customization_path(template_customization)
+        %td
+          = link_to 'Edit', edit_admin_template_customization_path(template_customization)
+        %td
+          = link_to 'Destroy', admin_template_customization_path(template_customization), :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to 'New Template Customization', new_admin_template_customization_path
