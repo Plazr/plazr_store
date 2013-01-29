@@ -62,9 +62,8 @@
             <dt>Variantes:</dt>
           </dl>
           <select>
-            <!--Pq é isto?-->
             <% @product.variants.each_with_index do |v, index| %>
-              <% v.variant_property_values.each_with_index do |vpv, index1| %>
+              <% v.variant_property_values.each do |vpv| %>
                 <option value=<%= v.id %> ><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
               <% end %>
             <% end %>
@@ -143,11 +142,10 @@
 
 <script>
 $(document).ready(function() {
+
+
   $('#product-show select').change(function(){
     var id = $(this).val();
-    //$("#add_cart_f").attr("action","/cart/add/" + id);
-    //$("#add_wishlist_f").attr("action","/wishlist/add/" + id);
-    //window.location.href = "<%= @product.id %>/variants/" + id;
     window.location.href = "/products/<%= @product.id %>/variants/" + id; 
   });
 
