@@ -63,7 +63,7 @@ module PlazrStore
       if Multimedium.logo.nil?
         Multimedium::new(class_type: 'logo')
       else
-        Multimedium.banner
+        Multimedium.logo
       end
     end
 
