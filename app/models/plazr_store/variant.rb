@@ -109,6 +109,14 @@ module PlazrStore
       info
     end
 
+    def variant_properties_values
+      names=""
+      self.variant_property_values.each do |v|
+        names << v.variant_property.display_name + ": " + v.presentation + "  "
+      end
+      names
+    end
+
     def restock_date_date_string
       @restock_date_date_string || (restock_date || Time.now).to_date.to_s(:db)
     end
