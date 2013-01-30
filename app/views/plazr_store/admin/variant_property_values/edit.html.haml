@@ -1,3 +1,5 @@
-%h1 Edit Variant Property Value
-
-= render :partial => 'form'
+#admin
+	%h1= "Editar \"#{@variant_property_value.presentation}\""
+	.btn-group
+		= link_to 'Voltar', admin_variant_property_variant_property_values_path(@variant_property), :class => [:btn, 'btn-small']
+	= render 'form'

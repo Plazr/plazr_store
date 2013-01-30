@@ -1,70 +1,24 @@
-//= require ../application
-//= require_self
-article {
-	div.section {
-		padding: .5em 0;
-
-		.field {
-			max-width: 500px;
-			min-width: 100px;
-			width: 100%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		div.field {
-			.full {
-				width: 100%;
-			}
-
-			.number {
-				text-align: right;
-			}
-
-			.center {
-				text-align: center;
+#admin {
+	#new_product {
+		padding: 0 1em 0 1em 0;
+		p {
+			margin-bottom: 20px;
+			.text-info {
+				// line-height: 2em;
+				// vertical-align: text-bottom;
 			}
 		}
-	}
-}
-
-span img.icon {
-	height: 1em;
-}
-
-.cell {
-	margin: 0 !important;
-	max-width: 300px;
-	min-width: 100px;
-
-	div {
-		margin: .5em;
-		text-align: center;
-	}
-}
-
-
-
-ul.checklistbox {
-	max-height: 7em;
-	margin: 0;
-	overflow-y: scroll;
-
-	li {
-		padding-left: .5em;
-		padding-right: .5em;
-		line-height: 2em;
-		list-style:none;
-
-		label {
-			// display: inline;
+		.wide {
+			width: 80%;
+		}
+		.checklistbox {
+			width: 82%;
+		}
+		input[type="file"] {
+			display: none;
+		}
+		.dummyfile {
+   			margin-bottom: 15px;
 		}
 	}
-	li.odd {
-		background-color: lightgrey;
-	}
-}
-
-div#buttons {
-	text-align: center;
 }

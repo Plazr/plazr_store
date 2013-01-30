@@ -15,6 +15,7 @@ module PlazrStore
     validates :minimum_cart, numericality: {:greater_than_or_equal_to => 0, :allow_blank => true}
     validates :times_used, numericality: {:greater_than_or_equal_to => 0, :allow_blank => true}
     validates :uses_allowed, numericality: {:greater_than_or_equal_to => -1, :allow_blank => true}
+    validates :starts_at, :presence => true
     validate :start_before_expire
 
     def start_before_expire

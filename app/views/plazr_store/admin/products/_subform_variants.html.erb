@@ -3,7 +3,7 @@
 		<div class="control-group">
 			<%= variant.label :sku, 'SKU', :class => 'control-label' %>
 			<div class="controls">
-				<%= variant.text_field :sku, :class => :wide, placeholder: 'SKU' %>
+				<%= variant.text_field :sku, :class => 'input-small	', placeholder: 'SKU' %>
 			</div>
 		</div>
 		<div class="control-group">
@@ -18,19 +18,25 @@
 			</div>
 		</div>
 		<% if variant.object.new_record? %>
-			<div>
-				<h2>Image</h2>
-				<div class="field">
+			<div class="control-group">
+				<label class="control-label">
+					Imagem
+				</label>
+				<div class="controls">
+					<div class="dummyfile wide">
+      					<input id="filename" type="text" class="input disabled" name="filename" readonly>
+      					<a id="fileselectbutton" class="btn">Choose...</a>
+      				</div>
 					<%= variant.fields_for :multimedia do |multimedium| %>
 						<% if multimedium.object.new_record? %>
 							<%# this line is necessary before the file_field (small fix to use paperclip) %>
 		  				<%= multimedium.hidden_field :class_type, :value => 'variant' %>
-							<%= multimedium.label :file, 'Image file', :class => 'control-label' %>
-							<div class="controls">
-								<%= multimedium.file_field :file, :class => :wide %>
+							<!-- <%= multimedium.label :file, 'Ficheiro' %> -->
+							<!-- <div class="controls"> -->
+								<%= multimedium.file_field :file, :class => :wide, id: 'file' %>
 								<%#= multimedium.label :caption %>
-								<%= multimedium.text_field :caption, :class => :wide, placeholder: 'Caption', style: 'display:block' %>
-							</div>
+								<%= multimedium.text_field :caption, :class => :wide, placeholder: 'Legenda', style: 'display:block' %>
+							<!-- </div> -->
 						<% end %>
 					<% end %>
 				</div>
@@ -38,3 +44,16 @@
 		<% end %>
 	<% end %>
 <% end %>
+
+<script type="text/javascript">
+ 		$('#admin #fileselectbutton').click(function(e){
+ 			console.log("HERE");
+  			$('#admin #file').trigger('click');
+ 		});
+
+ 		$('#admin #file').change(function(e){
+  			var val = $(this).val();
+  			var file = val.split(/[\\/]/);
+  			$('#admin #filename').val(file[file.length-1]);
+ 		});
+</script>

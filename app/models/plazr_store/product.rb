@@ -233,6 +233,14 @@ module PlazrStore
       end
     end
 
+    # Returns true if any variant of the product has a variant_property_value
+    def variants_have_property_values?
+      self.variants.each do |v|
+        return true if v.variant_variant_property_values.count > 0
+      end
+      return false
+    end
+
     protected
 
     def create_available_at

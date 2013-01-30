@@ -46,5 +46,12 @@ module PlazrStore
       @promotional_code.destroy
       redirect_to admin_promotional_codes_path
     end
+
+    protected
+
+    def get_location
+      super
+      @tab = 'promotions'
+    end
   end
 end

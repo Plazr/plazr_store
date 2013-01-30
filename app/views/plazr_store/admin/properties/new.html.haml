@@ -1,3 +1,5 @@
-%h1 New Property
-
-= render :partial => 'form'
+#admin
+	%h1 Nova Propriedade de Produto
+	.btn-group
+		= link_to 'Voltar', admin_properties_path, :class => [:btn, 'btn-small']
+	= render 'form'

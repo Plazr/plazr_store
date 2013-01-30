@@ -46,9 +46,6 @@ describe PZS::Variant, type: :model do
   end
 
   describe "#Validations" do
-    it "requires sku to be set" do
-      FactoryGirl.create(:variant).should validate_presence_of :sku
-    end
     it "requires visible to be set" do
       FactoryGirl.create(:variant).should validate_presence_of :visible
     end

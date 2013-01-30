@@ -1,3 +1,6 @@
+@import 'plazr_store/partials/colors';
+@import 'plazr_store/partials/functions';
+
 @mixin dropbutton-icon($image-url) {
 	background-image: url($image-url);
 	background-repeat: no-repeat;
@@ -5,16 +8,14 @@
 }
 
 .topbar-wrapper {
-	width: 100%;
-	// remove container margin and padding because it goes inside another container
 	.container {
+		padding-right: 0;
+		padding-left: 0;
 		margin: 0;
-		padding: 0;
+		background-color: white;
 	}
 	.topbar {
-		border-bottom: 1px solid #EEE;
-		padding: 0.6em 0 0.6em 0;
-		background-color: white;
+		padding: 1em 0 1em 0;
 		form {
 			margin: 0;
 			select {
@@ -24,28 +25,31 @@
 	}
 	ul.dropdown-menu li a {
 		padding-left: 30px;
-		// margin-left: 20px;
 	}
-	.admin, .admin:hover {
+	.admin-button, .admin-button:hover {
 		@include dropbutton-icon("<%= image_path('plazr_store/icons/admin.png') %>");
 	}
-	.exit, .exit:hover {
+	.exit-button, .exit-button:hover {
 		@include dropbutton-icon("<%= image_path('plazr_store/icons/out.png') %>");
 	}
-	.edit, .edit:hover {
+	.edit-button, .edit-button:hover {
 		@include dropbutton-icon("<%= image_path('plazr_store/icons/edit.png') %>");
 	}
-	.profile, .profile:hover {
+	.profile-button, .profile-button:hover {
 		@include dropbutton-icon("<%= image_path('plazr_store/icons/user.png') %>");
 	}
 }
 
-// used when the bar is fixed
 .topbar-wrapper.fixed {
+	width: 100%;
 	z-index: 2;
 	position: fixed;
 	top: 0;
-	margin: 0 auto;
+	.container {
+		.topbar {
+			padding: 0.6em 0 0.6em 0;
+		}
+	}
 }
 
 

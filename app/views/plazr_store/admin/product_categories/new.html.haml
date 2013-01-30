@@ -1,3 +1,5 @@
-%h1 New ProductCategory
-
-= render :partial => 'form'
+#admin
+	%h1 Nova Categoria
+	.btn-group
+		= link_to 'Voltar', admin_product_categories_path, :class => [:btn, 'btn-small']
+	= render 'form'

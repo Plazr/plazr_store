@@ -42,5 +42,6 @@ module PlazrStore
       # to ensure that all products are always shown in a consistent order
       self.product_promotions.sort_by! {|x| x.product.name}
     end
+    
   end
 end

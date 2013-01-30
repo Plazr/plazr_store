@@ -7,17 +7,17 @@ module PlazrStore
     def index
     end
 
-    def get_location
-      @section = params[:controller].split('/').last
-      @view = params[:action]
-    end
-
     protected
 
       def check_admin
         if cannot? :manage, :store
           redirect_to root_path, :alert => "You don't have permission to access this"
         end
+      end
+
+      def get_location
+        @section = params[:controller].split('/').last
+        @view = params[:action]
       end
 
   end

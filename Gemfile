@@ -8,4 +8,4 @@ gemspec
 gem 'pry-rails'
 
 gem 'plazr_auth', :git => 'https://github.com/Plazr/plazr_auth.git'
-
+# gem "sass_rails_patch", "~> 0.0.1"

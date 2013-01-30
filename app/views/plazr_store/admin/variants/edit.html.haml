@@ -1,3 +1,5 @@
 #admin
-	= render 'plazr_store/admin/nav'
-	= render :partial => 'form'
+	%h1= "Editar \"#{@variant.sku}\""
+	.btn-group
+		= link_to 'Voltar', admin_product_variant_path(@variant), :class => [:btn, 'btn-small']
+	= render 'form'
