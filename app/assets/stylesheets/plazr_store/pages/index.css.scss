@@ -18,6 +18,7 @@
         .well-entry {
             padding-top: 8px;
             div {
+                font-family: 'Lato', sans-serif;
                 @include background-cover-image;
                 border: 1px solid $border-color;
                 height: 70px;
@@ -87,7 +88,6 @@
         }
 
         .featured-box {
-
             color: #333;
             text-decoration: none;
             p.price {
@@ -95,6 +95,7 @@
                 margin-bottom: 15px;
             }
             header {
+                font-family: 'Lato', sans-serif;
                 line-height: 40px;
                 margin-bottom: 0.6em;
                 font-size: 40px;

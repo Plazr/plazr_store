@@ -7,9 +7,17 @@
 	<%= csrf_meta_tags %>
 	<%= javascript_include_tag "plazr_store/application" %>
 	<% if user_signed_in? && current_user.role?('admin') %>
-		<%= stylesheet_link_tag    "plazr_store/admin/application", :media => "all" %>
+	<%= stylesheet_link_tag    "plazr_store/admin/application", :media => "all" %>
 	<% end %>
 	<%= yield :head %>
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+	.hero-wrap .hero-unit {
+		background: url("<%= @logo.file %>") left center no-repeat;
+		padding-left: 125px;
+	}
+	</style>
 </head>
 <body>
 	<div class="hero-wrap">
@@ -18,7 +26,7 @@
 				<div class="span12">
 					<div class="hero-unit">
 						<a href="/">
-							Plazr Store
+							<%= STORE['name'].capitalize %>
 						</a>
 					</div>
 				</div>
@@ -39,10 +47,10 @@
 		<div class="background-color"></div>
 		<div class="container">
 			<% if @namespace == 'PlazrStore::Admin' %>
-				<%= render 'plazr_store/admin/nav' %>
+			<%= render 'plazr_store/admin/nav' %>
 			<% else %>
-				<%= render 'layouts/top_bar' %>
-				<%= yield %>
+			<%= render 'layouts/top_bar' %>
+			<%= yield %>
 			<% end %>
 			<footer>
 				<div class="row-fluid">
@@ -67,8 +75,8 @@
 					<div class="span4">
 						<section class="">
 							<ul id="share">
-								<li><%= image_tag 'plazr_store/icons/facebook.png' %></li>
-								<li><%= image_tag 'plazr_store/icons/twitter.png' %></li>
+								<!--<li><%= image_tag 'plazr_store/icons/facebook.png' %></li>
+								<li><%= image_tag 'plazr_store/icons/twitter.png' %></li>-->
 							</ul>
 						</section>
 					</div>

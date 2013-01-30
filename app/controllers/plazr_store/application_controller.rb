@@ -3,7 +3,6 @@ module PlazrStore
 
   before_filter :get_categories
   before_filter :get_pages
-  before_filter :get_banner
   before_filter :get_logo
   before_filter :get_namespace
 

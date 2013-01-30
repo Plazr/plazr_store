@@ -9,12 +9,12 @@ module PlazrStore
     ## Paperclip ##
     has_attached_file :file,
       :styles      => Proc.new { |upload| upload.instance.set_styles },
-      :url         => :set_url_base_on_parent!, 
+      :url         => :set_url_base_on_parent!,
       :path        => :set_path_based_on_parent!,
       :default_url => :default_url_method
 
     validates_attachment_presence :file
-    validates_attachment_content_type :file, :content_type => ['image/jpeg', 'image/png', 
+    validates_attachment_content_type :file, :content_type => ['image/jpeg', 'image/png',
                   'image/gif', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/mp4']
 
     ## Callbacks ##
@@ -36,7 +36,7 @@ module PlazrStore
         false
       end
     end
-    
+
     ## Instance Methods ##
 
     # returns the banner of the store

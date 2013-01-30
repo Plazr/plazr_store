@@ -21,9 +21,9 @@
 			<li class="divider"></li>
 			<li><%= link_to 'Sair', plazr_auth.destroy_user_session_path, :method => :delete, class: 'exit-button' %></li>
 		<% else %>
-			<li><%= link_to 'Iniciar Sessão',  plazr_auth.new_user_session_path %></li>
-			<li><%= link_to 'Registar', plazr_auth.new_user_registration_path %></li>
-			<li><%= link_to 'Recuperar password',  new_password_path(:user) %></li>
+			<li><%= link_to 'Iniciar Sessão',  plazr_auth.new_user_session_path, class: 'profile-button' %></li>
+			<li><%= link_to 'Registar', plazr_auth.new_user_registration_path, class: 'register-button' %></li>
+			<li><%= link_to 'Recuperar password',  new_password_path(:user), class: 'recover-button' %></li>
 		<% end %>
 	</ul>
 </div>
