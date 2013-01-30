@@ -1,23 +1,26 @@
-= form_for [:admin, @page] do |f|
-  - if @page.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
-      %div{:class=>["alert","alert-error"]}
-        %ul
-          - @page.errors.full_messages.each do |msg|
-            %li= msg
+= form_for [:admin, @page], :html => { :class => [:form, 'form-horizontal'] } do |f|
+	/ - if @page.errors.any?
+	/ 	#error_explanation
+	/ 		%h2= "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
+	/ 		%div{:class=>["alert","alert-error"]}
+	/ 			%ul
+	/ 				- @page.errors.full_messages.each do |msg|
+	/ 					%li= msg
+	.control-group
+		= f.label 'Título', :class => 'control-label'
+		.controls
+			= f.text_field :title, :class => :span12
 
-  = f.label :title
-  = f.text_field :title
-  %br
+	.control-group
+		%label.control-label http://plazr.net/storename/
+		.controls
+			= f.text_field :slug, :class => :span12
 
-  = f.label :slug
-  = f.text_field :slug
-  %br
+	.control-group
+		= f.label 'Conteúdo', :class => 'control-label'
+		.controls
+			= f.text_area :content, :class => ['redactor', :span12], :rows => 40
 
-  = f.label :content
-  = f.text_area :content, :class => "redactor", :rows => 40, :cols => 20
-  %br
-
-  = f.submit "Submit"
-  = link_to 'Cancel', admin_pages_path
+	.control-group
+		.controls
+			= f.submit 'Gravar', :class => [:btn, 'btn-primary']

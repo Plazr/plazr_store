@@ -6,7 +6,8 @@ module PlazrStore
     end
 
     def index
-      @products = Product.all
+      # @products = Product.all
+      @products = Product.all.paginate(:page => params[:page], :per_page => 19)
     end
 
     def create
@@ -73,12 +74,6 @@ module PlazrStore
       redirect_to admin_products_path
     end
 
-    def get_location
-      super
-      @tab = :products
-    end
-
-
     protected
       # collections used on the views for the belongs_to relations
       def entities_collections
@@ -91,6 +86,11 @@ module PlazrStore
         # builds variant_properties that are not persisted so that fields_for can render them
         @product.get_unselected_variant_properties_and_order_by_name
         @product.get_unselected_product_categories_and_order_by_name
+      end
+
+      def get_location
+        super
+        @tab = 'products'
       end
   end
 end

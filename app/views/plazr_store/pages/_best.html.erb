@@ -1,18 +1,16 @@
 <div id="well-outter">
 	<section class="row-fluid well-list">
-		<div>
+		<header>
 			<h4>Mais Vendidos</h4>
-		</div>
+		</header>
 		<% @best.each_with_index do |best, index| %>
-		<article class="well-entry row-fluid">
-			<div class="span2">
-				<%= image_tag best.image.file.url %>
-			</div>
-			<div class="span10">
-				<%= best.name %>
-			</div>
-
-		</article>
+		<a href="<%= url_for best %>">
+			<article class="well-entry row-fluid">
+				<div class="span12" style="background-image:url('<%= image_path best.image.file.url %>')">
+					<span><%= best.name %></span>
+				</div>
+			</article>
+		</a>
 		<% end %>
 	</section>
 </div>

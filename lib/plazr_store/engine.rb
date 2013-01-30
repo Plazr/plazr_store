@@ -1,5 +1,7 @@
 require 'jquery-rails'
 require 'haml'
+require 'compass-rails'
+require 'sass-rails'
 require 'paranoia'
 require 'paranoia_uniqueness_validator'
 require 'paperclip'
@@ -10,6 +12,8 @@ require 'carrierwave'
 require 'mini_magick'
 require 'activemerchant'
 require 'will_paginate'
+require 'will_paginate/array'
+require 'will_paginate-bootstrap'
 
 module PlazrStore
   class Engine < ::Rails::Engine

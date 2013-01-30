@@ -7,7 +7,7 @@ module PlazrStore
     end
 
     def index
-      @multimedia = Multimedium.multimedia_from_all_variants_of_a_product(@product)
+      @multimedia = Multimedium.multimedia_from_all_variants_of_a_product(@product).paginate( page: params['page'], per_page: 19 )
     end
 
     def create

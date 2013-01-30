@@ -1,5 +1,12 @@
 #admin
-	= render 'plazr_store/admin/nav', :tab => :products, :section => :variants, :view => :show
+	%h1= @variant.product.name
+	%h2= @variant.sku
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_product_variants_path(@product), :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_product_variant_path(@product,@variant), :class => :btn
+			= link_to 'Eliminar', admin_product_variant_path(@product,@variant), :method => :delete, data: { confirm: 'Are you sure?' }, :class => [:btn, 'btn-danger']
 	.show
 		.row-fluid
 			.span4
@@ -7,8 +14,6 @@
 				%noscript= image_tag imgpth, :class => :photo
 				.photo{ style: "background-image:url('#{imgpth}')" }
 			.span8
-				%h1= @variant.product.name
-				%h2= @variant.sku
 				%p= @variant.description
 				.row-fluid
 					.offset1.span3

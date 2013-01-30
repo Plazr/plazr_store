@@ -15,5 +15,5 @@
 	Total price: <%= @cart.total_price %>
 </p>
 
-<%= link_to 'Checkout', plazr_store.checkout_path, method: :get %>
+<%= link_to 'Checkout', plazr_store.checkout_path, method: :get, :form_cart => true %>
 

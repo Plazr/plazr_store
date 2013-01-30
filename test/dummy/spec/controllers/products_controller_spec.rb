@@ -17,14 +17,14 @@ describe PZS::ProductsController, :type => :controller do
   end
 
   describe "GET #show" do
-    it "assigns the requested product to @product" do
+    it "assigns the requested product to @product", focus: true do
       m = FactoryGirl.create :product_full
-      get :show, id: m
+      get :show, product_id: m
       assigns(:product).should eq(m)
     end
 
-    it "renders the :show template" do
-      get :show, id: FactoryGirl.create(:product_full)
+    it "renders the :show template", focus: true do
+      get :show, product_id: FactoryGirl.create(:product_full)
       response.should render_template :show
     end
   end

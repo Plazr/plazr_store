@@ -1,103 +1,116 @@
 <article id="product-show">
-  <div class="row-fluid">
 
+  <header class="row-fluid">
+    <div class="span7">
+      <h2><%= @product.name %></h2>
+      <p><%= @product.rating %></p>
+    </div>
+    <div class="span5">
+      <h2><%= @variant.price %> €</h2>
+    </div>
+  </header>
+
+
+  <div class="row-fluid">
     <div class="span6">
-      <div id="page-wrap">
-        <div class="slider-wrap">
-          <div id="main-photo-slider" class="csw">
-            <div class="panelContainer">
-              <% @product.images.each_with_index do |im, index| %>
-              <div class="panel" title='Panel <%=index + 1 %>'>
-                <div class="wrapper">
-                  <img src=<%=im.file%> alt="temp" />
-                </div>
+
+        <div id="page-wrap">
+          <div class="slider-wrap">
+            <div id="main-photo-slider" class="csw">
+              <div class="panelContainer">
+                
+                <% @product.images.each_with_index do |im, index| %>
+                  <div class="panel" title='Panel <%=index + 1 %>'>
+                    <div class="wrapper">
+                      <img src=<%=im.file%> alt="temp" />
+                    </div>
+                  </div>
+                <% end %>
               </div>
+            </div>
+
+            <div id="movers-row">
+              
+              <% @product.images.each_with_index do |im, index| %>
+                <div><a href="#<%=index + 1 %>" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
               <% end %>
+              
             </div>
           </div>
-          <div id="movers-row">
-            <% @product.images.each_with_index do |im, index| %>
-            <div><a href="#<%=index + 1 %>" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
-            <% end %>
-          </div>
         </div>
       </div>
-    </div>
-
-    <div class="span6">
-
-      <div class="row-fluid">
-        <header class="page-header product-name">
-          <%= @product.name %><div><%= render 'plazr_store/shared/stars', count: 2 %></div>
-        </header>
-      </div>
-
-      <p>Preço: <span class="price"><%= @product.master_price %> €</span></p>
-      <ul>
-        <li><a href="#" class="btn btn-large btn-primary disabled">Add Cart</a></li>
-        <li><a href="#" class="btn btn-large btn-primary disabled">Add Wishlist</a></li>
-        <li><a href="#" class="btn btn-large btn-primary disabled">Add comment</a></li>
-      </ul>
-      <ul>
-        <li><a href="#" class="btn btn-large btn-primary disabled">Share facebook</a></li>
-        <li><a href="#" class="btn btn-large btn-primary disabled">Share twiter</a></li>
-        <li><a href="#" class="btn btn-large btn-primary disabled">Share google</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <section>
-    <div class="row-fluid">
-      <div class="span12">
-        <% if !@product.variants_without_master.empty? %>
-        <p>Variantes:</p>
-        <select>
-          <% @product.variants_without_master.each do |v| %>
-          <% v.variant_property_values.each_with_index do |vpv, index| %>
-          <option><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
-          <% end %>
-          <% end %>
-        </select>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="row-fluid">
-      <div class="span12">
-        <p>Quantidade:</p>
-        <input type="number" value="Quantity" />
-      </div>
-    </div>
-
-    <div class="row-fluid">
-
-      <div class="span5">
+      <!--Descrição do variante e do product-->
+      <div class="span3">
         <dl>
-          <dt>Descrição</dt>
+          <dt>Detalhes</dt>
           <dd><%= @product.details %></dd>
+          <% if @product.brand %>
+          <dt>Marca</dt>
+          <dd><%= @product.brand.name %></dd>
+          <% end %>
           <dt>Referência<dt>
-            <dd><%= @product.master_variant.sku %></dd>
+          <dd><%= @variant.sku %></dd>
+          <% if @variant.description %>
+            <dt>Descrição<dt>
+            <dd><%= @variant.description %></dd>
+          <% end %>
+        </dl>
+
+        
+        <% if !@product.variants_without_master.empty?%>
+          <dl>
+            <dt>Variantes:</dt>
           </dl>
-        </div>
+          <select>
+            <% @product.variants_without_master.each_with_index do |v, index| %>
+               <option id=<%= v.id %> value=<%= v.id %> ><%= v.variant_properties_values %></option>
+             <% end %>
+          </select>
+        <% end %>
+
+        <dl>
+          <dt>Quantidade:</dt>
+        </dl>
+        <%= add_to_cart_form(@variant.id) %>
+        <%= add_to_wishlist_form(@variant.id) %>
       </div>
-    </section>
+
+      <div class="span3">
+            <ul>
+              <li><a id="add_cart_bt" class="btn btn-large btn-primary disabled">Add Cart</a></li>
+              <li><a id="add_wishlist_bt" class="btn btn-large btn-primary disabled">Add Wishlist</a></li>
+              <li><a class="btn btn-large btn-primary disabled">Add comment</a></li>
+            </ul>
+          <!--
+          <ul>
+            <a href="#" class="btn btn-large btn-primary disabled">Share facebook</a>
+            <a href="#" class="btn btn-large btn-primary disabled">Share twiter</a>
+            <a href="#" class="btn btn-large btn-primary disabled">Share google</a>
+          </ul>
+        -->
+      </div>
+
+    </div>
 
     <% if @product.related.size > 0 %>
-    <section>
-      <div class="row-fluid">
-        <div class="page-header">
-          <h3>Artigos relacionados</h3>
-        </div>
-      </div>
+      <section>
 
-      <!--Não consigo validar porque a base de dados nao esta povoada-->
-      <div class="row-fluid">
-        <% @product.related.each do |product| %>
-        <%= render 'plazr_store/shared/thumb-item', recommended: product %>
-        <% end %>
-      </div>
-    </section>
+        <div>
+          <div class="row">
+            <div class="span9" align="center">
+              <h3>Artigos relacionados</h3>
+            </div>
+          </div>
+
+          <!--Não consigo validar porque a base de dados nao esta povoada-->
+            <div class="row">
+              <% @product.related.each do |product| %>
+                <%= render 'plazr_store/shared/thumb-item', recommended: product %>
+              <% end %>
+            </div>
+
+        </div>
+      </section>
     <%end%>
 
     <% if !@product.comments.empty? %>
@@ -124,3 +137,27 @@
     </section>
     <% end %>
   </article>
+
+<script>
+$(document).ready(function() {
+  /*var indexId = $('#product-show select #<%= @variant.id %>').index()
+  $('#product-show select').prop('selectedIndex', indexId);*/
+
+  $('#product-show select').change(function(){
+    var id = $(this).val();
+    //window.location.href = "/products/<%= @product.id %>/variants/" + id; 
+    $("#add_cart_f").attr("action","/cart/add/" + id);
+    $("#add_wishlist_f").attr("action","/wishlist/add/" + id);
+  });
+
+  $("#add_cart_bt").click(function(){
+    if(parseInt($("#add_cart_f #amount").val())>0) $("#add_cart_f").submit();
+    else alert("Quantidade inferior a 0.");
+  });
+
+  $("#add_wishlist_bt").click(function(){
+    $("#add_wishlist_f").submit();
+  });
+
+});
+</script>

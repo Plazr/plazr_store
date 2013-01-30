@@ -7,7 +7,7 @@ module PlazrStore
     end
 
     def index
-      @variant_property_values = @variant_property.variant_property_values
+      @variant_property_values = @variant_property.variant_property_values.paginate( page: params['page'], per_page: 10 )
     end
 
     def create
@@ -47,6 +47,11 @@ module PlazrStore
     protected
       def get_variant_property
         @variant_property = VariantProperty.find(params[:variant_property_id])
+      end
+
+      def get_location
+        super
+        @tab = 'products'
       end
   end
 end

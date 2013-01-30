@@ -1,23 +1,23 @@
-%h1 Listing Variant Property Values
-%table
-  %thead
-    %tr
-      %th Name
-      %th Presentation
-      %th Variant Property
-  %tbody
-    - @variant_property_values.each do |variant_property_value|
-      %tr
-        %td
-          = variant_property_value.name
-        %td
-          = variant_property_value.presentation
-        %td
-          = variant_property_value.variant_property.display_name
-        %td
-          = link_to 'Show', admin_variant_property_variant_property_value_path(@variant_property, variant_property_value)
-        %td
-          = link_to 'Edit', edit_admin_variant_property_variant_property_value_path(@variant_property, variant_property_value)
-        %td
-          = link_to 'Destroy', admin_variant_property_variant_property_value_path(@variant_property, variant_property_value), :method => :delete, :data => { :confirm => 'Are you sure?' }
-= link_to 'New Variant', new_admin_variant_property_variant_property_value_path
+#admin
+	%h1= "Lista de Valores para \"#{@variant_property.display_name}\""
+	#variant-property-values.listing
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th.name Nome
+					%th.name Apresentação
+					%th.btn-mini &nbsp;
+					%th.btn-mini &nbsp;
+			%tbody
+				%tr.success
+					%td{ :colspan => 4 }
+						= link_to 'Adicionar valor', new_admin_variant_property_variant_property_value_path
+				- @variant_property_values.each do |variant_property_value|
+					%tr
+						%td.name= variant_property_value.name
+						%td.text= variant_property_value.presentation
+						%td.btn-mini
+							= link_to 'Editar', edit_admin_variant_property_variant_property_value_path(@variant_property, variant_property_value), :class => [:btn, 'btn-mini']
+						%td.btn-mini
+							= link_to 'Eliminar', admin_variant_property_variant_property_value_path(@variant_property, variant_property_value), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
+		= will_paginate @variant_property_values, :renderer => BootstrapPagination::Rails

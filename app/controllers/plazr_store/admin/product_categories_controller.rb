@@ -6,7 +6,7 @@ module PlazrStore
     end
 
     def index
-      @product_categories = ProductCategory.all
+      @product_categories = ProductCategory.all.paginate( page: params['page'], per_page: 10 )
     end
 
     def new
