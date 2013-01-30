@@ -53,10 +53,9 @@
             <dt>Descrição<dt>
             <dd><%= @variant.description %></dd>
           <% end %>
-        </dl>
+          </dl>
 
         
-      <!--Tem de se por o master variante e os variantes tb-->
         <% if !@product.variants.empty? %>
           <dl>
             <dt>Variantes:</dt>
@@ -64,7 +63,7 @@
           <select>
             <% @product.variants.each_with_index do |v, index| %>
               <% v.variant_property_values.each do |vpv| %>
-                <option value=<%= v.id %> ><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
+                <option id=<%= v.id %> value=<%= v.id %> ><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
               <% end %>
             <% end %>
           </select>
@@ -142,7 +141,10 @@
 
 <script>
 $(document).ready(function() {
+  var indexId = $('#product-show select #<%= @variant.id %>').index()
 
+  $('#product-show select').prop('selectedIndex', indexId);
+  //$('#product-show select').prop('selectedIndex', );
 
   $('#product-show select').change(function(){
     var id = $(this).val();
