@@ -36,6 +36,8 @@ PlazrStore::Engine.routes.draw do
       resources :variant_property_values
     end
     resources :paypal_accounts
+    
+    match 'customization' => 'customizations#show', :as => :customization, :via => :get, :controller => 'customizations'
   end
 
   resources :products, :only => [:index, :show]
