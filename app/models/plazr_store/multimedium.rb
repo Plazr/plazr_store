@@ -74,7 +74,7 @@ module PlazrStore
       elsif self.class_type == 'banner'
         {:banner => '800x100!'}
       elsif self.class_type == 'logo'
-        {:logo => '200x200!'}
+        {:logo => '60x60!'}
       end
     end
 
