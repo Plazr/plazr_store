@@ -45,8 +45,10 @@
         <dl>
           <dt>Detalhes</dt>
           <dd><%= @product.details %></dd>
+          <% if @product.brand %>
           <dt>Marca</dt>
           <dd><%= @product.brand.name %></dd>
+          <% end %>
           <dt>Referência<dt>
           <dd><%= @variant.sku %></dd>
           <% if @variant.description %>
@@ -142,9 +144,7 @@
 <script>
 $(document).ready(function() {
   var indexId = $('#product-show select #<%= @variant.id %>').index()
-
   $('#product-show select').prop('selectedIndex', indexId);
-  //$('#product-show select').prop('selectedIndex', );
 
   $('#product-show select').change(function(){
     var id = $(this).val();
