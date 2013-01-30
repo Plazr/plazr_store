@@ -6,7 +6,7 @@ module PlazrStore
     end
 
     def index
-      @variant_properties = VariantProperty.all
+      @variant_properties = VariantProperty.all.paginate( page: params['page'], per_page: 10 )
     end
 
     def new
