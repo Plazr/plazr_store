@@ -300,7 +300,7 @@
 	.listing-linked {
 		table.table {
 			tbody {
-				tr {
+				tr.linked {
 					td {
 						margin: 0;
 						padding: 0;
@@ -318,7 +318,7 @@
 					}
 				}
 
-				tr:hover {
+				tr.linked:hover {
 					text-decoration: underline;
 				}
 			}
@@ -395,7 +395,7 @@
 	#promotions {
 		.name ,
 		.enum {
-			width: 10%;
+			width: 15%;
 		}
 		.val {
 			width: 5%;
@@ -403,7 +403,11 @@
 	}
 
 	.center {
-		text-align: center
+		text-align: center;
+	}
+
+	.pagination {
+		text-align: center;
 	}
 
 }

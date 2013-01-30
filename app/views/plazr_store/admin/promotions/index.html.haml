@@ -11,16 +11,21 @@
 					%th.btn-mini &nbsp;
 					%th.btn-mini &nbsp;
 			%tbody
-				%tr.success
-					%td{ colspan: 6 }
-						= link_to 'Adicionar promoção', new_admin_promotion_path
-				- @promotions.each do |promotion|
-					- row_class = :warning if promotion.starts_at.future?
-					- row_class = :error if promotion.expires_at && promotion.expires_at.past?
-					%tr{ :class => row_class }
-						%td.name= link_to promotion.name, admin_promotion_path(promotion)
-						%td.text= link_to promotion.description, admin_promotion_path(promotion)
-						%td.val= link_to promotion.value, admin_promotion_path(promotion)
-						%td.enum= link_to promotion.discount_type.name, admin_promotion_path(promotion)
-						%td.btn-mini= link_to 'Editar', edit_admin_promotion_path(promotion), :class => [:btn, 'btn-mini']
-						%td.btn-mini= link_to 'Eliminar', admin_promotion_path(promotion), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
+				- if @promotions.empty?
+					%tr.info
+						%td{ colspan: 6 }
+							= raw "Não existem promoções. Clique #{link_to 'aqui', new_admin_promotion_path} para criar uma nova promoção."
+				- else
+					%tr.success
+						%td{ colspan: 6 }
+							= link_to 'Adicionar promoção', new_admin_promotion_path
+					- @promotions.each do |promotion|
+						- row_class = :warning if promotion.starts_at.future?
+						- row_class = :error if promotion.expires_at && promotion.expires_at.past?
+						%tr{ :class => [:linked, row_class] }
+							%td.name= link_to promotion.name, admin_promotion_path(promotion)
+							%td.text= link_to promotion.description, admin_promotion_path(promotion)
+							%td.val= link_to promotion.value, admin_promotion_path(promotion)
+							%td.enum= link_to promotion.discount_type.name, admin_promotion_path(promotion)
+							%td.btn-mini= link_to 'Editar', edit_admin_promotion_path(promotion), :class => [:btn, 'btn-mini']
+							%td.btn-mini= link_to 'Eliminar', admin_promotion_path(promotion), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']

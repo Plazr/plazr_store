@@ -1,6 +1,6 @@
-%p.text-warning= "Tab: #{@tab.inspect}"
-%p.text-warning= "Section: #{@section.inspect}"
-%p.text-warning= "View: #{@view.inspect}"
+/ %p.text-warning= "Tab: #{@tab.inspect}"
+/ %p.text-warning= "Section: #{@section.inspect}"
+/ %p.text-warning= "View: #{@view.inspect}"
 %ul.nav.nav-tabs
 	%li{ :class => @tab == 'pages' ? :active : nil }
 		= link_to 'Loja', admin_pages_path

@@ -74,7 +74,7 @@
 									= link_to admin_product_variant_path(@product, variant), :method => :delete, data: { confirm: 'Are you sure?' } do
 										= button_tag 'Eliminar', :class => [:btn, 'btn-mini', 'btn-danger']
 			#properties.span6
-				%h2 Propriedades
+				%h2= link_to 'Propriedades', admin_product_product_properties_path(@product)
 				- if @product.variant_properties.empty?
 					%p.text-info This product has no properties
 				- else

@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks'
   s.add_dependency 'rails_engine_decorators'
   s.add_dependency 'will_paginate', '~> 3.0.0'
+  s.add_dependency 'will_paginate-bootstrap'
   s.add_dependency 'cancan'
   s.add_dependency 'redactor-rails'
   s.add_dependency 'carrierwave'
