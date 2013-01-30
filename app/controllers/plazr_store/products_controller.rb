@@ -6,7 +6,12 @@ module PlazrStore
     end
 
     def show
-      @product = Product.find(params[:id])
+      @product = Product.find(params[:product_id])
+      if params[:variant_id].nil?
+     	@variant = Product.find(params[:product_id]).master_variant
+  	  else
+		@variant = Variant.find(params[:variant_id])  	  	
+  	  end
     end
 
   end

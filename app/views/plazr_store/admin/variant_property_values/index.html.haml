@@ -20,3 +20,4 @@
 							= link_to 'Editar', edit_admin_variant_property_variant_property_value_path(@variant_property, variant_property_value), :class => [:btn, 'btn-mini']
 						%td.btn-mini
 							= link_to 'Eliminar', admin_variant_property_variant_property_value_path(@variant_property, variant_property_value), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
+		= will_paginate @variant_property_values, :renderer => BootstrapPagination::Rails

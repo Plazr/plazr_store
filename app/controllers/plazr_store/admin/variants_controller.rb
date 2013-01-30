@@ -7,7 +7,7 @@ module PlazrStore
     end
 
     def index
-      @variants = @product.variants_without_master
+      @variants = @product.variants_without_master.paginate( page: params['page'], per_page: 19 )
     end
 
     def create

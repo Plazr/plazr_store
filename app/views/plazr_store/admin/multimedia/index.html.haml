@@ -30,3 +30,4 @@
 				.actions
 					= link_to 'Editar', edit_admin_product_multimedium_path(@product, multimedium), :class => [:btn, 'btn-mini']
 					= link_to 'Eliminar', admin_product_multimedium_path(@product, multimedium), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
+	= will_paginate @products, :renderer => BootstrapPagination::Rails

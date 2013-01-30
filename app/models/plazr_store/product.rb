@@ -236,7 +236,7 @@ module PlazrStore
     # Returns true if any variant of the product has a variant_property_value
     def variants_have_property_values?
       self.variants.each do |v|
-        return true if v.variant_variant_property_values.count > 0
+        return true if !v.variant_variant_property_values.empty?
       end
       return false
     end

@@ -31,3 +31,4 @@
 						= button_tag 'Editar', :class => [:btn, 'btn-mini']
 					= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
 						= button_tag 'Eliminar', :class => [:btn, 'btn-mini', 'btn-danger']
+	= will_paginate @products, :renderer => BootstrapPagination::Rails

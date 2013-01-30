@@ -6,6 +6,6 @@
 		%li.nav-header Gerir ofertas
 		%li{ :class => in_promotions ? :active : nil }
 			= link_to 'Promoções', in_promotions ? '#' : admin_promotions_path
-		%li{ :class => in_promo_codes ? :active : nil }
-			= link_to 'Códigos', in_promo_codes ? '#' : admin_promotional_codes_path
+		/ %li{ :class => in_promo_codes ? :active : nil }
+		/ 	= link_to 'Códigos', in_promo_codes ? '#' : admin_promotional_codes_path
 = render "plazr_store/admin/#{@section}/nav_section" if @section == 'promotions'
