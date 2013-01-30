@@ -143,15 +143,12 @@
 <script>
 $(document).ready(function() {
 
-<<<<<<< HEAD
 
   $('#product-show select').change(function(){
     var id = $(this).val();
     window.location.href = "/products/<%= @product.id %>/variants/" + id; 
   });
 
-=======
->>>>>>> afc35949e4b084a82994300e8fa16c1c75829ea1
   $("#add_cart_bt").click(function(){
     if(parseInt($("#add_cart_f #amount").val())>0) $("#add_cart_f").submit();
   });
