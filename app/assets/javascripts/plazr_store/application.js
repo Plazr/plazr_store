@@ -14,6 +14,7 @@
 //= require plazr_store/topbar
 //= require plazr_store/search/search
 //= require plazr_store/thumb-item
+//= require plazr_store/cart/show
 /*********************************************************/
 /** Global (reserved) functions
  *

@@ -5,7 +5,7 @@ module PlazrStore
     end
 
     def index
-      @pages = Page.all
+      @pages = Page.all.paginate( page: params['page'], per_page: 10 )
     end
 
     def create

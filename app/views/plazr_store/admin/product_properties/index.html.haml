@@ -11,9 +11,9 @@
 		%table.table.table-striped.table-hover
 			%thead
 				%tr
-					%th.id ID
-					%th.name Name
-					%th.value Value
+					%th.id Identificador
+					%th.name Nome
+					%th.value Valor
 					%th.button &nbsp;
 			%tbody
 				= form_for([:admin, @product, @property], :url => admin_product_product_properties_path(@product), :method => :post) do |f|
@@ -31,11 +31,11 @@
 								= link_to 'Eliminar', admin_product_product_property_path(@product, product_property), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
 					%tr.new
 						%td
-							= f.text_field :id_name, autofocus: true, placeholder: 'New ID'
+							= f.text_field :id_name, autofocus: true, placeholder: 'Identificador'
 						%td
-							= f.text_field :display_name, placeholder: 'New name'
+							= f.text_field :display_name, placeholder: 'Nome'
 						%td
 							= f.fields_for :product_properties do |pp|
-								= pp.text_field :value, placeholder: 'New value'
+								= pp.text_field :value, placeholder: 'Valor'
 								= pp.hidden_field :product_id, :value => @product.id
-						%td= f.submit "Update", :class => [:btn, 'btn-primary', 'btn-large']
+						%td= f.submit 'Guardar', :class => [:btn, 'btn-primary', 'btn-large']

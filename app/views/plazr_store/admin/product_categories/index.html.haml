@@ -4,9 +4,9 @@
 		%table.table.table-striped.table-hover.table-bordered
 			%thead
 				%tr
-					%th.name Name
-					%th.desc Description
-					%th.prnt Parent
+					%th.name Nome
+					%th.desc Descrição
+					%th.prnt Agregadora
 					%th &nbsp;
 					%th &nbsp;
 			%tbody
@@ -21,3 +21,4 @@
 						%td.btn-mini
 							= link_to 'Editar', edit_admin_product_category_path(pc), :class => [:btn, 'btn-mini']
 						%td.btn-mini= link_to 'Eliminar', admin_product_category_path(pc), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger', 'btn-mini']
+	= will_paginate @product_categories, :renderer => BootstrapPagination::Rails

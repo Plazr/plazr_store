@@ -6,7 +6,7 @@ module PlazrStore
     end
 
     def index
-      @prototypes = Prototype.all
+      @prototypes = Prototype.all.paginate( page: params['page'], per_page: 10 )
     end
 
     def create
