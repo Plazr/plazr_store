@@ -58,15 +58,13 @@
           </dl>
 
         
-        <% if !@product.variants.empty? %>
+        <% if !@product.variants.empty?%>
           <dl>
             <dt>Variantes:</dt>
           </dl>
           <select>
             <% @product.variants.each_with_index do |v, index| %>
-              <% v.variant_property_values.each do |vpv| %>
-                <option id=<%= v.id %> value=<%= v.id %> ><%= index%> - <%vpv.variant_property.display_name%> - <%= vpv.presentation%></option>
-              <% end %>
+              <option id=<%= v.id %> value=<%= v.id %> > <%= index + 1 %> <%= v.name %></option>
             <% end %>
           </select>
         <% end %>
