@@ -11,9 +11,6 @@ module PlazrStore
 
     has_many :multimedia, :dependent => :destroy, :inverse_of => :variant
 
-    #has_many :shipment_condition_variants, :dependent => :destroy
-    #has_many :shipment_conditions, :through => :shipment_condition_variants
-
     has_many :variant_variant_property_values, :dependent => :destroy
     has_many :variant_property_values, :through => :variant_variant_property_values
 
@@ -34,9 +31,9 @@ module PlazrStore
                     :restock_date_date_string, :restock_date_time_string
 
     ## Validations ##
-    validates_presence_of :sku, :visible, :product
+    validates_presence_of :visible, :product
     validates :is_master, :inclusion => {:in => [true, false]}
-    validates :sku, :uniqueness_without_deleted => true
+    validates :sku, :uniqueness_without_deleted => true, :allow_blank => true
     validates :price, presence: true, numericality: {:greater_than_or_equal_to => 0}
     validates :amount_available, numericality: {:only_integer => true, :greater_than_or_equal_to => 0}
     validates :cost_price, numericality: {:greater_than_or_equal_to => 0}, :allow_nil => true
@@ -46,6 +43,7 @@ module PlazrStore
 
     ## Callbacks ##
     before_save :create_restock_date
+    after_save :sku_name
     before_validation :set_is_master, :on => :create
 
     # Delegations
@@ -145,6 +143,10 @@ module PlazrStore
         else
           Time.current
         end
+      end
+
+      def sku_name
+        update_attribute(:sku,"sku_#{self.id}") if self.sku.blank?
       end
   end
 end

@@ -44,7 +44,7 @@ module PlazrStore
 
     def get_location
       super
-      @tab = :pages
+      @tab = 'pages'
     end
   end
 end

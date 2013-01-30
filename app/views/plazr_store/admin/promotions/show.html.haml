@@ -1,44 +1,31 @@
-%h1 Show Promotion
-%p#notice
-  = notice
-%table
-  %tr
-    %td
-      %b Name
-    %td
-      = @promotion.name
-  %tr
-    %td
-      %b Description
-    %td
-      = @promotion.description
-  %tr
-    %td
-      %b Value
-    %td
-      = @promotion.value
-  %tr
-    %td
-      %b Minimum Filter
-    %td
-      = @promotion.min_filter
-  %tr
-    %td
-      %b Start Date
-    %td
-      = @promotion.starts_at
-  %tr
-    %td
-      %b End Date
-    %td
-      = @promotion.expires_at
-  %tr
-    %td
-      %b Discount Type
-    %td
-      = @promotion.discount_type.name
-
-
-= link_to 'Edit', edit_admin_promotion_path
-|
-= link_to 'Back', admin_promotions_path
+#admin
+	%h1= "Promoção \"#{@promotion.name}\""
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_promotions_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_promotion_path, :class => :btn
+			= link_to 'Eliminar', admin_promotion_path(@promotion), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger']
+	%h4 Descrição
+	%p= @promotion.description
+	.row-fluid
+		.offset2.span8
+			%table.table
+				%thead
+					%tr
+						%th.center Valor
+						%th.center Tipo de desconto
+						%th.center Quantidade mínima
+				%tbody
+					%tr
+						%td.center= @promotion.value
+						%td.center= @promotion.discount_type.name
+						%td.center= @promotion.min_filter
+	%p
+		- preposition = @promotion.starts_at.future? ? 'a partir de' : 'desde'
+		- if @promotion.expires_at && @promotion.expires_at.past?
+			= "Promoção expirada desde #{@promotion.expires_at} (iniciou a #{@promotion.starts_at})."
+		- elsif @promotion.expires_at
+			= "Promoção válida #{preposition} #{@promotion.starts_at} até #{@promotion.expires_at}"
+		- else
+			= "Promoção válida #{preposition} #{@promotion.starts_at}"

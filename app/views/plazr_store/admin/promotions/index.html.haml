@@ -1,36 +1,26 @@
-%h1 Listing Promotions
-%table
-  %thead
-    %tr
-      %th Name
-      %th Description
-      %th Value
-      %th Minimum Filter
-      %th Start Date
-      %th Expire Date
-      %th Discount Type
-
-  %tbody
-    - @promotions.each do |promotion|
-      %tr
-        %td
-          = promotion.name
-        %td
-          = promotion.description
-        %td
-          = promotion.value
-        %td
-          = promotion.min_filter
-        %td
-          = promotion.starts_at
-        %td
-          = promotion.expires_at
-        %td
-          = promotion.discount_type.name
-        %td
-          = link_to 'Show', admin_promotion_path(promotion)
-        %td
-          = link_to 'Edit', edit_admin_promotion_path(promotion)
-        %td
-          = link_to 'Destroy', admin_promotion_path(promotion), :method => :delete, :data => { :confirm => 'Are you sure?' }
-= link_to 'New Promotion', new_admin_promotion_path
+#admin
+	%h1 Lista de promoções
+	#promotions.listing.listing-linked
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th.name Nome
+					%th.text Descrição
+					%th.value Valor
+					%th.enum Tipo de desconto
+					%th.btn-mini &nbsp;
+					%th.btn-mini &nbsp;
+			%tbody
+				%tr.success
+					%td{ colspan: 6 }
+						= link_to 'Adicionar promoção', new_admin_promotion_path
+				- @promotions.each do |promotion|
+					- row_class = :warning if promotion.starts_at.future?
+					- row_class = :error if promotion.expires_at && promotion.expires_at.past?
+					%tr{ :class => row_class }
+						%td.name= link_to promotion.name, admin_promotion_path(promotion)
+						%td.text= link_to promotion.description, admin_promotion_path(promotion)
+						%td.val= link_to promotion.value, admin_promotion_path(promotion)
+						%td.enum= link_to promotion.discount_type.name, admin_promotion_path(promotion)
+						%td.btn-mini= link_to 'Editar', edit_admin_promotion_path(promotion), :class => [:btn, 'btn-mini']
+						%td.btn-mini= link_to 'Eliminar', admin_promotion_path(promotion), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']

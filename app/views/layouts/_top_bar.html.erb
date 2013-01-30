@@ -1,17 +1,6 @@
 <div class="topbar-wrapper">
   <div class="container">
     <div class="topbar clearfix">
-      <% if @logo.nil?%>
-        <li><%= link_to 'New Logo', plazr_store.new_admin_logo_path %></li>
-      <% elsif @logo.persisted? %>
-        <li><%= link_to 'Update Logo', plazr_store.edit_admin_logo_path(@logo) %></li>
-      <% end %>
-      <% if @banner.nil? %>
-        <li><%= link_to 'New Banner', plazr_store.new_admin_banner_path %></li>
-      <% elsif @banner.persisted? %>
-        <li><%= link_to 'Update Banner', plazr_store.edit_admin_banner_path(@banner) %></li>
-      <% end %>
-
       <%= form_tag plazr_store.search_path, :method => 'get', :class => "form-inline" do %>
         <%= text_field_tag :search, params[:search], :placeholder => "Camisolas amarelas", :class => "input-xlarge" %>
         <%= submit_tag "Pesquisar", :name => nil, :class=>"btn" %>
