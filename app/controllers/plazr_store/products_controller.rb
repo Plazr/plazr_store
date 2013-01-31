@@ -6,7 +6,7 @@ module PlazrStore
     end
 
     def show
-      @product = Product.find(params[:product_id])
+      @product = Product.find(params[:id])
       if @product.variants_without_master.empty?
      	  @variant = @product.master_variant
   	  else

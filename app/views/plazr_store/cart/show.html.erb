@@ -26,7 +26,7 @@
 					 <img src=<%=cart_variant.variant.image.file%>/>
 				</div>
 				<div class="span3">
-					<p><%= link_to cart_variant.info, product_path(cart_variant.product) %></p>
+					<p><%= link_to cart_variant.name, product_path(cart_variant.product) %></p>
 				</div>
 				<div class="span3">
 					<p><%=cart_variant.variant.price%> €</p>

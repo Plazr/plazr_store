@@ -40,11 +40,7 @@ PlazrStore::Engine.routes.draw do
     match 'customization' => 'customizations#show', :as => :customization, :via => :get, :controller => 'customizations'
   end
 
-  scope '/products' do#:products, :only => [:index, :show] do
-    match '/' => 'products#index', :as => :products, :via => :get, :controller => "products"
-    match '/:product_id' => 'products#show', :as => :product, :via => :get, :controller => "products"
-    match '/:product_id/variants/:variant_id' => 'products#show', :as => :product_variant, :via => :get, :controller => "products"
-  end
+  resources :products, :only => [:index, :show]
 
   #pages
   scope '/pages' do
