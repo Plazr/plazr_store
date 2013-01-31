@@ -1,11 +1,11 @@
 = form_for [:admin, @product, @variant], :html => { :class => [:form, 'form-horizontal'] } do |f|
-	- if @variant.errors.any?
-		#error_explanation
-			%h2= "#{pluralize(@variant.errors.count, "error")} prohibited this variant from being saved:"
-			%div{:class=>["alert","alert-error"]}
-				%ul
-					- @variant.errors.full_messages.each do |msg|
-						%li= msg
+	/ - if @variant.errors.any?
+	/ 	#error_explanation
+	/ 		%h2= "#{pluralize(@variant.errors.count, "error")} prohibited this variant from being saved:"
+	/ 		%div{:class=>["alert","alert-error"]}
+	/ 			%ul
+	/ 				- @variant.errors.full_messages.each do |msg|
+	/ 					%li= msg
 
 	.row-fluid
 		.span6
@@ -50,15 +50,18 @@
 						%span.add-on
 							= image_tag 'glyphicons/clock.png', :class => :icon
 		.span6
+			%h2 Image
 			- if f.object.new_record?
-				%h2 Image
 				.field
 					= f.fields_for :multimedia do |m|
+						= m.hidden_field :id
 						- if m.object.new_record?
-							// this line is necessary before the file_field (small fix to use paperclip)
 							= m.hidden_field :class_type
 							= m.file_field :file, :class => :wide
 							= m.text_field :caption, :class => :wide, placeholder: 'Caption'
+			- else
+				.alert.alert-info
+					%p= raw "Para modificar a(s) imagen(s) de um variante, vá a #{link_to 'Multimédia', admin_product_multimedia_path(@product)}, adicione ou remova imagens, e associe as imagens desejadas a este variante (#{@variant.sku})."
 
 			%h2 Properties
 			%table#properties.table.table-striped.table-bordered.table-hover.table-condensed
