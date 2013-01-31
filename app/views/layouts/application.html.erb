@@ -39,6 +39,13 @@
 		<div class="background-color"></div>
 		<div class="container">
 			<% if @namespace == 'PlazrStore::Admin' %>
+				<div class="topbar-wrapper">
+					<div class="btn-toolbar">
+						<div class="pull-right">
+							<%= render 'layouts/user' %>
+						</div>
+					</div>
+				</div>
 				<%= render 'plazr_store/admin/nav' %>
 			<% else %>
 				<%= render 'layouts/top_bar' %>

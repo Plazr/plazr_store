@@ -1,6 +1,7 @@
+<%# binding.pry %>
 <div class="btn-group">
 	<% if user_signed_in? %>
-		<a class="btn btn-primary dropdown-toggle" href="#">
+		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
 			<%= current_user.to_s unless Rails.env.test? %>
 			<span class="caret"></span>
 		</a>
@@ -12,11 +13,16 @@
 	<% end %>
 	<ul class="dropdown-menu pull-right" role="menu">
 		<% if user_signed_in? %>
-			<li><%= link_to 'Ver Perfil',  plazr_auth.profile_path(current_user), class: 'profile-button' %></li>
+			<li><%= link_to 'Ver Perfil',  plazr_auth.profile_path(current_user), :class => 'profile-button' %></li>
 			<li><%= link_to 'Editar Perfil',     plazr_auth.edit_user_registration_path, class: 'edit-button' %></li>
-			<% if current_user.role?('admin') %>
+			<%# if current_user.role?('admin') %>
+			<% if can? :admin, :store %>
 				<li class="divider"></li>
-				<li><%= link_to 'Painel Administrador', plazr_auth.admin_path, class: 'admin-button' %></li>
+				<% if @namespace == 'PlazrStore::Admin' %>
+					<li><%#= link_to 'Loja', '#', class: 'admin-button' %></li>
+				<% else %>
+					<li><%= link_to 'Painel Administrador', plazr_auth.admin_path, class: 'admin-button' %></li>
+				<% end %>
 			<% end %>
 			<li class="divider"></li>
 			<li><%= link_to 'Sair', plazr_auth.destroy_user_session_path, :method => :delete, class: 'exit-button' %></li>
