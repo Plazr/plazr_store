@@ -19,7 +19,7 @@
 			<% if can? :admin, :store %>
 				<li class="divider"></li>
 				<% if @namespace == 'PlazrStore::Admin' %>
-					<li><%#= link_to 'Loja', '#', class: 'admin-button' %></li>
+					<li><%= link_to 'Loja', root_path, class: 'admin-button' %></li>
 				<% else %>
 					<li><%= link_to 'Painel Administrador', plazr_auth.admin_path, class: 'admin-button' %></li>
 				<% end %>
