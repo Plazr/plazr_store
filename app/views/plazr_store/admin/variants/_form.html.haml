@@ -56,7 +56,7 @@
 					= f.fields_for :multimedia do |m|
 						= m.hidden_field :id
 						- if m.object.new_record?
-							= m.hidden_field :class_type
+							= m.hidden_field :class_type, :value => 'variant'
 							= m.file_field :file, :class => :wide
 							= m.text_field :caption, :class => :wide, placeholder: 'Caption'
 			- else
