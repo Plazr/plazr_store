@@ -27,6 +27,7 @@
 				</div>
 				<div class="span3">
 					<p><%= link_to cart_variant.name, product_path(cart_variant.product) %></p>
+					<p><%= cart_variant.variant.variant_properties_values %></p>
 				</div>
 				<div class="span3">
 					<p><%=cart_variant.variant.price%> €</p>
@@ -81,7 +82,8 @@
 						 <img src=<%=variant_wishlist.variant.image.file%>/>
 					</div>
 					<div class="span3">
-						<p><%= link_to variant_wishlist.info, product_path(variant_wishlist.product) %></p>
+						<p><%= link_to variant_wishlist.name, product_path(variant_wishlist.product) %></p>
+						<p><%= variant_wishlist.variant.variant_properties_values %></p>
 					</div>
 					<div class="span2">
 						<p><%=variant_wishlist.variant.price%> €</p>
