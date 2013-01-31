@@ -6,7 +6,7 @@
       <p><%= @product.rating %></p>
     </div>
     <div class="span5">
-      <h2><%= @variant.price %> €</h2>
+      <h2 id="price"><%= @variant.price %> €</h2>
     </div>
   </header>
 
@@ -63,7 +63,7 @@
           </dl>
           <select>
             <% @product.variants_without_master.each_with_index do |v, index| %>
-               <option id=<%= v.id %> value=<%= v.id %> ><%= v.variant_properties_values %></option>
+               <option id=<%= v.id %> value=<%= v.price %> ><%= v.variant_properties_values %></option>
              <% end %>
           </select>
         <% end %>
@@ -144,7 +144,11 @@ $(document).ready(function() {
   $('#product-show select').prop('selectedIndex', indexId);*/
 
   $('#product-show select').change(function(){
-    var id = $(this).val();
+    var price = $(this).val();
+
+    $('#product-show #price').text(price + " €");
+
+    var id = $(this).attr('id');
     //window.location.href = "/products/<%= @product.id %>/variants/" + id; 
     $("#add_cart_f").attr("action","/cart/add/" + id);
     $("#add_wishlist_f").attr("action","/wishlist/add/" + id);
@@ -152,15 +156,15 @@ $(document).ready(function() {
 
   $("#add_cart_bt").click(function(){
     if(parseInt($("#add_cart_f #amount").val())>0){
-      $("#add_cart_f").submit();
       alert("Adicionado ao carrinho");
+      $("#add_cart_f").submit();
     } 
     else alert("Quantidade inferior a 0.");
   });
 
   $("#add_wishlist_bt").click(function(){
-    $("#add_wishlist_f").submit();
     alert("Adicionado ao carrinho");
+    $("#add_wishlist_f").submit();
   });
 
 });
