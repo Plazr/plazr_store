@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_logo
-    @logo = PlazrStore::Multimedium.get_logo
+    @logo = PlazrStore::Multimedium.logo
   end
 
 end
