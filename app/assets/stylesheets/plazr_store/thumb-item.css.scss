@@ -3,7 +3,7 @@
 
 a.thumb-item {
     margin-bottom: 3em;
-	color: #333;
+	color: white;
 	text-decoration: none;
 	article {
 		border: 1px solid white;
@@ -20,10 +20,9 @@ a.thumb-item {
     section.box {
     	text-align: center;
     	padding: 5px 0 1px 0;
-    	background: $thumb-bg;
-    	border-bottom: 1px solid $thumb-hover;
+    	@include background-noise($thumb-bg);
+    	// border-bottom: 1px solid $thumb-hover;
     }
-
 	&:hover {
 		text-decoration: none;
 		article {
@@ -34,7 +33,7 @@ a.thumb-item {
 			filter:alpha(opacity=60); /* For IE8 and earlier */
 		}
 		section.box {
-			background: $thumb-hover;
+			@include background-noise ($thumb-hover);
 			color: white;
 			-moz-transition: all 0.1s ease-in;
     		-webkit-transition: all 0.1s ease-in;
