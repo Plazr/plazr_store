@@ -50,7 +50,7 @@ module PlazrStore
     end
 
     # return the banner or the default banner if doesn't exist one specific banner
-    def get_banner
+    def self.get_banner
       if Multimedium.banner.nil?
         Multimedium::new(class_type: 'banner')
       else
@@ -59,7 +59,7 @@ module PlazrStore
     end
 
     # return the logo or the default logo if doesn't exist one specific logo
-    def get_logo
+    def self.get_logo
       if Multimedium.logo.nil?
         Multimedium::new(class_type: 'logo')
       else

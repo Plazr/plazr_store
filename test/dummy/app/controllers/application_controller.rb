@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_banner
-    @banner = PlazrStore::Multimedium.banner
+    @banner = PlazrStore::Multimedium.get_banner
   end
 
   def get_logo
