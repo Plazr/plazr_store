@@ -1,5 +1,5 @@
 #admin
 	%h1= "Editar \"#{@product.name}\""
 	.btn-group
-		= link_to 'Voltar', admin_product_categories_path, :class => [:btn, 'btn-small']
+		= link_to 'Voltar', admin_product_path(@product), :class => [:btn, 'btn-small']
 	= render 'form'

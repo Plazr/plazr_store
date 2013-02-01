@@ -8,15 +8,15 @@
 	/ 					%li= msg
 
 	.control-group
-		= f.label :name, :class => 'control-label'
+		= f.label 'Nome', :class => 'control-label'
 		.controls
 			= f.text_field :name
 	
 	.control-group
-		= f.label :presentation, :class => 'control-label'
+		= f.label 'Apresentação', :class => 'control-label'
 		.controls
 			= f.text_field :presentation
 	
 	.control-group
 		.controls
-			= f.submit "Submit", :class => [:btn, 'btn-primary']
+			= f.submit "Guardar", :class => [:btn, 'btn-primary']

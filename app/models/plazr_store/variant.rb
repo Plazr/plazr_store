@@ -18,8 +18,7 @@ module PlazrStore
     has_many :wishlists, :through => :variant_wishlists
 
     ## Nested Attributes ##
-    accepts_nested_attributes_for :variant_variant_property_values, :allow_destroy => true, 
-          :reject_if => proc {|attributes| attributes.any? {|_,v| v.blank?}}
+    accepts_nested_attributes_for :variant_variant_property_values, :allow_destroy => true
     accepts_nested_attributes_for :multimedia, :allow_destroy => true,
           :reject_if => proc { |t| t['file'].nil? }
 
@@ -45,6 +44,7 @@ module PlazrStore
     before_save :create_restock_date
     after_save :sku_name
     before_validation :set_is_master, :on => :create
+    before_save :mark_variant_property_value_for_removal
 
     # Delegations
     delegate :name, :to => :product
@@ -155,6 +155,13 @@ module PlazrStore
 
       def sku_name
         update_attribute(:sku,"sku_#{self.id}") if self.sku.blank?
+      end
+
+      #used to mark the variant_variant_property_value to be destroyed when none is selected
+      def mark_variant_property_value_for_removal
+        variant_variant_property_values.each do |vvpv|
+          vvpv.mark_for_destruction if vvpv.variant_property_value_id.blank?
+        end
       end
   end
 end

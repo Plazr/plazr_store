@@ -54,7 +54,7 @@
 					- variants = @product.variants_without_master
 					- if variants.empty?
 						%li
-							%p.text-info This product has no variants
+							%p.text-info Este produto não tem variantes.
 					- else
 						- variants.each do |variant|
 							%li.span4.smaller
@@ -76,15 +76,16 @@
 			#properties.span6
 				%h2= link_to 'Propriedades', admin_product_product_properties_path(@product)
 				- if @product.variant_properties.empty?
-					%p.text-info This product has no properties
+					%p.text-info Este produto não tem propriedades.
 				- else
 					%ul.listbox
 						- @product.variant_properties.each do |vp|
 							%li.well.well-small.clearfix
-								= link_to admin_variant_property_path(vp.id) do
+								= link_to admin_variant_property_variant_property_values_path(vp.id) do
 									%strong= vp.display_name
 								%ul.values
 									- vp.variant_property_values.each do |vpv|
 										%li
-											= link_to admin_variant_property_variant_property_value_path(vp.id, vpv.id) do
-												%span.label.label-inverse= vpv.presentation
+											%span.label.label-inverse= vpv.presentation
+											/ = link_to admin_variant_property_variant_property_value_path(vp.id, vpv.id) do
+											/ 	%span.label.label-inverse= vpv.presentation

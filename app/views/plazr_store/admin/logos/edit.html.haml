@@ -1,20 +1,20 @@
 %h1 Edit Logo
 
-= form_for @logo, :url => url_for(:controller => 'logos', :action => 'update'), :html => { :multipart => true } do |f|
-  - if @logo.errors.any?
+= form_for @new_logo, :url => url_for(:controller => 'logos', :action => 'update'), :html => { :multipart => true } do |f|
+  - if @new_logo.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@logo.errors.count, "error")} prohibited this logo from being saved:"
+      %h2= "#{pluralize(@new_logo.errors.count, "error")} prohibited this logo from being saved:"
       %div{:class=>["alert","alert-error"]}
         %ul
-          - @logo.errors.full_messages.each do |msg|
+          - @new_logo.errors.full_messages.each do |msg|
             %li= msg
 
-  = image_tag @logo.file.url(:logo)
+  = image_tag @new_logo.file.url(:logo)
   // this line is necessary before the file_field (small fix to use paperclip)
   = f.hidden_field :class_type, :value => 'logo'
   = f.label :file
   = f.file_field :file
   %br
-  
+
   = f.submit "Submit"
   = link_to 'Cancel', root_path

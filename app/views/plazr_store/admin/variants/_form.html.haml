@@ -15,31 +15,31 @@
 					= f.text_field :sku, :class => :wide, placeholder: 'SKU', autofocus: true
 
 			.control-group
-				= f.label :description, :class => 'control-label'
+				= f.label 'Descrição', :class => 'control-label'
 				.controls
 					= f.text_area :description, :class => :wide, placeholder: 'Product description', rows: 5
 			
 			.control-group
-				= f.label :price, :class => 'control-label'
+				= f.label 'Preço', :class => 'control-label'
 				.controls
 					.input-append
 						= f.text_field :price, :class => [:number, 'input-small'], placeholder: 'price'
 						%span.add-on= image_tag 'glyphicons/euro.png', :class => :icon
 			
 			.control-group
-				= f.label :cost_price, :class => 'control-label'
+				= f.label 'Custo', :class => 'control-label'
 				.controls
 					.input-append
 						= f.text_field :cost_price, :class => [:number, 'input-small'], placeholder: 'cost'
 						%span.add-on= image_tag 'glyphicons/euro.png', :class => :icon
 			
 			.control-group
-				= f.label :amount_available, :class => 'control-label'
+				= f.label 'Quantidade disponível', :class => 'control-label'
 				.controls
 					= f.number_field :amount_available, :class => 'input-small'
 			
 			.control-group
-				= f.label :restock_date, :class => 'control-label'
+				= f.label 'Reabastecimento', :class => 'control-label'
 				.controls
 					.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
 						= f.text_field :restock_date_date_string, :class => [:center, 'input-small'], readonly: true
@@ -50,17 +50,20 @@
 						%span.add-on
 							= image_tag 'glyphicons/clock.png', :class => :icon
 		.span6
+			%h2 Imagem
 			- if f.object.new_record?
-				%h2 Image
 				.field
 					= f.fields_for :multimedia do |m|
+						= m.hidden_field :id
 						- if m.object.new_record?
-							// this line is necessary before the file_field (small fix to use paperclip)
-							= m.hidden_field :class_type
+							= m.hidden_field :class_type, :value => 'variant'
 							= m.file_field :file, :class => :wide
 							= m.text_field :caption, :class => :wide, placeholder: 'Caption'
+			- else
+				.alert.alert-info
+					%p= raw "Para modificar a(s) imagen(s) de um variante, vá a #{link_to 'Multimédia', admin_product_multimedia_path(@product)}, adicione ou remova imagens, e associe as imagens desejadas a este variante (#{@variant.sku})."
 
-			%h2 Properties
+			%h2 Propriedades
 			%table#properties.table.table-striped.table-bordered.table-hover.table-condensed
 				%thead
 					%tr
@@ -68,9 +71,10 @@
 						%th Value
 				%tbody
 					= f.fields_for :variant_variant_property_values do |vvpv|
-						%tr
-							%td.key= vvpv.label :display_name, vvpv.object.variant_property_value.variant_property.display_name, :class => 'control-label'
-							%td.value= vvpv.collection_select :variant_property_value_id, vvpv.object.variant_property_value.variant_property.variant_property_values, :id, :presentation, {}
+						- if vvpv.object.variant_property_value
+							%tr
+								%td.key= vvpv.label :display_name, vvpv.object.variant_property_value.variant_property.display_name, :class => 'control-label'
+								%td.value= vvpv.collection_select :variant_property_value_id, vvpv.object.variant_property_value.variant_property.variant_property_values, :id, :presentation, include_blank: 'Selecione um valor', selected:(vvpv.object.persisted? && vvpv.object.variant_property_value.id) || ""
 	.actions
 		= f.submit "Submit", :class => [:btn, 'btn-primary']
 		= link_to admin_product_variants_path, :method => :get do

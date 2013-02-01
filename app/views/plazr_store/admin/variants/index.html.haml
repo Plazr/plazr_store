@@ -3,7 +3,7 @@
 		%ul.span10.thumbnails
 			- if @variants.empty?
 				%li
-					%p.text-info= raw("This product has no variants. Create a #{link_to 'new', new_admin_product_variant_path} one?")
+					%p.text-info= raw("Este produto não tem variantes. Clique #{link_to 'aqui', new_admin_product_variant_path} para criar um novo variante.")
 			- else
 				%li.span2
 					= link_to new_admin_product_variant_path do
@@ -15,7 +15,7 @@
 									= image_tag imgpth
 								= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
 					.actions
-						= link_to 'Novo', new_admin_product_path, :class => [:btn, 'btn-mini', 'btn-success']
+						= link_to 'Novo', new_admin_product_variant_path, :class => [:btn, 'btn-mini', 'btn-success']
 				- @variants.each do |v|
 					%li.span2
 						= link_to admin_product_variant_path(@product, v) do

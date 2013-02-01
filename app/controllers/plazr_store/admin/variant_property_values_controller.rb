@@ -14,7 +14,8 @@ module PlazrStore
       @variant_property_value = @variant_property.variant_property_values.build params[:variant_property_value]
 
       if @variant_property_value.save
-        redirect_to admin_variant_property_variant_property_value_path(@variant_property, @variant_property_value), :notice => 'VariantPropertyValue was successfully created.'
+        # redirect_to admin_variant_property_variant_property_value_path(@variant_property, @variant_property_value), :notice => 'VariantPropertyValue was successfully created.'
+        redirect_to admin_variant_property_variant_property_values_path, :notice => 'VariantPropertyValue was successfully created.'
       else
         render :new
       end

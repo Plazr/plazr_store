@@ -15,7 +15,7 @@
 	<style type="text/css">
 	.hero-wrap .hero-unit {
 		background: url("<%= @logo.file %>") left center no-repeat;
-		padding-left: 125px;
+		padding-left: <%= "#{@logo.get_width+20}px" %>;
 	}
 	</style>
 </head>

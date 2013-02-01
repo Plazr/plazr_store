@@ -63,8 +63,13 @@ module PlazrStore
       if Multimedium.logo.nil?
         Multimedium::new(class_type: 'logo')
       else
-        Multimedium.banner
+        Multimedium.logo
       end
+    end
+
+    def get_width(style = :logo)
+      geo = Paperclip::Geometry.from_file(file.path(style))
+      geo.width
     end
 
     # set the style of the file accordingly to the class_type
@@ -74,7 +79,7 @@ module PlazrStore
       elsif self.class_type == 'banner'
         {:banner => '800x100!'}
       elsif self.class_type == 'logo'
-        {:logo => '60x60!'}
+        {:logo => '400x60>'}
       end
     end
 

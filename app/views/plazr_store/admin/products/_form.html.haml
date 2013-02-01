@@ -55,13 +55,12 @@
 								%ul.checklistbox
 									- odd = true
 									= frm.fields_for :product_product_categories do |pcf|
-										- rowclass = odd ? :odd : :even
-										%li{ :class => rowclass }
-											.checkbox
-												= pcf.check_box :_destroy, {:checked => pcf.object.persisted?}, '0', '1'
-												= pcf.object.product_category.name
-											= pcf.hidden_field :product_category_id
-										- odd = !odd;
+										- if pcf.object.product_category.is_leaf?
+											%li
+												.checkbox
+													= pcf.check_box :_destroy, {:checked => pcf.object.persisted?}, '0', '1'
+													= pcf.object.product_category.name
+												= pcf.hidden_field :product_category_id
 					.control-group
 						.controls
 							%a{href: '#tabStepTwo', "data-toggle" => "tab", class: 'btn btn-primary'}

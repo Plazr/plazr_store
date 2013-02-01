@@ -1,14 +1,14 @@
 module PlazrStore
   class Admin::LogosController < Admin::ApplicationController
-    
+
     def new
-      @logo = Multimedium.new
+      @new_logo = Multimedium.new
     end
 
     def create
-      @logo = Multimedium.new params[:multimedium]
+      @new_logo = Multimedium.new params[:multimedium]
 
-      if @logo.save
+      if @new_logo.save
         redirect_to root_path, :notice => 'Logo was successfully created.'
       else
         render :new
@@ -16,16 +16,16 @@ module PlazrStore
     end
 
     def edit
-      @logo = Multimedium.find(params[:id])
+      @new_logo = Multimedium.find(params[:id])
     end
 
     def update
-      @logo = Multimedium.find params[:id]
+      @new_logo = Multimedium.find params[:id]
 
-      if @logo.update_attributes(params[:multimedium])
+      if @new_logo.update_attributes(params[:multimedium])
         redirect_to root_path, :notice => 'Logo was successfully updated.'
       else
-        render :edit 
+        render :edit
       end
     end
 

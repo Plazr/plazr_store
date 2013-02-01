@@ -60,7 +60,7 @@ module PlazrStore
         params[:pps].each do |k,v|
           Property.find(v[:property_id]).update_attributes(:id_name => v[:id_name], :display_name => v[:display_name])
           ProductProperty.find(k).update_attributes(:value => v[:value])
-        end
+        end if params[:pps]
       end
   end
 end
