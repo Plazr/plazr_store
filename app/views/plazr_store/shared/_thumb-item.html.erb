@@ -1,9 +1,8 @@
 <a class="thumb-item span3" href="<%= url_for(recommended) %>">
 	<article class="">
 		<section class="thumb-item-image" style="background-image:url(<%= image_path recommended.image.file.url %>)">
-		</section>
-		<section class="box">
-			<p>
+					<section class="box">
+			<p class="thumb-rate">
 				<% 3.times do %>
 				<%= image_tag 'plazr_store/rate/star-full.png', :class => 'rating' %>
 				<% end %>
@@ -11,10 +10,12 @@
 				<%= image_tag 'plazr_store/rate/star-empty.png', :class => 'rating' %>
 				<% end %>
 			</p>
-			<h5><%= recommended.name %></h5>
-			<p>
-				€ <%= recommended.master_price %>
+			<h5 class="thumb-name"><%= recommended.name %></h5>
+			<p class="thumb-price">
+				<span>€ <%= recommended.master_price %></span>
 			</p>
 		</section>
+		</section>
+
 	</article>
 </a>

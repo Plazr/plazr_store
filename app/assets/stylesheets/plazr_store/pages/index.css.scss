@@ -6,33 +6,33 @@
 	padding-top: 10px;
 
 	#well-outter {
-        a {
-            color: #333;
-        }
         background-color: white;
-        margin: 0;
-        h4 {
-            // padding-bottom: 0.1em;
-            // border-bottom: 1px solid $border-color;
-        }
-        .well-entry {
+        a:not(:first-child) .well-entry {
             padding-top: 8px;
+        }
+        a .well-entry {
             div {
                 font-family: 'Lato', sans-serif;
                 @include background-cover-image;
-                border: 1px solid $border-color;
-                height: 70px;
+                border: 1px solid  white;
+                height: 74.5px;
                 line-height: 60px;
                 vertical-align: middle;
                 padding-left: 20px;
-                &:hover {
-                    opacity:0.8;
-                    filter:alpha(opacity=80); /* For IE8 and earlier */
-                }
                 span {
+                    color: black;
                     font-size: 20px;
                     padding: 5px;
                     background-color: rgba(255, 255, 255, 0.7);
+                    @include transition(0s, 1s, background-color);
+
+                }
+                &:hover {
+                    border: 1px solid $border-color;
+                }
+                &:hover span {
+                    background-color: $recommended-bg-hover-color;
+                    color: white;
                 }
             }
         }
@@ -47,10 +47,9 @@
             border: 10px solid white;
         }
 
-        @include background-noise($recommended-bg);
-
         position: relative;
         border: 1px solid $border-color;
+
         &:hover {
             background-color: $thumb-hover;
             border: 1px solid $thumb-hover;
@@ -63,13 +62,12 @@
                 filter:alpha(opacity=60); /* For IE8 and earlier */
             }
             .featured-box {
-                // color: white;
                 -moz-transition: all 0.2s ease-in;
                 -webkit-transition: all 0.2s ease-in;
                 -o-transition: all 0.2s ease-in;
                 transition: all 0.2s ease-in;
                  span.transparent-background {
-                    background-color: rgba($recommended-bg, 0.8);
+                    background-color: $recommended-bg-hover-color;
                     color: white;
                 }
             }
@@ -78,33 +76,23 @@
         .featured-image {
             z-index: -10;
             height: 300px;
-            // width: 350px;
             width: 100%;
-            float: left;
-            -moz-background-size: cover;
-            -webkit-background-size: cover;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center top;
-            -webkit-transition: opacity 0.2s ease-in-out;
-            -moz-transition: opacity 0.2s ease-in-out;
-            -o-transition: opacity 0.2s ease-in-out;
-            transition: opacity 0.2s ease-in-out;
+            @include background-cover-image;
         }
 
         .featured-box {
+            color: $recommended-fg-color;
+            text-decoration: none;
             span.transparent-background {
                 padding: 0.2em;
-                background-color: rgba(255, 255, 255, 0.7);
+                background-color: $recommended-bg-color;
+                @include transition(0s, 1s, background-color);
             }
-            color: #333;
-            text-decoration: none;
             p {
                 margin-bottom: 15px;
             }
             p.price {
                 font-size: 25px;
-
             }
             header {
                 font-family: 'Lato', sans-serif;
