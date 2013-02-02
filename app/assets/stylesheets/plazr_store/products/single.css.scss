@@ -1,9 +1,6 @@
 $border-color: #EEE;
 $price-color: #900;
 
-li {
-	list-style: none;
-	}
 
 article#product-show {
 	.price {
@@ -27,6 +24,10 @@ article#product-show {
 }
 
 article#product-show {
+	li {
+		list-style: none;
+		margin-bottom: 10px;
+	}
 
 	/*
 	PAGE STRUCTURE

@@ -18,7 +18,7 @@
           <div class="slider-wrap">
             <div id="main-photo-slider" class="csw">
               <div class="panelContainer">
-                
+
                 <% @product.images.each_with_index do |im, index| %>
                   <div class="panel" title='Panel <%=index + 1 %>'>
                     <div class="wrapper">
@@ -30,17 +30,22 @@
             </div>
 
             <div id="movers-row">
-              
+
               <% @product.images.each_with_index do |im, index| %>
                 <div><a href="#<%=index + 1 %>" class="cross-link"><img src=<%=im.file%> class="nav-thumb" alt="temp-thumb" /></a></div>
               <% end %>
-              
+
             </div>
           </div>
         </div>
       </div>
       <!--Descrição do variante e do product-->
       <div class="span3">
+        <dl>
+          <dt>Quantidade</dt>
+          <%= add_to_cart_form(@variant.id) %>
+          <%= add_to_wishlist_form(@variant.id) %>
+        </dl>
         <dl>
           <dt>Detalhes</dt>
           <dd><%= @product.details %></dd>
@@ -56,7 +61,7 @@
           <% end %>
         </dl>
 
-        
+
         <% if !@product.variants_without_master.empty?%>
           <dl>
             <dt>Variantes:</dt>
@@ -64,30 +69,20 @@
           <select>
             <% @product.variants_without_master.each_with_index do |v, index| %>
                <option id=<%= v.id %> value=<%= v.price %> ><%= v.variant_properties_values %></option>
-             <% end %>
+            <% end %>
           </select>
         <% end %>
 
-        <dl>
-          <dt>Quantidade:</dt>
-        </dl>
-        <%= add_to_cart_form(@variant.id) %>
-        <%= add_to_wishlist_form(@variant.id) %>
+
+
       </div>
 
       <div class="span3">
             <ul>
-              <li><a id="add_cart_bt" class="btn btn-large btn-primary disabled">Add Cart</a></li>
-              <li><a id="add_wishlist_bt" class="btn btn-large btn-primary disabled">Add Wishlist</a></li>
-              <li><a class="btn btn-large btn-primary disabled">Add comment</a></li>
+              <li><a id="add_cart_bt" class="btn">Adicionar ao carrinho</a></li>
+              <li><a id="add_wishlist_bt" class="btn">Adicionar à wishlist</a></li>
+              <li><a class="btn">Comentar</a></li>
             </ul>
-          <!--
-          <ul>
-            <a href="#" class="btn btn-large btn-primary disabled">Share facebook</a>
-            <a href="#" class="btn btn-large btn-primary disabled">Share twiter</a>
-            <a href="#" class="btn btn-large btn-primary disabled">Share google</a>
-          </ul>
-        -->
       </div>
 
     </div>
@@ -97,8 +92,8 @@
 
         <div>
           <div class="row">
-            <div class="span9" align="center">
-              <h3>Artigos relacionados</h3>
+            <div class="span12">
+              <h3 class="page-header">Artigos relacionados</h3>
             </div>
           </div>
 
@@ -155,7 +150,7 @@ $(document).ready(function() {
     if(parseInt($("#add_cart_f #amount").val())>0){
       alert("Adicionado ao carrinho");
       $("#add_cart_f").submit();
-    } 
+    }
     else alert("Quantidade inferior a 0.");
   });
 
