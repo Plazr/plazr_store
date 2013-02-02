@@ -1,13 +1,11 @@
-%h1 Show Property
-%p#notice
-  = notice
-%table
-  %tr
-    %td
-      %b Display Name
-    %td
-      = @property.display_name
-
-= link_to 'Edit', edit_admin_property_path(@property)
-|
-= link_to 'Back', admin_properties_path
+#admin
+	%h1= @property.id_name
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_properties_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_property_path(@property), :class => :btn
+			= link_to 'Eliminar', admin_property_path(@property), :method => :delete, :data => { :confirm => "Está prestes a eliminar a propriedade \"#{@property.id_name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
+	%p#notice= notice
+	%h3 Apresentação
+	%p= @property.display_name

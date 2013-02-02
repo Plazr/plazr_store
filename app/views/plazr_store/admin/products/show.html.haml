@@ -5,15 +5,12 @@
 			= link_to 'Voltar', admin_products_path, :class => [:btn, 'btn-small']
 		.btn-group.pull-right
 			= link_to 'Editar', edit_admin_product_path(@product), :class => :btn
-			= link_to 'Eliminar', admin_product_path(@product), :method => :delete, data: { confirm: 'Are you sure?' }, :class => [:btn, 'btn-danger']
+			= link_to 'Eliminar', admin_product_path(@product), :method => :delete, data: { confirm: "Está prestes a eliminar o produto \"#{@product.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
 	.show
 		.row-fluid
 			.span4
-				- variant = @product.master_variant
-				- imgpth = if variant.nil? || variant.multimedia.empty?
-					- 'http://placehold.it/100x100&text=No%20image'
-				- else
-					- variant.multimedia.first.file.url(:thumb)
+				- imgpth = 'http://placehold.it/100x100&text=No%20image'
+				- imgpth = @product.master_variant.multimedia.first.file.url(:thumb) unless @product.master_variant.nil? || @product.master_variant.multimedia.empty?
 				%noscript
 					= image_tag imgpth, :class => :photo
 				= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
@@ -24,15 +21,14 @@
 						= @product.brand.name
 				- Time::DATE_FORMATS[:long_at] = '%B %d, %Y at %H:%M'
 				- available_at = Time.parse("#{@product.available_at_date_string} #{@product.available_at_time_string}")
-				- if available_at.past?
-					%p= "Disponível desde #{available_at.to_s(:long_at)}"
-				- else
+				- if available_at.future?
 					%p= "Disponível a partir de #{available_at.to_s(:long_at)}"
-				%h6= @product.slug
+				- else
+					%p= "Disponível desde #{available_at.to_s(:long_at)}"
 				%p
-					%strong SKU:
+					%strong Identificador:
 					= @product.master_variant.sku if @product.master_variant
-				%h4= "€ #{@product.master_variant ? @product.master_variant.price : '--'}"
+				%h4= number_to_currency @product.master_variant.price, unit: '€' if @product.master_variant
 				.rating
 					%span
 						- if @product.rating
@@ -49,7 +45,7 @@
 							%span.label= pc.name
 		.row-fluid
 			#variants.span6
-				%h2= link_to 'Variantes', admin_product_variants_path(@product)
+				%h2= link_to 'Modelos', admin_product_variants_path(@product)
 				%ul.thumbnails
 					- variants = @product.variants_without_master
 					- if variants.empty?
@@ -61,22 +57,26 @@
 								.thumbnail
 									%div
 										%strong.title= link_to variant.sku, admin_product_variant_path(@product, variant)
-										- imgpth = if variant.multimedia.empty?
-											- 'http://placehold.it/100x100&text=No%20image'
-										- else
-											- variant.multimedia.first.file.url(:thumb)
+										- imgpth = 'http://placehold.it/100x100&text=No%20image'
+										- imgpth = variant.multimedia.first.file.url(:thumb) unless variant.multimedia.empty?
 										%noscript
 											= image_tag imgpth, :class => :photo
 										= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
 								.actions
 									= link_to edit_admin_product_variant_path(@product, variant) do
 										= button_tag 'Editar', :class => [:btn, 'btn-mini']
-									= link_to admin_product_variant_path(@product, variant), :method => :delete, data: { confirm: 'Are you sure?' } do
+									= link_to admin_product_variant_path(@product, variant), :method => :delete, data: { confirm: "Está prestes a eliminar o modelo \"#{variant.sku}\". Deseja continuar?" } do
 										= button_tag 'Eliminar', :class => [:btn, 'btn-mini', 'btn-danger']
 			#properties.span6
-				%h2= link_to 'Propriedades', admin_product_product_properties_path(@product)
+				%h2= link_to 'Propriedades de Produto', admin_product_product_properties_path(@product)
+				- if @product.product_properties.empty?
+					%p.text-info Este producto não tem propriedades.
+				- else
+					%ul.listbox
+
+				%h2= link_to 'Propriedades de Modelo', admin_product_product_properties_path(@product)
 				- if @product.variant_properties.empty?
-					%p.text-info Este produto não tem propriedades.
+					%p.text-info Este produto não tem propriedades de modelo.
 				- else
 					%ul.listbox
 						- @product.variant_properties.each do |vp|
