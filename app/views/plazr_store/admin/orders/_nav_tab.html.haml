@@ -1,6 +1,9 @@
-- in_orders = @section == 'orders' && @view == 'index'
+- in_orders = @section == 'orders'              && @view == 'index'
+- in_shpcnd = @section == 'shipment_conditions' && @view == 'index'
 .well.well-small
 	%ul.nav.nav-list
 		%li.nav-header Encomendas
 		%li{ :class => in_orders ? :active : nil }
 			= link_to 'Encomendas', in_orders ? '#' : admin_orders_path
+		%li{ :class => in_shpcnd ? :active : nil }
+			= link_to 'Meios de entrega', in_shpcnd ? '#' : admin_shipment_conditions_path, style: 'font-size:smaller'

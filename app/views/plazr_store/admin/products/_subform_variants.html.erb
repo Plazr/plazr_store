@@ -1,13 +1,13 @@
 <%= form.fields_for :variants do |variant| %>
 	<% if variant.object.is_master? %>
 		<div class="control-group">
-			<%= variant.label :sku, 'SKU', :class => 'control-label' %>
+			<%= variant.label 'Identificador', 'SKU', :class => 'control-label' %>
 			<div class="controls">
 				<%= variant.text_field :sku, :class => 'input-small	', placeholder: 'SKU' %>
 			</div>
 		</div>
 		<div class="control-group">
-			<%= variant.label :price, :class => 'control-label' %>
+			<%= variant.label 'Preço', :class => 'control-label' %>
 			<div class="controls">
 				<div class="input-append">
 					<%= variant.text_field :price, :class => [:number, 'input-small'], placeholder: 'price' %>

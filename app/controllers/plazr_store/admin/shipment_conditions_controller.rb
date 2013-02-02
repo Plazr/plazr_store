@@ -6,7 +6,8 @@ module PlazrStore
     end
 
     def index
-      @shipment_conditions = ShipmentCondition.all
+      # @shipment_conditions = ShipmentCondition.all
+      @shipment_conditions = ShipmentCondition.all.paginate(:page => params[:page], :per_page => 10)
     end
 
     def new
@@ -21,7 +22,8 @@ module PlazrStore
       @shipment_condition = ShipmentCondition.new(params[:shipment_condition])
 
       if @shipment_condition.save
-        redirect_to admin_shipment_condition_path(@shipment_condition), :notice => 'ShipmentCondition was created successfully'
+        # redirect_to admin_shipment_condition_path(@shipment_condition), :notice => 'ShipmentCondition was created successfully'
+        redirect_to admin_shipment_condition_path(@shipment_condition), :notice => 'Meio de entrega criado com sucesso'
       else
         render :new
       end
@@ -31,7 +33,7 @@ module PlazrStore
       @shipment_condition = ShipmentCondition.find(params[:id])
 
       if @shipment_condition.update_attributes(params[:shipment_condition])
-        redirect_to admin_shipment_condition_path(@shipment_condition), :notice => 'ShipmentCondition was created sucessfully'
+        redirect_to admin_shipment_condition_path(@shipment_condition), :notice => 'Meio de entrega actualizado com sucesso'
       else
         render :edit
       end
@@ -45,7 +47,7 @@ module PlazrStore
 
     def get_location
       super
-      @tab = 'pages'
+      @tab = 'orders'
     end
   end
 end

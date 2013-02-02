@@ -1,3 +1,5 @@
-%h1 Edit ShipmentCondition
-
-= render :partial => 'form'
+#admin
+	%h1= "Editar \"#{@shipment_condition.service_name}\""
+	.btn-group
+		= link_to 'Voltar', admin_shipment_conditions_path, :class => [:btn, 'btn-small']
+	= render 'form'

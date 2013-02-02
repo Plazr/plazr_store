@@ -1,20 +1,29 @@
-= form_for [:admin, @shipment_condition] do |f|
-  - if @shipment_condition.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@shipment_condition.errors.count, "error")} prohibited this shipment_condition from being saved:"
-      %div{:class=>["alert","alert-error"]}
-        %ul
-          - @shipment_condition.errors.full_messages.each do |msg|
-            %li= msg
+= form_for [:admin, @shipment_condition], :html => { :class => [:form, 'form-horizontal'] } do |f|
+	- if @shipment_condition.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@shipment_condition.errors.count, "error")} prohibited this shipment_condition from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- @shipment_condition.errors.full_messages.each do |msg|
+						%li= msg
+	.control-group
+		= f.label 'Nome do serviço', :class => 'control-label'
+		.controls
+			= f.text_field :service_name, :class => :span6
 
-  = f.label :service_name
-  = f.text_field :service_name
+	.control-group
+		= f.label 'Preço', :class => 'control-label'
+		.controls
+			.input-append
+				= f.text_field :price, :class => [:span4, :number]
+				%span.add-on
+					= image_tag 'glyphicons/euro.png', :class => :icon
+	
+	.control-group
+		= f.label 'Detalhes do serviço', :class => 'control-label'
+		.controls
+			= f.text_area :service_details, :class => :span12, rows: 3
 
-  = f.label :price
-  = f.text_field :price, :class => 'shipment_condition'
-  
-  = f.label :service_details
-  = f.text_area :service_details
-
-  = f.submit "Submit"
-  = link_to 'Cancel', admin_shipment_conditions_path
+	.control-group
+		.controls
+			= f.submit 'Guardar', :class => [:btn, 'btn-primary']

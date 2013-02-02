@@ -1,20 +1,26 @@
-%h1 Listing ShipmentConditions
-%table
-  %thead
-    %tr
-      %th Service Name
-      %th Price
-  %tbody
-    - @shipment_conditions.each do |shipment_condition|
-      %tr
-        %td
-          = shipment_condition.service_name
-        %td
-          #{shipment_condition.price} €
-        %td
-          = link_to 'Show', admin_shipment_condition_path(shipment_condition)
-        %td
-          = link_to 'Edit', edit_admin_shipment_condition_path(shipment_condition)
-        %td
-          = link_to 'Destroy', admin_shipment_condition_path(shipment_condition), :method => :delete, :data => { :confirm => 'Are you sure?' }
-= link_to 'New shipmentCondition', new_admin_shipment_condition_path
+#admin
+	.listing.listing-linked
+		%h1 Lista de Meios de Entrega
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th Nome do serviço
+					%th Preço
+					%th.btn-mini &nbsp;
+					%th.btn-mini &nbsp;
+			%tbody
+				- if @shipment_conditions.empty?
+					%tr.info
+						%td{ colspan: 4 }
+							= raw "Não existem meios de entrega. Clique #{link_to 'aqui', new_admin_shipment_condition_path} para criar um novo meio de entrega."
+				- else
+					%tr.success
+						%td{ colspan: 4 }
+							= link_to 'Adicionar meio de envio', new_admin_shipment_condition_path
+					- @shipment_conditions.each do |shipment_condition|
+						%tr.linked
+							%td= link_to shipment_condition.service_name, admin_shipment_condition_path(shipment_condition)
+							%td= link_to number_to_currency(shipment_condition.price, unit: '€'), admin_shipment_condition_path(shipment_condition)
+							%td.btn-mini= link_to 'Editar', edit_admin_shipment_condition_path(shipment_condition), :class => [:btn, 'btn-mini']
+							%td.btn-mini= link_to 'Eliminar', admin_shipment_condition_path(shipment_condition), :method => :delete, :data => { :confirm => "Está prestes a apagar meio de entrega \"#{shipment_condition.service_name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger', 'btn-mini']
+	= will_paginate @shipment_conditions, :renderer => BootstrapPagination::Rails
