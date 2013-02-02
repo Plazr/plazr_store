@@ -1,0 +1,36 @@
+#admin
+	%h1= @variant.product.name
+	%h2= @variant.sku
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_product_variants_path(@product), :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_product_variant_path(@product,@variant), :class => :btn
+			= link_to 'Eliminar', admin_product_variant_path(@product,@variant), :method => :delete, data: { confirm: 'Are you sure?' }, :class => [:btn, 'btn-danger']
+	.show
+		.row-fluid
+			.span4
+				- imgpth = @variant.image.file.url(:thumb)
+				%noscript= image_tag imgpth, :class => :photo
+				.photo{ style: "background-image:url('#{imgpth}')" }
+			.span8
+				%p= @variant.description
+				.row-fluid
+					.offset1.span3
+						%table.table.table-bordered
+							%tbody
+								%tr
+									%th Price
+									%td= number_to_currency( @variant.price, unit: '€' )
+								%tr
+									%th Cost
+									%td= number_to_currency( @variant.cost_price, unit: '€' )
+					.offset1.span6
+						%table.table.table-bordered
+							%tbody
+								%tr
+									%th Available
+									%td= @variant.amount_available
+								%tr
+									%th Restock
+									%td= @variant.restock_date.to_time.to_s(:long)

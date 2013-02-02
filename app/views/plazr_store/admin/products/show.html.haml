@@ -1,0 +1,91 @@
+#admin
+	%h1= @product.name
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_products_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_product_path(@product), :class => :btn
+			= link_to 'Eliminar', admin_product_path(@product), :method => :delete, data: { confirm: 'Are you sure?' }, :class => [:btn, 'btn-danger']
+	.show
+		.row-fluid
+			.span4
+				- variant = @product.master_variant
+				- imgpth = if variant.nil? || variant.multimedia.empty?
+					- 'http://placehold.it/100x100&text=No%20image'
+				- else
+					- variant.multimedia.first.file.url(:thumb)
+				%noscript
+					= image_tag imgpth, :class => :photo
+				= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
+			.span8
+				- if @product.brand
+					%p
+						%strong Marca: 
+						= @product.brand.name
+				- Time::DATE_FORMATS[:long_at] = '%B %d, %Y at %H:%M'
+				- available_at = Time.parse("#{@product.available_at_date_string} #{@product.available_at_time_string}")
+				- if available_at.past?
+					%p= "Disponível desde #{available_at.to_s(:long_at)}"
+				- else
+					%p= "Disponível a partir de #{available_at.to_s(:long_at)}"
+				%h6= @product.slug
+				%p
+					%strong SKU:
+					= @product.master_variant.sku if @product.master_variant
+				%h4= "€ #{@product.master_variant ? @product.master_variant.price : '--'}"
+				.rating
+					%span
+						- if @product.rating
+							= @product.rating.times
+						- else
+							%em (sem avaliação)
+				%p= @product.details
+		#categories
+			%h2 Categorias
+			%ul
+				- @product.product_categories.each do |pc|
+					%li
+						= link_to admin_product_category_path(pc.id) do
+							%span.label= pc.name
+		.row-fluid
+			#variants.span6
+				%h2= link_to 'Variantes', admin_product_variants_path(@product)
+				%ul.thumbnails
+					- variants = @product.variants_without_master
+					- if variants.empty?
+						%li
+							%p.text-info Este produto não tem variantes.
+					- else
+						- variants.each do |variant|
+							%li.span4.smaller
+								.thumbnail
+									%div
+										%strong.title= link_to variant.sku, admin_product_variant_path(@product, variant)
+										- imgpth = if variant.multimedia.empty?
+											- 'http://placehold.it/100x100&text=No%20image'
+										- else
+											- variant.multimedia.first.file.url(:thumb)
+										%noscript
+											= image_tag imgpth, :class => :photo
+										= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
+								.actions
+									= link_to edit_admin_product_variant_path(@product, variant) do
+										= button_tag 'Editar', :class => [:btn, 'btn-mini']
+									= link_to admin_product_variant_path(@product, variant), :method => :delete, data: { confirm: 'Are you sure?' } do
+										= button_tag 'Eliminar', :class => [:btn, 'btn-mini', 'btn-danger']
+			#properties.span6
+				%h2= link_to 'Propriedades', admin_product_product_properties_path(@product)
+				- if @product.variant_properties.empty?
+					%p.text-info Este produto não tem propriedades.
+				- else
+					%ul.listbox
+						- @product.variant_properties.each do |vp|
+							%li.well.well-small.clearfix
+								= link_to admin_variant_property_variant_property_values_path(vp.id) do
+									%strong= vp.display_name
+								%ul.values
+									- vp.variant_property_values.each do |vpv|
+										%li
+											%span.label.label-inverse= vpv.presentation
+											/ = link_to admin_variant_property_variant_property_value_path(vp.id, vpv.id) do
+											/ 	%span.label.label-inverse= vpv.presentation

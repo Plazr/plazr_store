@@ -1,0 +1,414 @@
+#admin {
+	padding-top: 1em;
+	h1 {
+		// text-align: center;
+	}
+}
+
+#admin {
+	// padding-top: 1em;
+	h2 {
+		font-size: large;
+	}
+
+	.nav-tabs {
+		margin-bottom: 1em;
+	}
+
+	.nav-pills {
+		border-bottom: 1px solid #DDD;
+		padding-bottom: .5em;
+
+		> li {
+			margin-left: 1.5em;
+		}
+	}
+
+	ul.thumbnails {
+		li {
+			min-width: 150px;
+			padding-bottom: 1em;
+			text-align: center;
+
+			div.thumbnail {
+				margin: .5em;
+
+				strong.title {
+					overflow: no-display;
+					white-space: nowrap;
+					width: 100%;
+				}
+			}
+
+			div.actions {
+				padding: .5em;
+
+				a:hover {
+					text-decoration: none;
+				}
+			}
+		}
+
+		li.first-in-row { margin-left: 0; }
+
+		li.smaller {
+			min-width: 90px;
+		}
+	}
+
+
+
+
+	.form {
+		.row-fluid {
+			// margin-top: 1.5em;
+			.control-group ,
+			.field {
+				margin-left: auto;
+				margin-right: auto;
+
+				.wide {
+					width: 90%;
+				}
+
+				.number {
+					text-align: right;
+				}
+
+				.center {
+					text-align: center;
+				}
+
+				ul.checklistbox {
+					border: 1px solid #CCC;
+					border-radius: 4px;
+					list-style: none;
+					max-height: 7em;
+					margin: 0;
+					overflow-y: scroll;
+					overflow: -moz-scrollbars-vertical;
+					overflow: -webkit-scrollbars-vertical;
+
+					li {
+						padding-left: .5em;
+						padding-right: .5em;
+						line-height: 2em;
+					}
+
+					li.odd {
+						background-color: lightgrey;
+					}
+				}
+
+				ul.checklistbox::-webkit-scrollbar {
+					-webkit-appearance: none;
+					width: 11px;
+					height: 11px;
+				}
+
+				ul.checklistbox::-webkit-scrollbar-thumb {
+					border-radius: 8px;
+					border: 2px solid white;
+					background-color: rgba(0, 0, 0, .5);
+				}
+			}
+
+			.field {
+				border: 1px solid #CCC;
+				border-radius: 4px;
+				padding: 1em;
+				text-align: center;
+			}
+		}
+
+		.actions {
+			text-align: center;
+		}
+	}
+
+	.form-horizontal {
+		table#properties {
+
+			td, th {
+				width: 50%;
+			}
+
+			td.key .control-label {
+				text-align: left;
+			}
+		}
+	}
+
+
+
+	ul.listbox {
+		border: 1px solid #CCC;
+		border-radius: 4px;
+		list-style: none;
+		margin: 0;
+		overflow-y: scroll;
+		overflow: -moz-scrollbars-vertical;
+		overflow: -webkit-scrollbars-vertical;
+
+		li {
+			padding-left: .5em;
+			padding-right: .5em;
+			line-height: 2em;
+
+			strong {
+				float: left;
+				padding: 0 .5em;
+			}
+
+			ul.values {
+				list-style: none;
+				margin: 0;
+
+				li {
+					margin: 0;
+					padding: 0;
+					display: inline;
+				}
+			}
+		}
+
+		li.odd {
+			background-color: lightgrey;
+		}
+	}
+
+
+
+	ul.checklistbox {
+	 	border: 1px solid #CCC;
+	 	border-radius: 4px;
+		list-style: none;
+		max-height: 7em;
+		margin: 0;
+		overflow-y: scroll;
+		overflow: -moz-scrollbars-vertical;
+		overflow: -webkit-scrollbars-vertical;
+		width: 543px;
+
+		li {
+			padding-left: .5em;
+			padding-right: .5em;
+			line-height: 2em;
+		}
+
+		li:nth-child(odd) {
+			background-color: lightgrey;
+		}
+
+	 }
+
+	 ul.checklistbox::-webkit-scrollbar {
+		-webkit-appearance: none;
+		width: 11px;
+		height: 11px;
+	}
+
+	ul.checklistbox::-webkit-scrollbar-thumb {
+		border-radius: 8px;
+		border: 2px solid white;
+		background-color: rgba(0, 0, 0, .5);
+	}
+
+
+
+	span img.icon {
+		height: 1em;
+	}
+
+
+
+
+
+	.show {
+		#categories {
+			ul {
+				list-style: none;
+
+				li {
+					display: inline;
+
+					span {
+						padding: .5em 1em;
+					}
+				}
+			}
+		}
+
+
+		#properties {
+			ul.listbox {
+				border: none;
+
+				li.well {
+					background: inherit;
+					margin: 0;
+				}
+			}
+		}
+	}
+
+
+
+	.listing {
+		table.table {
+			tr {
+				th ,
+				td {
+					vertical-align: middle;
+				}
+
+				td.text {
+					text-align: justify;
+				}
+
+				td.btn-mini ,
+				div.btn-mini {
+					width: 10%;
+				}
+
+				td.btn-small ,
+				div.btn-small {
+					width: 12%;
+				}
+			}
+
+			tr.success {
+				td {
+					text-align: center;
+				}
+			}
+		}
+
+		table.table-bordered {
+			th:first-child ,
+			td:first-child {
+				border-left: 1px solid #CCC;
+			}
+
+			th ,
+			td {
+				border-left: none;
+			}
+		}
+	}
+
+	.listing-linked {
+		table.table {
+			tbody {
+				tr.linked {
+					td {
+						margin: 0;
+						padding: 0;
+						vertical-align: middle;
+
+						a:not(.btn) {
+							color: inherit;
+							display: block;
+							padding: 8px;
+						}
+
+						a:hover {
+							text-decoration: none;
+						}
+					}
+				}
+
+				tr.linked:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+
+
+	#properties {
+		table.table {
+			td ,
+			th {
+				padding-left: 1em;
+				padding-right: 1em;
+				text-align: center;
+				vertical-align: middle;
+
+				input {
+					margin: 0 auto;
+				}
+
+				input[type="text"] {
+					width: 100%;
+				}
+			}
+
+			tr.new {
+				td {
+					padding-bottom: 1em;
+					padding-top: 2em;
+				}
+			}
+		}
+	}
+
+	#categories.listing {
+		table.table {
+			tr {
+				td.name ,
+				td.prnt {
+					width: 20%;
+				}
+
+				td.desc {
+					width: 40%;
+				}
+			}
+		}
+	}
+
+	p.text-info {
+		// text-align: center;
+		a {
+			text-decoration: underline;
+		}
+	}
+
+
+
+	#properties {
+		.id {
+			width: 15%;
+		}
+
+		.name {
+			width: 30%;
+		}
+
+		.button {
+			width: 10%
+		}
+	}
+
+	#promotions {
+		.name ,
+		.enum {
+			width: 15%;
+		}
+		.val {
+			width: 5%;
+		}
+	}
+
+	.center {
+		text-align: center;
+	}
+
+	.pagination {
+		text-align: center;
+	}
+
+}
+

@@ -1,0 +1,28 @@
+= form_for [:admin, @product, @multimedium], :html => { :class => [:form, 'form-horizontal'], :multipart => true } do |f|
+	- if @multimedium.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@multimedium.errors.count, "error")} prohibited this multimedium from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- @multimedium.errors.full_messages.each do |msg|
+						%li= msg
+
+	.control-group
+		// this line is necessary before the file_field (small fix to use paperclip)
+		= f.hidden_field :class_type, :value => 'variant'
+		= f.label 'Ficheiro', :class => 'control-label'
+		.controls
+			= f.file_field :file
+
+	.control-group
+		= f.label :caption, :class => 'control-label'
+		.controls
+			= f.text_field :caption
+
+	.control-group
+		= f.label :variant, :class => 'control-label'
+		.controls
+			= f.collection_select :variant_id, @variants, :id, :sku, prompt: 'Pick a variant'
+	.control-group
+		.controls
+			= f.submit "Submit", :class => [:btn, 'btn-primary']

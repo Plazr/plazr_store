@@ -1,0 +1,24 @@
+#admin
+	%h1 Lista de Categorias
+	#categories.listing
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th.name Nome
+					%th.desc Descrição
+					%th.prnt Agregadora
+					%th &nbsp;
+					%th &nbsp;
+			%tbody
+				%tr.success
+					%td{ :colspan => 5 }
+						= link_to 'Adicionar categoria', new_admin_product_category_path
+				- @product_categories.each do |pc|
+					%tr
+						%td.name= pc.name
+						%td.desc= pc.description
+						%td.prnt= pc.parent_product_category.name if pc.parent_product_category
+						%td.btn-mini
+							= link_to 'Editar', edit_admin_product_category_path(pc), :class => [:btn, 'btn-mini']
+						%td.btn-mini= link_to 'Eliminar', admin_product_category_path(pc), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger', 'btn-mini']
+	= will_paginate @product_categories, :renderer => BootstrapPagination::Rails

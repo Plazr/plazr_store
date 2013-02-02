@@ -1,0 +1,25 @@
+%h1 Show Page
+%p#notice
+  = notice
+%table
+  %tr
+    %td
+      %b Store ID:
+      = @paypal_account.store_id
+  %tr
+    %td
+      %b API Username:
+      = @paypal_account.api_username
+  %tr
+    %td
+      %b API Password:
+      = @paypal_account.api_password
+  %tr
+    %td
+      %b Signature:
+      = @paypal_account.signature
+
+
+= link_to 'Edit', edit_admin_paypal_account_path(@paypal_account)
+|
+= link_to 'Back', admin_paypal_accounts_path

@@ -1,0 +1,6 @@
+#admin
+	#pages
+		%h1 Nova página
+		.btn-group
+			= link_to 'Voltar', admin_pages_path, :class => [:btn, 'btn-small']
+		= render :partial => 'form'

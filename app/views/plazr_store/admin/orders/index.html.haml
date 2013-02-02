@@ -1,0 +1,12 @@
+#admin
+	%h1 Encomendas
+	.listing
+		%table.table.table-striped.table-hover.table-bordered
+			- if @orders.empty?
+				%tr.info
+					%td= "Não existem encomendas."
+			- else
+				- @orders.each do |order|
+					%tr
+						%td= link_to order.info, admin_order_path(order)
+		= will_paginate @orders unless @orders.empty?

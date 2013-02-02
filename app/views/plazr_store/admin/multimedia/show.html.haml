@@ -1,0 +1,25 @@
+#admin
+	%h1= @multimedium.caption
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_product_multimedia_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_product_multimedium_path(@product, @multimedium), :class => :btn
+			= link_to 'Eliminar', admin_product_multimedium_path(@product, @multimedium), :method => :delete, data: { confirm: 'Are you sure?' }, :class => [:btn, 'btn-danger']
+	.show
+		.row-fluid
+			.offset3.span6
+				- if @multimedium.variant
+					%table.table.table-condensed.table-bordered
+						%thead
+							%tr
+								%th{ :style => 'text-align:center' } Variante
+						%tbody
+							%tr
+								%td{ :style => 'text-align:center' }= @multimedium.variant.sku
+				- else
+					.alert.alert-info Ficheiro não atribuído a qualquer variante.
+				- imgpth = @multimedium.file.url(:thumb)
+				%noscript
+					= image_tag imgpth
+				= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }

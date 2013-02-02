@@ -1,0 +1,5 @@
+#admin
+	%h1= "Editar \"#{@variant.sku}\""
+	.btn-group
+		= link_to 'Voltar', admin_product_variant_path(@product,@variant), :class => [:btn, 'btn-small']
+	= render 'form'

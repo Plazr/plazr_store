@@ -1,0 +1,5 @@
+#admin
+	%h1= "Editar \"#{@promotion.name}\""
+	.btn-group
+		= link_to 'Voltar', admin_promotion_path(@promotion), :class => [:btn, 'btn-small']
+	= render 'form'

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  value: MyString
+  starts_at: 2012-11-14 18:07:35
+  expires_at: 2012-11-14 18:07:35
+  discount_type: 
+
+two:
+  name: MyString
+  description: MyText
+  value: MyString
+  starts_at: 2012-11-14 18:07:35
+  expires_at: 2012-11-14 18:07:35
+  discount_type: 

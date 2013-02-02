@@ -1,0 +1,26 @@
+#admin
+	%h1 Lista de Protótipos
+	#prototypes.listing.listing-linked
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th.name Nome
+					%th &nbsp;
+					%th &nbsp;
+			%tbody
+				- if @prototypes.empty?
+					%tr.info
+						%td{ colspan: 3 }
+							= raw "Não existem protótipos. Clique #{link_to 'aqui', new_admin_prototype_path} para adicionar um novo protótipo."
+				- else
+					%tr.success
+						%td{ :colspan => 3 }
+							= link_to 'Adicionar protótipo', new_admin_prototype_path
+					- @prototypes.each do |prototype|
+						%tr.linked
+							%td.name= link_to prototype.name, admin_prototype_path(prototype)
+							%td.btn-mini
+								= link_to 'Editar', edit_admin_prototype_path(prototype), :class => [:btn, 'btn-mini']
+							%td.btn-mini
+								= link_to 'Eliminar', admin_prototype_path(prototype), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger', 'btn-mini']
+	= will_paginate @prototypes, :renderer => BootstrapPagination::Rails

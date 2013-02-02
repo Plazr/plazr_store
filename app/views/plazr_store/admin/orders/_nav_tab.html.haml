@@ -1,0 +1,6 @@
+- in_orders = @section == 'orders' && @view == 'index'
+.well.well-small
+	%ul.nav.nav-list
+		%li.nav-header Encomendas
+		%li{ :class => in_orders ? :active : nil }
+			= link_to 'Encomendas', in_orders ? '#' : admin_orders_path

@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  email: MyString
+  item_total: 9.99
+  adjustment_total: 9.99
+  total: 9.99
+  payment_state: MyString
+  shipment_state: MyString
+  completed_at: 2012-11-14 22:46:43
+  state: MyString
+  cart: 
+  promotional_code: 
+  coupon: 
+  payment_data: 
+  user: 
+  bill_address_id: 1
+  ship_address_id: 1
+
+two:
+  email: MyString
+  item_total: 9.99
+  adjustment_total: 9.99
+  total: 9.99
+  payment_state: MyString
+  shipment_state: MyString
+  completed_at: 2012-11-14 22:46:43
+  state: MyString
+  cart: 
+  promotional_code: 
+  coupon: 
+  payment_data: 
+  user: 
+  bill_address_id: 1
+  ship_address_id: 1

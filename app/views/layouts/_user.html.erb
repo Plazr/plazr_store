@@ -1,0 +1,48 @@
+<%# binding.pry %>
+<div class="btn-group">
+	<% if user_signed_in? %>
+		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+			<%= current_user.to_s unless Rails.env.test? %>
+			<span class="caret"></span>
+		</a>
+	<% else %>
+		<%= link_to 'Iniciar Sessão',  plazr_auth.new_user_session_path, class: 'btn btn-primary' %>
+		<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			<span class="caret"></span>
+		</button>
+	<% end %>
+	<ul class="dropdown-menu pull-right" role="menu">
+		<% if user_signed_in? %>
+			<li><%= link_to 'Ver Perfil',  plazr_auth.profile_path(current_user), :class => 'profile-button' %></li>
+			<li><%= link_to 'Editar Perfil',     plazr_auth.edit_user_registration_path, class: 'edit-button' %></li>
+			<%# if current_user.role?('admin') %>
+			<% if can? :admin, :store %>
+				<li class="divider"></li>
+				<% if @namespace == 'PlazrStore::Admin' %>
+					<li><%= link_to 'Loja', root_path, class: 'store-button' %></li>
+				<% else %>
+					<li><%= link_to 'Painel Administrador', plazr_auth.admin_path, class: 'admin-button' %></li>
+				<% end %>
+			<% end %>
+			<li class="divider"></li>
+			<li><%= link_to 'Sair', plazr_auth.destroy_user_session_path, :method => :delete, class: 'exit-button' %></li>
+		<% else %>
+			<li><%= link_to 'Iniciar Sessão',  plazr_auth.new_user_session_path, class: 'profile-button' %></li>
+			<li><%= link_to 'Registar', plazr_auth.new_user_registration_path, class: 'register-button' %></li>
+			<li><%= link_to 'Recuperar password',  new_password_path(:user), class: 'recover-button' %></li>
+		<% end %>
+	</ul>
+</div>
+
+<!-- Buy button. It only display if registered and not admin! -->
+<% if user_signed_in? && cannot?(:admin, :store) %>
+	<div class="btn-group">
+		<%= link_to 'Comprar',  plazr_auth.new_user_session_path, class: 'btn btn-success' %>
+		<a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+			<span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu pull-right" role="menu">
+				<li>Ver o cesto</li>
+		</ul>
+	</div>
+<% end %>

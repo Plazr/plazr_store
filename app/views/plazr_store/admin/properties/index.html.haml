@@ -1,0 +1,23 @@
+#admin
+	%h1 Lista de Propriedades de Produto
+	#product-properties.listing
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th Identificador
+					%th Nome
+					%th &nbsp;
+					%th &nbsp;
+			%tbody
+				%tr.success
+					%td{ :colspan => 4 }
+						= link_to 'Adicionar propriedade', new_admin_property_path
+				- @properties.each do |property|
+					%tr
+						%td.name= property.id_name
+						%td.name= property.display_name
+						%td.btn-mini
+							= link_to 'Editar', edit_admin_property_path(property), :class => [:btn, 'btn-mini']
+						%td.btn-mini
+							= link_to 'Eliminar', admin_property_path(property), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
+	= will_paginate @properties, :renderer => BootstrapPagination::Rails

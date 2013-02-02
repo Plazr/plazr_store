@@ -1,0 +1,11 @@
+- if @promotion
+	%ul.nav.nav-pills
+		%li= link_to 'Lista', admin_promotions_path
+- else
+	%ul.nav.nav-pills
+		%li{ :class => @section == 'promotions' ? :active : nil }
+			= link_to 'Promoções', @section == 'promotions' ? '#' : admin_promotions_path
+		/ %li{ :class => @section == '' ? :active : nil }
+		/ 	= link_to 'Tipos de descontos', @section == '' ? '#' : admin_discount_types_path
+		/ %li{ :class => @section == '' ? :active : nil }
+		/ 	= link_to 'Códigos', @section == '' ? '#' : admin_promotional_codes_path

@@ -1,0 +1,12 @@
+%h2= "Order ##{@order.id}"
+= "Payment State: #{@order.payment_state}"
+%br
+- if !@order.paid?
+  = change_to_paid_form(@order.id)
+State: 
+= @order.state
+%br
+Created at: 
+= @order.created_at.strftime("%m-%d-%Y")
+%br
+= render "details", :order => @order

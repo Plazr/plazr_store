@@ -1,0 +1,22 @@
+= form_for [:admin, @property], :html => { :class => [:form, 'form-horizontal'] } do |f|
+	/ - if @property.errors.any?
+	/ 	#error_explanation
+	/ 		%h2= "#{pluralize(@property.errors.count, "error")} prohibited this property from being saved:"
+	/ 		%div{:class=>["alert","alert-error"]}
+	/ 			%ul
+	/ 				- @property.errors.full_messages.each do |msg|
+	/ 					%li= msg
+
+	.control-group
+		= f.label :id_name, :class => 'control-label'
+		.controls
+			= f.text_field :id_name
+
+	.control-group
+		= f.label :display_name, :class => 'control-label'
+		.controls
+			= f.text_field :display_name
+
+	.control-group
+		.controls
+			= f.submit "Submit", :class => [:btn, 'btn-primary']

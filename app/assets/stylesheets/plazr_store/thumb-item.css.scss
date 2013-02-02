@@ -1,0 +1,44 @@
+@import 'plazr_store/partials/colors';
+@import 'plazr_store/partials/functions';
+
+a.thumb-item {
+    margin-bottom: 3em;
+	color: white;
+	text-decoration: none;
+	article {
+		border: 1px solid white;
+	}
+	.thumb-item-image {
+		@include background-cover-image;
+		width: 100%;
+		-webkit-transition: opacity 0.1s ease-in-out;
+		-moz-transition: opacity 0.1s ease-in-out;
+		-o-transition: opacity 0.1s ease-in-out;
+		transition: opacity 0.1s ease-in-out;
+	}
+
+    section.box {
+    	text-align: center;
+    	padding: 5px 0 1px 0;
+    	@include background-noise($thumb-bg);
+    	// border-bottom: 1px solid $thumb-hover;
+    }
+	&:hover {
+		text-decoration: none;
+		article {
+			border: 1px solid $thumb-hover;
+		}
+		.thumb-item-image {
+			opacity:0.6;
+			filter:alpha(opacity=60); /* For IE8 and earlier */
+		}
+		section.box {
+			@include background-noise ($thumb-hover);
+			color: white;
+			-moz-transition: all 0.1s ease-in;
+    		-webkit-transition: all 0.1s ease-in;
+    		-o-transition: all 0.1s ease-in;
+    		transition: all 0.1s ease-in;
+    	}
+    }
+}

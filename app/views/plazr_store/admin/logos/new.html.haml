@@ -1,0 +1,19 @@
+%h1 New Logo
+
+= form_for @new_logo, :url => url_for(:controller => 'logos', :action => 'create'), :method => 'post', :html => { :multipart => true } do |f|
+  - if @new_logo.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@new_logo.errors.count, "error")} prohibited this logo from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @new_logo.errors.full_messages.each do |msg|
+            %li= msg
+
+  // this line is necessary before the file_field (small fix to use paperclip)
+  = f.hidden_field :class_type, :value => 'logo'
+  = f.label :file
+  = f.file_field :file
+  %br
+
+  = f.submit "Submit"
+  = link_to 'Cancel', root_path
