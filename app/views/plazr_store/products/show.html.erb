@@ -139,30 +139,30 @@
   </article>
 
 <script>
-$(document).ready(function() {
-  $('#product-show select').change(function(){
-    var price = $(this).val();
+  $(document).ready(function() {
+    $('#product-show select').change(function(){
+      var price = $(this).val();
 
-    $('#product-show #price').text(price + " €");
+      $('#product-show #price').text(price + " €");
 
-    var id = $(this).attr('id');
+      var id = $(this).attr('id');
 
-    $("#add_cart_f").attr("action","/cart/add/" + id);
-    $("#add_wishlist_f").attr("action","/wishlist/add/" + id);
+      $("#add_cart_f").attr("action","/cart/add/" + id);
+      $("#add_wishlist_f").attr("action","/wishlist/add/" + id);
+    });
+
+    $("#add_cart_bt").click(function(){
+      if(parseInt($("#add_cart_f #amount").val())>0){
+        alert("Adicionado ao carrinho");
+        $("#add_cart_f").submit();
+      } 
+      else alert("Quantidade inferior a 0.");
+    });
+
+    $("#add_wishlist_bt").click(function(){
+      alert("Adicionado à wishlist");
+      $("#add_wishlist_f").submit();
+    });
+
   });
-
-  $("#add_cart_bt").click(function(){
-    if(parseInt($("#add_cart_f #amount").val())>0){
-      alert("Adicionado ao carrinho");
-      $("#add_cart_f").submit();
-    } 
-    else alert("Quantidade inferior a 0.");
-  });
-
-  $("#add_wishlist_bt").click(function(){
-    alert("Adicionado à wishlist");
-    $("#add_wishlist_f").submit();
-  });
-
-});
 </script>
