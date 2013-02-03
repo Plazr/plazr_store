@@ -10,10 +10,10 @@
 	.control-group
 		= f.label :value, 'Valor', class: 'control-label'
 		.controls
-			#colorpickerHolder.input-append.color{"data-color" => "rgb(255, 146, 180)", "data-color-format" => "rgb"}
+			#colorpickerHolder.input-append.color{"data-color" => "#{@template_customization.value}", "data-color-format" => "rgb"}
 				= f.text_field :value
 				%span.add-on
-					%i{"style" => "background-color: rgb(255, 146, 180)"}
+					%i{"style" => "background-color: #{@template_customization.value}"}
 
 	.control-group
 		.controls

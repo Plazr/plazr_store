@@ -24,21 +24,21 @@ module PlazrStore
   puts "Creating template customization colors"
   color = TemplateCustomization.find_or_initialize_by_id_name('bg-color')
   color.display_name = 'Cor do Fundo'
-  color.value = '#DDE6D6'
+  color.value = 'rgba(221,230,214,1)'
   color.save
 
   color = TemplateCustomization.find_or_initialize_by_id_name('border-color')
   color.display_name = 'Cor do Contorno'
-  color.value = '#00A8C6'
+  color.value = 'rgba(0,168,198,1)'
   color.save
 
   color = TemplateCustomization.find_or_initialize_by_id_name('header-color')
   color.display_name = 'Cor do Titulo'
-  color.value = '#0F0F0F'
+  color.value = 'rgba(15,15,15,1)'
   color.save
 
   color = TemplateCustomization.find_or_initialize_by_id_name('primary-color')
   color.display_name = 'Cor Principal'
-  color.value = '#00A8C6'
+  color.value = 'rgba(0,168,198,1)'
   color.save
 end
