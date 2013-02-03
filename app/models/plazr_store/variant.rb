@@ -110,11 +110,15 @@ module PlazrStore
     end
 
     def variant_properties_values
-      names=""
+      names="-"
       self.variant_property_values.each do |v|
         names << v.variant_property.display_name + ": " + v.presentation + "  "
       end
-      names
+      if (names == "-")
+        ""
+      else
+        names
+      end
     end
 
     def restock_date_date_string
