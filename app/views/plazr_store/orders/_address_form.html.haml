@@ -1,26 +1,32 @@
-= address.label :first_name
-= address.text_field :first_name
-%br
-= address.label :last_name
-= address.text_field :last_name
-%br
-= address.label :address1
-= address.text_field :address1
-%br
-= address.label :address2
-= address.text_field :address2
-%br
-= address.label :city
-= address.text_field :city
-%br
-= address.label :zipcode
-= address.text_field :zipcode
-%br
-= address.label :phone
-= address.text_field :phone
-%br
-= address.label :alternative_phone
-= address.text_field :alternative_phone
-%br
-= address.label :company
-= address.text_field :company
+.control-group
+	= address.label [:first_name, :last_name], 'Nome', :class => 'control-label'
+	.controls.controls-row
+		= address.text_field :first_name, placeholder: 'Primeiros nomes', :class => [:span6, 'first-name']
+		= address.text_field :last_name, placeholder: 'Apelidos', :class => [:span6, 'last-name']
+
+.control-group
+	= address.label [:address1, :address2], 'Morada', :class => 'control-label'
+	.controls
+		= address.text_field :address1, placeholder: 'Nome da Rua, n.º da porta, ...', :class => ['input-block-level', :address1]
+		= address.text_field :address2, placeholder: 'Nome do Edifício, Freguesia, ...', :class => ['input-block-level', :address1]
+
+.control-group
+	= address.label :city, 'Localidade', :class => 'control-label'
+	.controls
+		= address.text_field :city, placeholder: 'Nome da cidade', :class => :city
+
+.control-group
+	= address.label :zipcode, 'Código Postal', :class => 'control-label'
+	.controls
+		= address.text_field :zipcode, placeholder: 'XXXX-XXX', :class => 'postal-code'
+
+.control-group
+	= address.label [:phone, :alternative_phone], 'Telefone', :class => 'control-label'
+	.controls
+		= address.text_field :phone, placeholder: 'Principal', :class => :phone
+		= address.text_field :alternative_phone, placeholder: 'Alternativo', :class => :altphone
+
+.control-group
+	= address.label :company, 'Entidade', :class => 'control-label'
+	.controls
+		= address.text_field :company, placeholder: 'Nome da Empresa, Associação, ...', :class => :company

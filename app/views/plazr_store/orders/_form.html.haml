@@ -1,36 +1,56 @@
-= form_for order, :url => { :controller => "orders", :action => "new" } do |f|    
-  - if defined? @pre_order
-    - if @pre_order.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(order.errors.count, "error")} prohibited this order from being saved:"
-        %div{:class=>["alert","alert-error"]}
-          %ul
-            - @pre_order.errors.full_messages.each do |msg|
-              %li= msg
-  - if order.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(order.errors.count, "error")} prohibited this order from being saved:"
-      %div{:class=>["alert","alert-error"]}
-        %ul
-          - order.errors.full_messages.each do |msg|
-            %li= msg
+= form_for order, :url => { :controller => "orders", :action => "new" }, :html => { :class => 'form-horizontal' } do |f|    
+	- if defined? @pre_order
+		- if @pre_order.errors.any?
+			#error_explanation
+				%h2= "#{pluralize(order.errors.count, "error")} prohibited this order from being saved:"
+				%div{:class=>["alert","alert-error"]}
+					%ul
+						- @pre_order.errors.full_messages.each do |msg|
+							%li= msg
+	- if order.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(order.errors.count, "error")} prohibited this order from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- order.errors.full_messages.each do |msg|
+						%li= msg
 
-  %h2 Address Details
-  = render :partial => 'billing_address', :locals => { f: f, address: address}
-  = render :partial => 'shipping_address', :locals => { f: f, address: address}
+	%h2 Morada
+	.row-fluid
+		.span6.billing
+			= render :partial => 'billing_address', :locals => { f: f, address: address}
+		.span6.shipping
+			= render :partial => 'shipping_address', :locals => { f: f, address: address}
 
-  %h2 Shipment Condition
-  = render :partial => 'shipment_condition', :locals => { f: f, shipment_conditions: shipment_conditions, order: order}
+	%h2 Meios de entrega
+	= render partial: 'shipment_condition', :locals => { f: f, shipment_conditions: shipment_conditions, order: order}
 
-  %h2 Payment
-  = render :partial => 'payment', :locals => { f: f, :disabled => false }
-  = f.hidden_field :express_token
-  = f.hidden_field :payer_id
+	%h2 Pagamento
+	= render :partial => 'payment', :locals => { f: f, :disabled => false }
+	= f.hidden_field :express_token
+	= f.hidden_field :payer_id
 
-  -# %h2 Promotional Code
-  -# = render :partial => 'promotional_code', :locals => { f: f }
-  
-  = f.submit "Confirm Purchase"
+	-# %h2 Promotional Code
+	-# = render :partial => 'promotional_code', :locals => { f: f }
 
-  %h2= "Order Summary"
-  = render :partial => 'summary', :locals => { f: f, cart: cart }
+	%h2 Resumo da encomenda
+	= render partial: 'summary', :locals => { f: f, cart: cart }
+
+	.form-actions
+		= f.submit 'Confirmar compra', :class => [:btn, 'btn-primary']
+
+:javascript
+	function copy_from_billing () {
+		$('.shipping .first-name').val( $('.billing .first-name').val() );
+		$('.shipping .last-name').val( $('.billing .last-name').val() );
+		$('.shipping .address1').val( $('.billing .address1').val() );
+		$('.shipping .address2').val( $('.billing .address2').val() );
+		$('.shipping .city').val( $('.billing .city').val() );
+		$('.shipping .postal-code').val( $('.billing .postal-code').val() );
+		$('.shipping .phone').val( $('.billing .phone').val() );
+		$('.shipping .altphone').val( $('.billing .altphone').val() );
+		$('.shipping .company').val( $('.billing .company').val() );
+	}
+	function update_summary () {
+		
+	}

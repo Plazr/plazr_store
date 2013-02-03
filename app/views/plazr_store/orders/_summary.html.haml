@@ -1,27 +1,25 @@
-%table{border:"1"}
-  %tr
-    %th= "Item"
-    %th= "Price"
-    %th= "Quantity"
-    %th= "Subtotal"
-  - cart.cart_variants.each do |line_item|
-    %tr
-      %td= line_item.info
-      %td= number_to_currency line_item.unit_price
-      %td= line_item.amount
-      %td= number_to_currency line_item.price
-  %tr
-    %td{colspan: "2"}
-    %td= "Subtotal"
-    %td= number_to_currency cart.total_price
-  %tr
-    %td{colspan: "2"}
-    %td= "Shipment Condition"
-    %td= "TODO: poe-se aqui? se sim, como ja que no chekcout ainda nao se escolheu o shipment_condition. so se for na confirmacao da order. Ou por javascript, atualizar este valor quando se atualizar o valor no form."
-  %tr
-    %td{colspan: "2"}
-    %td= "Total"
-    - if defined? order
-      %td= order.total
-    - else 
-      %td
+= link_to 'actualizar', 'update_summary()', style: 'float:right'
+%table.table.table-striped.table-hover.table-bordered
+	%thead
+		%tr
+			%th Produto
+			%th Preço
+			%th Quantidade
+			%th Total do produto
+	%tbody
+		- cart.cart_variants.each do |line_item|
+			%tr
+				%td= line_item.info
+				%td= number_to_currency line_item.unit_price, unit: '€'
+				%td= line_item.amount
+				%td= number_to_currency line_item.price, unit: '€'
+	%tfoot
+		%tr
+			%td{ colspan: 3 } Subtotal 
+			%td= number_to_currency cart.total_price, unit: '€'
+		%tr
+			%td{ colspan: 3 } Meios de envio
+			%td#shipment-total
+		%tr
+			%td{ colspan: 3 } Total
+			%td#total
