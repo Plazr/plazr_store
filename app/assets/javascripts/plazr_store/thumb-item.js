@@ -3,10 +3,11 @@ $(document).ready(function() {
 		this.elem = elem;
 		this.span = span;
 		this.update = function() {
-			spanWidth = $(this.span).width() - 30;
+			spanWidth = $(this.span).width() - 0;
 			$(this.elem).height(spanWidth);
 		}
 	}
+
 	thumbItem = new ThumbItem(".thumb-item-image", ".span3");
 	thumbItem.update();
 

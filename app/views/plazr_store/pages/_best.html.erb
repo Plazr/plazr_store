@@ -1,8 +1,5 @@
 <div id="well-outter">
 	<section class="row-fluid well-list">
-		<header>
-			<h4>Mais Vendidos</h4>
-		</header>
 		<% @best.each_with_index do |best, index| %>
 		<a href="<%= url_for best %>">
 			<article class="well-entry row-fluid">

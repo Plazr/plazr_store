@@ -18,10 +18,12 @@ $(document).ready(function() {
 		}
 	}
 
-	nav = new Navbar(".topbar-wrapper");
-	nav.update();
-
-	$(window).scroll(function() {
+	if($(".topbar-wrapper").length) {
+		nav = new Navbar(".topbar-wrapper");
 		nav.update();
-	});
+
+		$(window).scroll(function() {
+			nav.update();
+		});
+	}
 });

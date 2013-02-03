@@ -1,4 +1,4 @@
-= form_for [:admin, @template_customization] do |f|
+= form_for [:admin, @template_customization], :html => { :class => [:form, 'form-horizontal'] } do |f|
   - if @template_customization.errors.any?
     #error_explanation
       %h2= "#{pluralize(@template_customization.errors.count, "error")} prohibited this TemplateCustomization from being saved:"
@@ -7,17 +7,19 @@
           - @template_customization.errors.full_messages.each do |msg|
             %li= msg
 
-  = f.label :id_name
-  = f.text_field :id_name
-  %br
+  / .control-group
+  /   = f.label :display_name, class: 'control-label'
+  /   .controls
+  /     = f.text_field :display_name
 
-  = f.label :display_name
-  = f.text_field :display_name
-  %br
+  .control-group
+    = f.label :value, class: 'control-label'
+    .controls
+      #colorpickerHolder.input-append.color{"data-color" => "rgb(255, 146, 180)", "data-color-format" => "rgb"}
+        = f.text_field :value
+        %span.add-on
+          %i{"style" => "background-color: rgb(255, 146, 180)"}
 
-  = f.label :value
-  = f.text_field :value
-  %br
 
   //%h4= "Products"
   //= f.fields_for :product_promotions do |pp|
@@ -26,5 +28,12 @@
   //  = pp.hidden_field :product_id
   //%br
 
-  = f.submit "Submit"
-  = link_to 'Cancel', admin_template_customizations_path
+  .control-group
+    .controls
+      = f.submit "Submit", class: 'btn btn-primary'
+      = link_to 'Cancel', admin_template_customizations_path, class: 'btn'
+
+
+:javascript
+  console.log("Running");
+  $('#colorpickerHolder').colorpicker()

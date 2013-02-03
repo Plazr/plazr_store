@@ -9,12 +9,13 @@
 //= require bootstrap/datepicker/core.js
 //= require bootstrap/datepicker/locales/bootstrap-datepicker.pt.js
 //= require bootstrap/timepicker.js
-//= require jquery.masonry.min.js
 //= require_self
 //= require plazr_store/topbar
 //= require plazr_store/search/search
 //= require plazr_store/thumb-item
 //= require plazr_store/cart/show
+//= require bootstrap-colorpicker
+
 /*********************************************************/
 /** Global (reserved) functions
  *

@@ -1,5 +1,5 @@
 class PlazrStore::ApplicationController < ApplicationController
-
+  helper :all
   # before_filter :get_categories
   # before_filter :get_pages
   # before_filter :get_banner
