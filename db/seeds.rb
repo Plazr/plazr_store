@@ -28,7 +28,7 @@ module PlazrStore
   color.save
 
   color = TemplateCustomization.find_or_initialize_by_id_name('border-color')
-  color.display_name = 'Cor Principal'
+  color.display_name = 'Cor do Contorno'
   color.value = '#00A8C6'
   color.save
 

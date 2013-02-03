@@ -7,15 +7,18 @@
           - @template_customization.errors.full_messages.each do |msg|
             %li= msg
 
-  .control-group
-    = f.label :display_name, class: 'control-label'
-    .controls
-      = f.text_field :display_name
+  / .control-group
+  /   = f.label :display_name, class: 'control-label'
+  /   .controls
+  /     = f.text_field :display_name
 
   .control-group
     = f.label :value, class: 'control-label'
     .controls
-      = f.text_field :value, id: 'colorpickerHolder'
+      #colorpickerHolder.input-append.color{"data-color" => "rgb(255, 146, 180)", "data-color-format" => "rgb"}
+        = f.text_field :value
+        %span.add-on
+          %i{"style" => "background-color: rgb(255, 146, 180)"}
 
 
   //%h4= "Products"
@@ -24,6 +27,7 @@
   //  = pp.label :_destroy, pp.object.product.name
   //  = pp.hidden_field :product_id
   //%br
+
   .control-group
     .controls
       = f.submit "Submit", class: 'btn btn-primary'
@@ -32,3 +36,4 @@
 
 :javascript
   console.log("Running");
+  $('#colorpickerHolder').colorpicker()

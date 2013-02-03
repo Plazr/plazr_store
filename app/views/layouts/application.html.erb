@@ -16,6 +16,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 	<style type="text/css">
 
+	/* logo */
 	body .hero-wrap .hero-unit  {
 		<% unless @logo.nil? %>
 			background: url("<%= @logo.file %>") left center no-repeat;
@@ -23,13 +24,22 @@
 			background-size: auto 60px;
 		<% end %>
 	}
+	/* header color */
 	body .hero-wrap .hero-unit a { color: <%= @colors["header-color"] %> }
+	/* background color */
 	body { background-color: <%= @colors["bg-color"] %>}
+	/* border color */
+
 	body > #container-wrapper > .container { border-color: <%= @colors["border-color"] %>}
-	#index-page #featured { border-color: <%= @colors["border-color"] %>}
+
 	body > #container-wrapper > .container > footer { border-color: <%= @colors["border-color"] %>}
 	body > #container-wrapper > .container > footer .border-right { border-color: <%= @colors["border-color"] %>}
-	#index-page #featured .featured-box span { background-color: <%= @colors["primary-color"] %>}
+
+	/* featured colors */
+	#index-page #featured .featured-box span.transparent-background { background-color: <%= @colors["primary-color"] %>}
+	#index-page #featured:hover .featured-box span.transparent-background { background-color: <%= @colors["primary-color"] %>}
+	#index-page #featured { border-color: <%= @colors["border-color"] %>}
+	#index-page #featured:hover { border-color: <%= @colors["primary-color"] %>}
 
 	/* well list colors */
 	#index-page #well-outter a .well-entry div:hover { border-color: <%= @colors["primary-color"] %> }
