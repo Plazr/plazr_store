@@ -5,7 +5,7 @@ $(document).ready(function() {
 		this.elem = elem;
 		this.elemViewTop = $(elem).offset().top;
 		this.isNavbarVisible = function() {
-			return $(window).scrollTop() < this.elemViewTop;
+			return $(window).scrollTop() < (this.elemViewTop + $(elem).height() / 3);
 		}
 		this.update = function() {
 			if(this.isNavbarVisible() && this.fixed) {

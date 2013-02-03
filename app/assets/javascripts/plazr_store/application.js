@@ -10,11 +10,11 @@
 //= require bootstrap/datepicker/locales/bootstrap-datepicker.pt.js
 //= require bootstrap/timepicker.js
 //= require_self
-//= require plazr_store/topbar
 //= require plazr_store/search/search
 //= require plazr_store/thumb-item
 //= require plazr_store/cart/show
 //= require bootstrap-colorpicker
+//= require plazr_store/topbar
 
 /*********************************************************/
 /** Global (reserved) functions

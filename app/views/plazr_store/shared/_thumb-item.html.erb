@@ -3,12 +3,7 @@
 		<section class="thumb-item-image" style="background-image:url(<%= image_path recommended.image.file.url %>)">
 					<section class="box">
 			<p class="thumb-rate">
-				<% 3.times do %>
-				<%= image_tag 'plazr_store/rate/star-full.png', :class => 'rating' %>
-				<% end %>
-				<% 2.times do %>
-				<%= image_tag 'plazr_store/rate/star-empty.png', :class => 'rating' %>
-				<% end %>
+				<%= rating_to_stars(recommended.rating_truncated) %>
 			</p>
 			<h5 class="thumb-name"><%= recommended.name %></h5>
 			<p class="thumb-price">
