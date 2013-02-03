@@ -23,7 +23,8 @@
 							- product.name
 						%strong.title= name
 						%div
-							- imgpth = product.image.file.url(:thumb)
+							- imgpth = 'http://placehold.it/300&text=Sem%20Imagem'
+							- imgpth = product.image.file.url(:thumb) unless product.master_variant.nil? || product.master_variant.multimedia.empty?
 							%noscript
 								= image_tag imgpth
 							= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
