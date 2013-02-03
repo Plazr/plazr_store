@@ -15,11 +15,11 @@
 				%td= number_to_currency line_item.price, unit: '€'
 	%tfoot
 		%tr
-			%td{ colspan: 3 } Subtotal 
+			%td{ colspan: 3 } Subtotal
 			%td= number_to_currency cart.total_price, unit: '€'
 		%tr
 			%td{ colspan: 3 } Meios de envio
-			%td#shipment-total
+			%td#shipment-methods
 		%tr
 			%td{ colspan: 3 } Total
-			%td#total
+			%td#total= number_to_currency cart.total_price, unit: '€'

@@ -1,4 +1,4 @@
-= form_for order, :url => { :controller => "orders", :action => "new" }, :html => { :class => 'form-horizontal' } do |f|    
+= form_for order, :url => { :controller => "orders", :action => "new" }, :html => { :class => 'form-horizontal' } do |f|
 	- if defined? @pre_order
 		- if @pre_order.errors.any?
 			#error_explanation
@@ -51,6 +51,11 @@
 		$('.shipping .altphone').val( $('.billing .altphone').val() );
 		$('.shipping .company').val( $('.billing .company').val() );
 	}
-	function update_summary () {
-		
-	}
+
+	$('#payment_method_name').change(function() {
+		console.log($(this).find(":selected").text());
+		$('#shipment-methods').html($(this).find(":selected").text());
+	});
+	$('#payment_method_name').change();
+
+
