@@ -12,7 +12,7 @@ module PlazrStore
     before_save :fill_fields
 
     def fill_fields
-      self.display_name = self.id_name unless !self.display_name.blank?
+      self.display_name = self.id_name if self.display_name.blank?
     end
   end
 end

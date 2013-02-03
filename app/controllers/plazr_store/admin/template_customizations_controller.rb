@@ -2,6 +2,7 @@ module PlazrStore
   class Admin::TemplateCustomizationsController < Admin::ApplicationController
 
     def show
+      redirect_to admin_template_customizations_path
       @template_customization = TemplateCustomization.find(params[:id])
     end
 
@@ -10,6 +11,7 @@ module PlazrStore
     end
 
     def new
+      redirect_to admin_template_customizations_path
       @template_customization = TemplateCustomization.new
     end
 
@@ -41,6 +43,13 @@ module PlazrStore
       @template_customization = TemplateCustomization.find(params[:id])
       @template_customization.destroy
       redirect_to admin_template_customizations_path
+    end
+
+    protected
+
+    def get_location
+      super
+      @tab = 'pages'
     end
   end
 end

@@ -1,39 +1,23 @@
 = form_for [:admin, @template_customization], :html => { :class => [:form, 'form-horizontal'] } do |f|
-  - if @template_customization.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@template_customization.errors.count, "error")} prohibited this TemplateCustomization from being saved:"
-      %div{:class=>["alert","alert-error"]}
-        %ul
-          - @template_customization.errors.full_messages.each do |msg|
-            %li= msg
+	- if @template_customization.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@template_customization.errors.count, "error")} prohibited this TemplateCustomization from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- @template_customization.errors.full_messages.each do |msg|
+						%li= msg
 
-  / .control-group
-  /   = f.label :display_name, class: 'control-label'
-  /   .controls
-  /     = f.text_field :display_name
+	.control-group
+		= f.label :value, 'Valor', class: 'control-label'
+		.controls
+			#colorpickerHolder.input-append.color{"data-color" => "rgb(255, 146, 180)", "data-color-format" => "rgb"}
+				= f.text_field :value
+				%span.add-on
+					%i{"style" => "background-color: rgb(255, 146, 180)"}
 
-  .control-group
-    = f.label :value, class: 'control-label'
-    .controls
-      #colorpickerHolder.input-append.color{"data-color" => "rgb(255, 146, 180)", "data-color-format" => "rgb"}
-        = f.text_field :value
-        %span.add-on
-          %i{"style" => "background-color: rgb(255, 146, 180)"}
-
-
-  //%h4= "Products"
-  //= f.fields_for :product_promotions do |pp|
-  //  = pp.check_box :_destroy, {:checked => pp.object.product_id.to_s == @prod || @check_prods.include?(pp.object.product_id.to_s) || pp.object.persisted?}, '0', '1'
-  //  = pp.label :_destroy, pp.object.product.name
-  //  = pp.hidden_field :product_id
-  //%br
-
-  .control-group
-    .controls
-      = f.submit "Submit", class: 'btn btn-primary'
-      = link_to 'Cancel', admin_template_customizations_path, class: 'btn'
-
+	.control-group
+		.controls
+			= f.submit "Guardar", class: 'btn btn-primary'
 
 :javascript
-  console.log("Running");
-  $('#colorpickerHolder').colorpicker()
+	$('#colorpickerHolder').colorpicker()
