@@ -1,4 +1,7 @@
 module PlazrStore
-  module ApplicationHelper
-  end
+	module ApplicationHelper
+
+
+
+	end
 end

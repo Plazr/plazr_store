@@ -3,6 +3,9 @@ $price-color: #900;
 
 
 article#product-show {
+	h2 span {
+		padding-left: 10px;
+	}
 	.price {
 		color: $price-color;
 		font-size: 18px;

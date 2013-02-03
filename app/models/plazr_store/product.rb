@@ -180,6 +180,14 @@ module PlazrStore
       self.update_attribute :rating, avg
     end
 
+    def rating_truncated
+      unless rating.nil?
+        self.rating.truncate
+      else
+        0
+      end
+    end
+
 
     ## Class Methods ##
     # Finds products by brand

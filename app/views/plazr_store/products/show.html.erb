@@ -2,8 +2,7 @@
 
   <header class="row-fluid">
     <div class="span7">
-      <h2><%= @product.name %></h2>
-      <p><%= @product.rating %></p>
+      <h2><%= @product.name %><span><%= rating_to_stars(@product.rating_truncated) %></span></h2>
     </div>
     <div class="span5">
       <h2 id="price"><%= @variant.price %> €</h2>
@@ -151,7 +150,7 @@
     if(parseInt($("#add_cart_f #amount").val())>0){
       alert("Adicionado ao carrinho");
       $("#add_cart_f").submit();
-    } 
+    }
     else alert("Quantidade inferior a 0.");
   });
 
