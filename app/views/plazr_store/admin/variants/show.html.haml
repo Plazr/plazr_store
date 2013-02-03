@@ -1,6 +1,6 @@
 #admin
-	%h1= @variant.product.name
-	%h2= @variant.sku
+	%h1= @variant.sku
+	%h2= @variant.product.name
 	.btn-toolbar
 		.btn-group
 			= link_to 'Voltar', admin_product_variants_path(@product), :class => [:btn, 'btn-small']
@@ -15,23 +15,34 @@
 				%noscript= image_tag imgpth, :class => :photo
 				.photo{ style: "background-image:url('#{imgpth}')" }
 			.span8
+				%h3 Descrição
 				%p= @variant.description
+				%h3 Preços
 				.row-fluid
-					.offset1.span3
-						%table.table.table-bordered
-							%tbody
-								%tr
-									%th Price
-									%td= number_to_currency( @variant.price, unit: '€' )
-								%tr
-									%th Cost
-									%td= number_to_currency( @variant.cost_price, unit: '€' )
-					.offset1.span6
-						%table.table.table-bordered
-							%tbody
-								%tr
-									%th Available
-									%td= @variant.amount_available
-								%tr
-									%th Restock
-									%td= @variant.restock_date.to_time.to_s(:long)
+					.span6
+						%strong Venda:
+						= number_to_currency( @variant.price, unit: '€' )
+					.span6
+						%strong Custo:
+						= @variant.cost_price ? number_to_currency( @variant.cost_price, unit: '€' ) : '--'
+				%h3 Stock
+				.row-fluid
+					.span6
+						%strong Quantidade disponível:
+						= @variant.amount_available
+					.span6
+						%strong Próximo reabastecimento:
+						%br
+						= @variant.restock_date.to_time.to_s(:long)
+				%h3 Propriedades
+				%table.table
+					%thead
+						%tr
+							%th Nome
+							%th Valor
+					%tbody
+						- @variant.variant_property_values.each do |vpv|
+							%tr
+								%td= vpv.variant_property.display_name
+								%td= vpv.presentation
+
