@@ -120,7 +120,7 @@
       <div class="row-fluid">
         <div class="span4">
           <h3>Nome</h3>
-          <p><%= PlazrAuth::User.find(@product.id).first_name %></p>
+          <p><%= c.owner.name %></p>
           <p><%= c.rating %></p>
         </div>
 
