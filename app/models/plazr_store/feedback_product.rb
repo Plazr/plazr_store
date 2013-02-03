@@ -13,6 +13,11 @@ module PlazrStore
     ## Attributes ##
     attr_accessible :comment, :rating, :product, :order
 
+    ## Instance Methods ##
+    def owner
+      self.order.user
+    end
+
     protected
 
       def update_product_rating
