@@ -21,7 +21,7 @@ module PlazrStore
       @variant_property = VariantProperty.new(params[:variant_property])
 
       if @variant_property.save
-        redirect_to admin_variant_property_path(@variant_property), :notice => 'Propriedade de variante criada com sucesso'
+        redirect_to admin_variant_property_path(@variant_property), :notice => 'Propriedade de modelo criada com sucesso.'
         # redirect_to admin_variant_properties_path, :notice => 'VariantProperty was created successfully'
       else
         render :new
@@ -32,7 +32,7 @@ module PlazrStore
       @variant_property = VariantProperty.find(params[:id])
 
       if @variant_property.update_attributes(params[:variant_property])
-        redirect_to admin_variant_property_path(@variant_property), :notice => 'VariantProperty was created sucessfully'
+        redirect_to admin_variant_property_path(@variant_property), :notice => 'Propriedade de modelo actualizada com sucesso.'
       else
         render :edit
       end

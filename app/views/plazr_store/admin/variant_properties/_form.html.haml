@@ -1,22 +1,22 @@
 = form_for [:admin, @variant_property], :html => { :class => [:form, 'form-horizontal'] } do |f|
-	/ - if @variant_property.errors.any?
-	/ 	#error_explanation
-	/ 		%h2= "#{pluralize(@variant_property.errors.count, "error")} prohibited this variant_property from being saved:"
-	/ 		%div{:class=>["alert","alert-error"]}
-	/ 			%ul
-	/ 				- @variant_property.errors.full_messages.each do |msg|
-	/ 					%li= msg
+	- if @variant_property.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@variant_property.errors.count, "error")} prohibited this variant_property from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- @variant_property.errors.full_messages.each do |msg|
+						%li= msg
 
 	.control-group
-		= f.label 'Identificador', :class => 'control-label'
+		= f.label :id_name, 'Identificador', :class => 'control-label'
 		.controls
 			= f.text_field :id_name
 
 	.control-group
-		= f.label 'Nome', :class => 'control-label'
+		= f.label :display_name, 'Nome', :class => 'control-label'
 		.controls
 			= f.text_field :display_name
 
 	.control-group
 		.controls
-			= f.submit 'Submit', :class => [:btn, 'btn-primary']
+			= f.submit 'Guardar', :class => [:btn, 'btn-primary']

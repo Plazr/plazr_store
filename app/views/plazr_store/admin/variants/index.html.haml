@@ -1,9 +1,10 @@
 #admin
+	%h1= "Modelos de \"#{@product.name}\""
 	.row-fluid
 		%ul.span10.thumbnails
 			- if @variants.empty?
 				%li
-					%p.text-info= raw("Este produto não tem variantes. Clique #{link_to 'aqui', new_admin_product_variant_path} para criar um novo variante.")
+					%p.text-info= raw("Este produto não tem modelos. Clique #{link_to 'aqui', new_admin_product_variant_path} para criar um novo modelo.")
 			- else
 				%li.span2
 					= link_to new_admin_product_variant_path do
@@ -20,20 +21,16 @@
 					%li.span2
 						= link_to admin_product_variant_path(@product, v) do
 							.thumbnail
-								- maxlen = 10
-								- title = if v.sku.length > maxlen
-									- "#{v.sku[0...maxlen]}..."
-								- else
-									- v.sku
+								- title = v.sku
+								- title = "#{v.sku[0...maxlen]}..." if v.sku.length > 10
 								%strong.title= title
 								%div
-									- imgpth = v.image.file.url(:thumb)
+									- imgpth = 'http://placehold.it/300&text=Sem%20imagem'
+									- imgpth = v.image.file.url(:thumb) if v.multimedia.any?
 									%noscript
 										= image_tag imgpth
 									= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
 						.actions
-							= link_to edit_admin_product_variant_path(@product, v) do
-								= button_tag 'Editar', :class => [:btn, 'btn-mini']
-							= link_to admin_product_variant_path(@product, v), :method => :delete, data: { confirm: 'Are you sure?' } do
-								= button_tag 'Eliminar', :class => [:btn, 'btn-mini', 'btn-danger']
+							= link_to 'Editar', edit_admin_product_variant_path(@product, v), :class => [:btn, 'btn-mini']
+							= link_to 'Eliminar', admin_product_variant_path(@product, v), :method => :delete, data: { confirm: "Está prestes a eliminar o modelo \"#{v.sku}\". Deseja continuar?" }, :class => [:btn, 'btn-mini', 'btn-danger']
 		= will_paginate @variants, :renderer => BootstrapPagination::Rails

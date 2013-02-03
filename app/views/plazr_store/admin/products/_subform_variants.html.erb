@@ -1,13 +1,13 @@
 <%= form.fields_for :variants do |variant| %>
 	<% if variant.object.is_master? %>
 		<div class="control-group">
-			<%= variant.label 'Identificador', 'SKU', :class => 'control-label' %>
+			<%= variant.label :sku, 'Identificador', :class => 'control-label' %>
 			<div class="controls">
-				<%= variant.text_field :sku, :class => 'input-small	', placeholder: 'SKU' %>
+				<%= variant.text_field :sku, :class => :span10, placeholder: 'Referência, Código de Barras, Código de Produto, ...' %>
 			</div>
 		</div>
 		<div class="control-group">
-			<%= variant.label 'Preço', :class => 'control-label' %>
+			<%= variant.label :price, 'Preço', :class => 'control-label' %>
 			<div class="controls">
 				<div class="input-append">
 					<%= variant.text_field :price, :class => [:number, 'input-small'], placeholder: 'price' %>
@@ -15,6 +15,7 @@
 						<%= image_tag 'glyphicons/euro.png', :class => :icon %>
 					</span>
 				</div>
+				<span class="star">*</span>
 			</div>
 		</div>
 		<% if variant.object.new_record? %>

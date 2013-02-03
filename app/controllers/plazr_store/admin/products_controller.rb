@@ -21,7 +21,7 @@ module PlazrStore
             @product.create_all_variant_properties_association(p)
           end
         end
-        redirect_to admin_product_path(@product), :notice => 'Product was successfully created.'
+        redirect_to admin_product_path(@product), :notice => 'Produto criado com sucesso.'
       else
         @product.variants.first.multimedia.build
         entities_collections
@@ -60,7 +60,7 @@ module PlazrStore
             @product.create_all_variant_properties_association(p)
           end
         end
-        redirect_to admin_product_path(@product), :notice => 'Product was successfully updated.'
+        redirect_to admin_product_path(@product), :notice => 'Produto actualizado com sucesso.'
       else
         entities_collections
         build_relations_for_fields_for
@@ -78,7 +78,9 @@ module PlazrStore
       # collections used on the views for the belongs_to relations
       def entities_collections
         @brands = Brand.all
+        @product_categories = ProductCategory.all
         @prototypes = Prototype.all
+        @variant_properties = VariantProperty.all
       end
 
       # builds certain product relations so that fields_for can render properly

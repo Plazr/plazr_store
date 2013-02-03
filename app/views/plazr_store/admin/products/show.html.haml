@@ -9,7 +9,7 @@
 	.show
 		.row-fluid
 			.span4
-				- imgpth = 'http://placehold.it/100x100&text=No%20image'
+				- imgpth = 'http://placehold.it/300&text=Sem%20imagem'
 				- imgpth = @product.master_variant.multimedia.first.file.url(:thumb) unless @product.master_variant.nil? || @product.master_variant.multimedia.empty?
 				%noscript
 					= image_tag imgpth, :class => :photo
@@ -57,7 +57,7 @@
 								.thumbnail
 									%div
 										%strong.title= link_to variant.sku, admin_product_variant_path(@product, variant)
-										- imgpth = 'http://placehold.it/100x100&text=No%20image'
+										- imgpth = 'http://placehold.it/100x100&text=Sem%20imagem'
 										- imgpth = variant.multimedia.first.file.url(:thumb) unless variant.multimedia.empty?
 										%noscript
 											= image_tag imgpth, :class => :photo
