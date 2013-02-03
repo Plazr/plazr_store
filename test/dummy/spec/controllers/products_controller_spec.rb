@@ -19,12 +19,12 @@ describe PZS::ProductsController, :type => :controller do
   describe "GET #show" do
     it "assigns the requested product to @product" do
       m = FactoryGirl.create :product_full
-      get :show, product_id: m
+      get :show, id: m
       assigns(:product).should eq(m)
     end
 
     it "renders the :show template" do
-      get :show, product_id: FactoryGirl.create(:product_full)
+      get :show, id: FactoryGirl.create(:product_full)
       response.should render_template :show
     end
   end
