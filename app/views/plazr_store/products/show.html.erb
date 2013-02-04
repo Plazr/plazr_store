@@ -9,9 +9,10 @@
     </div>
   </header>
   <% if @product.has_active_promotions? %>
-    <div class="row-fluid">
+    <div class="row-fluid" id="promo">
       <div class="span4">
         <h5>Promoção <%= @product.promotions.active_promotions.first.name %></h5>
+        <p><%= number_to_currency @variant.original_price, unit: '€' %></p>
       </div>
     </div>
   <% end %>
@@ -74,7 +75,7 @@
           </dl>
           <select>
             <% @product.variants_without_master.each_with_index do |v, index| %>
-               <option id=<%= v.id %> value=<%= v.price %> > <%= v.name %><%= v.variant_properties_values %></option>
+               <option class=<%= v.original_price %> id=<%= v.id %> value=<%= v.price %> > <%= v.name %> asd<%= v.variant_properties_values %></option>
             <% end %>
           </select>
         <% end %>
@@ -142,6 +143,12 @@
 <script>
   $(document).ready(function() {
     $('#product-show select').change(function(){
+      var or_price = $('#product-show select option:selected').attr('class');
+
+      if(!(or_price == undefined)) {
+        $('#promo p').text(parseInt(or_price).toFixed(2));
+      }
+        
       var price = $(this).val();
 
       $('#product-show #price').text("€" + parseInt(price).toFixed(2));
