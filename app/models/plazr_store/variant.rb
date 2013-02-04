@@ -59,7 +59,7 @@ module PlazrStore
       elsif promotion.discount_type.type_id == 1
         read_attribute(:price).to_f - (read_attribute(:price).to_f * (promotion.value.to_f/100))
       elsif promotion.discount_type.type_id == 3
-        promotion.value
+        promotion.value.to_f
       else
         read_attribute(:price)
       end
