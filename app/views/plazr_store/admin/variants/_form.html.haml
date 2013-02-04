@@ -71,6 +71,7 @@
 						%th Valor
 				%tbody
 					= f.fields_for :variant_variant_property_values do |vvpv|
+						= vvpv.hidden_field :id
 						- if vvpv.object.variant_property_value
 							%tr
 								%td.key= vvpv.label :display_name, vvpv.object.variant_property_value.variant_property.display_name, :class => 'control-label'
