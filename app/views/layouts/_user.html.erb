@@ -26,8 +26,8 @@
 	<% end %>
 	<ul class="dropdown-menu pull-right" role="menu">
 		<% if user_signed_in? %>
-<!-- 			<li><%= link_to 'Ver Perfil',  plazr_auth.profile_path(current_user), :class => 'profile-button' %></li>
-			<li><%= link_to 'Editar Perfil',     plazr_auth.edit_user_registration_path, class: 'edit-button' %></li> -->
+<!-- 		<li><%= link_to 'Ver Perfil',  plazr_auth.profile_path(current_user), :class => 'profile-button' %></li> -->
+			<li><%= link_to 'Editar Perfil',     plazr_auth.edit_user_registration_path, class: 'edit-button' %></li>
 			<%# if current_user.role?('admin') %>
 			<% if can? :admin, :store %>
 				<% if @namespace == 'PlazrStore::Admin' %>

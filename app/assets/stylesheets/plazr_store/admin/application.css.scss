@@ -406,6 +406,29 @@
 		}
 	}
 
+	#orders {
+		tr.success {
+			th, td {
+				text-align: left;
+			}
+		}
+	}
+
+	#order {
+		td.btn-mini {
+			width: 10%;
+			text-align: center;
+
+			form {
+				margin: 0;
+			}
+		}
+
+		th, td {
+			vertical-align: middle;
+		}
+	}
+
 	.center {
 		text-align: center;
 	}

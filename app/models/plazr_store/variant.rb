@@ -44,7 +44,6 @@ module PlazrStore
     before_save :create_restock_date
     after_save :sku_name
     before_validation :set_is_master, :on => :create
-    before_save :mark_variant_property_value_for_removal
 
     # Delegations
     delegate :name, :to => :product
@@ -58,9 +57,9 @@ module PlazrStore
       if promotion.nil?
         read_attribute(:price)
       elsif promotion.discount_type.type_id == 1
-        read_attribute(:price) - (read_attribute(:price) * (promotion.value/100))
+        read_attribute(:price).to_f - (read_attribute(:price).to_f * (promotion.value.to_f/100))
       elsif promotion.discount_type.type_id == 3
-        promotion.value
+        promotion.value.to_f
       else
         read_attribute(:price)
       end
@@ -68,6 +67,18 @@ module PlazrStore
 
     def formatted_price
       price.to_s 
+    end
+
+    def original_price
+      read_attribute(:price)
+    end
+
+    def has_active_promotions?
+      if self.product.promotions.active_promotions.empty?
+        false
+      else
+        true
+      end
     end
 
     #creates an array for all the variant_properties that are associated to the product of this variant
@@ -159,13 +170,6 @@ module PlazrStore
 
       def sku_name
         update_attribute(:sku,"sku_#{self.id}") if self.sku.blank?
-      end
-
-      #used to mark the variant_variant_property_value to be destroyed when none is selected
-      def mark_variant_property_value_for_removal
-        variant_variant_property_values.each do |vvpv|
-          vvpv.mark_for_destruction if vvpv.variant_property_value_id.blank?
-        end
       end
   end
 end

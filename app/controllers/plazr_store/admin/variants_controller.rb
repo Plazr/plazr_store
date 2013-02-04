@@ -17,6 +17,7 @@ module PlazrStore
         redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully created.'
       else
         @variant.multimedia.build
+        build_relations_for_fields_for
         render :new
       end
     end
@@ -38,6 +39,7 @@ module PlazrStore
       if @variant.update_attributes(params[:variant])
         redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully updated.'
       else
+        build_relations_for_fields_for
         render :edit 
       end
     end
