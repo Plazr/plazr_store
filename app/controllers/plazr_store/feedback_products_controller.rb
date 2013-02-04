@@ -14,7 +14,7 @@ module PlazrStore
       @feedback_product.order   = @order
       @feedback_product.product = @product
       if @feedback_product.save
-        flash[:success] = "Review saved! Thank you"
+        flash[:success] = "Classificação guardada! Obrigado"
         redirect_to order_path(@order)
       else
         render :new
