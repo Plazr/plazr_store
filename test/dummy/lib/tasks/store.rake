@@ -109,14 +109,14 @@ namespace :db do
                 "Caneleiras", 3.99
     add_product "Ginga", "INDICADA PARA JOGAR FUTEBOL DE RUA", "Bolas de Futebol", 3.99
     add_product "SPZ EURO12", "INDICADA PARA A PRÁTICA OCASIONAL", "Bolas de Futebol", 7.99
-    add_product "Portugal Supporer's", 
-                "COBERTURA: Cobertura Premium Up para um toque e sentir exepcional. 
-                 CÂMARA DE AR: poliéster reforçado na bexiga meçhora a retenção de ar e forma.
-                 DESENHO: Construção ligada permite Bonded construção 
-                 permite alinhar os paineis uniformemente para um toque consistente e 
-                 uma maior durabilidade. Absorve menos água, assim a bola mantem um 
-                 peso e sentir consistente.", 
-                 "Bolas de Futebol", 9.99
+    # add_product "Portugal Supporer's", 
+    #             "COBERTURA: Cobertura Premium Up para um toque e sentir exepcional. 
+    #              CÂMARA DE AR: poliéster reforçado na bexiga meçhora a retenção de ar e forma.
+    #              DESENHO: Construção ligada permite Bonded construção 
+    #              permite alinhar os paineis uniformemente para um toque consistente e 
+    #              uma maior durabilidade. Absorve menos água, assim a bola mantem um 
+    #              peso e sentir consistente.", 
+    #              "Bolas de Futebol", 9.99
     add_product "League PRO", "Cosida à mão; 32 Paineis", "Bolas de Futebol", 15.99
     add_product "Futsal Academy", "Bola de futsal com tamanho e peso recomendados para formação", 
                 "Bolas de futsal", 7.99

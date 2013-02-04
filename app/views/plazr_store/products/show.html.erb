@@ -139,7 +139,7 @@
 
       $('#product-show #price').text(price + " €");
 
-      var id = $(this).attr('id');
+      var id = $('#product-show select option:selected').attr('id');
 
       $("#add_cart_f").attr("action","/cart/add/" + id);
       $("#add_wishlist_f").attr("action","/wishlist/add/" + id);

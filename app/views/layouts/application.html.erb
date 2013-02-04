@@ -88,6 +88,11 @@
 				<div class="row-fluid">
 					<div class="span12">
 						Sabe mais em <a href="http://www.plazr.net">plazr.net</a>
+						<div class="pull-right pages">
+							<% @pages.each do |page| %>
+								<%= link_to page.title, plazr_store.page_path(page) %>
+							<% end %>
+						</div>
 					</div>
 				</div>
 			</footer>
