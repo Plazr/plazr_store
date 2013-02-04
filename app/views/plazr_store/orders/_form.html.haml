@@ -52,10 +52,13 @@
 		$('.shipping .company').val( $('.billing .company').val() );
 	}
 
-	$('#payment_method_name').change(function() {
-		console.log($(this).find(":selected").text());
-		$('#shipment-methods').html($(this).find(":selected").text());
+	$('input[name="order[shipment_condition_id]"]').change(function() {
+		id = $('input[name="order[shipment_condition_id]"]:checked').val();
+		value = $('span[name='+id+']').text().trim();
+		$('#shipment-methods').html("€"+value);
+		$('#total').html("€"+(Number("#{cart.total_price}")+Number(value)));
+
 	});
-	$('#payment_method_name').change();
+	$('input[name="order[shipment_condition_id]"]').change();
 
 
