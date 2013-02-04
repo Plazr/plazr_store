@@ -125,13 +125,13 @@
 
       <% @product.comments.each do |c| %>
       <div class="row-fluid">
-        <div class="span4">
+        <div class="span6">
           <h3>Nome</h3>
           <p><%= c.owner.name %></p>
-          <p><%= c.rating %></p>
-        </div>
-
-        <div class="span5">
+          <p class="thumb-rate">
+            <%= rating_to_stars(c.rating) %>
+          </p>
+          <br>
           <p><%= c.comment %></p>
         </div>
       </div>
