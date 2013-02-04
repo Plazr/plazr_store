@@ -1,17 +1,17 @@
 = form_for [:admin, @product_category], :html => { :class => [:form, 'form-horizontal'] } do |f|
-	/ - if @product_category.errors.any?
-	/ 	#error_explanation
-	/ 		%h2= "#{pluralize(@product_category.errors.count, "error")} prohibited this product_category from being saved:"
-	/ 		%div{:class=>["alert","alert-error"]}
-	/ 			%ul
-	/ 				- @product_category.errors.full_messages.each do |msg|
-	/ 					%li= msg
+	- if @product_category.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@product_category.errors.count, "error")} prohibited this product_category from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- @product_category.errors.full_messages.each do |msg|
+						%li= msg
 	.control-group
-		= f.label :name, :class => 'control-label'
+		= f.label :name, 'Nome', :class => 'control-label'
 		.controls
 			= f.text_field :name
 	.control-group
-		= f.label :description, :class => 'control-label'
+		= f.label :description, 'Descrição', :class => 'control-label'
 		.controls
 			= f.text_field :description
 	.control-group
@@ -20,4 +20,4 @@
 			= f.collection_select :parent_product_category_id, @product_categories, :id, :name, {:include_blank => true}
 	.control-group
 		.controls
-			= f.submit 'Submit', :class => [:btn, 'btn-primary']
+			= f.submit 'Guardar', :class => [:btn, 'btn-primary']
