@@ -5,7 +5,7 @@
 			= link_to 'Voltar', admin_promotions_path, :class => [:btn, 'btn-small']
 		.btn-group.pull-right
 			= link_to 'Editar', edit_admin_promotion_path, :class => :btn
-			= link_to 'Eliminar', admin_promotion_path(@promotion), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger']
+			= link_to 'Eliminar', admin_promotion_path(@promotion), :method => :delete, :data => { :confirm => "Está prestes a eliminar a promoção \"#{@promotion.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
 	%h4 Descrição
 	%p= @promotion.description
 	.row-fluid

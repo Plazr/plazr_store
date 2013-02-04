@@ -22,5 +22,5 @@
 							%td.btn-mini
 								= link_to 'Editar', edit_admin_prototype_path(prototype), :class => [:btn, 'btn-mini']
 							%td.btn-mini
-								= link_to 'Eliminar', admin_prototype_path(prototype), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-danger', 'btn-mini']
+								= link_to 'Eliminar', admin_prototype_path(prototype), :method => :delete, :data => { :confirm => "Está prestes a eliminar o protótipo \"#{prototype.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger', 'btn-mini']
 	= will_paginate @prototypes, :renderer => BootstrapPagination::Rails

@@ -28,4 +28,4 @@
 							%td.val= link_to promotion.value, admin_promotion_path(promotion)
 							%td.enum= link_to promotion.discount_type.name, admin_promotion_path(promotion)
 							%td.btn-mini= link_to 'Editar', edit_admin_promotion_path(promotion), :class => [:btn, 'btn-mini']
-							%td.btn-mini= link_to 'Eliminar', admin_promotion_path(promotion), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
+							%td.btn-mini= link_to 'Eliminar', admin_promotion_path(promotion), :method => :delete, :data => { :confirm => "Está prestes a eliminar a promoção \"#{promotion.name}\". Deseja continuar?" }, :class => [:btn, 'btn-mini', 'btn-danger']
