@@ -1,14 +1,14 @@
 %table
   %tr
     %th= "Item"
-    %th= "Price"
-    %th= "Quantity"
+    %th= "Preço"
+    %th= "Quantidade"
     %th= "Subtotal"
   - order.cart.cart_variants.each do |line_item|
     %tr
       %td
         = line_item.info
-        = link_to 'Rate this', new_feedback_product_path(order, line_item.product)
+        = link_to 'Classificar isto', new_feedback_product_path(order, line_item.product)
       %td= number_to_currency line_item.unit_price
       %td= line_item.amount
       %td= number_to_currency line_item.price
@@ -18,7 +18,7 @@
     %td= number_to_currency order.cart.total_price
   %tr
     %td{colspan: "2"}
-    %td= "Shipment Condition"
+    %td= "Meio de Envio"
     %td= number_to_currency order.shipment_condition.price
   %tr
     %td{colspan: "2"}
@@ -28,8 +28,8 @@
 Email: 
 = order.email
 
-%h3= "Billing Information"
+%h3= "Facturação"
 = raw order.billing_address.display
 
-%h3= "Shipping Information"
+%h3= "Informação de Envio"
 = raw order.shipping_address.display

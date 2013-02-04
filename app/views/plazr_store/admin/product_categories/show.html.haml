@@ -1,17 +1,10 @@
-%h1 Show ProductCategory
-%p#notice
-  = notice
-%table
-  %tr
-    %td
-      %b Name
-    %td
-      = @product_category.name
-    %td
-      %b Description
-    %td
-      = @product_category.description
-
-= link_to 'Edit', edit_admin_product_category_path(@product_category)
-|
-= link_to 'Back', admin_product_categories_path
+#admin
+	%h1= @product_category.name
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_product_categories_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_product_category_path, :class => :btn
+			= link_to 'Eliminar', admin_product_category_path(@product_category), :method => :delete, :data => { :confirm => "Está prestes a eliminar a categoria de produto \"#{@product_category.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
+	%h3 Descrição
+	%p= @product_category.description

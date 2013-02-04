@@ -42,12 +42,12 @@ module PlazrStore
 
     ## Callbacks ##
     before_save :create_restock_date
+    before_save :val_price
     after_save :sku_name
     before_validation :set_is_master, :on => :create
 
     # Delegations
     delegate :name, :to => :product
-
 
     ## Instance Methods ##
 
@@ -83,8 +83,14 @@ module PlazrStore
 
     #creates an array for all the variant_properties that are associated to the product of this variant
     def get_variant_properties_from_product
+      vpv = []
+      self.variant_variant_property_values.each do |vvpv|
+        if !vvpv.variant_property_value.nil?
+          vpv << vvpv.variant_property_value.variant_property_id
+        end
+      end
       self.product.variant_properties.each do |vp|
-        self.variant_variant_property_values.build(:variant_property_value => vp.variant_property_values.first) unless self.variant_property_values.map(&:variant_property_id).include?(vp.id)
+        self.variant_variant_property_values.build(:variant_property_value => vp.variant_property_values.first) unless vpv.include?(vp.id)#self.variant_variant_property_values.map(&:variant_property_value_id).include?(vp.variant_property_values.first.id)
       end
     end
 
@@ -170,6 +176,15 @@ module PlazrStore
 
       def sku_name
         update_attribute(:sku,"sku_#{self.id}") if self.sku.blank?
+      end
+
+      def val_price
+        if self.read_attribute(:price).blank?
+          errors.add(:base, "Price can't be blank")
+          false
+        else 
+          true
+        end
       end
   end
 end

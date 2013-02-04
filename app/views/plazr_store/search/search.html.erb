@@ -4,9 +4,9 @@
 
 		<div class="span3">
 			<span>Preço: </span>
-			<input type="number" value="0" name="min_price">
+			<input type="number" value="<%= params[:min_price] %>" name="min_price">
 			<span> € a </span>
-			<input type="number" value="0" name="max_price">
+			<input type="number" value="<%= params[:max_price] %>" name="max_price">
 			<span> €</span>
 		</div>
 
@@ -40,3 +40,13 @@
 
 	<%= will_paginate @products %>
 </div>
+
+<script>
+	$(document).ready(function() {
+	   
+		$('#category').val('<%= params[:category] %>');
+		$('#brand').val('<%= params[:brand] %>');
+		$('#price').val('<%= params[:price] %>');
+
+	  });
+</script>
