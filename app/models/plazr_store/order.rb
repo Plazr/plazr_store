@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Order < ActiveRecord::Base
     belongs_to :cart

@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::VariantPropertyValuesController < Admin::ApplicationController
     before_filter :get_variant_property
@@ -14,8 +15,7 @@ module PlazrStore
       @variant_property_value = @variant_property.variant_property_values.build params[:variant_property_value]
 
       if @variant_property_value.save
-        # redirect_to admin_variant_property_variant_property_value_path(@variant_property, @variant_property_value), :notice => 'VariantPropertyValue was successfully created.'
-        redirect_to admin_variant_property_variant_property_values_path, :notice => 'VariantPropertyValue was successfully created.'
+        redirect_to admin_variant_property_variant_property_values_path, :notice => 'Valor de propriedade de modelo criado com sucesso.'
       else
         render :new
       end
@@ -33,7 +33,7 @@ module PlazrStore
       @variant_property_value = VariantPropertyValue.find params[:id]
 
       if @variant_property_value.update_attributes(params[:variant_property_value])
-        redirect_to admin_variant_property_variant_property_value_path(@variant_property, @variant_property_value), :notice => 'VariantPropertyValue was successfully updated.'
+        redirect_to admin_variant_property_variant_property_value_path(@variant_property, @variant_property_value), :notice => 'Valor de propriedade de modelo atualizado com sucesso.'
       else
         render :edit 
       end

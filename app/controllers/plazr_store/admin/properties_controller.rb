@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::PropertiesController < Admin::ApplicationController
 
@@ -21,7 +22,7 @@ module PlazrStore
       @property = Property.new(params[:property])
 
       if @property.save
-        redirect_to admin_property_path(@property), :notice => 'Property was created successfully'
+        redirect_to admin_property_path(@property), :notice => 'Propriedade criada com sucesso.'
       else
         render :new
       end
@@ -31,7 +32,7 @@ module PlazrStore
       @property = Property.find(params[:id])
 
       if @property.update_attributes(params[:property])
-        redirect_to admin_property_path(@property), :notice => 'Property was created sucessfully'
+        redirect_to admin_property_path(@property), :notice => 'Propriedade atualizada com sucesso.'
       else
         render :edit
       end

@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::ProductCategoriesController < Admin::ApplicationController
 
@@ -29,7 +30,7 @@ module PlazrStore
       end
 
       if @product_category.save
-        redirect_to admin_product_category_path(@product_category), :notice => 'ProductCategory was created successfully'
+        redirect_to admin_product_category_path(@product_category), :notice => 'Categoria de produtos criada com sucesso.'
       else
         @product_categories = ProductCategory.where(is_leaf: false)
         render :new
@@ -43,7 +44,7 @@ module PlazrStore
         if(!params[:product_category][:parent_product_category_id].empty?)
           @product_category.is_leaf = true
         end
-        redirect_to admin_product_category_path(@product_category), :notice => 'ProductCategory was created sucessfully'
+        redirect_to admin_product_category_path(@product_category), :notice => 'Categoria de produtos atualizada com sucesso.'
       else
         @product_categories = []
         if @product_category.child_product_categories.empty?

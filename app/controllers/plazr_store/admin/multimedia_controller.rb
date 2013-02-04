@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::MultimediaController < Admin::ApplicationController
     before_filter :get_product
@@ -14,7 +15,7 @@ module PlazrStore
       @multimedium = Multimedium.new params[:multimedium]
 
       if @multimedium.save
-        redirect_to admin_product_multimedium_path(@product, @multimedium), :notice => 'Multimedium was successfully created.'
+        redirect_to admin_product_multimedium_path(@product, @multimedium), :notice => 'Elemento de multimédia criado com sucesso.'
       else
         entity_collection
         render :new
@@ -35,7 +36,7 @@ module PlazrStore
       @multimedium = Multimedium.find params[:id]
 
       if @multimedium.update_attributes(params[:multimedium])
-        redirect_to admin_product_multimedium_path(@product, @multimedium), :notice => 'Multimedium was successfully updated.'
+        redirect_to admin_product_multimedium_path(@product, @multimedium), :notice => 'Elemento de multimédia atualizado com sucesso.'
       else
         entity_collection
         render :edit 

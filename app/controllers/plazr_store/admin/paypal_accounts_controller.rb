@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   
   #path = File.expand_path '../../../../..',__FILE__
