@@ -19,14 +19,10 @@ module PlazrStore
 
     def create
       @promotion = Promotion.new params[:promotion]
-        puts @promotion
-        puts "LIX1"
 
       if @promotion.save
         redirect_to admin_promotion_path(@promotion), :notice => 'Promotion was successfully created.' 
       else
-        puts "LIXO"
-        puts @promotion
         instance_variable_loading
         process_product_attrs
         @discount_types = DiscountType.promotion_types
