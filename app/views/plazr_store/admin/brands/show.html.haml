@@ -1,13 +1,8 @@
-%h1 Show Brand
-%p#notice
-  = notice
-%table
-  %tr
-    %td
-      %b Name
-    %td
-      = @brand.name
-
-= link_to 'Edit', edit_admin_brand_path(@brand)
-|
-= link_to 'Back', admin_brands_path
+#admin
+	%h1= @brand.name
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_brands_path
+		.btn-group
+			= link_to 'Editar', edit_admin_brand_path(@brand)
+			= link_to 'Eliminar', admin_brand_path(b), :method => :delete, :data => { :confirm => "Está prestes a eliminar a marca \"#{b.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
