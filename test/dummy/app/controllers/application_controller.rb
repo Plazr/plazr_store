@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
-
+  
+  helper :all
   before_filter :get_categories
   before_filter :get_pages
   before_filter :get_banner
