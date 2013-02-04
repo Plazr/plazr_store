@@ -59,6 +59,10 @@ module PlazrStore
       PZS::Cart.with_deleted.find(self.cart_id)
     end
 
+    def completed?
+      self.state == "completed"
+    end
+
     def info
       # summarizes an order's information (id, state and created_at)
       info = "Order ##{self.id}"
