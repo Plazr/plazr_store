@@ -6,6 +6,5 @@
 		.btn-group.pull-right
 			= link_to 'Editar', edit_admin_property_path(@property), :class => :btn
 			= link_to 'Eliminar', admin_property_path(@property), :method => :delete, :data => { :confirm => "Está prestes a eliminar a propriedade de produto \"#{@property.id_name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
-	%p#notice= notice
 	%h3 Apresentação
 	%p= @property.display_name

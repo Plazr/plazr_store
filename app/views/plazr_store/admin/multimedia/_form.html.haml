@@ -13,16 +13,20 @@
 		= f.label 'Ficheiro', :class => 'control-label'
 		.controls
 			= f.file_field :file
+			%span.star *
 
 	.control-group
-		= f.label :caption, :class => 'control-label'
+		= f.label :caption, 'Legenda', :class => 'control-label'
 		.controls
 			= f.text_field :caption
 
 	.control-group
-		= f.label :variant, :class => 'control-label'
+		= f.label :variant, 'Modelo', :class => 'control-label'
 		.controls
-			= f.collection_select :variant_id, @variants, :id, :sku, prompt: 'Pick a variant'
+			= f.collection_select :variant_id, @variants, :id, :sku, prompt: 'Selecione um modelo'
 	.control-group
 		.controls
-			= f.submit "Submit", :class => [:btn, 'btn-primary']
+			= f.submit 'Guardar', :class => [:btn, 'btn-primary']
+	%p
+		%span.star *
+		Campos obrigatórios

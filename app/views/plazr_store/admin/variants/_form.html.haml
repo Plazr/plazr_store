@@ -10,27 +10,28 @@
 	.row-fluid
 		.span6
 			.control-group
-				= f.label :sku, :class => 'control-label'
+				= f.label :sku, 'Identificador', :class => 'control-label'
 				.controls
-					= f.text_field :sku, :class => :wide, placeholder: 'SKU', autofocus: true
+					= f.text_field :sku, :class => :wide, placeholder: 'Referência, e.g.', autofocus: true
 
 			.control-group
 				= f.label 'Descrição', :class => 'control-label'
 				.controls
-					= f.text_area :description, :class => :wide, placeholder: 'Product description', rows: 5
+					= f.text_area :description, :class => :wide, rows: 5
 			
 			.control-group
 				= f.label 'Preço', :class => 'control-label'
 				.controls
 					.input-append
-						= f.text_field :price, :class => [:number, 'input-small'], placeholder: 'price'
+						= f.text_field :price, :class => [:number, 'input-small']
 						%span.add-on= image_tag 'glyphicons/euro.png', :class => :icon
+					%span.star *
 			
 			.control-group
 				= f.label 'Custo', :class => 'control-label'
 				.controls
 					.input-append
-						= f.text_field :cost_price, :class => [:number, 'input-small'], placeholder: 'cost'
+						= f.text_field :cost_price, :class => [:number, 'input-small']
 						%span.add-on= image_tag 'glyphicons/euro.png', :class => :icon
 			
 			.control-group
@@ -79,3 +80,6 @@
 						
 	.actions
 		= f.submit 'Guardar', :class => [:btn, 'btn-primary']
+	%p
+		%span.star *
+		Campos obrigatórios
