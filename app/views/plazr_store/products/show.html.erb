@@ -115,7 +115,7 @@
       </section>
     <%end%>
 
-    <% if !@product.comments.empty? %>
+    <!---->
     <section>
       <div class="row-fluid">
         <div class="span11">
@@ -123,21 +123,17 @@
         </div>
       </div>
 
-      <% @product.comments.each do |c| %>
       <div class="row-fluid">
         <hr>
         <div class="span6">
-          <p><%= c.owner.name %></p>
-          <p class="thumb-rate">
-            <%= rating_to_stars(c.rating) %>
+          <h4>Miguel Gomes</h4>
+          <p id="stars" class="thumb-rate">
+            <%= rating_to_stars(4) %>
           </p>
-          <br>
-          <p><%= c.comment %></p>
+          <p>asdasdadasasdasdasdad</p>
         </div>
       </div>
-      <% end %>
     </section>
-    <% end %>
   </article>
 
 <script>
