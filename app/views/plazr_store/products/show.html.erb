@@ -5,7 +5,7 @@
       <h2><%= @product.name %><span><%= rating_to_stars(@product.rating_truncated) %></span></h2>
     </div>
     <div class="span5">
-      <h2 id="price"><%= @variant.price %> €</h2>
+      <h2 id="price"><%= number_to_currency @variant.price, unit: '€' %></h2>
     </div>
   </header>
 
@@ -137,7 +137,7 @@
     $('#product-show select').change(function(){
       var price = $(this).val();
 
-      $('#product-show #price').text(price + " €");
+      $('#product-show #price').text("€" + parseInt(price).toFixed(2));
 
       var id = $('#product-show select option:selected').attr('id');
 

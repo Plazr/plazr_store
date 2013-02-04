@@ -15,5 +15,5 @@
 						%td.btn-mini
 							= link_to 'Editar', edit_admin_brand_path(b), :class => [:btn, 'btn-mini']
 						%td.btn-mini
-							= link_to 'Eliminar', admin_brand_path(b), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-mini', 'btn-danger']
+							= link_to 'Eliminar', admin_brand_path(b), :method => :delete, :data => { :confirm => "Está prestes a eliminar a marca \"#{b.name}\". Deseja continuar?" }, :class => [:btn, 'btn-mini', 'btn-danger']
 	= will_paginate @brands, :renderer => BootstrapPagination::Rails
