@@ -18,6 +18,10 @@ module PlazrStore
       else
         @variant.multimedia.build
         build_relations_for_fields_for
+
+        @variant.variant_variant_property_values.each do |vvpv|
+          puts vvpv.variant_property_value.inspect
+        end
         render :new
       end
     end
@@ -39,7 +43,7 @@ module PlazrStore
       if @variant.update_attributes(params[:variant])
         redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully updated.'
       else
-        build_relations_for_fields_for
+        build_relations_for_fields_for        
         render :edit 
       end
     end
