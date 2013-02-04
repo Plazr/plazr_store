@@ -8,10 +8,14 @@ namespace :db do
     require 'factory_girl_rails'
     require 'database_cleaner'
 
+
     puts '>> Deleting all records from all tables'
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.clean
       PlazrAuth::User.with_deleted.all.each { |u| u.destroy! }
+
+    puts 'Running db:seed'
+    Rake::Task["db:seed"].execute
 
     puts '>> Generating user'
       FactoryGirl.create :user_with_user_role, email: "user@gmail.com", password: "asdasd", password_confirmation: "asdasd"

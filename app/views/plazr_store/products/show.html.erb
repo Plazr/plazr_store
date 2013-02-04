@@ -8,6 +8,13 @@
       <h2 id="price"><%= number_to_currency @variant.price, unit: '€' %></h2>
     </div>
   </header>
+  <% if @product.has_active_promotions? %>
+    <div class="row-fluid">
+      <div class="span4">
+        <h5>Promoção <%= @product.promotions.active_promotions.first.name %></h5>
+      </div>
+    </div>
+  <% end %>
 
 
   <div class="row-fluid">
