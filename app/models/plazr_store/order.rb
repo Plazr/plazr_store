@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Order < ActiveRecord::Base
     belongs_to :cart
@@ -95,6 +96,10 @@ module PlazrStore
       #preorder = PreOrder.find_by_cart_id(current_user.cart.id)
       self.shipment_condition_id = shipment_condition_id
       self.total = ShipmentCondition.find(self.shipment_condition_id).price + current_user.cart.total_price
+    end
+
+    def product_classified? (product)
+      !FeedbackProduct.find_by_order_id_and_product_id(self.id, product.id).nil?
     end
 
     protected

@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::ProductPropertiesController < Admin::ApplicationController
     before_filter :get_product
@@ -27,10 +28,10 @@ module PlazrStore
         prop = Property.find_by_id_name(params[:property][:id_name])
         ProductProperty.create(:property => prop, :product => @product,
               :value => params[:property][:product_properties_attributes]['0'][:value])  
-        redirect_to admin_product_product_properties_path(@product), :notice => 'ProductProperty was successfully associated and everything was updated.'
+        redirect_to admin_product_product_properties_path(@product), :notice => 'Propriedade de produto associada com sucesso. Todos os valores atualizados com sucesso.'
       # if the property fills the requirements, it is saved and then the user is redirected back to index
       elsif @property.save
-        redirect_to admin_product_product_properties_path(@product), :notice => 'ProductProperty was successfully created and everything was updated.'
+        redirect_to admin_product_product_properties_path(@product), :notice => 'Propriedade de produto criada com sucesso. Todos os valores atualizados com sucesso.'
       # if everything else fails, get all the product_properties and render index
       else
         @product_properties = @product.product_properties

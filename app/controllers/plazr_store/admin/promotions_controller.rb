@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::PromotionsController < Admin::ApplicationController 
     
@@ -19,14 +20,10 @@ module PlazrStore
 
     def create
       @promotion = Promotion.new params[:promotion]
-        puts @promotion
-        puts "LIX1"
 
       if @promotion.save
-        redirect_to admin_promotion_path(@promotion), :notice => 'Promotion was successfully created.' 
+        redirect_to admin_promotion_path(@promotion), :notice => 'Promoção criada com sucesso.' 
       else
-        puts "LIXO"
-        puts @promotion
         instance_variable_loading
         process_product_attrs
         @discount_types = DiscountType.promotion_types
@@ -45,7 +42,7 @@ module PlazrStore
       @promotion = Promotion.find(params[:id])
 
       if @promotion.update_attributes(params[:promotion])
-        redirect_to admin_promotion_path(@promotion), :notice => 'Promotion was successfully updated.' 
+        redirect_to admin_promotion_path(@promotion), :notice => 'Promoção actualizada com sucesso.' 
       else
         instance_variable_loading
         process_product_attrs

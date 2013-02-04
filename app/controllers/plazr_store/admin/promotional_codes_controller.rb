@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::PromotionalCodesController < Admin::ApplicationController 
 
@@ -18,7 +19,7 @@ module PlazrStore
       @promotional_code = PromotionalCode.new params[:promotional_code]
 
       if @promotional_code.save
-        redirect_to admin_promotional_code_path(@promotional_code), :notice => 'PromotionalCode was successfully created.' 
+        redirect_to admin_promotional_code_path(@promotional_code), :notice => 'Código promocional criado com sucesso.' 
       else
         @discount_types = DiscountType.promotional_code_types
         render :new
@@ -34,7 +35,7 @@ module PlazrStore
       @promotional_code = PromotionalCode.find(params[:id])
 
       if @promotional_code.update_attributes(params[:promotional_code])
-        redirect_to admin_promotional_code_path(@promotional_code), :notice => 'PromotionalCode was successfully updated.' 
+        redirect_to admin_promotional_code_path(@promotional_code), :notice => 'Código promocional atualizado com sucesso.' 
       else
         @discount_types = DiscountType.promotional_code_types
         render :edit

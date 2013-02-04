@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::PagesController < Admin::ApplicationController
     def show
@@ -12,7 +13,7 @@ module PlazrStore
       @page = Page.new(params[:page])
 
       if @page.save
-        redirect_to admin_page_path(@page), :notice => 'Page was successfully created.'
+        redirect_to admin_page_path(@page), :notice => 'Página criada com sucesso.'
       else
         render :new
       end
@@ -30,7 +31,7 @@ module PlazrStore
       @page = Page.find(params[:id])
 
       if @page.update_attributes(params[:page])
-        redirect_to admin_page_path(@page), :notice => 'Page was successfully updated.'
+        redirect_to admin_page_path(@page), :notice => 'Página atualizada com sucesso.'
       else
         render :edit
       end

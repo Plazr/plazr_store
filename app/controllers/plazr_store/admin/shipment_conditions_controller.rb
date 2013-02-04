@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::ShipmentConditionsController < Admin::ApplicationController
 
@@ -22,7 +23,6 @@ module PlazrStore
       @shipment_condition = ShipmentCondition.new(params[:shipment_condition])
 
       if @shipment_condition.save
-        # redirect_to admin_shipment_condition_path(@shipment_condition), :notice => 'ShipmentCondition was created successfully'
         redirect_to admin_shipment_condition_path(@shipment_condition), :notice => 'Meio de entrega criado com sucesso'
       else
         render :new

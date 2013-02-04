@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PlazrStore::Admin::ApplicationController < PlazrStore::ApplicationController
 
   before_filter :check_admin
