@@ -71,6 +71,14 @@ module PlazrStore
       master_variant.multimedia
     end
 
+    def all_variants_images
+      images = []
+      self.variants.each do |v|
+        images << v.multimedia
+      end
+      images
+    end
+
     def variants_without_master
       self.variants.without_master
     end
