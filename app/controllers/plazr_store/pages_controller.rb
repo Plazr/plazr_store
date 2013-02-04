@@ -8,7 +8,11 @@ module PlazrStore
     end
 
     def show
-      @page = Page.find_by_slug(params[:slug])
+      if !!(params[:slug] =~ /^[-+]?[0-9]+$/)
+        @page = Page.find(params[:slug])
+      else
+        @page = Page.find_by_slug(params[:slug])
+      end
     end
   end
 

@@ -20,6 +20,9 @@
 		= f.label 'Conteúdo', :class => 'control-label'
 		.controls
 			= f.text_area :content, :class => [:span12], :rows => 40
+			%span.help-block Pode utilizar código HTML para estruturar o conteúdo.
+			%span.help-block= raw "Da mesma forma, pode incluir código CSS para personalizar o aspecto das suas páginas. Pode ainda recorrer aos componentes fornecidos pela framework #{link_to 'Twitter Bootstrap', 'http://twitter.github.com/bootstrap'}."
+			%p.text-info Lamentamos mas de momento não nos é possível suportar o armazenamento de elementos multimédia para as páginas. Pode, no entanto, incluir nas suas páginas elementos alojados por outros serviços online.
 
 	.control-group
 		.controls
