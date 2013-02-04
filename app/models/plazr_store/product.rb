@@ -51,6 +51,14 @@ module PlazrStore
       self.variants.count >= 1
     end
 
+    def has_active_promotions?
+      if self.promotions.active_promotions.empty?
+        false
+      else
+        true
+      end
+    end
+
     def comments
       self.feedback_products.all
     end

@@ -73,14 +73,6 @@ module PlazrStore
       read_attribute(:price)
     end
 
-    def has_active_promotions?
-      if self.product.promotions.active_promotions.empty?
-        false
-      else
-        true
-      end
-    end
-
     #creates an array for all the variant_properties that are associated to the product of this variant
     def get_variant_properties_from_product
       vpv = []
