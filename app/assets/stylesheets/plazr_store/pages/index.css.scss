@@ -1,0 +1,113 @@
+@import 'plazr_store/partials/colors';
+@import 'plazr_store/partials/functions';
+
+
+#index-page {
+	padding-top: 10px;
+
+	#well-outter {
+        background-color: white;
+        a:not(:first-child) .well-entry {
+            padding-top: 8px;
+        }
+        a .well-entry {
+            div {
+                font-family: 'Lato', sans-serif;
+                @include background-cover-image;
+                border: 1px solid  white;
+                height: 74.5px;
+                line-height: 60px;
+                vertical-align: middle;
+                padding-left: 20px;
+                span {
+                    color: black;
+                    font-size: 20px;
+                    padding: 5px;
+                    background-color: rgba(255, 255, 255, 0.7);
+                    @include transition(0s, 1s, background-color);
+
+                }
+                &:hover {
+                    border: 1px solid $border-color;
+                }
+                &:hover span {
+                    background-color: $recommended-bg-hover-color;
+                    color: white;
+                }
+            }
+        }
+    }
+
+    #recommended {
+        margin-top: 2em;
+    }
+
+    #featured {
+        .span12 {
+            border: 10px solid white;
+        }
+
+        position: relative;
+        border: 1px solid $border-color;
+
+        &:hover {
+            background-color: $thumb-hover;
+            border: 1px solid $thumb-hover;
+            -moz-transition: all 0.2s ease-in;
+            -webkit-transition: all 0.2s ease-in;
+            -o-transition: all 0.2s ease-in;
+            transition: all 0.2s ease-in;
+            .thumb-item-image {
+                opacity:0.6;
+                filter:alpha(opacity=60); /* For IE8 and earlier */
+            }
+            .featured-box {
+                -moz-transition: all 0.2s ease-in;
+                -webkit-transition: all 0.2s ease-in;
+                -o-transition: all 0.2s ease-in;
+                transition: all 0.2s ease-in;
+                 span.transparent-background {
+                    background-color: $recommended-bg-hover-color;
+                    color: white;
+                }
+            }
+        }
+
+        .featured-image {
+            z-index: -10;
+            height: 300px;
+            width: 100%;
+            @include background-cover-image;
+        }
+
+        .featured-box {
+            color: $recommended-fg-color;
+            text-decoration: none;
+            span.transparent-background {
+                padding: 0.2em;
+                background-color: $recommended-bg-color;
+                @include transition(0s, 1s, background-color);
+            }
+            p {
+                margin-bottom: 15px;
+            }
+            p.price {
+                font-size: 25px;
+            }
+            header {
+                font-family: 'Lato', sans-serif;
+                line-height: 70px;
+                margin-bottom: 0.6em;
+                font-size: 40px;
+            }
+            > div {
+                position:absolute;
+                bottom: 15px;
+                padding-left: 340px;
+                padding-right: 30px;
+            }
+        }
+
+    }
+}
+

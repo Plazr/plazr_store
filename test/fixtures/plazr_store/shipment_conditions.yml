@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shipment_method: MyString
+  value: 9.99
+  active: false
+
+two:
+  shipment_method: MyString
+  value: 9.99
+  active: false

@@ -1,0 +1,28 @@
+#admin
+	%h1= @prototype.name
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_prototypes_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_prototype_path(@prototype), :class => :btn
+			= link_to 'Eliminar', admin_prototype_path(@prototype), :method => :delete, :data => { :confirm => "Está prestes a eliminar o protótipo \"#{@prototype.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
+	.row-fluid
+		.offset1.span4
+			%table.table.table-striped.table-bordered
+				%thead
+					%tr
+						%th Propriedades de Produto
+					%tbody
+						- @prototype.properties.each do |p|
+							%tr
+								%td= p.display_name
+		.offset2.span4
+			%table.table.table-striped.table-bordered
+				%thead
+					%tr
+						%th Propriedades de Variante
+					%tbody
+						- @prototype.variant_properties.each do |p|
+							%tr
+								%td
+									= p.display_name

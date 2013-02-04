@@ -1,0 +1,73 @@
+@import 'plazr_store/partials/colors';
+@import 'plazr_store/partials/functions';
+
+@mixin dropbutton-icon($image-url) {
+	background-image: url($image-url);
+	background-repeat: no-repeat;
+	background-position: .6em .4em;
+}
+
+.topbar-wrapper {
+	.container {
+		padding-right: 0;
+		padding-left: 0;
+		margin: 0;
+		background-color: white;
+	}
+	.topbar {
+		padding: 1em 0 1em 0;
+		form {
+			margin: 0;
+			select {
+				margin-bottom: 1px;
+			}
+		}
+	}
+}
+.topbar-wrapper	ul.dropdown-menu li, #admin-topbar ul.dropdown-menu li {
+	a {
+		padding-left: 30px;
+	}
+	.admin-button, .admin-button:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/admin.png') %>");
+	}
+	.store-button, .store-button:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/admin.png') %>");
+	}
+	.exit-button, .exit-button:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/out.png') %>");
+	}
+	.edit-button, .edit-button:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/edit.png') %>");
+	}
+	.profile-button, .profile-button:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/user.png') %>");
+	}
+	.init-button, .init-button:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/in.png') %>");
+	}
+	.recover-button, .recover-button:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/bulb-2.png') %>");
+	}
+	.register-button, .register-button:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/compose-3.png') %>");
+	}
+	.cart-button, .cart-button:hover {
+		@include dropbutton-icon("<%= image_path('plazr_store/icons/cart.png') %>");
+	}
+}
+
+.topbar-wrapper.fixed {
+	width: 100%;
+	z-index: 2;
+	position: fixed;
+	top: 0;
+	.container {
+		.topbar {
+			padding: 0.6em 0 0.6em 0;
+		}
+	}
+}
+
+
+

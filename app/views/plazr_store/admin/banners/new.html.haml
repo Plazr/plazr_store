@@ -1,0 +1,19 @@
+%h1 New Banner
+
+= form_for @banner, :url => url_for(:controller => 'banners', :action => 'create'), :method => :post, :html => { :multipart => true } do |f|
+  - if @banner.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@banner.errors.count, "error")} prohibited this banner from being saved:"
+      %div{:class=>["alert","alert-error"]}
+        %ul
+          - @banner.errors.full_messages.each do |msg|
+            %li= msg
+
+  // this line is necessary before the file_field (small fix to use paperclip)
+  = f.hidden_field :class_type, :value => 'banner'
+  = f.label :file
+  = f.file_field :file
+  %br
+
+  = f.submit "Submit"
+  = link_to 'Cancel', root_path

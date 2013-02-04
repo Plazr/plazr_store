@@ -1,0 +1,18 @@
+#admin
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_shipment_conditions_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_shipment_condition_path(@shipment_condition), :class => :btn
+			= link_to 'Eliminar', admin_shipment_condition_path(@shipment_condition), :method => :delete, :data => { :confirm => "Está prestes a eliminar o meio de entrega \"#{@shipment_condition.service_name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
+	%h1= @shipment_condition.service_name
+	%p#notice= notice
+	.row-fluid
+		.span6
+			%h3 Nome do serviço
+			%p= @shipment_condition.service_name
+		.span6
+			%h3 Preço
+			%p= number_to_currency @shipment_condition.price, unit: '€'
+	%h3 Descrição
+	%p= @shipment_condition.service_details

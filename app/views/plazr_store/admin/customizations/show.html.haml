@@ -1,0 +1,20 @@
+%h1 Showing Active Brand and Logo
+%p#notice
+  = notice
+%table
+  %tr
+    - if !@banner.nil?
+      %td
+        %b Banner
+      %td
+        = image_tag @banner.file.url(:banner)
+      %td 
+        = link_to 'Edit', edit_admin_banner_path(@banner)
+  %tr
+    - if !@logo.nil?
+      %td
+        %b Logo
+      %td
+        = image_tag @logo.file.url(:logo)
+      %td
+        = link_to 'Edit', edit_admin_logo_path(@logo)

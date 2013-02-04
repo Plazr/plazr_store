@@ -1,0 +1,36 @@
+#admin
+	%h1 Lista de Produtos
+	%ul.thumbnails
+		%li.span2
+			= link_to new_admin_product_path do
+				.thumbnail
+					%strong.title Adicionar
+					%div
+						- imgpth = 'http://placehold.it/300&text=Novo'
+						%noscript
+							= image_tag imgpth
+						= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
+			.actions
+				= link_to 'Novo', new_admin_product_path, :class => [:btn, 'btn-mini', 'btn-success']
+		- @products.each do |product|
+			%li.span2
+				= link_to admin_product_path(product) do
+					.thumbnail
+						- maxlen = 10
+						- name = if product.name.length > maxlen
+							- "#{product.name[0...maxlen]}..."
+						- else
+							- product.name
+						%strong.title= name
+						%div
+							- imgpth = 'http://placehold.it/300&text=Sem%20Imagem'
+							- imgpth = product.image.file.url(:thumb) unless product.master_variant.nil? || product.master_variant.multimedia.empty?
+							%noscript
+								= image_tag imgpth
+							= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
+				.actions
+					= link_to edit_admin_product_path(product) do
+						= button_tag 'Editar', :class => [:btn, 'btn-mini']
+					= link_to admin_product_path(product), :method => :delete, data: { confirm: "Está prestes a eliminar o produto \"#{product.name}\". Deseja continuar?" } do
+						= button_tag 'Eliminar', :class => [:btn, 'btn-mini', 'btn-danger']
+	= will_paginate @products, :renderer => BootstrapPagination::Rails

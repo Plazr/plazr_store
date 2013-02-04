@@ -1,0 +1,23 @@
+<%= form_for @feedback_product, url: feedback_product_path, method: :post do |f| %>
+
+  <% if @feedback_product.errors.any? %>
+    <div id="#error_explanation">
+      <h2><%= "Ocorreram erros:" %></h2>
+      <div class"alert alert-error">
+        <ul>
+          <% @feedback_product.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>4
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.label :rating, "Classificação" %>
+  <%= f.select :rating, (1..5).to_a, :selected => nil, :include_blank => true %><br />
+
+  <%= f.label :comment, "Comentário" %><br />
+  <%= f.text_area :comment %><br />
+
+  <%= f.submit %>
+<% end %>

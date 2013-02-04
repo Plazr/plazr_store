@@ -1,0 +1,41 @@
+#admin
+	%h1= "Propriedades de \"#{@product.name}\""
+	#properties.listing
+		- if @property.errors.any?
+			.alert.alert-danger
+				%button.close{ :type => :button, 'data-dismiss' => :alert } &times;
+				%strong= "#{pluralize(@property.errors.count, 'error')} prohibited this property from being saved:"
+				%ul
+					- @property.errors.full_messages.each do |msg|
+						%li= msg
+		%table.table.table-striped.table-hover
+			%thead
+				%tr
+					%th.id Identificador
+					%th.name Nome
+					%th.value Valor
+					%th.button &nbsp;
+			%tbody
+				= form_for([:admin, @product, @property], :url => admin_product_product_properties_path(@product), :method => :post) do |f|
+					- @product_properties.each do |product_property|
+
+						%tr
+							%td.id
+								= hidden_field_tag 'pps['<<product_property.id.to_s<<'][property_id]',product_property.property_id
+								= text_field_tag 'pps['<<product_property.id.to_s<<'][id_name]', product_property.property.id_name
+							%td.name
+								= text_field_tag 'pps['<<product_property.id.to_s<<'][display_name]', product_property.property.display_name
+							%td.value
+								= text_field_tag 'pps['<<product_property.id.to_s<<'][value]', product_property.value
+							%td.button
+								= link_to 'Eliminar', admin_product_product_property_path(@product, product_property), :method => :delete, :data => { :confirm => "Está prestes a eliminar a propriedade \"#{product_property.property.id_name}\" do produto \"#{product_property.product.name}\". Deseja continuar?" }, :class => [:btn, 'btn-mini', 'btn-danger']
+					%tr.new
+						%td
+							= f.text_field :id_name, autofocus: true, placeholder: 'Identificador'
+						%td
+							= f.text_field :display_name, placeholder: 'Nome'
+						%td
+							= f.fields_for :product_properties do |pp|
+								= pp.text_field :value, placeholder: 'Valor'
+								= pp.hidden_field :product_id, :value => @product.id
+						%td= f.submit 'Guardar', :class => [:btn, 'btn-primary', 'btn-large']

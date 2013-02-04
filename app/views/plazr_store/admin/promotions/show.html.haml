@@ -1,0 +1,31 @@
+#admin
+	%h1= "Promoção \"#{@promotion.name}\""
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_promotions_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_promotion_path, :class => :btn
+			= link_to 'Eliminar', admin_promotion_path(@promotion), :method => :delete, :data => { :confirm => "Está prestes a eliminar a promoção \"#{@promotion.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
+	%h4 Descrição
+	%p= @promotion.description
+	.row-fluid
+		.offset2.span8
+			%table.table
+				%thead
+					%tr
+						%th.center Valor
+						%th.center Tipo de desconto
+						%th.center Quantidade mínima
+				%tbody
+					%tr
+						%td.center= @promotion.value
+						%td.center= @promotion.discount_type.name
+						%td.center= @promotion.min_filter
+	%p
+		- preposition = @promotion.starts_at.future? ? 'a partir de' : 'desde'
+		- if @promotion.expires_at && @promotion.expires_at.past?
+			= "Promoção expirada desde #{@promotion.expires_at} (iniciou a #{@promotion.starts_at})."
+		- elsif @promotion.expires_at
+			= "Promoção válida #{preposition} #{@promotion.starts_at} até #{@promotion.expires_at}"
+		- else
+			= "Promoção válida #{preposition} #{@promotion.starts_at}"

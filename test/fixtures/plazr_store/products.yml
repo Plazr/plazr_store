@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  details: MyString
+  permalink: MyString
+  price_max: 9.99
+  price_min: 9.99
+  rating: 9.99
+  active: false
+  available_at: 2012-11-14 11:43:25
+  deleted_at: 2012-11-14 11:43:25
+
+two:
+  name: MyString
+  details: MyString
+  permalink: MyString
+  price_max: 9.99
+  price_min: 9.99
+  rating: 9.99
+  active: false
+  available_at: 2012-11-14 11:43:25
+  deleted_at: 2012-11-14 11:43:25

@@ -1,0 +1,25 @@
+= link_to 'actualizar', 'update_summary()', style: 'float:right'
+%table.table.table-striped.table-hover.table-bordered
+	%thead
+		%tr
+			%th Produto
+			%th Preço
+			%th Quantidade
+			%th Total do produto
+	%tbody
+		- cart.cart_variants.each do |line_item|
+			%tr
+				%td= line_item.info
+				%td= number_to_currency line_item.unit_price, unit: '€'
+				%td= line_item.amount
+				%td= number_to_currency line_item.price, unit: '€'
+	%tfoot
+		%tr
+			%td{ colspan: 3 } Subtotal
+			%td= number_to_currency cart.total_price, unit: '€'
+		%tr
+			%td{ colspan: 3 } Meios de envio
+			%td#shipment-methods
+		%tr
+			%td{ colspan: 3 } Total
+			%td#total

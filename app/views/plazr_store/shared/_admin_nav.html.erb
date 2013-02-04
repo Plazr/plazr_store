@@ -1,0 +1,13 @@
+<% if can? :admin, :store %>
+  Admin
+
+  <ul>
+    <li><%= link_to 'Products', plazr_store.admin_products_path %></li>
+    <li><%= link_to 'Pages', plazr_store.admin_pages_path %></li>
+    <li><%= link_to 'Prototypes', plazr_store.admin_prototypes_path %></li>
+    <li><%= link_to 'Variant Properties', plazr_store.admin_variant_properties_path %></li>
+    <li><%= link_to 'Properties', plazr_store.admin_properties_path %></li>
+    <li><%= link_to 'Promotions', plazr_store.admin_promotions_path %></li>
+  </ul>
+
+<% end%>

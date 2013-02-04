@@ -1,0 +1,23 @@
+= form_for [:admin, @template_customization], :html => { :class => [:form, 'form-horizontal'] } do |f|
+	- if @template_customization.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@template_customization.errors.count, "error")} prohibited this TemplateCustomization from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- @template_customization.errors.full_messages.each do |msg|
+						%li= msg
+
+	.control-group
+		= f.label :value, 'Valor', class: 'control-label'
+		.controls
+			#colorpickerHolder.input-append.color{"data-color" => "#{@template_customization.value}", "data-color-format" => "rgb"}
+				= f.text_field :value
+				%span.add-on
+					%i{"style" => "background-color: #{@template_customization.value}"}
+
+	.control-group
+		.controls
+			= f.submit "Guardar", class: 'btn btn-primary'
+
+:javascript
+	$('#colorpickerHolder').colorpicker()

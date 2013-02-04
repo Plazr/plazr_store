@@ -1,0 +1,24 @@
+%h1 Show Template Customization
+%p#notice
+  = notice
+%table
+  %tr
+    %td
+      %b Id Name
+    %td
+      = @template_customization.id_name
+  %tr
+    %td
+      %b Display Name
+    %td
+      = @template_customization.display_name
+  %tr
+    %td
+      %b Value
+    %td
+      = @template_customization.value
+
+
+= link_to 'Edit', edit_admin_template_customization_path
+|
+= link_to 'Back', admin_template_customizations_path

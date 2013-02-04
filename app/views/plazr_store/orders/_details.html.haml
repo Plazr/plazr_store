@@ -1,0 +1,48 @@
+%h3 Produtos
+%table.table.table-striped.table-hover
+	%thead
+		%tr
+			%th
+			%th Produto
+			%th Preço
+			%th Quantidade
+			%th Total do produto
+	%tbody
+		- order.cart.cart_variants.each do |line_item|
+			%tr
+				%td
+					- if order.product_classified? line_item.product
+						= rating_to_stars line_item.product.rating
+					- else
+						= link_to 'Classificar', new_feedback_product_path(order, line_item.product), :class => [:btn, 'btn-mini', 'btn-inverse']
+				%td
+					= line_item.info
+				%td= number_to_currency line_item.unit_price, unit: '€'
+				%td= line_item.amount
+				%td= number_to_currency line_item.price, unit: '€'
+	%tfoot
+		%tr
+			%th{ colspan: 4 } Subtotal
+			%td= number_to_currency order.cart.total_price, unit: '€'
+		%tr
+			%th{ colspan: 4 } Meio de Envio
+			%td= number_to_currency order.shipment_condition.price, unit: '€'
+		%tr
+			%th{ colspan: 4 } Total
+			%td= number_to_currency order.total, unit: '€'
+
+%h3 Utilizador
+%div
+	%strong Email:
+	= order.email
+
+%h3 Morada
+.row-fluid
+	.span6
+		%h4 Facturação
+		.well
+			= raw order.billing_address.display
+	.span6
+		%h4 Entrega
+		.well
+			= raw order.shipping_address.display

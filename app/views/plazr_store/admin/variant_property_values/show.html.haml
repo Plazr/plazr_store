@@ -1,0 +1,12 @@
+#admin
+	%h1= @variant_property_value.name
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_variant_property_variant_property_values_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_variant_property_variant_property_value_path(@variant_property, @variant_property_value), :class => :btn
+			= link_to 'Eliminar', admin_variant_property_variant_property_value_path(@variant_property, @variant_property_value), :method => :delete, :data => { :confirm => "Está prestes a eliminar o valor \"#{@variant_property_value.name}\" da propriedade de modelo \"#{@variant_property.id_name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
+	%h3 Apresentação
+	= @variant_property_value.presentation
+	%h3 Propriedade de modelo
+	= link_to @variant_property_value.variant_property.display_name, admin_variant_property_path(@variant_property_value.variant_property)
