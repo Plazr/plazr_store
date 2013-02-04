@@ -78,6 +78,4 @@
 								%td.value= vvpv.collection_select :variant_property_value_id, vvpv.object.variant_property_value.variant_property.variant_property_values, :id, :presentation, include_blank: 'Selecione um valor', selected:(vvpv.object.persisted? && vvpv.object.variant_property_value.id) || ""
 						
 	.actions
-		= f.submit "Submit", :class => [:btn, 'btn-primary']
-		= link_to admin_product_variants_path, :method => :get do
-			%button.btn.btn-mini Cancel
+		= f.submit 'Guardar', :class => [:btn, 'btn-primary']
