@@ -23,7 +23,6 @@ module PlazrStore
       if @promotion.save
         redirect_to admin_promotion_path(@promotion), :notice => 'Promotion was successfully created.' 
       else
-        @promotion.errors.full_messages.inspect
         instance_variable_loading
         process_product_attrs
         @discount_types = DiscountType.promotion_types

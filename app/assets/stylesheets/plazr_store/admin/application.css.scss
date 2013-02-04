@@ -441,5 +441,13 @@
 		color: red;
 	}
 
+	.datepicker > div.field_with_errors {
+		display: inherit;
+	}
+
+	div.field_with_errors {
+		display: inline;
+	}
+
 }
 

@@ -31,6 +31,6 @@
 				.actions
 					= link_to edit_admin_product_path(product) do
 						= button_tag 'Editar', :class => [:btn, 'btn-mini']
-					= link_to admin_product_path(product), :method => :delete, data: { confirm: 'Are you sure?' } do
+					= link_to admin_product_path(product), :method => :delete, data: { confirm: "Está prestes a eliminar o produto \"#{product.name}\". Deseja continuar?" } do
 						= button_tag 'Eliminar', :class => [:btn, 'btn-mini', 'btn-danger']
 	= will_paginate @products, :renderer => BootstrapPagination::Rails

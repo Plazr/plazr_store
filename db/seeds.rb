@@ -1,13 +1,14 @@
+# encoding: utf-8
 PlazrAuth::Engine.load_seed
 
 module PlazrStore
   puts 'Creating default Discount Types'
 
   discount_types = [
-    {name:'Flat Percent', description:'The price is updated by a given percentage.', scope:0, type_id:1},
-    {name:'Pack Discount', description:'If a given number of products are bought, a discount is applied', scope:1, type_id:2},
-    {name:'New Price', description:'A new price is set to the product.', scope:2, type_id:3},
-    {name:'Number Items', description:'A discount is applied if a given number of items are bought.', scope:1, type_id:4}
+    {name:'Percentagem Fixa', description:'O preço é atualizado segundo uma dada percentagem.', scope:0, type_id:1},
+    {name:'Pack Disconto', description:'Se um dado número de produtos são comprados, o disconto é aplicado', scope:1, type_id:2},
+    {name:'Novo Preço', description:'Um novo preço é definido para o produto.', scope:2, type_id:3},
+    {name:'Número de Items', description:'Um disconto é aplicado se um dado número de items forem comprados.', scope:1, type_id:4}
   ]
 
   discount_types.each do |attributes|
