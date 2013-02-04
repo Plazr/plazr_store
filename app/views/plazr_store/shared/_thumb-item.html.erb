@@ -7,7 +7,7 @@
 			</p>
 			<h5 class="thumb-name"><%= recommended.name %></h5>
 			<p class="thumb-price">
-				<span>€ <%= recommended.master_price %></span>
+				<span>€ <%= number_to_currency recommended.master_price, unit: '€' %></span>
 			</p>
 		</section>
 		</section>
