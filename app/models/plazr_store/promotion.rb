@@ -29,7 +29,7 @@ module PlazrStore
     end
 
     ## Scopes ##
-    scope :active_promotions, lambda{ where("? BETWEEN starts_at AND expires_at", Date.today) }
+    scope :active_promotions, lambda{ where("(? BETWEEN starts_at AND expires_at) OR (starts_at < ? AND expires_at IS NULL) OR (starts_at IS NULL AND ? < expires_at)", Date.today, Date.today, Date.today) }
 
     ## Public Methods ##
 
