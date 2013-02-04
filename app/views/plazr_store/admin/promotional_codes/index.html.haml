@@ -44,4 +44,4 @@
 							%td
 								= link_to 'Edit', edit_admin_promotional_code_path(promotional_code)
 							%td
-								= link_to 'Destroy', admin_promotional_code_path(promotional_code), :method => :delete, :data => { :confirm => 'Are you sure?' }
+								= link_to 'Destroy', admin_promotional_code_path(promotional_code), :method => :delete, :data => { :confirm => "Está prestes eliminar o código promocional \"#{promotional_code}\". Deseja continuar?" }

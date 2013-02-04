@@ -20,5 +20,5 @@
 						%td.prnt= pc.parent_product_category.name if pc.parent_product_category
 						%td.btn-mini
 							= link_to 'Editar', edit_admin_product_category_path(pc), :class => [:btn, 'btn-mini']
-						%td.btn-mini= link_to 'Eliminar', admin_product_category_path(pc), :method => :delete, :data => { :confirm => "Está prestes a eliminar a categoria de produto \"#{@product_category.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger', 'btn-mini']
+						%td.btn-mini= link_to 'Eliminar', admin_product_category_path(pc), :method => :delete, :data => { :confirm => "Está prestes a eliminar a categoria de produto \"#{pc.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger', 'btn-mini']
 	= will_paginate @product_categories, :renderer => BootstrapPagination::Rails

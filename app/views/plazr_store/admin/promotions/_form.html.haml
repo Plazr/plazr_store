@@ -11,6 +11,7 @@
 		= f.label 'Nome', :class => 'control-label'
 		.controls
 			= f.text_field :name
+			%span.star *
 
 	.control-group
 		= f.label 'Descrição', :class => 'control-label'
@@ -21,11 +22,13 @@
 		= f.label 'Tipo de desconto', :class => 'control-label'
 		.controls
 			= f.collection_select :discount_type_id, @discount_types, :id, :name, {:prompt => "Escolha o tipo de desconto"}
+			%span.star *
 
 	.control-group
 		= f.label 'Valor', :class => 'control-label'
 		.controls
 			= f.text_field :value
+			%span.star *
 		
 
 	.control-group
@@ -64,3 +67,7 @@
 	.control-group
 		.controls
 			= f.submit 'Guardar', :class => [:btn, 'btn-primary']
+
+	%p
+		%span.star *
+		Campos obrigatórios
