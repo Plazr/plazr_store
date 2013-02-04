@@ -1,24 +1,14 @@
-%h1 Show Page
-%p#notice
-  = notice
-%table
-  %tr
-    %td
-      %b Title
-    %td
-      = @page.title
-  %tr
-    %td
-      %b Slug
-    %td
-      = @page.slug
-  %tr
-    %td
-      %b Content
-    %td
-      = raw(@page.content)
-
-
-= link_to 'Edit', edit_admin_page_path(@page)
-|
-= link_to 'Back', admin_pages_path
+#admin
+	%h1= @page.title
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_pages_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_page_path(@page), :class => :btn
+			= link_to 'Eliminar', admin_page_path(@page), :method => :delete, :data => { :confirm => "Está prestes a eliminar a página \"#{@page.title}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
+	%p
+		- lnk = "http://#{request.host_with_port}/pages/#{@page.slug}"
+		%strong= link_to lnk, lnk
+	%h3 Conteúdo
+	.container-fluid.well
+		= raw(@page.content)
