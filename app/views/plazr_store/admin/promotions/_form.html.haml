@@ -20,7 +20,7 @@
 	.control-group
 		= f.label 'Tipo de desconto', :class => 'control-label'
 		.controls
-			= f.collection_select :discount_type_id, @discount_types, :id, :name, {:prompt => "Pick a discount type"}
+			= f.collection_select :discount_type_id, @discount_types, :id, :name, {:prompt => "Escolha o tipo de desconto"}
 
 	.control-group
 		= f.label 'Valor', :class => 'control-label'
