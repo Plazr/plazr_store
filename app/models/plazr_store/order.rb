@@ -97,6 +97,10 @@ module PlazrStore
       self.total = ShipmentCondition.find(self.shipment_condition_id).price + current_user.cart.total_price
     end
 
+    def product_classified? (product)
+      !FeedbackProduct.find_by_order_id_and_product_id(self.id, product.id).nil?
+    end
+
     protected
     def complete_order
       self.state = "completed"
