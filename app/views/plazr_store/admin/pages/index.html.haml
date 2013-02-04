@@ -1,10 +1,12 @@
 #admin
-	.listing
+	.listing.listing-linked
 		%h1 Lista de Páginas da Loja
 		%table.table.table-striped.table-hover.table-bordered
 			%thead
 				%tr
 					%th Título
+					%th &nbsp;
+					%th &nbsp;
 			%tbody
 				- if @pages.empty?
 					%tr.info
@@ -12,13 +14,13 @@
 							= raw "Não existem páginas. Clique #{link_to 'aqui', new_admin_page_path} para criar uma nova página."
 				- else
 					%tr.success
-						%td
+						%td{ colspan: 3 }
 							= link_to 'Adicionar página', new_admin_page_path
 					- @pages.each do |page|
-						%tr
-							%td= page.title
-							%td
-								= link_to 'Editar', edit_admin_page_path(page), :class => [:btn, 'btn-small']
-							%td
-								= link_to 'Eliminar', admin_page_path(page), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => [:btn, 'btn-small', 'btn-danger']
+						%tr.linked
+							%td= link_to page.title, admin_page_path(page)
+							%td.btn-mini
+								= link_to 'Editar', edit_admin_page_path(page), :class => [:btn, 'btn-mini']
+							%td.btn-mini
+								= link_to 'Eliminar', admin_page_path(page), :method => :delete, :data => { :confirm => "Está prestes a eliminar a página \"#{page.title}\". Deseja continuar?" }, :class => [:btn, 'btn-mini', 'btn-danger']
 		= will_paginate @pages, :renderer => BootstrapPagination::Rails
