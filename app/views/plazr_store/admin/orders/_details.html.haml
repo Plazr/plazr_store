@@ -31,7 +31,7 @@
 			%td
 		%tr
 			%th{ colspan: 3 } Meio de envio
-			%td= number_to_currency order.shipment_condition.price, unit: '€'
+			%td= number_to_currency (order.shipment_condition ? order.shipment_condition.price : 0), unit: '€'
 			%td
 		%tr
 			%th{ colspan: 3 } Total

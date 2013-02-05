@@ -62,7 +62,7 @@ module PlazrStore
 
     def get_location
       super
-      @tab = :products
+      @tab = 'products'
     end
   end
 end
