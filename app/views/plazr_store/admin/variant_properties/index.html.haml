@@ -1,0 +1,26 @@
+#admin
+	%h1 Lista de Propriedades de Modelo
+	#variant-properties.listing
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th Identificador
+					%th Nome
+					%th &nbsp;
+					%th &nbsp;
+					%th &nbsp;
+			%tbody
+				%tr.success
+					%td{ :colspan => 5 }
+						= link_to 'Adicionar propriedade', new_admin_variant_property_path
+				- @variant_properties.each do |variant_property|
+					%tr
+						%td.name= variant_property.id_name
+						%td.name= variant_property.display_name
+						%td.btn-small
+							= link_to 'Valores', admin_variant_property_variant_property_values_path(variant_property), :class => [:btn, 'btn-small']
+						%td.btn-mini
+							= link_to 'Editar', edit_admin_variant_property_path(variant_property), :class => [:btn, 'btn-mini']
+						%td.btn-mini
+							= link_to 'Eliminar', admin_variant_property_path(variant_property), :method => :delete, :data => { :confirm => "Está prestes a eliminar a propriedade de modelo \"#{variant_property.id_name}\". Deseja continuar?" }, :class => [:btn, 'btn-mini', 'btn-danger']
+	= will_paginate @variant_properties, :renderer => BootstrapPagination::Rails

@@ -1,0 +1,48 @@
+#admin
+	%h1= @variant.sku
+	%h2= @variant.product.name
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_product_variants_path(@product), :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_product_variant_path(@product,@variant), :class => :btn
+			= link_to 'Eliminar', admin_product_variant_path(@product,@variant), :method => :delete, data: { confirm: "Está prestes a eliminar o modelo \"#{@variant.sku}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
+	.show
+		.row-fluid
+			.span4
+				- imgpth = 'http://placehold.it/300&text=Sem%20imagem'
+				- imgpth = @variant.image.file.url(:thumb) if @variant.multimedia.any?
+				%noscript= image_tag imgpth, :class => :photo
+				.photo{ style: "background-image:url('#{imgpth}')" }
+			.span8
+				%h3 Descrição
+				%p= @variant.description
+				%h3 Preços
+				.row-fluid
+					.span6
+						%strong Venda:
+						= number_to_currency( @variant.price, unit: '€' )
+					.span6
+						%strong Custo:
+						= @variant.cost_price ? number_to_currency( @variant.cost_price, unit: '€' ) : '--'
+				%h3 Stock
+				.row-fluid
+					.span6
+						%strong Quantidade disponível:
+						= @variant.amount_available
+					.span6
+						%strong Próximo reabastecimento:
+						%br
+						= @variant.restock_date.to_time.to_s(:long)
+				%h3 Propriedades
+				%table.table
+					%thead
+						%tr
+							%th Nome
+							%th Valor
+					%tbody
+						- @variant.variant_property_values.each do |vpv|
+							%tr
+								%td= vpv.variant_property.display_name
+								%td= vpv.presentation
+

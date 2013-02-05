@@ -1,0 +1,13 @@
+%h1= "Encomenda n.º #{@order.id}"
+%span.label{ :class => "label-#{order_state_to_class @order.state}" }
+	= order_state_en_to_pt @order.state
+%h3 Datas
+.row-fluid
+	.span6
+		%strong Criação:
+		= @order.created_at.to_date.to_s(:db)
+	.span6
+		%strong Finalização:
+		= @order.completed_at ? @order.completed_at.to_date.to_s(:db) : '--'
+= render 'details', order: @order
+

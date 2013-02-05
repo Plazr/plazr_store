@@ -1,0 +1,6 @@
+<% count.times do %>
+<%= image_tag 'plazr_store/rate/star-full.png', :class => 'rating' %>
+<% end %>
+<% (5-count).times do %>
+<%= image_tag 'plazr_store/rate/star-empty.png', :class => 'rating' %>
+<% end %>

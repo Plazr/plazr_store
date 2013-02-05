@@ -1,0 +1,22 @@
+<div id="index-page">
+	<div class="row-fluid">
+		<section class="span8">
+			<%= render 'featured' if @featured %>
+		</section>
+		<section class="span4">
+			<%= render 'best' if @best %>
+		</section>
+	</div>
+	<section id="recommended">
+<!-- 		<header class="page-header">
+			<h2><span>Recomendados<span></h2>
+		</header> -->
+		<% @recommended.each_slice(4) do |r| %>
+			<section class="row-fluid">
+				<% r.each do |recommended| %>
+				<%= render 'plazr_store/shared/thumb-item', :recommended => recommended %>
+				<% end %>
+			</section>
+		<% end %>
+	</section>
+</div>

@@ -1,0 +1,243 @@
+/*
+ *= require bootstrap/bootstrap.css
+ *= require bootstrap/bootstrap-responsive.css
+ *= require bootstrap/datepicker.css
+ *= require bootstrap/timepicker.css
+ *= require redactor-rails
+ *= require_self
+ *= require plazr_store/topbar
+ *= require plazr_store/products/single
+ *= require plazr_store/search/search
+ *= require plazr_store/pages/index
+ *= require plazr_store/thumb-item
+ *= require plazr_store/admin/application
+ *= require plazr_store/admin/products/new
+ *= require plazr_store/cart/show
+ *= require colorpicker
+
+ */
+
+/** Namespaces and reserved names
+*
+*  <<NOTE>> Keeping this sorted alphabetically will help
+*         searching through.
+*
+*  [PC, 16 Jan 2013]
+*  #admin : namespace for all the styling regarding the admin zone
+*         (backoffice).
+*
+*  [PC, 9 Jan 2013]
+*  .datepicker : reserved for datepicker dropdown menus.
+*                (see application.js)
+*
+*  [PC, 9 Jan 2013]
+*  .timepicker : reserved for timepicker dropdown menus.
+*                (see application.js)
+*
+*  [PC, 9 Jan 2013]
+*  div.photo : reserved for divs framing a squared image, e.g. for
+*            product images when listing like a grid).
+*              (see application.js)
+*
+*	[Gabriel]
+*	a.thumb-item : reserved for products thumbnails.
+*				There is a partial for this.
+*/
+
+@import 'plazr_store/partials/colors';
+@import 'plazr_store/partials/functions';
+
+#login-form {
+	h2 {
+		padding-bottom: 0.7em;
+	}
+	.span4 {
+		margin-bottom: 2em;
+	}
+	.control-label {
+		width: 70px;
+	}
+	.controls {
+		margin-left: 90px;
+	}
+	.border-right {
+		border-right: 1px solid $border-color;
+	}
+	.border-left {
+		border-left: 1px solid $border-color;
+	}
+	input[type='checkbox'] {
+		// margin: 0;
+	}
+	label.inline-block {
+		// padding-left: 15px;
+		// display: inline-block;
+	}
+}
+
+.hero-wrap {
+	position: relative;
+	background-color: white;
+	.container {
+		background-color: white;
+		@include container-border-padding;
+	}
+	.hero-unit {
+		height: 70px;
+		padding: 40px 0 10px 0;
+		margin-bottom: 5px;
+		background: transparent;
+		a {
+			text-decoration: none;
+			font-family: 'Lato', sans-serif;
+			line-height: 45px;
+			vertical-align: middle;
+			font-size: 70px;
+			color: $header-color;
+			font-weight: bold;
+		}
+	}
+}
+
+.flash-messages {
+	position: absolute;
+	bottom: 0;
+	padding: 1em 0 0.3em 0;
+}
+
+nav.nav-wrapper {
+	width: 100%;
+	margin: 0 auto;
+	top: 0;
+	position: absolute;
+	ul {
+		padding: 0.5em 0 0 0;
+		a {
+			color: white;
+			text-decoration: underline;
+		}
+	}
+}
+
+body {
+	background-color: $background-color;
+	@include background-noise($background-color);
+	> #container-wrapper {
+		position: relative;
+		.background-color {
+			background-color: white;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 140px;
+			z-index: -1;
+		}
+	}
+
+	> #container-wrapper > .container {
+		// -webkit-box-shadow:  0px 0px 4px 2px rgba(0, 0, 0, 0.6);
+        // box-shadow:  0px 0px 4px 2px rgba(0, 0, 0, 0.6);
+		border: 1px solid $border-color;
+		background-color: white;
+		margin-bottom: 2em;
+		@include container-border-padding;
+	}
+
+	> #container-wrapper > .container > footer {
+		border-top: 1px solid $border-color;
+		margin-bottom: 2em;
+
+		section {
+			margin-left: 1em !important;
+			padding: 0.5em 0 1em 0;
+		}
+
+		.border-right {
+			border-right: 1px solid $border-color;
+		}
+
+		ul#share {
+			list-style:none;
+			li {
+				display: inline;
+				list-style-type: none;
+			}
+		}
+	}
+
+	> footer {
+		.pages {
+			a {
+				padding-left: 1em;
+			}
+		}
+		padding: 2em 0 2em 0;
+		color: white;
+		background-color: black;
+		ul#share {
+			padding:0;
+			margin:0;
+			list-style:none;
+			margin:0 auto;
+			li {
+				display: inline;
+				list-style-type: none;
+				padding-left: 20px;
+			}
+		}
+	}
+}
+
+body {
+	#layout-container {
+		padding: 0 0 3em 0;
+	}
+}
+
+
+.content {
+	padding: 10px 0 20px 30px;
+	background-color: #DDD;
+}
+
+
+.product-border {
+	border: 1px solid;
+	text-align: center;
+	margin: 1em 0 1em 0;
+}
+
+
+.page-header {
+	margin-bottom: 1em;
+	padding-bottom: 0
+}
+
+
+
+table {
+	border-spacing: 0;
+	width: 100%;
+}
+
+table td {
+	vertical-align: top;
+}
+
+
+/* RESERVED */
+div.photo {
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+	-webkit-background-size: contain;
+}
+
+/* HACK */
+/*   Show cursor as pointer over the anchor of a tab even if the tab
+* is active.
+*/
+.nav-tabs > .active > a:hover {
+	cursor: pointer !important;
+}

@@ -1,0 +1,15 @@
+Thanks for your order!
+
+Items
+
+<% @order.cart.cart_variants.each do |line_item| %>
+  <%= line_item.info %> x <%= line_item.amount %> = <%= number_to_currency line_item.unit_price %>
+<% end -%>
+
+Shipping Condition
+
+<% @order.shipment_condition.service_name %>
+
+Total
+
+<%= number_to_currency @order.total %>

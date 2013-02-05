@@ -1,0 +1,47 @@
+#admin
+	.listing
+		%h1 Lista de Códigos Promocionais
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th Código
+					%th Descrição
+					%th Tipo de desconto
+					%th Valor
+					%th &nbsp;
+					%th &nbsp;
+			%tbody
+				- if @promotional_codes.empty?
+					%tr.info
+						%td{ :colspan => 6 }
+							= raw "Não existem códigos promocionais. Clique #{link_to 'aqui', new_admin_promotional_code_path} para criar um novo código."
+				- else
+					%tr.success
+						%td{ :colspan => 6 }
+							= link_to 'Adicionar código', new_admin_promotional_code_path
+					- @promotional_codes.each do |promotional_code|
+						%tr
+							%td
+								= promotional_code.code
+							%td
+								= promotional_code.description
+							%td
+								= promotional_code.value
+							%td
+								= promotional_code.minimum_cart
+							%td
+								= promotional_code.uses_allowed
+							%td
+								= promotional_code.times_used
+							%td
+								= promotional_code.starts_at
+							%td
+								= promotional_code.expires_at
+							%td
+								= promotional_code.discount_type.name
+							%td
+								= link_to 'Show', admin_promotional_code_path(promotional_code)
+							%td
+								= link_to 'Edit', edit_admin_promotional_code_path(promotional_code)
+							%td
+								= link_to 'Destroy', admin_promotional_code_path(promotional_code), :method => :delete, :data => { :confirm => "Está prestes eliminar o código promocional \"#{promotional_code}\". Deseja continuar?" }

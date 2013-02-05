@@ -1,0 +1,12 @@
+.controls
+	- if shipment_conditions.empty?
+		%p.text-info Esta loja não definiu meios de entrega. Todas as encomendas feitas a esta loja serão enviadas por correio normal, sendo as despesas de envio cobradas ao cliente final no acto do levantamento. Isto é opcional, podendo o representante desta loja optar por suportar os portes de envio.
+	- else
+		- shipment_conditions.each do |sc|
+			-if sc == shipment_conditions.first
+				= f.radio_button :shipment_condition_id, sc.id, checked: 'checked'
+			- else
+				= f.radio_button :shipment_condition_id, sc.id
+			%span{name: "#{sc.id}", style: 'display:none'}
+				=sc.price
+			= f.label :shipment_condition_id, "#{sc.service_name} - #{number_to_currency sc.price}"

@@ -1,0 +1,24 @@
+#admin
+	%h1 Encomendas
+	#orders.listing.listing-linked
+		%table.table.table-striped.table-hover.table-bordered
+			%thead
+				%tr
+					%th &nbsp;
+					%th Utilizador
+					%th Data de criação
+					%th Data de finalização
+					%th Total
+			%tbody
+				- if @orders.empty?
+					%tr.info
+						%td= "Não existem encomendas."
+				- else
+					- @orders.each do |order|
+						%tr.linked{ :class => order_state_to_class(order.state) }
+							%td= link_to order.id, admin_order_path(order)
+							%td= link_to order.email, admin_order_path(order)
+							%td= link_to order.created_at.to_date.to_s(:db), admin_order_path(order)
+							%td= link_to order.completed_at ? order.completed_at.to_date.to_s(:db) : '--', admin_order_path(order)
+							%td= link_to number_to_currency(order.total, unit: '€'), admin_order_path(order)
+		= will_paginate @orders unless @orders.empty?

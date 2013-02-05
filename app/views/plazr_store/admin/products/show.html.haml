@@ -1,0 +1,92 @@
+#admin
+	%h1= @product.name
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_products_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_product_path(@product), :class => :btn
+			= link_to 'Eliminar', admin_product_path(@product), :method => :delete, data: { confirm: "Está prestes a eliminar o produto \"#{@product.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']
+	.show
+		.row-fluid
+			.span4
+				- imgpth = 'http://placehold.it/300&text=Sem%20imagem'
+				- imgpth = @product.master_variant.multimedia.first.file.url(:thumb) unless @product.master_variant.nil? || @product.master_variant.multimedia.empty?
+				%noscript
+					= image_tag imgpth, :class => :photo
+				= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
+			.span8
+				- if @product.brand
+					%p
+						%strong Marca: 
+						= @product.brand.name
+				- Time::DATE_FORMATS[:long_at] = '%B %d, %Y at %H:%M'
+				- available_at = Time.parse("#{@product.available_at_date_string} #{@product.available_at_time_string}")
+				- if available_at.future?
+					%p= "Disponível a partir de #{available_at.to_s(:long_at)}"
+				- else
+					%p= "Disponível desde #{available_at.to_s(:long_at)}"
+				%p
+					%strong Identificador:
+					= @product.master_variant.sku if @product.master_variant
+				%h4= number_to_currency @product.master_variant.price, unit: '€' if @product.master_variant
+				.rating
+					%span
+						- if @product.rating
+							= @product.rating.times
+						- else
+							%em (sem avaliação)
+				%p= @product.details
+		#categories
+			%h2 Categorias
+			%ul
+				- @product.product_categories.each do |pc|
+					%li
+						= link_to admin_product_category_path(pc.id) do
+							%span.label= pc.name
+		.row-fluid
+			#variants.span6
+				%h2= link_to 'Modelos', admin_product_variants_path(@product)
+				%ul.thumbnails
+					- variants = @product.variants_without_master
+					- if variants.empty?
+						%li
+							%p.text-info Este produto não tem modelos.
+					- else
+						- variants.each do |variant|
+							%li.span4.smaller
+								.thumbnail
+									= link_to admin_product_variant_path(@product, variant) do
+										%div
+											%strong.title= variant.sku
+											- imgpth = 'http://placehold.it/100x100&text=Sem%20imagem'
+											- imgpth = variant.multimedia.first.file.url(:thumb) unless variant.multimedia.empty?
+											%noscript
+												= image_tag imgpth, :class => :photo
+											= content_tag :div, nil, { :class => :photo, style: "background-image:url('#{imgpth}')" }
+								.actions
+									= link_to edit_admin_product_variant_path(@product, variant) do
+										= button_tag 'Editar', :class => [:btn, 'btn-mini']
+									= link_to admin_product_variant_path(@product, variant), :method => :delete, data: { confirm: "Está prestes a eliminar o modelo \"#{variant.sku}\". Deseja continuar?" } do
+										= button_tag 'Eliminar', :class => [:btn, 'btn-mini', 'btn-danger']
+			#properties.span6
+				%h2= link_to 'Propriedades de Produto', admin_product_product_properties_path(@product)
+				- if @product.product_properties.empty?
+					%p.text-info Este producto não tem propriedades.
+				- else
+					%ul.listbox
+
+				%h2= link_to 'Propriedades de Modelo', admin_product_product_properties_path(@product)
+				- if @product.variant_properties.empty?
+					%p.text-info Este produto não tem propriedades de modelo.
+				- else
+					%ul.listbox
+						- @product.variant_properties.each do |vp|
+							%li.well.well-small.clearfix
+								= link_to admin_variant_property_variant_property_values_path(vp.id) do
+									%strong= vp.display_name
+								%ul.values
+									- vp.variant_property_values.each do |vpv|
+										%li
+											%span.label.label-inverse= vpv.presentation
+											/ = link_to admin_variant_property_variant_property_value_path(vp.id, vpv.id) do
+											/ 	%span.label.label-inverse= vpv.presentation

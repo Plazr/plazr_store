@@ -1,0 +1,16 @@
+<a class="thumb-item span3" href="<%= url_for(recommended) %>">
+	<article class="">
+		<section class="thumb-item-image" style="background-image:url(<%= image_path recommended.image.file.url %>)">
+					<section class="box">
+			<p class="thumb-rate">
+				<%= rating_to_stars(recommended.rating_truncated) %>
+			</p>
+			<h5 class="thumb-name"><%= recommended.name %></h5>
+			<p class="thumb-price">
+				<span>€ <%= number_to_currency recommended.master_price, unit: '€' %></span>
+			</p>
+		</section>
+		</section>
+
+	</article>
+</a>

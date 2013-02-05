@@ -1,0 +1,35 @@
+@mixin transition($delay, $duration, $property) {
+	-moz-transition-property: $property;
+	-moz-transition-duration: $duration;
+	-moz-transition-delay: $delay;
+	/* WebKit */
+	-webkit-transition-property: $property;
+	-webkit-transition-duration: $duration;
+	-webkit-transition-delay: $delay;
+	/* Opera */
+	-o-transition-property: $property;
+	-o-transition-duration: $duration;
+	-o-transition-delay: $delay;
+	/* Standard */
+	transition-property: $property;
+	transition-duration: $duration;
+	transition-delay: $delay;
+}
+
+@mixin background-noise($color) {
+	background: $color image-url("noise.png");
+	box-sizing: border-box;
+}
+
+@mixin background-cover-image {
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+
+@mixin container-border-padding {
+	padding-left: 2em;
+	padding-right: 2em;
+}

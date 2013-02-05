@@ -1,0 +1,24 @@
+#admin {
+	#new_product {
+		padding: 0 1em 0 1em 0;
+		p {
+			margin-bottom: 20px;
+			.text-info {
+				// line-height: 2em;
+				// vertical-align: text-bottom;
+			}
+		}
+		.wide {
+			width: 80%;
+		}
+		.checklistbox {
+			width: 82%;
+		}
+		input[type="file"] {
+			display: none;
+		}
+		.dummyfile {
+   			margin-bottom: 15px;
+		}
+	}
+}

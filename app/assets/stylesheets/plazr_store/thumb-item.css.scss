@@ -1,0 +1,68 @@
+@import 'plazr_store/partials/colors';
+@import 'plazr_store/partials/functions';
+
+a.thumb-item {
+    margin-bottom: 3em;
+	color: white;
+	text-decoration: none;
+
+	article {
+		@include transition(0s, 0.5s, border);
+		border: 1px solid white;
+		position: relative;
+	}
+
+	.thumb-item-image {
+		@include background-cover-image;
+		width: 100%;
+		-webkit-transition: opacity 0.1s ease-in-out;
+		-moz-transition: opacity 0.1s ease-in-out;
+		-o-transition: opacity 0.1s ease-in-out;
+		transition: opacity 0.1s ease-in-out;
+	}
+
+    section.box {
+    	color: black;
+    	text-align: center;
+    	padding: 3px 0 1px 0;
+    	.thumb-rate {
+    		@include transition(0s, 1s, background-color);
+    		width: 100%;
+    		text-align: center;
+    		position: absolute;
+    		top: 3px;
+    	}
+    	.thumb-name  {
+    		@include transition(0s, 1s, background-color);
+    		width: 100%;
+    		padding: 2px 0 2px 0;
+    		text-align: center;
+    		position: absolute;
+    		bottom: 30px;
+    		background-color: rgba(white, 0.8);
+    	}
+    	.thumb-price {
+    		width: 100%;
+    		text-align: center;
+    		position: absolute;
+    		bottom: 0px;
+    		span {
+    			@include transition(0s, 1s, background-color);
+    			padding: 2px 3px 2px 3px;
+    			background-color: rgba(white, 0.8);
+    		}
+    	}
+    }
+
+	&:hover {
+		article {
+			 border: 1px solid $border-color;
+		}
+		section.box {
+			color: white;
+    		h5, p span {
+    			background-color: $recommended-bg-hover-color;
+    		}
+    	}
+    }
+}

@@ -1,0 +1,55 @@
+<div class="container">
+
+	<div class="row-fuild" id="filters">
+
+		<div class="span3">
+			<span>Preço: </span>
+			<input type="number" value="<%= params[:min_price] %>" name="min_price">
+			<span> € a </span>
+			<input type="number" value="<%= params[:max_price] %>" name="max_price">
+			<span> €</span>
+		</div>
+
+		<div class="span2">
+			<%= select_tag "category", options_from_collection_for_select(@categories, :id, :name), :prompt => "Categoria" %>
+		</div>
+
+		<div class="span2">
+			<%= select_tag "brand", options_from_collection_for_select(@brands, :id, :name), :prompt => "Marca" %>
+		</div>
+
+		<div class="span2">
+			<select id="price">
+				<option value>Ordene por preço</option>
+		        <option value="1">Ascendente</option>
+		        <option value="-1">Descendente</option>
+			</select>
+		</div>
+
+		<div class="span1">
+			<a id="filter" class="btn btn-primary">Filtrar</a>
+		</div>
+		<div class="span1">
+			<a id="reset" class="btn btn-primary">Limpar</a>
+		</div>
+
+	</div>
+
+	<div class="row">
+		<% @products.each do |product| %>
+			<%= render 'plazr_store/shared/thumb-item', recommended: product %>
+		<% end %>
+	</div>
+
+	<%= will_paginate @products %>
+</div>
+
+<script>
+	$(document).ready(function() {
+	   
+		$('#category').val('<%= params[:category] %>');
+		$('#brand').val('<%= params[:brand] %>');
+		$('#price').val('<%= params[:price] %>');
+
+	  });
+</script>

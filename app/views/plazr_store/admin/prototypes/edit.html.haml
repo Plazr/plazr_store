@@ -1,0 +1,5 @@
+#admin
+	%h1= "Editar \"#{@prototype.name}\""
+	.btn-group
+		= link_to 'Voltar', admin_prototypes_path, :class => [:btn, 'btn-small']
+	= render 'form'

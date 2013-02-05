@@ -1,0 +1,8 @@
+#admin
+	%h1= @brand.name
+	.btn-toolbar
+		.btn-group
+			= link_to 'Voltar', admin_brands_path, :class => [:btn, 'btn-small']
+		.btn-group.pull-right
+			= link_to 'Editar', edit_admin_brand_path(@brand), :class => :btn
+			= link_to 'Eliminar', admin_brand_path(@brand), :method => :delete, :data => { :confirm => "Está prestes a eliminar a marca \"#{@brand.name}\". Deseja continuar?" }, :class => [:btn, 'btn-danger']

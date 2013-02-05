@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= STORE['name'].capitalize %></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<%= favicon_link_tag image_path('plazr_store/favicon.ico') %>
+	<%= stylesheet_link_tag    "plazr_store/application", :media => "all" %>
+	<%= csrf_meta_tags %>
+	<%= javascript_include_tag "plazr_store/application" %>
+	<% if user_signed_in? && current_user.role?('admin') %>
+		<%= stylesheet_link_tag    "plazr_store/admin/application", :media => "all" %>
+	<% end %>
+
+	<%= yield :head %>
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+
+	/* logo */
+	body .hero-wrap .hero-unit  {
+		<% unless @logo.nil? %>
+			background: url("<%= @logo.file %>") left center no-repeat;
+			padding-left: <%= "#{@logo.get_width+15}px" %>;
+			background-size: auto 60px;
+		<% end %>
+	}
+	/* header color */
+	body .hero-wrap .hero-unit a { color: <%= @colors["header-color"] %> }
+	/* background color */
+	body { background-color: <%= @colors["bg-color"] %>}
+	/* border color */
+
+	body > #container-wrapper > .container { border-color: <%= @colors["border-color"] %>}
+
+	body > #container-wrapper > .container > footer { border-color: <%= @colors["border-color"] %>}
+	body > #container-wrapper > .container > footer .border-right { border-color: <%= @colors["border-color"] %>}
+
+	/* featured colors */
+	#index-page #featured .featured-box span.transparent-background { background-color: <%= @colors["primary-color"] %>}
+	#index-page #featured:hover .featured-box span.transparent-background { background-color: <%= @colors["primary-color"] %>}
+	#index-page #featured { border-color: <%= @colors["border-color"] %>}
+	#index-page #featured:hover { border-color: <%= @colors["primary-color"] %>}
+
+	/* well list colors */
+	#index-page #well-outter a .well-entry div:hover { border-color: <%= @colors["primary-color"] %> }
+	#index-page #well-outter a .well-entry div:hover span { background-color: <%= @colors["primary-color"] %> }
+
+	/* thumb colors */
+	a.thumb-item:hover article { border-color: <%= @colors["primary-color"] %>}
+	a.thumb-item:hover article section.box .thumb-name, a.thumb-item:hover article section.box .thumb-price span { background-color: <%= @colors["primary-color"] %>}
+	</style>
+</head>
+<body>
+	<div class="hero-wrap">
+		<header class="container">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="hero-unit">
+						<div class="header-logo"></div>
+						<a href="/">
+							<%= STORE['name'].capitalize %>
+						</a>
+					</div>
+				</div>
+			</div>
+			<% unless flash.empty? %>
+			<% flash.each do |name, msg| %>
+			<% if msg.is_a?(String) %>
+			<span class="text-info pull-right flash-messages">
+				<%= content_tag :div, msg, :id => "flash_#{name}" %>
+			</span>
+			<% end %>
+			<% end %>
+			<% end %>
+		</header>
+	</div>
+
+	<div id="container-wrapper">
+		<div class="background-color"></div>
+		<div class="container">
+			<% if @namespace == 'PlazrStore::Admin' %>
+				<%= render 'plazr_store/admin/nav' %>
+			<% else %>
+			<%= render 'layouts/top_bar' %>
+			<%= yield %>
+			<% end %>
+			<footer>
+				<div class="row-fluid">
+					<div class="span12">
+						Sabe mais em <a href="http://www.plazr.net">plazr.net</a>
+						<div class="pull-right pages">
+							<% @pages.each do |page| %>
+								<%= link_to page.title, plazr_store.page_path(page) %>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<%= yield :script %>
+</body>
+</html>

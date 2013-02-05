@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sku: MyString
+  description: MyString
+  price: 9.99
+  cost_price: 9.99
+  available: false
+  amount_available: 1
+  is_master: false
+  deleted_at: 2012-11-14 14:54:17
+
+two:
+  sku: MyString
+  description: MyString
+  price: 9.99
+  cost_price: 9.99
+  available: false
+  amount_available: 1
+  is_master: false
+  deleted_at: 2012-11-14 14:54:17

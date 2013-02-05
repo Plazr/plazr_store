@@ -1,0 +1,73 @@
+= form_for [:admin, @promotion], :html => { :class => [:form, 'form-horizontal'] } do |f|
+	- if @promotion.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@promotion.errors.count, "error")} prohibited this promotion from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- @promotion.errors.full_messages.each do |msg|
+						%li= msg
+
+	.control-group
+		= f.label 'Nome', :class => 'control-label'
+		.controls
+			= f.text_field :name
+			%span.star *
+
+	.control-group
+		= f.label 'Descrição', :class => 'control-label'
+		.controls
+			= f.text_field :description
+
+	.control-group
+		= f.label 'Tipo de desconto', :class => 'control-label'
+		.controls
+			= f.collection_select :discount_type_id, @discount_types, :id, :name, {:prompt => "Escolha o tipo de desconto"}
+			%span.star *
+
+	.control-group
+		= f.label 'Valor', :class => 'control-label'
+		.controls
+			= f.text_field :value
+			%span.star *
+		
+
+	.control-group
+		= f.label 'Quantidade mínima', :class => 'control-label'
+		.controls
+			= f.text_field :min_filter
+
+	.control-group
+		= f.label 'Data de início', :class => 'control-label'
+		.controls
+			.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
+				= f.text_field :starts_at, :class => [:center, 'input-small'], readonly: true, :value => Time.now.to_date.to_s(:db)
+				%span.add-on
+					= image_tag 'glyphicons/calendar.png', :class => :icon
+
+	.control-group
+		= f.label 'Expira após', :class => 'control-label'
+		.controls
+			.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
+				= f.text_field :expires_at, :class => [:center, 'input-small'], readonly: true
+				%span.add-on
+					= image_tag 'glyphicons/calendar.png', :class => :icon
+
+	.control-group
+		= f.label 'Produtos', :class => 'control-label'
+		.controls
+			%ul.checklistbox
+				= f.fields_for :product_promotions do |pp|
+					%li
+						.checkbox
+							= pp.check_box :_destroy, {:checked => pp.object.product_id.to_s == @prod || @check_prods.include?(pp.object.product_id.to_s) || pp.object.persisted?}, '0', '1'
+							= pp.label :_destroy, pp.object.product.name
+							= pp.hidden_field :product_id
+							= pp.hidden_field :id
+
+	.control-group
+		.controls
+			= f.submit 'Guardar', :class => [:btn, 'btn-primary']
+
+	%p
+		%span.star *
+		Campos obrigatórios

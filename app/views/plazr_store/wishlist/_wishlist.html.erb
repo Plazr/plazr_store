@@ -1,0 +1,9 @@
+<ul>
+  <% @wishlist.variant_wishlists.each do |variant_wishlist| %>
+    <li>
+      <%= link_to variant_wishlist.info, product_path(variant_wishlist.product) %>
+      <%= link_to 'Delete', wishlist_remove_path(variant_wishlist.variant), method: :delete %>
+      <%= add_to_cart_form(variant_wishlist.variant.id) %>
+    </li>
+  <% end %>
+</ul>

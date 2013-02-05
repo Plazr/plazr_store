@@ -1,0 +1,126 @@
+= form_for [:admin, @product], :html => { :class => [:form, 'form-horizontal'] } do |frm|
+	- if @product.errors.any?
+		%ul.alert.alert-error
+			- @product.errors.full_messages.each do |msg|
+				%li= msg
+	.tabbable
+		.row-fluid
+			%ul.nav.nav-tabs.span12
+				%li.active= link_to '1. Dados do produto', '#tabStepOne', 'data-toggle' => 'tab'
+				%li= link_to '2. Modelo base', '#tabStepTwo', 'data-toggle' => 'tab'
+				%li= link_to '3. Propriedades', '#tabStepThree', 'data-toggle' => 'tab'
+
+		.tab-content
+			#tabStepOne.tab-pane.row-fluid.active
+				.span12
+					#basic-info.section
+						.control-group
+							= frm.label :name, 'Nome', :class => 'control-label'
+							.controls
+								= frm.text_field :name, :class => :span10, placeholder: 'Camisola verde, Calções azuis, ...', autofocus: true
+								%span.star *
+						.control-group
+							= frm.label :details, 'Descrição', :class => 'control-label'
+							.controls
+								= frm.text_area :details, :class => :span10, placeholder: 'Formato, tendência, criador, objectivo, ...', rows: '5'
+						.control-group
+							= frm.label :available_at, 'Disponibilidade', :class => 'control-label'
+							.controls
+								.input-append.date.datepicker{ 'data-date-format' => 'yyyy-mm-dd' }
+									= frm.text_field :available_at_date_string, :class => [:center, 'input-small'], readonly: true
+									%span.add-on
+										= image_tag 'glyphicons/calendar.png', :class => :icon
+								.input-append.bootstrap-timepicker-component
+									= frm.text_field :available_at_time_string, :class => ['input-small', :timepicker, :center], readonly: true
+									%span.add-on
+										= image_tag 'glyphicons/clock.png', :class => :icon
+					#brand.section
+						.control-group
+							= frm.label :brand_id, 'Marca', :class => 'control-label'
+							.controls
+								- if @brands.empty?
+									%p.text-info Não existem marcas.
+								- else
+									= frm.collection_select :brand_id, @brands, :id, :name, { prompt: 'Selecione uma marca' }, { :class => :span10 }
+
+					#categories.section
+						.control-group
+							= frm.label :product_categories, 'Categorias', :class => 'control-label'
+							.controls
+								- if @product_categories.empty?
+									%p.text-info Não existem categorias para selecionar.
+								- else
+									%ul.checklistbox
+										= frm.fields_for :product_product_categories do |pcf|
+											- if pcf.object.product_category.is_leaf?
+												%li
+													.checkbox
+														= pcf.check_box :_destroy, {:checked => pcf.object.persisted?}, '0', '1'
+														= pcf.object.product_category.name
+													= pcf.hidden_field :product_category_id
+					.control-group
+						.controls
+							= link_to 'Continuar', '#tabStepTwo', 'data-toggle' => 'tab', :class => [:btn, 'btn-primary']
+
+			#tabStepTwo.tab-pane.row-fluid
+				.span12
+					#variants.section
+						= render 'subform_variants', form: frm
+					.control-group
+						.controls
+							= link_to 'Continuar', '#tabStepThree', 'data-toggle' => 'tab', :class => [:btn, 'btn-primary']
+
+			#tabStepThree.row-fluid.tab-pane
+				.span12
+					.section
+						.control-group
+							= frm.label :product_variant_properties, 'Propriedades dos modelos', :class => 'control-label'
+							.controls
+								- if @variant_properties.empty?
+									%p.text-info Não existem propriedades de modelos para selecionar.
+								- else
+									%ul.checklistbox
+										= frm.fields_for :product_variant_properties do |ff|
+											%li
+												.checkbox
+													= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1'
+													= ff.object.variant_property.display_name
+												= ff.hidden_field :variant_property_id
+								%span.help-block Estas propriedades poderão ter valores distintos entre modelos do mesmo produto.
+
+					#prototypes.section
+						.control-group
+							= frm.label :prototypes, 'Protótipos', :class => 'control-label'
+							.controls
+								- if @prototypes.empty?
+									%p.text-info Não existem protótipos para selecionar.
+								- else
+									%ul.checklistbox
+										- odd = true
+										- @prototypes.each do |prototype|
+											- rowclass = odd ? :odd : :even
+											%li{ :class => rowclass }
+												.checkbox
+													= check_box_tag 'prototypes[]', prototype.id
+													= prototype.name
+												=# label_tag prototype.name, nil
+											- odd = !odd;
+								%span.help-block O novo produto vai ser criado com as propriedades dos protótipos seleccionados.
+					.section.control-group
+						.controls
+							= frm.submit 'Submeter', :class => ["btn", 'btn-primary']
+							= link_to 'Cancelar', admin_products_path, :class => :btn
+	%p
+		%span.star *
+		Campos obrigatórios
+
+:javascript
+	tabbable = $('#admin .tabbable');
+	tabbable.find('.tab-pane a[data-toggle=tab]').click(function() {
+		tab = $(this).attr('href');
+		$(tabbable).find('li.active').removeClass('active');
+		$(tabbable).find("li a[href='"+tab+"']").parent().addClass('active');
+	});
+
+
+
