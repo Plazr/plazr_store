@@ -9,14 +9,14 @@ module PlazrStore
 
     ## Paperclip ##
     has_attached_file :file,
-      :styles      => Proc.new { |upload| upload.instance.set_styles },
-      :url         => :set_url_base_on_parent!,
-      :path        => :set_path_based_on_parent!,
-      :default_url => :default_url_method
+    :styles      => Proc.new { |upload| upload.instance.set_styles },
+    :url         => :set_url_base_on_parent!,
+    :path        => :set_path_based_on_parent!,
+    :default_url => :default_url_method
 
     validates_attachment_presence :file
     validates_attachment_content_type :file, :content_type => ['image/jpeg', 'image/png',
-                  'image/gif', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/mp4']
+      'image/gif', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/mp4']
 
     ## Callbacks ##
     before_validation :one_logo, on: :create
@@ -69,8 +69,12 @@ module PlazrStore
     end
 
     def get_width(style = :logo)
-      geo = Paperclip::Geometry.from_file(file.path(style))
-      geo.width
+      unless Multimedium.find_all_by_class_type('logo').count > 0
+        geo = Paperclip::Geometry.from_file(file.path(style))
+        geo.width
+      else
+        0
+      end
     end
 
     # set the style of the file accordingly to the class_type
@@ -111,7 +115,7 @@ module PlazrStore
     end
 
     protected
-      def default_url_method
+    def default_url_method
         #if self.class == 'variant'
         "/assets/no_image_avail/#{self.class_type}.png"
         #elsif self.class == 'banner'
@@ -121,5 +125,5 @@ module PlazrStore
         #end
       end
 
+    end
   end
-end
