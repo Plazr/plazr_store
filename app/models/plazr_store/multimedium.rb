@@ -69,7 +69,7 @@ module PlazrStore
     end
 
     def get_width(style = :logo)
-      unless Multimedium.find_all_by_class_type('logo').count > 0
+      unless Multimedium.find_all_by_class_type('logo').nil?
         geo = Paperclip::Geometry.from_file(file.path(style))
         geo.width
       else
