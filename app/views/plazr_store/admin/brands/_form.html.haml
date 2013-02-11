@@ -1,16 +1,16 @@
 = form_for [:admin, @brand], :html => { :class => [:form, 'form-horizontal'] } do |f|
-	/ - if @brand.errors.any?
-	/ 	#error_explanation
-	/ 		%h2= "#{pluralize(@brand.errors.count, "error")} prohibited this brand from being saved:"
-	/ 		%div{:class=>["alert","alert-error"]}
-	/ 			%ul
-	/ 				- @brand.errors.full_messages.each do |msg|
-	/ 					%li= msg
+	- if @brand.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@brand.errors.count, "error")} prohibited this brand from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- @brand.errors.full_messages.each do |msg|
+						%li= msg
 	.control-group
-		= f.label :name, :class => 'control-label'
+		= f.label :name, 'Nome', :class => 'control-label'
 		.controls
 			= f.text_field :name
 
 	.control-group
 		.controls
-			= f.submit "Submit", :class => [:btn, 'btn-primary']
+			= f.submit 'Guardar', :class => [:btn, 'btn-primary']

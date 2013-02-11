@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Order < ActiveRecord::Base
     belongs_to :cart
@@ -56,6 +57,10 @@ module PlazrStore
     def cart
       # gets the cart even if it is marked as deleted
       PZS::Cart.with_deleted.find(self.cart_id)
+    end
+
+    def completed?
+      self.state == "completed"
     end
 
     def info

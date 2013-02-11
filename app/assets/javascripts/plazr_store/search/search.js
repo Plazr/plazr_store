@@ -1,6 +1,19 @@
 $(document).ready(function() {
 
-	$("#filters a").click(getValues);
+	$("#filter").click(getValues);
+
+	$("#reset").click(resetValues);
+
+	function resetValues(){
+		$('.clearfix #search').val('');
+		$('input[name="min_price"]').val('');
+		$('input[name="max_price"]').val('');
+
+		$('#category').prop("selectedIndex", 0);
+		$('#brand').prop("selectedIndex", 0);
+		$('#price').prop("selectedIndex", 0);
+
+	}
 
 	function getValues(){
 		var search = $('.clearfix #search').val();

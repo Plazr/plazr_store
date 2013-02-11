@@ -9,9 +9,10 @@
     </div>
   </header>
   <% if @product.has_active_promotions? %>
-    <div class="row-fluid">
+    <div class="row-fluid" id="promo">
       <div class="span4">
         <h5>Promoção <%= @product.promotions.active_promotions.first.name %></h5>
+        <p><%= number_to_currency @variant.original_price, unit: '€' %></p>
       </div>
     </div>
   <% end %>
@@ -74,7 +75,7 @@
           </dl>
           <select>
             <% @product.variants_without_master.each_with_index do |v, index| %>
-               <option id=<%= v.id %> value=<%= v.price %> > <%= v.name %><%= v.variant_properties_values %></option>
+               <option class=<%= v.original_price %> id=<%= v.id %> value=<%= v.price %> > <%= v.name %> asd<%= v.variant_properties_values %></option>
             <% end %>
           </select>
         <% end %>
@@ -87,7 +88,7 @@
             <ul>
               <li><a id="add_cart_bt" class="btn">Adicionar ao carrinho</a></li>
               <li><a id="add_wishlist_bt" class="btn">Adicionar à wishlist</a></li>
-              <li><a class="btn">Comentar</a></li>
+              <!--<li><a class="btn">Comentar</a></li>-->
             </ul>
       </div>
 
@@ -124,24 +125,31 @@
 
       <% @product.comments.each do |c| %>
       <div class="row-fluid">
-        <div class="span4">
-          <h3>Nome</h3>
-          <p><%= c.owner.name %></p>
-          <p><%= c.rating %></p>
-        </div>
-
-        <div class="span5">
+        <hr>
+        <div class="span6">
+          <h4><%= c.owner.name %></h4>
+          <p id="stars" class="thumb-rate">
+            <%= rating_to_stars(4) %>
+          </p>
+          <br>
           <p><%= c.comment %></p>
         </div>
       </div>
       <% end %>
     </section>
     <% end %>
+
   </article>
 
 <script>
   $(document).ready(function() {
     $('#product-show select').change(function(){
+      var or_price = $('#product-show select option:selected').attr('class');
+
+      if(!(or_price == undefined)) {
+        $('#promo p').text(parseInt(or_price).toFixed(2));
+      }
+        
       var price = $(this).val();
 
       $('#product-show #price').text("€" + parseInt(price).toFixed(2));

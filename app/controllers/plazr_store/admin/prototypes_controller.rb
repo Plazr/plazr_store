@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::PrototypesController < Admin::ApplicationController
 
@@ -13,7 +14,7 @@ module PlazrStore
       @prototype = Prototype.new(params[:prototype])
 
       if @prototype.save
-        redirect_to admin_prototype_path(@prototype), :notice => 'Prototype was successfully created.'
+        redirect_to admin_prototype_path(@prototype), :notice => 'Protótipo criado com sucesso.'
       else
         instance_variable_loading
         render :new
@@ -34,7 +35,7 @@ module PlazrStore
       @prototype = Prototype.find(params[:id])
 
       if @prototype.update_attributes(params[:prototype])
-        redirect_to admin_prototype_path(@prototype), :notice => 'Prototype was successfully updated.'
+        redirect_to admin_prototype_path(@prototype), :notice => 'Protótipo atualizado com sucesso.'
       else
         instance_variable_loading
         render :edit 
@@ -49,7 +50,7 @@ module PlazrStore
 
     def get_location
       super
-      @tab = :products
+      @tab = 'products'
     end
 
     protected

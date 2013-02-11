@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class PropertyPrototype < ActiveRecord::Base
     ## Relations ##

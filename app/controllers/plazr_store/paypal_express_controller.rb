@@ -1,3 +1,4 @@
+# encoding: utf-8
 require_dependency "plazr_store/application_controller"
 
 module PlazrStore

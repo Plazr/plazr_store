@@ -2,6 +2,13 @@ $border-color: #EEE;
 $price-color: #900;
 
 
+#stars{
+	height: 15px;
+	.rating{
+		height: 15px;
+	}
+}
+
 article#product-show {
 	h2 span {
 		padding-left: 10px;

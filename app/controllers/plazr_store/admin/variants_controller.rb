@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::VariantsController < Admin::ApplicationController
     before_filter :get_product
@@ -14,7 +15,7 @@ module PlazrStore
       @variant = @product.variants.build params[:variant]
 
       if @variant.save
-        redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully created.'
+        redirect_to admin_product_variant_path(@product, @variant), :notice => 'Modelo criado com sucesso.'
       else
         @variant.multimedia.build
         build_relations_for_fields_for
@@ -41,7 +42,7 @@ module PlazrStore
       @variant = Variant.find(params[:id])
 
       if @variant.update_attributes(params[:variant])
-        redirect_to admin_product_variant_path(@product, @variant), :notice => 'Variant was successfully updated.'
+        redirect_to admin_product_variant_path(@product, @variant), :notice => 'Modelo atualizado com sucesso.'
       else
         build_relations_for_fields_for        
         render :edit 

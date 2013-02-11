@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::BrandsController < Admin::ApplicationController
     def show
@@ -12,7 +13,7 @@ module PlazrStore
       @brand = Brand.new(params[:brand])
 
       if @brand.save
-        redirect_to admin_brand_path(@brand), :notice => 'Brand was successfully created.'
+        redirect_to admin_brand_path(@brand), :notice => 'Marca criada com sucesso.'
       else
         render :new
       end
@@ -30,7 +31,7 @@ module PlazrStore
       @brand = Brand.find(params[:id])
 
       if @brand.update_attributes(params[:brand])
-        redirect_to admin_brand_path(@brand), :notice => 'Brand was successfully updated.'
+        redirect_to admin_brand_path(@brand), :notice => 'Marca atualizada com sucesso.'
       else
         render :edit 
       end
@@ -44,7 +45,7 @@ module PlazrStore
 
     def get_location
       super
-      @tab = :products
+      @tab = 'products'
     end
   end
 end

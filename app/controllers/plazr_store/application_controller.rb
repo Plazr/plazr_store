@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PlazrStore::ApplicationController < ApplicationController
   helper :all
   # before_filter :get_categories

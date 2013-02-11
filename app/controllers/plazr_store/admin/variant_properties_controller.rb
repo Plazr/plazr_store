@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PlazrStore
   class Admin::VariantPropertiesController < Admin::ApplicationController
 
@@ -22,7 +23,6 @@ module PlazrStore
 
       if @variant_property.save
         redirect_to admin_variant_property_path(@variant_property), :notice => 'Propriedade de modelo criada com sucesso.'
-        # redirect_to admin_variant_properties_path, :notice => 'VariantProperty was created successfully'
       else
         render :new
       end
@@ -46,7 +46,7 @@ module PlazrStore
 
     def get_location
       super
-      @tab = :products
+      @tab = 'products'
     end
   end
 end

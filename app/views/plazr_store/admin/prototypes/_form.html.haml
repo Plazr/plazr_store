@@ -1,11 +1,11 @@
 = form_for [:admin, @prototype], :html => { :class => [:form, 'form-horizontal'] } do |f|
-	/ - if @prototype.errors.any?
-	/ 	#error_explanation
-	/ 		%h2= "#{pluralize(@prototype.errors.count, "error")} prohibited this prototype from being saved:"
-	/ 		%div{:class=>["alert","alert-error"]}
-	/ 			%ul
-	/ 				- @prototype.errors.full_messages.each do |msg|
-	/ 					%li= msg
+	- if @prototype.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@prototype.errors.count, "error")} prohibited this prototype from being saved:"
+			%div{:class=>["alert","alert-error"]}
+				%ul
+					- @prototype.errors.full_messages.each do |msg|
+						%li= msg
 
 	.control-group
 		= f.label 'Nome', :class => 'control-label'
@@ -22,6 +22,7 @@
 							= pp.check_box :_destroy, {:checked => pp.object.persisted?}, '0', '1'
 							= pp.label :_destroy, pp.object.property.display_name
 							= pp.hidden_field :property_id
+						= pp.hidden_field :id
 	
 	.control-group
 		= f.label 'Propriedades de Variante'
@@ -33,7 +34,8 @@
 							= pvp.check_box :_destroy, {:checked => pvp.object.persisted?}, '0', '1'
 							= pvp.label :_destroy, pvp.object.variant_property.display_name
 							= pvp.hidden_field :variant_property_id
+						= pvp.hidden_field :id
 
 	.control-group
 		.controls
-			= f.submit "Submit", :class => [:btn, 'btn-primary']
+			= f.submit 'Guardar', :class => [:btn, 'btn-primary']
