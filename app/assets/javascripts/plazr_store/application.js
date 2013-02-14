@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery_ujs
-//= require redactor-rails
 //= require plazr_store/products/single
 //= require imageSlider/jquery-easing-1.3.pack
 //= require imageSlider/jquery-easing-compatibility.1.2.pack
